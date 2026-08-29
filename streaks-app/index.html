@@ -296,20 +296,70 @@ let calMode = 'all';
 let lastKudos = 0;
 let justToggledId = null;
 
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function isValidDateKey(dateStr){
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return false;
+  const [y,m,d] = dateStr.split('-').map(Number);
+  if(m < 1 || m > 12) return false;
+  const dt = new Date(y, m-1, d);
+  return dt.getFullYear()===y && dt.getMonth()===m-1 && dt.getDate()===d;
+}
+
+// Defensively rebuilds app state from untrusted input (localStorage or an imported backup file).
+// Never trusts shapes/types — always falls back to safe defaults for anything malformed.
+function sanitizeLoaded(loaded){
+  const safe = { habits: DEFAULT_HABITS.map(h=>({...h})), entries: {} };
+  if(!loaded || typeof loaded !== 'object') return safe;
+
+  if(Array.isArray(loaded.habits)){
+    safe.habits = DEFAULT_HABITS.map(defaultH=>{
+      const saved = loaded.habits.find(h=>h && h.id===defaultH.id);
+      if(saved && typeof saved.name === 'string' && saved.name.trim()){
+        return { ...defaultH, name: saved.name.trim().slice(0,20) };
+      }
+      return defaultH;
+    });
+  }
+
+  if(loaded.entries && typeof loaded.entries === 'object' && !Array.isArray(loaded.entries)){
+    const validHabitIds = new Set(safe.habits.map(h=>h.id));
+    for(const dateStr of Object.keys(loaded.entries)){
+      if(!isValidDateKey(dateStr)) continue;
+      const day = loaded.entries[dateStr];
+      if(!day || typeof day !== 'object') continue;
+      const cleanDay = {};
+      for(const habitId of Object.keys(day)){
+        if(!validHabitIds.has(habitId)) continue;
+        const e = day[habitId];
+        if(!e || typeof e !== 'object') continue;
+        const cleanEntry = {};
+        if(e.done === true) cleanEntry.done = true;
+        else if(e.done === false) cleanEntry.done = false;
+        if(e.amount !== undefined){
+          const n = Number(e.amount);
+          if(Number.isFinite(n)) cleanEntry.amount = Math.max(0, n);
+        }
+        if(Object.keys(cleanEntry).length) cleanDay[habitId] = cleanEntry;
+      }
+      if(Object.keys(cleanDay).length) safe.entries[dateStr] = cleanDay;
+    }
+  }
+  return safe;
+}
+
 function loadState(){
   try{
     const raw = localStorage.getItem(STORAGE_KEY);
     if(raw){
       const loaded = JSON.parse(raw);
-      state.entries = loaded.entries || {};
-      if(loaded.habits){
-        state.habits = state.habits.map(defaultH=>{
-          const saved = loaded.habits.find(h=>h.id===defaultH.id);
-          return saved ? { ...defaultH, name: saved.name } : defaultH;
-        });
-      }
+      const clean = sanitizeLoaded(loaded);
+      state.habits = clean.habits;
+      state.entries = clean.entries;
     }
-  }catch(e){ console.error('load failed', e); }
+  }catch(e){ console.error('load failed — starting from a clean state', e); }
   render();
 }
 function saveState(){
@@ -340,7 +390,11 @@ function computeStreak(habitId){
   let cursor = todayStr();
   if(!isDone(cursor, habitId)) cursor = addDays(cursor, -1);
   let streak = 0;
-  while(isDone(cursor, habitId)){ streak++; cursor = addDays(cursor, -1); }
+  let guard = 0;
+  while(isDone(cursor, habitId)){
+    streak++; cursor = addDays(cursor, -1);
+    if(++guard > 20000) break; // safety valve against any unforeseen data loop
+  }
   return streak;
 }
 function allDoneOn(dateStr){
@@ -357,7 +411,11 @@ function computeComboStreak(){
   let cursor = todayStr();
   if(!allDoneOn(cursor)) cursor = addDays(cursor, -1);
   let streak = 0;
-  while(allDoneOn(cursor)){ streak++; cursor = addDays(cursor, -1); }
+  let guard = 0;
+  while(allDoneOn(cursor)){
+    streak++; cursor = addDays(cursor, -1);
+    if(++guard > 20000) break;
+  }
   return streak;
 }
 function computeKudos(){
@@ -435,7 +493,7 @@ function renderHabits(){
         </div>
       </div>
       <div class="habit-main">
-        <input class="habit-name" data-id="${habit.id}" value="${habit.name}" maxlength="20" />
+        <input class="habit-name" data-id="${habit.id}" value="${escapeHtml(habit.name)}" maxlength="20" />
         <div class="habit-sub">${streak>0 ? `<b>${streak}</b> day streak` : 'no streak yet'}</div>
       </div>
       <div class="habit-control">
@@ -482,6 +540,15 @@ function renderHabits(){
     });
   });
   list.querySelectorAll('.num-val').forEach(el=>{
+    // Save on every keystroke (no re-render — re-rendering here would rebuild the
+    // input and kick the user out mid-type). Re-render happens on blur/enter instead,
+    // so the streak badge etc. catch up without disrupting typing.
+    el.addEventListener('input', e=>{
+      const id = e.target.dataset.id;
+      const raw = e.target.value;
+      const v = raw === '' ? undefined : Math.max(0, Number(raw)||0);
+      setAmount(selectedDate, id, v);
+    });
     el.addEventListener('change', e=>{
       const id = e.target.dataset.id;
       const raw = e.target.value;
@@ -678,13 +745,9 @@ document.getElementById('importFile').addEventListener('change', e=>{
       }
       const ok = confirm('This will replace all data currently on this device with the backup file. Continue?');
       if(!ok) return;
-      state.entries = loaded.entries || {};
-      if(loaded.habits){
-        state.habits = state.habits.map(defaultH=>{
-          const saved = loaded.habits.find(h=>h.id===defaultH.id);
-          return saved ? { ...defaultH, name: saved.name } : defaultH;
-        });
-      }
+      const clean = sanitizeLoaded(loaded);
+      state.habits = clean.habits;
+      state.entries = clean.entries;
       saveState();
       render();
       alert('Backup restored.');
