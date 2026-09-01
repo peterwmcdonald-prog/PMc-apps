@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Cathays">
+<meta name="theme-color" content="#E6EAE6">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Cathays Park commute</title>
+<style>
+  :root{--stone:#E6EAE6;--ink:#17332F;--slate:#5A6E6A;--hair:#CBD4CF;--card:#FDFDFC;
+        --signal:#A8272E;--pin:#8A6A1F}
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--stone);color:var(--ink);
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+    padding:max(16px,env(safe-area-inset-top)) 14px calc(40px + env(safe-area-inset-bottom));
+    -webkit-text-size-adjust:100%}
+  .wrap{max-width:520px;margin:0 auto}
+  .eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--slate);font-weight:700}
+  h1{margin:5px 0 16px;font-size:26px;line-height:1.12;font-weight:700;letter-spacing:-.02em}
+  .row{display:flex;gap:6px;margin-bottom:8px}
+  button{font:inherit}
+  .tab{flex:1;padding:10px 4px;font-size:13.5px;font-weight:600;cursor:pointer;
+    border:1px solid var(--hair);background:transparent;color:var(--slate);border-radius:4px}
+  .tab[aria-selected="true"]{background:var(--ink);color:var(--card);border-color:var(--ink)}
+  .panel{background:var(--card);border:1px solid var(--hair);border-radius:6px;padding:11px 13px;
+    margin:12px 0 14px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums}
+  input[type=time],input[type=number]{font:inherit;border:1px solid var(--hair);border-radius:4px;
+    background:var(--card);color:var(--ink);padding:5px 8px}
+  input[type=time]{font-family:ui-monospace,Menlo,monospace;font-size:17px;font-weight:700}
+  input[type=number]{width:64px;text-align:right;font-variant-numeric:tabular-nums}
+  #refresh{border:1px solid var(--hair);background:transparent;color:var(--slate);
+    border-radius:4px;padding:4px 10px;font-size:17px;line-height:1.1;cursor:pointer}
+  #refresh:active{background:var(--ink);color:var(--card)}
+
+  .card{background:var(--card);border:1px solid var(--hair);border-radius:6px;padding:15px;margin-bottom:11px}
+  .card.t0{border-top:3px solid var(--signal)}
+  .card.pinned{border:2px solid var(--pin);background:#FDFBF4}
+  .head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+  .card h2{margin:0;font-size:14px;font-weight:700;letter-spacing:-.01em}
+  .paceline{font-size:11.5px;color:var(--slate);margin-top:2px}
+  .t0 h2{color:var(--signal)}
+  .pinned h2{color:var(--pin)}
+  .star{flex:0 0 auto;border:1px solid var(--hair);background:transparent;color:var(--slate);
+    border-radius:4px;padding:5px 9px;font-size:15px;line-height:1;cursor:pointer}
+  .star.on{background:var(--pin);border-color:var(--pin);color:var(--card)}
+  .meta{font-size:12px;color:var(--slate)}
+  ol.spine{list-style:none;margin:13px 0 0;padding:0}
+  ol.spine li{display:flex;gap:13px;position:relative;padding-bottom:16px}
+  ol.spine li:last-child{padding-bottom:0}
+  ol.spine li:not(:last-child)::before{content:"";position:absolute;left:46px;top:15px;bottom:0;width:1px;background:var(--hair)}
+  .t{width:42px;text-align:right;font-size:15px;font-weight:600;line-height:15px}
+  .dot{width:10px;height:10px;border-radius:99px;margin-top:3px;flex:0 0 auto;
+    background:var(--card);border:2px solid var(--hair);z-index:1}
+  .dot.start{background:var(--ink);border-color:var(--ink)}
+  .dot.end{background:var(--signal);border-color:var(--signal)}
+  .pinned .dot.end{background:var(--pin);border-color:var(--pin)}
+  .place{font-size:13.5px;font-weight:600;line-height:16px;display:block}
+  .note{font-size:12px;color:var(--slate);margin-top:1px;display:block}
+  .verdict{margin-top:12px;padding-top:9px;border-top:1px dashed var(--hair);font-size:11.5px;color:var(--slate);line-height:1.45}
+  .pinbar{background:#FDFBF4;border:1px solid var(--pin);border-radius:6px;padding:10px 13px;
+    margin-bottom:11px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .pinbar span{font-size:12px;color:var(--pin);font-weight:600}
+  .pinbar button{border:1px solid var(--pin);background:transparent;color:var(--pin);
+    border-radius:4px;padding:5px 10px;font-size:12px;font-weight:600;cursor:pointer}
+
+  .settings-btn{margin-top:4px;width:100%;padding:10px;font-size:13px;font-weight:600;color:var(--slate);
+    background:transparent;border:1px solid var(--hair);border-radius:4px;cursor:pointer}
+  #settings{background:var(--card);border:1px solid var(--hair);border-top:none;
+    border-radius:0 0 6px 6px;padding:8px 13px 12px}
+  #settings label{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0;font-size:13px}
+  #settings label span:first-child{flex:1}
+  #settings input.isDefault{color:#5F6E6B}
+  #settings input.changed{color:var(--ink);font-weight:700;border-color:var(--ink)}
+  #settings input::placeholder{color:#5F6E6B}
+  .sechead{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;
+    color:var(--slate);margin:12px 0 2px;padding-top:8px;border-top:1px dashed var(--hair)}
+  .sechead:first-child{border-top:none;padding-top:0;margin-top:2px}
+  .unit{width:46px;font-size:11.5px;color:var(--slate);text-align:right}
+  .setfoot{display:flex;gap:6px;margin-top:12px}
+  .setfoot button{flex:1;padding:7px 4px;font-size:12px;font-weight:600;cursor:pointer;
+    border:1px solid var(--hair);background:transparent;color:var(--slate);border-radius:4px}
+  #setstatus{margin-top:9px;font-size:11.5px;line-height:1.5;color:var(--slate)}
+  #setstatus .warn{color:var(--signal);font-weight:600}
+
+  .links{background:var(--card);border:1px solid var(--hair);border-radius:6px;padding:13px;margin-bottom:11px}
+  .links .lbl{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--slate)}
+  .links .grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+  .links a{flex:1 1 30%;text-align:center;padding:9px 6px;font-size:12.5px;font-weight:600;
+    text-decoration:none;color:var(--ink);border:1px solid var(--hair);border-radius:4px;background:var(--stone)}
+  .links p{margin:9px 0 0;font-size:11.5px;line-height:1.5;color:var(--slate)}
+  footer{font-size:11px;line-height:1.5;color:var(--slate);margin-top:16px}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow" id="eyebrow">Dingle Road · Eastbrook ⇄ CP2</div>
+  <h1>Which station today?</h1>
+
+  <div class="row" role="tablist">
+    <button class="tab" id="dirIn" role="tab" aria-selected="true">To work</button>
+    <button class="tab" id="dirOut" role="tab" aria-selected="false">To home</button>
+  </div>
+  <div class="row" role="tablist">
+    <button class="tab" id="origHome" role="tab" aria-selected="true">On foot from home</button>
+    <button class="tab" id="origCar" role="tab" aria-selected="false">Car — school run</button>
+  </div>
+  <div class="row" role="tablist">
+    <button class="tab" id="modeNow" role="tab" aria-selected="true">Leave at</button>
+    <button class="tab" id="modeArrive" role="tab" aria-selected="false">Arrive by</button>
+  </div>
+
+  <div class="panel">
+    <span class="meta" id="panelLabel">Leaving now</span>
+    <input type="time" id="departAt">
+    <input type="time" id="arriveBy" value="09:00" class="hidden">
+    <button id="refresh" title="Reset to now">&#8635;</button>
+  </div>
+
+  <div id="pinbar"></div>
+  <div id="results"></div>
+
+  <button class="settings-btn" id="toggleSettings">Walking speed &amp; distances</button>
+  <div id="settings" class="hidden"></div>
+
+  <footer id="foot"></footer>
+</div>
+
+<script>
+/* ==================================================================
+   TIMETABLE DATA — weekdays, Saturday-only columns removed.
+   Penarth / Dingle Road / Eastbrook: TfW Booklet 14.
+   Cathays: TfW Booklet 13.  Both valid 17 May – 13 September 2026.
+   Times are anchored on Cardiff Central, as the booklets publish it.
+   Queen Street is derived: +5 min after Central northbound,
+   -6 min before Central southbound (conservative end of the 5–6 min
+   spread, so a connection is never shown tighter than it is).
+================================================================== */
+const NB_PEN=[["0605","0617"],["0635","0647"],["0650","0703"],["0705","0717"],["0720","0733"],["0735","0747"],["0750","0803"],["0805","0817"],["0820","0833"],["0835","0847"],["0850","0903"],["0905","0917"],["0920","0933"],["0935","0948"],["0950","1003"],["1005","1017"],["1020","1033"],["1035","1047"],["1050","1103"],["1105","1117"],["1120","1133"],["1135","1147"],["1150","1203"],["1205","1217"],["1220","1233"],["1235","1247"],["1250","1303"],["1305","1317"],["1320","1333"],["1335","1347"],["1350","1403"],["1405","1417"],["1420","1433"],["1435","1447"],["1450","1503"],["1505","1517"],["1520","1533"],["1535","1547"],["1550","1603"],["1605","1617"],["1620","1633"],["1635","1647"],["1650","1703"],["1705","1717"],["1720","1733"],["1735","1747"],["1750","1803"],["1805","1817"],["1820","1833"],["1835","1847"],["1850","1904"],["1905","1917"],["1935","1947"],["2005","2018"],["2035","2047"],["2105","2117"],["2135","2147"],["2205","2218"],["2235","2249"],["2304","2318"],["2336","2349"]];
+const NB_EBK=[["0543","0558"],["0607","0621"],["0626","0641"],["0637","0651"],["0707","0721"],["0726","0741"],["0737","0751"],["0756","0811"],["0807","0821"],["0826","0841"],["0837","0851"],["0856","0911"],["0907","0921"],["0926","0941"],["0937","0952"],["0956","1011"],["1007","1021"],["1026","1041"],["1037","1051"],["1056","1111"],["1107","1121"],["1126","1141"],["1137","1151"],["1156","1211"],["1207","1221"],["1226","1241"],["1237","1251"],["1256","1311"],["1307","1321"],["1326","1341"],["1337","1351"],["1356","1411"],["1407","1421"],["1426","1441"],["1437","1451"],["1456","1511"],["1507","1521"],["1526","1541"],["1537","1551"],["1556","1611"],["1607","1621"],["1626","1641"],["1637","1651"],["1656","1711"],["1707","1721"],["1726","1741"],["1737","1751"],["1756","1811"],["1807","1821"],["1826","1841"],["1837","1851"],["1856","1911"],["1907","1923"],["1926","1941"],["1937","1953"],["2007","2023"],["2026","2040"],["2056","2111"],["2126","2140"],["2156","2212"],["2224","2236"],["2307","2321"],["2326","2342"]];
+const SB_PEN=[["0616","0624","0628"],["0632","0643","0647"],["0650","0658","0702"],["0705","0713","0717"],["0720","0728","0732"],["0735","0743","0747"],["0750","0758","0802"],["0805","0813","0817"],["0820","0828","0832"],["0835","0843","0847"],["0850","0858","0902"],["0905","0913","0917"],["0920","0928","0932"],["0935","0943","0947"],["0950","0958","1002"],["1005","1013","1017"],["1020","1028","1032"],["1035","1043","1047"],["1050","1058","1103"],["1105","1113","1117"],["1120","1128","1133"],["1135","1143","1148"],["1150","1158","1203"],["1205","1213","1218"],["1220","1228","1233"],["1235","1243","1248"],["1250","1258","1303"],["1305","1313","1318"],["1320","1328","1333"],["1335","1343","1348"],["1350","1358","1403"],["1405","1413","1418"],["1420","1428","1433"],["1435","1443","1448"],["1450","1458","1503"],["1505","1513","1518"],["1520","1528","1533"],["1535","1543","1548"],["1550","1558","1603"],["1605","1613","1618"],["1620","1628","1633"],["1635","1643","1648"],["1650","1658","1703"],["1705","1713","1718"],["1720","1728","1733"],["1735","1743","1748"],["1750","1758","1803"],["1805","1813","1818"],["1820","1828","1833"],["1835","1843","1847"],["1850","1858","1902"],["1905","1913","1917"],["1935","1943","1948"],["2005","2013","2017"],["2035","2043","2047"],["2105","2113","2117"],["2135","2143","2147"],["2205","2213","2218"],["2248","2257","2301"],["2305","2313","2318"]];
+const SB_EBK=[["0515","0526"],["0529","0540"],["0539","0549"],["0610","0621"],["0629","0640"],["0637","0648"],["0659","0710"],["0709","0720"],["0729","0740"],["0739","0749"],["0759","0810"],["0809","0820"],["0829","0840"],["0839","0849"],["0859","0910"],["0909","0920"],["0930","0941"],["0938","0949"],["0959","1010"],["1009","1020"],["1029","1040"],["1039","1049"],["1059","1110"],["1109","1120"],["1129","1140"],["1139","1149"],["1159","1210"],["1209","1220"],["1229","1240"],["1239","1249"],["1259","1310"],["1309","1320"],["1329","1340"],["1339","1349"],["1359","1410"],["1409","1420"],["1429","1440"],["1439","1449"],["1459","1510"],["1509","1520"],["1529","1540"],["1539","1549"],["1559","1610"],["1609","1620"],["1629","1640"],["1639","1649"],["1659","1710"],["1709","1720"],["1729","1740"],["1739","1749"],["1759","1810"],["1809","1820"],["1829","1840"],["1839","1849"],["1909","1920"],["1939","1949"],["1959","2010"],["2039","2049"],["2058","2109"],["2139","2149"],["2212","2223"],["2240","2250"],["2330","2341"]];
+const CATH_NB=["0536","0603","0607","0615","0633","0637","0645","0703","0707","0715","0733","0737","0745","0803","0807","0815","0833","0837","0845","0903","0907","0915","0933","0937","0945","1003","1007","1015","1033","1037","1045","1103","1107","1115","1133","1137","1145","1203","1207","1215","1233","1237","1245","1303","1307","1315","1333","1337","1345","1403","1407","1415","1433","1437","1445","1503","1507","1515","1533","1537","1545","1603","1607","1615","1633","1637","1645","1703","1707","1715","1733","1737","1745","1803","1807","1815","1833","1837","1845","1903","1907","1915","1933","1937","1945","2003","2007","2015","2033","2039","2045","2106","2115","2137","2145","2206","2215","2232","2236","2245","2307","2315","2335","2349","2352"];
+const CATH_SB=["0539","0608","0626","0645","0702","0708","0715","0732","0738","0745","0802","0808","0815","0832","0838","0845","0902","0908","0915","0932","0938","0945","1002","1008","1015","1032","1038","1045","1102","1108","1115","1132","1138","1145","1202","1208","1215","1232","1238","1245","1302","1308","1315","1332","1337","1345","1402","1408","1415","1432","1438","1445","1502","1508","1515","1532","1538","1545","1602","1608","1615","1632","1638","1645","1702","1708","1715","1732","1738","1745","1802","1808","1815","1832","1838","1845","1902","1908","1915","1932","1938","1945","2002","2008","2015","2032","2038","2045","2059","2108","2115","2132","2138","2145","2208","2215","2232","2245"];
+
+const QS_AFTER_CDF=5, QS_BEFORE_CDF=6, CYS_NB_LEAD=3, CYS_SB_RUN=5;
+const QS_PLAT_NB="4", QS_PLAT_SB="2";
+
+/* ---- Walking legs, in km. Straight-line distance between mapped
+   points × 1.25 for real street routing. Adjustable below. ---- */
+const DIST={
+  dHomeDingle:1.8, dHomeEastbrook:1.3,   // measured
+  dCarDingle:0.45, dCarPenarth:0.62,     // still mapped estimates
+  dQueenSt:1.7,    dCathays:0.3          // measured
+};
+/* Three walking paces in min/km, set directly rather than derived. */
+const DEFAULTS={paceFast:10, paceSteady:12, paceEasy:15,
+                doorTime:2, buffer:3, change:4, ...DIST};
+
+const TIERS=[
+  {id:"fast",  name:"If you move fast", pk:"paceFast",   buffer:0, chgK:0.5,
+   blurb:"no hanging about"},
+  {id:"steady",name:"Steady",           pk:"paceSteady", buffer:1, chgK:1,
+   blurb:"normal pace"},
+  {id:"easy",  name:"Taking it easy",   pk:"paceEasy",   buffer:1.6, chgK:1.25,
+   blurb:"unhurried, with slack"}
+];
+const paceOf=T=>cfg[T.pk];
+
+const toMin=t=>+t.slice(0,2)*60 + +t.slice(2);
+const fmt=m=>{const x=((m%1440)+1440)%1440;
+  return String(Math.floor(x/60)).padStart(2,"0")+":"+String(x%60).padStart(2,"0")};
+const CNB=CATH_NB.map(toMin), CSB=CATH_SB.map(toMin);
+
+/* ---------- settings ---------- */
+const KEY="cathaysCfg10", PINKEY="cathaysPin1";
+let storageOK=true, cfg={...DEFAULTS};
+const FIELDS=[
+  ["§Walking pace"],
+  ["paceFast","Moving fast","min/km"],
+  ["paceSteady","Steady","min/km"],
+  ["paceEasy","Taking it easy","min/km"],
+  ["§Distances"],
+  ["dHomeEastbrook","Home to Eastbrook","km"],
+  ["dHomeDingle","Home to Dingle Road","km"],
+  ["dCarDingle","Car (school) to Dingle Road","km"],
+  ["dCarPenarth","Car (school) to Penarth","km"],
+  ["dQueenSt","Queen Street to CP2","km"],
+  ["dCathays","Cathays station to CP2","km"],
+  ["§Fixed times"],
+  ["doorTime","Getting into CP2","min"],
+  ["buffer","Spare time at the station","min"],
+  ["change","Change at Queen Street","min"]
+];
+const KEYS=FIELDS.filter(f=>f.length>1).map(f=>f[0]);
+const isDist=k=>k.startsWith("d")&&k!=="doorTime";
+
+(function load(){
+  try{
+    const q=new URLSearchParams(location.hash.replace(/^#/,""));
+    const w=q.get("w");
+    if(w){ const v=w.split("."); let ok=false;
+      KEYS.forEach((k,i)=>{ const n=parseFloat(v[i]);
+        if(!isNaN(n)&&n>=0&&n<=200){cfg[k]=n;ok=true;} });
+      if(ok) return; }
+  }catch(e){}
+  try{ const s=localStorage.getItem(KEY); if(s) cfg={...cfg,...JSON.parse(s)}; }
+  catch(e){ storageOK=false; }
+})();
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify(cfg)); storageOK=true; }
+                 catch(e){ storageOK=false; } }
+const encode=()=>"w="+KEYS.map(k=>cfg[k]).join(".");
+
+/* ---------- pin ---------- */
+const PIN_MINS=30;
+let pin=null;
+try{ const s=localStorage.getItem(PINKEY); if(s) pin=JSON.parse(s); }catch(e){}
+function pinAlive(){
+  if(!pin) return false;
+  const age=(Date.now()-pin.at)/60000;
+  if(age>PIN_MINS){ pin=null; try{localStorage.removeItem(PINKEY)}catch(e){} return false; }
+  return true;
+}
+function setPin(p){ pin=p; try{ p?localStorage.setItem(PINKEY,JSON.stringify(p))
+                                 :localStorage.removeItem(PINKEY); }catch(e){} }
+
+/* ---------- state ---------- */
+let mode="now", direction="in", origin="home", departTouched=false;
+const nowMin=()=>{const d=new Date();return d.getHours()*60+d.getMinutes()};
+const departField=()=>document.getElementById("departAt");
+const departValue=()=>{const v=departField().value; return v?toMin(v.replace(":","")):nowMin()};
+
+const stations=()=> origin==="car" ? ["Dingle Road","Penarth"] : ["Dingle Road","Eastbrook"];
+function distFor(st){
+  if(origin==="car") return st==="Penarth"?cfg.dCarPenarth:cfg.dCarDingle;
+  return st==="Eastbrook"?cfg.dHomeEastbrook:cfg.dHomeDingle;
+}
+/* minutes to walk a distance at a tier's pace */
+const wk=(km,T)=>Math.max(1,Math.round(km*paceOf(T)));
+const buf=T=>Math.round(cfg.buffer*T.buffer);
+const chg=T=>Math.max(1,Math.round(cfg.change*T.chgK));
+
+/* ---------- outbound ---------- */
+function buildOut(st,T){
+  const walk=wk(distFor(st),T), src=st==="Eastbrook"?NB_EBK:NB_PEN;
+  const qsWalk=wk(cfg.dQueenSt,T)+cfg.doorTime, cyWalk=wk(cfg.dCathays,T)+cfg.doorTime;
+  return src.map(rec=>{
+    const cdf=toMin(rec[1]);
+    const dep=st==="Dingle Road"?toMin(rec[0])+2:toMin(rec[0]);
+    const qs=cdf+QS_AFTER_CDF;
+    const leave=dep-walk-buf(T);
+    const walkArr=qs+qsWalk;
+    const c=CNB.find(x=>x-CYS_NB_LEAD>=qs+chg(T));
+    const trainArr=c!=null?c+cyWalk:null;
+    const useTrain=trainArr!=null&&trainArr<walkArr;
+    const arrive=useTrain?trainArr:walkArr;
+    return {leave,dep,qs,walkArr,trainArr,cathays:c??null,
+            qsDep:c!=null?c-CYS_NB_LEAD:null,arrive,
+            route:useTrain?"change":"walk",door:arrive-leave,walk,qsWalk,cyWalk};
+  });
+}
+/* ---------- return ---------- */
+function buildBack(st,T){
+  const walk=wk(distFor(st),T), src=st==="Eastbrook"?SB_EBK:SB_PEN;
+  const qsWalk=wk(cfg.dQueenSt,T), cyWalk=wk(cfg.dCathays,T);
+  return src.map(rec=>{
+    const qsDep=toMin(rec[0])-QS_BEFORE_CDF;
+    const arrSt=st==="Eastbrook"?toMin(rec[1]):st==="Dingle Road"?toMin(rec[1]):toMin(rec[2]);
+    const byWalk=qsDep-qsWalk-buf(T);
+    const hop=CSB.filter(c=>c+CYS_SB_RUN+chg(T)<=qsDep).pop();
+    const byHop=hop!=null?hop-cyWalk-buf(T):-Infinity;
+    const useHop=byHop>byWalk;
+    const leave=useHop?byHop:byWalk;
+    const arrive=arrSt+walk;
+    return {leave,dep:qsDep,arrSt,arrive,door:arrive-leave,walk,qsWalk,cyWalk,
+            useHop,hop,gain:byHop-byWalk};
+  });
+}
+function pick(list){
+  if(mode==="now"){ const from=departValue();
+    return list.filter(o=>o.leave>=from).sort((a,b)=>a.arrive-b.arrive)[0]||null; }
+  const tgt=toMin(document.getElementById("arriveBy").value.replace(":",""));
+  return list.filter(o=>o.arrive<=tgt).sort((a,b)=>b.leave-a.leave)[0]||null;
+}
+
+/* ---------- rendering ---------- */
+const START=()=>origin==="car"?"Leave the car":"Leave home";
+const END=()=>origin==="car"?"Back at the car":"Home";
+const ENDN=()=>origin==="car"?"Where you parked":"Front door";
+const spine=rows=>"<ol class=spine>"+rows.map(r=>
+  `<li><span class="t mono">${fmt(r[0])}</span><span class="dot ${r[3]||""}"></span>
+   <span style="flex:1;min-width:0"><span class=place>${r[1]}</span><span class=note>${r[2]}</span></span></li>`
+).join("")+"</ol>";
+
+function rowsOut(st,o,T){
+  const r=[[o.leave,START(),o.walk+" min walk"+(buf(T)?" + "+buf(T)+" min spare":", straight off"),"start"],
+           [o.dep,st+" station","Board train to Cardiff",""],
+           [o.qs,"Cardiff Queen Street",o.route==="change"
+             ?"Arrives platform "+QS_PLAT_NB+" — change, "+chg(T)+" min":"Walk from here",""]];
+  if(o.route==="change"){
+    r.push([o.qsDep,"Platform "+QS_PLAT_NB,"Same platform — northbound Taff line",""]);
+    r.push([o.cathays,"Cathays station",o.cyWalk+" min to the door",""]);
+  }
+  r.push([o.arrive,"CP2, Cathays Park","At your desk","end"]);
+  return r;
+}
+function rowsBack(st,o,T){
+  return o.useHop?[
+    [o.leave,"Leave CP2",o.cyWalk+" min walk"+(buf(T)?" + "+buf(T)+" min spare":", straight off"),"start"],
+    [o.hop,"Cathays station","One stop down",""],
+    [o.hop+CYS_SB_RUN,"Cardiff Queen Street","Platform "+QS_PLAT_SB+" — change, "+(o.dep-o.hop-CYS_SB_RUN)+" min",""],
+    [o.dep,"Platform "+QS_PLAT_SB,"Same platform — southbound",""],
+    [o.arrSt,st+" station",o.walk+" min walk",""],
+    [o.arrive,END(),ENDN(),"end"]
+  ]:[
+    [o.leave,"Leave CP2",o.qsWalk+" min walk"+(buf(T)?" + "+buf(T)+" min spare":", straight off"),"start"],
+    [o.dep,"Cardiff Queen Street","Platform "+QS_PLAT_SB,""],
+    [o.arrSt,st+" station",o.walk+" min walk",""],
+    [o.arrive,END(),ENDN(),"end"]
+  ];
+}
+
+function card(T,idx,st,o,pinned){
+  const pace=paceOf(T), kmh=(60/pace).toFixed(1);
+  if(!o) return `<div class="card"><div class=head><div>
+    <h2>${T.name}</h2><div class=paceline>${pace} min/km · ${T.blurb}</div></div></div>
+    <div class=meta style="margin-top:9px">Nothing catchable at this pace.</div></div>`;
+  const rows=direction==="in"?rowsOut(st,o,T):rowsBack(st,o,T);
+  const id=[direction,origin,T.id,st,o.dep].join("|");
+  return `<div class="card ${pinned?"pinned":"t"+idx}">
+    <div class=head>
+      <div><h2>${T.name} — ${direction==="in"?st:"home via "+st}</h2>
+      <div class=paceline>${pace} min/km (${kmh} km/h) · ${o.door} min door to door</div></div>
+      <button class="star ${pinned?"on":""}" data-pin="${id}"
+        title="${pinned?"Unpin":"Pin this for 30 min"}">${pinned?"★":"☆"}</button>
+    </div>
+    ${spine(rows)}
+    <div class=verdict>${verdict(o,T)}</div></div>`;
+}
+function verdict(o,T){
+  if(direction==="in")
+    return o.route==="change"?`Changing beats walking up by ${o.walkArr-o.trainArr} min.`
+      :o.trainArr==null?"No onward Cathays train — walking up from Queen Street."
+      :`Walking up beats the ${fmt(o.cathays)} Cathays train by ${o.trainArr-o.walkArr} min.`;
+  return o.useHop?`Riding down from Cathays buys ${o.gain} min at your desk.`
+    :"Walking to Queen Street beats the Cathays hop.";
+}
+
+const CRS={"Dingle Road":"DGL","Penarth":"PEN","Eastbrook":"EBK"};
+const rtt=c=>"https://www.realtimetrains.co.uk/search/simple/gb-nr:"+c;
+function liveLinks(sts){
+  const b=direction==="in"?sts.map(s=>[s,CRS[s]]).concat([["Queen St","CDQ"]])
+                          :[["Queen St","CDQ"],["Cathays","CYS"]].concat(sts.map(s=>[s,CRS[s]]));
+  return `<div class=links><span class=lbl>Live boards &amp; disruption</span>
+   <div class=grid>${b.map(([n,c])=>`<a href="${rtt(c)}" target="_blank" rel="noopener">${n}</a>`).join("")}
+   <a href="https://tfw.wales/service-status" target="_blank" rel="noopener">TfW status</a></div>
+   <p>Queen Street is usually platform ${QS_PLAT_NB} northbound and ${QS_PLAT_SB} southbound,
+   so both changes are normally same-platform. Confirm on the board.</p></div>`;
+}
+
+function render(){
+  if(mode==="now"&&!departTouched&&!pinAlive()) departField().value=fmt(nowMin());
+  document.getElementById("panelLabel").textContent =
+      mode==="now"?(departTouched?"Leaving after":"Leaving now")
+    : direction==="in"?"At my desk by":origin==="car"?"At the car by":"Home by";
+  document.getElementById("eyebrow").textContent =
+    (origin==="car"?"Dingle Road · Penarth":"Dingle Road · Eastbrook")+" ⇄ CP2";
+
+  const sts=stations(), build=direction==="in"?buildOut:buildBack;
+  let html="", bar="";
+
+  if(pinAlive()){
+    const [pd,po,pt,pst,pdep]=pin.id.split("|");
+    const left=Math.max(0,PIN_MINS-Math.round((Date.now()-pin.at)/60000));
+    bar=`<div class=pinbar><span>Locked on your ${fmt(+pdep)} — ${left} min left</span>
+         <button id=unpin>Unpin</button></div>`;
+    const T=TIERS.find(t=>t.id===pt)||TIERS[1];
+    const o=build(pst,T).find(x=>x.dep===+pdep);
+    if(o) html+=card(T,0,pst,o,true);
+  }
+
+  TIERS.forEach((T,i)=>{
+    const opts=sts.map(s=>{const o=pick(build(s,T));return o?{s,o}:null}).filter(Boolean);
+    opts.sort((a,b)=>(a.o.arrive-b.o.arrive)||(a.o.door-b.o.door));
+    const best=opts[0];
+    html+=card(T,i,best?best.s:sts[0],best?best.o:null,false);
+  });
+
+  document.getElementById("pinbar").innerHTML=bar;
+  document.getElementById("results").innerHTML=html+liveLinks(sts);
+  document.querySelectorAll("[data-pin]").forEach(b=>b.onclick=()=>{
+    const id=b.getAttribute("data-pin");
+    if(pinAlive()&&pin.id===id) setPin(null); else setPin({id,at:Date.now()});
+    render();
+  });
+  const up=document.getElementById("unpin");
+  if(up) up.onclick=()=>{setPin(null);render()};
+
+  document.getElementById("foot").innerHTML=
+   "Weekday times from TfW booklets 13 and 14, valid 17 May – 13 September 2026. "+
+   "Walking distances are yours for the home, Queen Street and Cathays legs; the two "+
+   "school-run legs are still mapped estimates. Check live times before you travel.";
+  paint();
+}
+
+/* ---------- settings UI ---------- */
+document.getElementById("settings").innerHTML = FIELDS.map(f=>{
+  if(f.length===1) return `<div class=sechead>${f[0].slice(1)}</div>`;
+  const [k,l,u]=f;
+  return `<label><span>${l}</span>
+    <input type=number inputmode=decimal step="${isDist(k)?"0.1":"1"}"
+      min=0 id="f_${k}" value="${cfg[k]}"><span class=unit>${u}</span></label>`;
+}).join("")
+ + `<div class=setfoot><button id=copyLink>Copy link with my settings</button>
+      <button id=resetAll>Reset all</button></div><div id=setstatus></div>`;
+
+function paint(){
+  const changed=KEYS.filter(k=>cfg[k]!==DEFAULTS[k]).length;
+  const el=document.getElementById("setstatus");
+  if(el) el.innerHTML = !storageOK
+    ? `<span class=warn>This device is blocking storage.</span> Changes work now but won't survive a restart — use "Copy link with my settings".`
+    : changed===0
+      ? `Grey figures are the defaults. ${cfg.paceFast}/${cfg.paceSteady}/${cfg.paceEasy} min/km is `+
+        `${(60/cfg.paceFast).toFixed(1)}/${(60/cfg.paceSteady).toFixed(1)}/${(60/cfg.paceEasy).toFixed(1)} km/h.`
+      : `${changed} adjusted, held on this device. Safari can clear that after weeks unused — the link button makes it permanent.`;
+  KEYS.forEach(k=>{const i=document.getElementById("f_"+k); if(!i) return;
+    const def=cfg[k]===DEFAULTS[k];
+    i.classList.toggle("isDefault",def); i.classList.toggle("changed",!def);});
+}
+KEYS.forEach(k=>document.getElementById("f_"+k).addEventListener("input",ev=>{
+  const n=parseFloat(ev.target.value);
+  cfg[k]=isNaN(n)?DEFAULTS[k]:Math.max(0,n); save(); render();
+}));
+document.getElementById("resetAll").onclick=()=>{
+  cfg={...DEFAULTS}; KEYS.forEach(k=>document.getElementById("f_"+k).value=cfg[k]);
+  try{localStorage.removeItem(KEY)}catch(e){}
+  history.replaceState(null,"",location.pathname+location.search); save(); render();
+};
+document.getElementById("copyLink").onclick=e=>{
+  history.replaceState(null,"",location.pathname+location.search+"#"+encode());
+  const b=e.target,was=b.textContent;
+  b.textContent="In the address bar — re-add to Home Screen";
+  setTimeout(()=>b.textContent=was,2600);
+};
+
+/* ---------- wiring ---------- */
+const sel=(id,on)=>document.getElementById(id).setAttribute("aria-selected",on?"true":"false");
+document.getElementById("modeNow").onclick=()=>{mode="now";sel("modeNow",1);sel("modeArrive",0);
+  departField().classList.remove("hidden");
+  document.getElementById("arriveBy").classList.add("hidden");render()};
+document.getElementById("modeArrive").onclick=()=>{mode="arrive";sel("modeNow",0);sel("modeArrive",1);
+  departField().classList.add("hidden");
+  document.getElementById("arriveBy").classList.remove("hidden");render()};
+document.getElementById("arriveBy").addEventListener("input",render);
+departField().addEventListener("input",()=>{departTouched=true;render()});
+document.getElementById("dirIn").onclick=()=>{direction="in";sel("dirIn",1);sel("dirOut",0);render()};
+document.getElementById("dirOut").onclick=()=>{direction="out";sel("dirIn",0);sel("dirOut",1);render()};
+document.getElementById("origHome").onclick=()=>{origin="home";sel("origHome",1);sel("origCar",0);render()};
+document.getElementById("origCar").onclick=()=>{origin="car";sel("origHome",0);sel("origCar",1);render()};
+document.getElementById("toggleSettings").onclick=e=>{
+  const h=document.getElementById("settings").classList.toggle("hidden");
+  e.target.textContent=h?"Walking speed & distances":"Hide settings"};
+document.getElementById("refresh").onclick=()=>{
+  const b=document.getElementById("refresh");
+  b.style.transition="transform .4s";b.style.transform="rotate(360deg)";
+  setTimeout(()=>{b.style.transition="";b.style.transform=""},420);
+  departTouched=false; setPin(null); departField().value=fmt(nowMin()); render();};
+
+render();
+setInterval(()=>{ if(pinAlive()){render();return;}
+                  if(!departTouched||mode!=="now") render(); },20000);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)render()});
+</script>
+</body>
+</html>
