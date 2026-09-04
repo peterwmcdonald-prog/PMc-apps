@@ -6,47 +6,64 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Cathays">
-<meta name="theme-color" content="#E6EAE6">
+<meta name="theme-color" content="#BFE3FA">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <title>Cathays Park commute</title>
 <style>
-  :root{--stone:#E6EAE6;--ink:#17332F;--slate:#5A6E6A;--hair:#CBD4CF;--card:#FDFDFC;
-        --signal:#A8272E;--pin:#8A6A1F}
+  :root{--stone:#DCEEFB;--ink:#123A5E;--slate:#5B7C99;--hair:#B9DAF0;--card:#FFFFFF;
+        --signal:#F2691B;--pin:#F5B301;--go:#2FA84F;--calm:#3C8DD6}
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
-  body{background:var(--stone);color:var(--ink);
-    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  body{color:var(--ink);
+    font-family:ui-rounded,"SF Pro Rounded",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
     padding:max(16px,env(safe-area-inset-top)) 14px calc(40px + env(safe-area-inset-bottom));
-    -webkit-text-size-adjust:100%}
+    -webkit-text-size-adjust:100%;
+    background:
+      radial-gradient(circle at 12% 8%, #FFFFFF 0 26px, transparent 27px),
+      radial-gradient(circle at 18% 6%, #FFFFFF 0 20px, transparent 21px),
+      radial-gradient(circle at 84% 16%, #FFFFFF 0 22px, transparent 23px),
+      radial-gradient(circle at 90% 13%, #FFFFFF 0 16px, transparent 17px),
+      linear-gradient(#BFE3FA 0%, #DCEEFB 38%, #EAF6E6 100%);
+    background-attachment:fixed;background-repeat:no-repeat}
   .wrap{max-width:520px;margin:0 auto}
   .eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--slate);font-weight:700}
-  h1{margin:5px 0 16px;font-size:26px;line-height:1.12;font-weight:700;letter-spacing:-.02em}
+  h1{margin:5px 0 16px;font-size:27px;line-height:1.12;font-weight:800;letter-spacing:-.02em}
   .row{display:flex;gap:6px;margin-bottom:8px}
   button{font:inherit}
-  .tab{flex:1;padding:10px 4px;font-size:13.5px;font-weight:600;cursor:pointer;
-    border:1px solid var(--hair);background:transparent;color:var(--slate);border-radius:4px}
-  .tab[aria-selected="true"]{background:var(--ink);color:var(--card);border-color:var(--ink)}
-  .panel{background:var(--card);border:1px solid var(--hair);border-radius:6px;padding:11px 13px;
+  .tab{flex:1;padding:11px 4px;font-size:13.5px;font-weight:700;cursor:pointer;
+    border:2px solid var(--hair);background:rgba(255,255,255,.75);color:var(--slate);border-radius:999px}
+  .tab[aria-selected="true"]{background:var(--calm);color:#fff;border-color:var(--calm);
+    box-shadow:0 2px 0 #2E6FA8}
+  .panel{background:var(--card);border:2px solid var(--hair);border-radius:16px;padding:11px 13px;
     margin:12px 0 14px;display:flex;align-items:center;justify-content:space-between;gap:10px}
   .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums}
   input[type=time],input[type=number]{font:inherit;border:1px solid var(--hair);border-radius:4px;
     background:var(--card);color:var(--ink);padding:5px 8px}
   input[type=time]{font-family:ui-monospace,Menlo,monospace;font-size:17px;font-weight:700}
   input[type=number]{width:64px;text-align:right;font-variant-numeric:tabular-nums}
-  #refresh{border:1px solid var(--hair);background:transparent;color:var(--slate);
+  #refresh{border:2px solid var(--hair);border-radius:999px;background:transparent;color:var(--slate);
     border-radius:4px;padding:4px 10px;font-size:17px;line-height:1.1;cursor:pointer}
   #refresh:active{background:var(--ink);color:var(--card)}
 
-  .card{background:var(--card);border:1px solid var(--hair);border-radius:6px;padding:15px;margin-bottom:11px}
-  .card.t0{border-top:3px solid var(--signal)}
-  .card.pinned{border:2px solid var(--pin);background:#FDFBF4}
+  .card{background:var(--card);border:2px solid var(--hair);border-radius:18px;padding:15px;
+    margin-bottom:12px;box-shadow:0 3px 0 rgba(18,58,94,.07)}
+  .card.t0{border-color:var(--signal)}
+  .card
+  .card.t1{border-color:var(--calm)}
+  .card.t1 h2{color:var(--calm)}
+  .card.t2{border-color:var(--go)}
+  .card.t2 h2{color:var(--go)}
+  .card.t0 .dot.end{background:var(--signal);border-color:var(--signal)}
+  .card.t1 .dot.end{background:var(--calm);border-color:var(--calm)}
+  .card.t2 .dot.end{background:var(--go);border-color:var(--go)}
+  .card.pinned{border:3px solid var(--pin);background:#FFFCF0}
   .head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
   .card h2{margin:0;font-size:14px;font-weight:700;letter-spacing:-.01em}
   .paceline{font-size:11.5px;color:var(--slate);margin-top:2px}
-  .t0 h2{color:var(--signal)}
+  
   .pinned h2{color:var(--pin)}
-  .star{flex:0 0 auto;border:1px solid var(--hair);background:transparent;color:var(--slate);
-    border-radius:4px;padding:5px 9px;font-size:15px;line-height:1;cursor:pointer}
+  .star{flex:0 0 auto;border:2px solid var(--hair);background:#fff;color:var(--slate);
+    border-radius:999px;padding:5px 10px;font-size:16px;line-height:1;cursor:pointer}
   .star.on{background:var(--pin);border-color:var(--pin);color:var(--card)}
   .meta{font-size:12px;color:var(--slate)}
   ol.spine{list-style:none;margin:13px 0 0;padding:0}
@@ -62,16 +79,16 @@
   .place{font-size:13.5px;font-weight:600;line-height:16px;display:block}
   .note{font-size:12px;color:var(--slate);margin-top:1px;display:block}
   .verdict{margin-top:12px;padding-top:9px;border-top:1px dashed var(--hair);font-size:11.5px;color:var(--slate);line-height:1.45}
-  .pinbar{background:#FDFBF4;border:1px solid var(--pin);border-radius:6px;padding:10px 13px;
+  .pinbar{background:#FFF6D6;border:2px solid var(--pin);border-radius:16px;padding:10px 13px;
     margin-bottom:11px;display:flex;align-items:center;justify-content:space-between;gap:10px}
   .pinbar span{font-size:12px;color:var(--pin);font-weight:600}
   .pinbar button{border:1px solid var(--pin);background:transparent;color:var(--pin);
     border-radius:4px;padding:5px 10px;font-size:12px;font-weight:600;cursor:pointer}
 
-  .settings-btn{margin-top:4px;width:100%;padding:10px;font-size:13px;font-weight:600;color:var(--slate);
-    background:transparent;border:1px solid var(--hair);border-radius:4px;cursor:pointer}
-  #settings{background:var(--card);border:1px solid var(--hair);border-top:none;
-    border-radius:0 0 6px 6px;padding:8px 13px 12px}
+  .settings-btn{margin-top:4px;width:100%;padding:11px;font-size:13px;font-weight:700;color:var(--slate);
+    background:rgba(255,255,255,.8);border:2px solid var(--hair);border-radius:999px;cursor:pointer}
+  #settings{background:var(--card);border:2px solid var(--hair);
+    border-radius:16px;padding:8px 13px 12px;margin-top:8px}
   #settings label{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0;font-size:13px}
   #settings label span:first-child{flex:1}
   #settings input.isDefault{color:#5F6E6B}
@@ -87,11 +104,11 @@
   #setstatus{margin-top:9px;font-size:11.5px;line-height:1.5;color:var(--slate)}
   #setstatus .warn{color:var(--signal);font-weight:600}
 
-  .links{background:var(--card);border:1px solid var(--hair);border-radius:6px;padding:13px;margin-bottom:11px}
+  .links{background:var(--card);border:2px solid var(--hair);border-radius:16px;padding:13px;margin-bottom:11px}
   .links .lbl{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--slate)}
   .links .grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
   .links a{flex:1 1 30%;text-align:center;padding:9px 6px;font-size:12.5px;font-weight:600;
-    text-decoration:none;color:var(--ink);border:1px solid var(--hair);border-radius:4px;background:var(--stone)}
+    text-decoration:none;color:var(--ink);border:1px solid var(--hair);border-radius:4px;background:#EAF4FC}
   .links p{margin:9px 0 0;font-size:11.5px;line-height:1.5;color:var(--slate)}
   footer{font-size:11px;line-height:1.5;color:var(--slate);margin-top:16px}
   .hidden{display:none}
