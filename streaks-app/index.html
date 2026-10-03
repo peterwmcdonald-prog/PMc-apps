@@ -304,6 +304,29 @@
   .pu-hist-row .pu-bar{ flex:1; height:9px; }
   .pu-hist-row b{ width:24px; text-align:right; color:var(--ink); }
   .data-row .export-btn{ margin-top:0; }
+
+  /* WEIGHT */
+  .wt-entry{ display:flex; align-items:center; gap:8px; margin-top:8px; }
+  .wt-entry input{ font-family:'Baloo 2',sans-serif; font-weight:800; border:none; border-radius:12px; background:var(--track); color:var(--ink); padding:8px 10px; min-width:0; }
+  .wt-entry input[type=number]{ width:96px; font-size:22px; text-align:center; }
+  .wt-entry input[type=date]{ flex:1; font-size:14px; }
+  .wt-entry .pu-main-btn{ width:auto; flex:none; margin-top:0; padding:12px 16px; background:var(--h2); box-shadow:0 3px 0 var(--h2-dark); }
+  .wt-stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:4px; }
+  .wt-stat b{ display:block; font-family:'Baloo 2',sans-serif; font-size:22px; line-height:1.1; color:var(--ink); }
+  .wt-stat .pu-dim{ font-size:10.5px; }
+  .wt-big{ font-family:'Baloo 2',sans-serif; font-weight:800; font-size:34px; line-height:1; color:var(--h2-dark); }
+  .wt-ranges{ display:flex; gap:6px; margin:4px 0 8px; }
+  .wt-ranges .habit-chip.active{ background:var(--ink); box-shadow:0 2px 0 #000; }
+  .wt-chart{ position:relative; }
+  .wt-chart svg{ display:block; width:100%; height:auto; overflow:visible; }
+  .wt-tip{ position:absolute; top:0; transform:translateX(-50%); background:var(--ink); color:#fff; font-size:11px; font-weight:800; padding:4px 8px; border-radius:8px; white-space:nowrap; pointer-events:none; }
+  .wt-legend{ display:flex; gap:14px; font-size:10.5px; color:var(--ink-dim); font-weight:700; margin-top:6px; flex-wrap:wrap; }
+  .wt-legend span{ display:inline-flex; align-items:center; gap:5px; }
+  .wt-row{ display:flex; align-items:center; gap:8px; padding:8px 0; border-top:2px dashed var(--track); font-size:13px; font-weight:800; }
+  .wt-row:first-child{ border-top:none; }
+  .wt-row span{ flex:1; color:var(--ink-dim); }
+  .wt-row em{ font-style:normal; font-size:11px; width:48px; text-align:right; color:var(--ink-dim); }
+  .wt-row button{ background:none; border:none; color:var(--ink-dimmer); font-size:16px; font-weight:900; padding:2px 6px; cursor:pointer; }
 </style>
 </head>
 <body>
@@ -360,11 +383,20 @@
   </div>
   <div id="puContent"></div>
 </div>
+
+<div class="view" id="viewWeight" hidden>
+  <div class="topbar">
+    <div class="brand">⚖️ Weight</div>
+    <div class="kudos-pill" id="wtPill">– kg</div>
+  </div>
+  <div id="wtContent"></div>
+</div>
 </div>
 
 <nav class="tabbar">
   <button id="tabHabits" class="active">🔥 Habits</button>
   <button id="tabPushups">💪 Press ups</button>
+  <button id="tabWeight">⚖️ Weight</button>
 </nav>
 
 <div class="confetti-layer" id="confettiLayer"></div>
@@ -386,7 +418,8 @@ const DEFAULT_HABITS = [
 
 const PU_HABIT_ID = 'h4';
 function defaultPushups(){ return { level:1, sessions:{}, tests:[], draft:null }; }
-let state = { habits: DEFAULT_HABITS, entries: {}, pushups: defaultPushups() };
+function defaultWeight(){ return { entries:{}, goal:null }; }
+let state = { habits: DEFAULT_HABITS, entries: {}, pushups: defaultPushups(), weight: defaultWeight() };
 let selectedDate = todayStr();
 let calMonth = new Date();
 let calMode = 'all';
@@ -408,7 +441,7 @@ function isValidDateKey(dateStr){
 // Defensively rebuilds app state from untrusted input (localStorage or an imported backup file).
 // Never trusts shapes/types — always falls back to safe defaults for anything malformed.
 function sanitizeLoaded(loaded){
-  const safe = { habits: DEFAULT_HABITS.map(h=>({...h})), entries: {}, pushups: sanitizePushups(loaded && loaded.pushups) };
+  const safe = { habits: DEFAULT_HABITS.map(h=>({...h})), entries: {}, pushups: sanitizePushups(loaded && loaded.pushups), weight: sanitizeWeight(loaded && loaded.weight) };
   if(!loaded || typeof loaded !== 'object') return safe;
 
   if(Array.isArray(loaded.habits)){
@@ -487,6 +520,22 @@ function sanitizePushups(pu){
   return safe;
 }
 
+const WT_MIN = 20, WT_MAX = 400;
+function wtClean(v){ const n = Math.round(Number(v)*10)/10; return Number.isFinite(n) && n >= WT_MIN && n <= WT_MAX ? n : undefined; }
+function sanitizeWeight(w){
+  const safe = defaultWeight();
+  if(!w || typeof w !== 'object') return safe;
+  if(w.entries && typeof w.entries === 'object' && !Array.isArray(w.entries)){
+    for(const d of Object.keys(w.entries)){
+      const kg = wtClean(w.entries[d]);
+      if(isValidDateKey(d) && kg !== undefined) safe.entries[d] = kg;
+    }
+  }
+  const g = wtClean(w.goal);
+  if(g !== undefined) safe.goal = g;
+  return safe;
+}
+
 function loadState(){
   try{
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -496,6 +545,7 @@ function loadState(){
       state.habits = clean.habits;
       state.entries = clean.entries;
       state.pushups = clean.pushups;
+      state.weight = clean.weight;
       saveState(); // persists removal of retired habits (e.g. Flexibility)
     }
   }catch(e){ console.error('load failed — starting from a clean state', e); }
@@ -1010,18 +1060,192 @@ function renderPushups(){
   const un = document.getElementById('puUndo'); if(un) un.addEventListener('click', puUndo);
 }
 
+/* ---------- WEIGHT ----------
+   Daily weigh-ins bounce around by a kilo or so (water, food), so the headline
+   numbers use a 7-day average trend rather than the raw last reading. */
+let wtRange = 90;
+let wtDate = todayStr();
+function wtSorted(){ return Object.keys(state.weight.entries).sort().map(d => ({ date:d, kg:state.weight.entries[d] })); }
+// Average of all weigh-ins in the 7 days ending on dateStr.
+function wtTrendOn(list, dateStr){
+  const from = addDays(dateStr, -6);
+  const win = list.filter(e => e.date >= from && e.date <= dateStr);
+  return win.length ? win.reduce((s,e) => s + e.kg, 0) / win.length : undefined;
+}
+function wtFmt(n, signed){ if(n === undefined) return '–'; const s = n.toFixed(1); return signed && n > 0 ? '+' + s : s; }
+function wtShortDate(d){ return new Date(d+'T00:00:00').toLocaleDateString(undefined,{day:'numeric',month:'short'}); }
+function wtDayNum(d){ return Math.round(new Date(d+'T00:00:00').getTime() / 86400000); }
+
+function wtChartSvg(list, goal){
+  const W = 320, H = 170, padL = 34, padR = 8, padT = 10, padB = 20;
+  const end = todayStr();
+  const start = wtRange ? addDays(end, -(wtRange-1)) : list[0].date;
+  const pts = list.filter(e => e.date >= start);
+  if(pts.length < 2) return '<div class="pu-dim" style="padding:20px 0;text-align:center">Log a couple more weigh-ins to see the chart.</div>';
+  const trend = pts.map(e => ({ date:e.date, kg:wtTrendOn(list, e.date) }));
+  const x0 = wtDayNum(pts[0].date), x1 = Math.max(wtDayNum(pts[pts.length-1].date), x0 + 1);
+  const vals = pts.map(e => e.kg).concat(goal ? [goal] : []);
+  let lo = Math.floor(Math.min(...vals) - 0.5), hi = Math.ceil(Math.max(...vals) + 0.5);
+  if(hi - lo < 2){ lo -= 1; hi += 1; }
+  const X = d => padL + (wtDayNum(d) - x0) / (x1 - x0) * (W - padL - padR);
+  const Y = kg => padT + (hi - kg) / (hi - lo) * (H - padT - padB);
+  const step = Math.max(1, Math.ceil((hi - lo) / 4));
+  let g = '';
+  for(let v = Math.ceil(lo); v <= hi; v += step){
+    g += `<line x1="${padL}" x2="${W-padR}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--track)" stroke-width="1"/>
+      <text x="${padL-6}" y="${Y(v)+3.5}" text-anchor="end" font-size="10" font-weight="700" fill="var(--ink-dim)">${v}</text>`;
+  }
+  g += `<text x="${padL}" y="${H-4}" font-size="10" font-weight="700" fill="var(--ink-dim)">${wtShortDate(pts[0].date)}</text>
+    <text x="${W-padR}" y="${H-4}" text-anchor="end" font-size="10" font-weight="700" fill="var(--ink-dim)">${wtShortDate(pts[pts.length-1].date)}</text>`;
+  if(goal && goal >= lo && goal <= hi){
+    g += `<line x1="${padL}" x2="${W-padR}" y1="${Y(goal)}" y2="${Y(goal)}" stroke="var(--green-dark)" stroke-width="1.5" stroke-dasharray="4 4"/>
+      <text x="${W-padR}" y="${Y(goal)-4}" text-anchor="end" font-size="10" font-weight="800" fill="var(--green-dark)">goal ${goal}</text>`;
+  }
+  const dots = pts.map(e => `<circle cx="${X(e.date)}" cy="${Y(e.kg)}" r="3" fill="var(--h2)" fill-opacity="0.35"/>`).join('');
+  const line = `<polyline fill="none" stroke="var(--h2-dark)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" points="${trend.map(t => `${X(t.date)},${Y(t.kg)}`).join(' ')}"/>`;
+  const hits = pts.map((e,i) => {
+    const xa = i ? (X(pts[i-1].date) + X(e.date)) / 2 : padL;
+    const xb = i < pts.length-1 ? (X(e.date) + X(pts[i+1].date)) / 2 : W - padR;
+    return `<rect class="wt-hit" data-i="${i}" x="${xa}" y="0" width="${Math.max(1, xb-xa)}" height="${H}" fill="transparent"/>`;
+  }).join('');
+  window._wtPts = pts.map((e,i) => ({ ...e, trend:trend[i].kg, x:X(e.date)/W*100, y:Y(e.kg) }));
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Weight chart">${g}${dots}${line}
+    <line id="wtCross" x1="0" x2="0" y1="${padT}" y2="${H-padB}" stroke="var(--ink-dimmer)" stroke-width="1" visibility="hidden"/>${hits}</svg>
+    <div class="wt-tip" id="wtTip" hidden></div>`;
+}
+
+function renderWeight(){
+  const el = document.getElementById('wtContent');
+  const w = state.weight;
+  const list = wtSorted();
+  const t = todayStr();
+  const latest = list[list.length-1];
+  const trendNow = latest ? wtTrendOn(list, latest.date) : undefined;
+  const trendAgo = n => { const d = addDays(latest.date, -n); return list.some(e => e.date <= d) ? wtTrendOn(list, d) ?? list.filter(e => e.date <= d).pop().kg : undefined; };
+  const ch7 = latest && trendAgo(7) !== undefined ? trendNow - trendAgo(7) : undefined;
+  const ch30 = latest && trendAgo(30) !== undefined ? trendNow - trendAgo(30) : undefined;
+  const startKg = list.length ? list[0].kg : undefined;
+  document.getElementById('wtPill').textContent = latest ? latest.kg.toFixed(1) + ' kg' : '– kg';
+
+  const editVal = w.entries[wtDate];
+  let html = `
+    <div class="pu-card">
+      <div class="pu-title">Log weight</div>
+      <div class="wt-entry">
+        <input type="number" id="wtVal" inputmode="decimal" step="0.1" placeholder="kg" value="${editVal ?? (latest ? latest.kg : '')}">
+        <input type="date" id="wtDate" max="${t}" value="${wtDate}">
+        <button class="pu-main-btn btn3d" id="wtSave">${editVal !== undefined ? 'Update' : 'Save'}</button>
+      </div>
+      <div class="pu-dim" style="margin-top:8px">${w.entries[t] !== undefined ? '✅ Weighed in today' : 'Same time each day works best — e.g. first thing in the morning.'}</div>
+    </div>`;
+
+  if(latest){
+    const toGo = w.goal && trendNow !== undefined ? trendNow - w.goal : undefined;
+    const goalPct = w.goal && startKg > w.goal ? Math.max(0, Math.min(100, (startKg - trendNow) / (startKg - w.goal) * 100)) : 0;
+    html += `
+    <div class="pu-card">
+      <div class="pu-dim">7-day average</div>
+      <div class="pu-best"><span class="wt-big">${wtFmt(trendNow)}</span><span class="pu-dim">kg</span></div>
+      <div class="wt-stats">
+        <div class="wt-stat"><b>${wtFmt(ch7, true)}</b><span class="pu-dim">kg this week</span></div>
+        <div class="wt-stat"><b>${wtFmt(ch30, true)}</b><span class="pu-dim">kg 30 days</span></div>
+        <div class="wt-stat"><b>${wtFmt(trendNow - startKg, true)}</b><span class="pu-dim">kg since ${wtShortDate(list[0].date)}</span></div>
+      </div>
+      ${w.goal ? `
+      <div class="pu-dim" style="margin:12px 0 6px">Goal ${w.goal.toFixed(1)} kg · ${toGo > 0 ? `<b style="color:var(--ink)">${toGo.toFixed(1)} kg</b> to go` : '<b style="color:var(--green-dark)">reached 🎉</b>'}</div>
+      <div class="pu-bar"><i style="width:${toGo > 0 ? goalPct : 100}%; background:var(--h2)"></i></div>` : ''}
+    </div>
+    <div class="pu-card">
+      <div class="pu-title">Trend</div>
+      <div class="wt-ranges">${[[30,'30 days'],[90,'90 days'],[0,'All']].map(([v,l]) => `<button class="habit-chip btn3d ${wtRange===v?'active':''}" data-wt-range="${v}" style="border:none">${l}</button>`).join('')}</div>
+      <div class="wt-chart" id="wtChart">${wtChartSvg(list, w.goal)}</div>
+      <div class="wt-legend">
+        <span><svg width="10" height="10"><circle cx="5" cy="5" r="4" fill="var(--h2)" fill-opacity="0.35"/></svg>daily weigh-in</span>
+        <span><svg width="16" height="10"><line x1="1" x2="15" y1="5" y2="5" stroke="var(--h2-dark)" stroke-width="2" stroke-linecap="round"/></svg>7-day average</span>
+        ${w.goal ? `<span><svg width="16" height="10"><line x1="1" x2="15" y1="5" y2="5" stroke="var(--green-dark)" stroke-width="1.5" stroke-dasharray="4 3"/></svg>goal</span>` : ''}
+      </div>
+    </div>`;
+  }
+
+  html += `
+    <div class="pu-card">
+      <div class="pu-title">Goal</div>
+      <div class="wt-entry">
+        <input type="number" id="wtGoal" inputmode="decimal" step="0.1" placeholder="kg" value="${w.goal ?? ''}">
+        <button class="pu-main-btn btn3d" id="wtGoalSave">Set goal</button>
+      </div>
+      <div class="pu-dim" style="margin-top:8px">Aim for about 0.25–0.5 kg a week — slow and steady sticks.${w.goal ? ' Clear the box and tap Set goal to remove it.' : ''}</div>
+    </div>`;
+
+  if(list.length){
+    const recent = list.slice(-14).reverse();
+    html += `<div class="pu-card"><div class="pu-title">Recent</div>${recent.map((e,i) => {
+      const prev = list[list.length-2-i];
+      const diff = prev ? e.kg - prev.kg : undefined;
+      return `<div class="wt-row"><span>${new Date(e.date+'T00:00:00').toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'})}</span>
+        <b>${e.kg.toFixed(1)}</b><em>${diff === undefined ? '' : wtFmt(diff, true)}</em>
+        <button data-wt-del="${e.date}" aria-label="Delete">×</button></div>`;
+    }).join('')}</div>`;
+  }
+  html += `<footer class="note">Daily weight swings by up to a kilo — watch the 7-day average, not the single readings.</footer>`;
+  el.innerHTML = html;
+
+  const save = () => {
+    const kg = wtClean(document.getElementById('wtVal').value);
+    const d = document.getElementById('wtDate').value;
+    if(kg === undefined){ alert(`Enter a weight between ${WT_MIN} and ${WT_MAX} kg.`); return; }
+    if(!isValidDateKey(d) || d > t){ alert('Pick a valid date (not in the future).'); return; }
+    w.entries[d] = kg; wtDate = t;
+    saveState(); renderWeight();
+  };
+  document.getElementById('wtSave').addEventListener('click', save);
+  document.getElementById('wtVal').addEventListener('keydown', e => { if(e.key === 'Enter') save(); });
+  document.getElementById('wtDate').addEventListener('change', e => { if(isValidDateKey(e.target.value)){ wtDate = e.target.value; renderWeight(); } });
+  document.getElementById('wtGoalSave').addEventListener('click', () => {
+    const raw = document.getElementById('wtGoal').value;
+    if(raw === ''){ w.goal = null; }
+    else { const g = wtClean(raw); if(g === undefined){ alert(`Enter a goal between ${WT_MIN} and ${WT_MAX} kg.`); return; } w.goal = g; }
+    saveState(); renderWeight();
+  });
+  el.querySelectorAll('[data-wt-range]').forEach(b => b.addEventListener('click', () => { wtRange = Number(b.dataset.wtRange); renderWeight(); }));
+  el.querySelectorAll('[data-wt-del]').forEach(b => b.addEventListener('click', () => {
+    const d = b.dataset.wtDel;
+    if(!confirm(`Delete ${w.entries[d].toFixed(1)} kg on ${wtShortDate(d)}?`)) return;
+    delete w.entries[d]; saveState(); renderWeight();
+  }));
+
+  const tip = document.getElementById('wtTip'), cross = document.getElementById('wtCross');
+  if(tip){
+    const show = i => {
+      const p = window._wtPts[i];
+      tip.hidden = false;
+      tip.style.left = Math.min(85, Math.max(15, p.x)) + '%';
+      tip.textContent = `${wtShortDate(p.date)} · ${p.kg.toFixed(1)} kg · avg ${p.trend.toFixed(1)}`;
+      cross.setAttribute('x1', p.x/100*320); cross.setAttribute('x2', p.x/100*320); cross.setAttribute('visibility','visible');
+    };
+    el.querySelectorAll('.wt-hit').forEach(r => {
+      r.addEventListener('pointerenter', () => show(Number(r.dataset.i)));
+      r.addEventListener('pointerdown', () => show(Number(r.dataset.i)));
+    });
+    document.getElementById('wtChart').addEventListener('pointerleave', e => { if(e.pointerType === 'mouse'){ tip.hidden = true; cross.setAttribute('visibility','hidden'); } });
+  }
+}
+
 function showView(name){
-  document.getElementById('viewHabits').hidden = name !== 'habits';
-  document.getElementById('viewPushups').hidden = name !== 'pushups';
-  document.getElementById('tabHabits').classList.toggle('active', name === 'habits');
-  document.getElementById('tabPushups').classList.toggle('active', name === 'pushups');
+  ['habits','pushups','weight'].forEach(v => {
+    const cap = v[0].toUpperCase() + v.slice(1);
+    document.getElementById('view' + cap).hidden = name !== v;
+    document.getElementById('tab' + cap).classList.toggle('active', name === v);
+  });
   window.scrollTo(0,0);
 }
 document.getElementById('tabHabits').addEventListener('click', ()=>showView('habits'));
 document.getElementById('tabPushups').addEventListener('click', ()=>showView('pushups'));
+document.getElementById('tabWeight').addEventListener('click', ()=>showView('weight'));
 
 function render(){
   renderPushups();
+  renderWeight();
   renderDateNav();
   renderDayProgress();
   renderHabits();
@@ -1048,12 +1272,13 @@ document.getElementById('prevMonth').addEventListener('click', ()=>{ calMonth.se
 document.getElementById('nextMonth').addEventListener('click', ()=>{ calMonth.setMonth(calMonth.getMonth()+1); renderCalendar(); });
 
 function exportCSV(){
-  const dates = Object.keys(state.entries).sort();
+  const dates = [...new Set(Object.keys(state.entries).concat(Object.keys(state.weight.entries)))].sort();
   const header = ['date'];
   state.habits.forEach(h=>{
     header.push(h.name + ' done');
     if(h.hasNumber) header.push(h.name + (h.unit ? ` (${h.unit})` : ' amount'));
   });
+  header.push('weight (kg)');
   const rows = [header];
   dates.forEach(dateStr=>{
     const row = [dateStr];
@@ -1062,6 +1287,7 @@ function exportCSV(){
       row.push(e.done === true ? 'yes' : 'no');
       if(h.hasNumber) row.push(e.amount !== undefined ? e.amount : '');
     });
+    row.push(state.weight.entries[dateStr] ?? '');
     rows.push(row);
   });
   const csv = rows.map(r => r.map(cell => {
@@ -1113,6 +1339,7 @@ document.getElementById('importFile').addEventListener('change', e=>{
       state.habits = clean.habits;
       state.entries = clean.entries;
       state.pushups = clean.pushups;
+      state.weight = clean.weight;
       saveState();
       render();
       alert('Backup restored.');
