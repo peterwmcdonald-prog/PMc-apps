@@ -243,11 +243,72 @@
   }
   .export-btn:active{ transform:translateY(3px); box-shadow:0 0 0 var(--card-border); }
   .data-row{ display:flex; gap:8px; margin-top:14px; }
+
+  /* TAB BAR */
+  .tabbar{
+    position:fixed; left:0; right:0; bottom:0; z-index:50;
+    display:flex; justify-content:center; gap:8px;
+    background:var(--card); border-top:2px solid var(--card-border);
+    padding:8px 16px calc(8px + env(safe-area-inset-bottom));
+  }
+  .tabbar button{
+    flex:1; max-width:244px; padding:10px; border-radius:14px; border:none; cursor:pointer;
+    background:var(--track); color:var(--ink-dim);
+    font-family:'Nunito',sans-serif; font-weight:900; font-size:13.5px;
+    box-shadow:0 3px 0 var(--card-border);
+  }
+  .tabbar button.active{ background:var(--ink); color:#fff; box-shadow:0 3px 0 #000; }
+  .tabbar button:active{ transform:translateY(3px); box-shadow:none; }
+  .view[hidden]{ display:none; }
+
+  /* PRESS UPS */
+  .pu-card{
+    background:var(--card); border:2px solid var(--card-border); border-radius:var(--radius);
+    padding:14px; margin-bottom:14px; box-shadow:0 3px 0 var(--card-border);
+  }
+  .pu-title{ font-family:'Baloo 2',sans-serif; font-weight:800; font-size:17px; margin:0 0 2px; }
+  .pu-dim{ font-size:11.5px; color:var(--ink-dim); font-weight:700; }
+  .pu-best{ display:flex; align-items:baseline; gap:6px; margin:6px 0 8px; }
+  .pu-best b{ font-family:'Baloo 2',sans-serif; font-size:34px; line-height:1; color:var(--h4-dark); }
+  .pu-bar{ height:12px; border-radius:999px; background:var(--track); overflow:hidden; }
+  .pu-bar i{ display:block; height:100%; background:var(--h4); border-radius:999px; transition:width .4s ease; }
+  .pu-ex{ padding:12px 0; border-top:2px dashed var(--track); }
+  .pu-ex:first-of-type{ border-top:none; }
+  .pu-ex-name{ font-weight:900; font-size:14px; }
+  .pu-ex-name small{ font-weight:800; font-size:10px; color:#fff; background:var(--ink-dimmer); border-radius:6px; padding:1px 6px; margin-left:6px; vertical-align:2px; }
+  .pu-ex-how{ font-size:11.5px; color:var(--ink-dim); font-weight:700; margin:2px 0 8px; }
+  .pu-sets{ display:flex; gap:7px; flex-wrap:wrap; }
+  .pu-set{
+    min-width:46px; height:40px; padding:0 10px; border-radius:12px;
+    background:var(--track); color:var(--ink); font-family:'Baloo 2',sans-serif; font-weight:800; font-size:16px;
+    box-shadow:0 3px 0 var(--card-border);
+  }
+  .pu-set.on{ background:var(--h4); color:#fff; box-shadow:0 3px 0 var(--h4-dark); }
+  .pu-feel{ display:flex; gap:7px; margin-top:6px; }
+  .pu-feel button, .pu-main-btn{
+    flex:1; padding:12px 6px; border-radius:14px; border:none;
+    font-family:'Nunito',sans-serif; font-weight:900; font-size:13px; color:#fff;
+    background:var(--h4); box-shadow:0 3px 0 var(--h4-dark);
+  }
+  .pu-feel button:disabled, .pu-main-btn:disabled{ opacity:0.35; }
+  .pu-feel button[data-feel="easy"]{ background:var(--green); box-shadow:0 3px 0 var(--green-dark); }
+  .pu-feel button[data-feel="hard"]{ background:var(--h1); box-shadow:0 3px 0 var(--h1-dark); }
+  .pu-main-btn{ width:100%; margin-top:6px; }
+  .pu-link{ background:none; border:none; color:var(--ink-dim); font-weight:800; font-size:12px; text-decoration:underline; margin-top:12px; padding:4px; font-family:'Nunito',sans-serif; cursor:pointer; }
+  .pu-test-input{ display:flex; align-items:center; gap:8px; }
+  .pu-test-input input{ width:70px; text-align:center; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:22px; border:none; border-radius:12px; background:var(--track); padding:6px 0; color:var(--ink); }
+  .pu-test-input .num-btn{ width:40px; height:40px; font-size:20px; }
+  .pu-hist{ display:flex; flex-direction:column; gap:6px; margin-top:8px; }
+  .pu-hist-row{ display:flex; align-items:center; gap:8px; font-size:11.5px; font-weight:800; color:var(--ink-dim); }
+  .pu-hist-row span:first-child{ width:62px; flex-shrink:0; }
+  .pu-hist-row .pu-bar{ flex:1; height:9px; }
+  .pu-hist-row b{ width:24px; text-align:right; color:var(--ink); }
   .data-row .export-btn{ margin-top:0; }
 </style>
 </head>
 <body>
 <div class="wrap">
+<div class="view" id="viewHabits">
 
   <div class="topbar">
     <div class="brand">🔥 Streaks</div>
@@ -292,6 +353,20 @@
   <footer class="note">Tap a day in the calendar to log it retrospectively. Your data lives only on this device — use Backup to move it elsewhere.</footer>
 </div>
 
+<div class="view" id="viewPushups" hidden>
+  <div class="topbar">
+    <div class="brand">💪 Press ups</div>
+    <div class="kudos-pill" id="puLevelPill">Level 1</div>
+  </div>
+  <div id="puContent"></div>
+</div>
+</div>
+
+<nav class="tabbar">
+  <button id="tabHabits" class="active">🔥 Habits</button>
+  <button id="tabPushups">💪 Press ups</button>
+</nav>
+
 <div class="confetti-layer" id="confettiLayer"></div>
 
 <script>
@@ -309,7 +384,9 @@ const DEFAULT_HABITS = [
   { id:'h4', name:'Press ups', color:'var(--h4)', dark:'var(--h4-dark)', hasNumber:true, unit:'' },
 ];
 
-let state = { habits: DEFAULT_HABITS, entries: {} };
+const PU_HABIT_ID = 'h4';
+function defaultPushups(){ return { level:1, sessions:{}, tests:[], draft:null }; }
+let state = { habits: DEFAULT_HABITS, entries: {}, pushups: defaultPushups() };
 let selectedDate = todayStr();
 let calMonth = new Date();
 let calMode = 'all';
@@ -331,7 +408,7 @@ function isValidDateKey(dateStr){
 // Defensively rebuilds app state from untrusted input (localStorage or an imported backup file).
 // Never trusts shapes/types — always falls back to safe defaults for anything malformed.
 function sanitizeLoaded(loaded){
-  const safe = { habits: DEFAULT_HABITS.map(h=>({...h})), entries: {} };
+  const safe = { habits: DEFAULT_HABITS.map(h=>({...h})), entries: {}, pushups: sanitizePushups(loaded && loaded.pushups) };
   if(!loaded || typeof loaded !== 'object') return safe;
 
   if(Array.isArray(loaded.habits)){
@@ -370,6 +447,46 @@ function sanitizeLoaded(loaded){
   return safe;
 }
 
+function sanitizePushups(pu){
+  const safe = defaultPushups();
+  if(!pu || typeof pu !== 'object') return safe;
+  const int = (v, min, max) => { const n = Math.round(Number(v)); return Number.isFinite(n) ? Math.min(max, Math.max(min, n)) : undefined; };
+  safe.level = int(pu.level, 1, PU_MAX_LEVEL) || 1;
+  if(pu.sessions && typeof pu.sessions === 'object'){
+    for(const dateStr of Object.keys(pu.sessions)){
+      const x = pu.sessions[dateStr];
+      if(!isValidDateKey(dateStr) || !x || typeof x !== 'object') continue;
+      const clean = {
+        level: int(x.level, 1, PU_MAX_LEVEL) || 1,
+        prevLevel: int(x.prevLevel, 1, PU_MAX_LEVEL) || 1,
+        full: int(x.full, 0, 10000) || 0,
+        total: int(x.total, 0, 10000) || 0,
+        feel: ['easy','right','hard','test'].includes(x.feel) ? x.feel : 'right',
+      };
+      if(x.test !== undefined){ const t = int(x.test, 0, 1000); if(t !== undefined) clean.test = t; }
+      safe.sessions[dateStr] = clean;
+    }
+  }
+  if(Array.isArray(pu.tests)){
+    safe.tests = pu.tests
+      .filter(t => t && isValidDateKey(t.date) && int(t.max, 0, 1000) !== undefined)
+      .map(t => ({ date:t.date, max:int(t.max, 0, 1000) }))
+      .sort((a,b) => a.date < b.date ? -1 : 1);
+  }
+  const d = pu.draft;
+  if(d && typeof d === 'object' && isValidDateKey(d.date)){
+    const draft = { date:d.date, sets:{}, forceTest: d.forceTest === true };
+    if(d.sets && typeof d.sets === 'object'){
+      for(const k of Object.keys(d.sets)){
+        if(/^[a-z]{1,10}$/.test(k) && Array.isArray(d.sets[k])) draft.sets[k] = d.sets[k].slice(0,10).map(v => v === true);
+      }
+    }
+    const tv = int(d.testVal, 0, 1000); if(tv !== undefined) draft.testVal = tv;
+    safe.draft = draft;
+  }
+  return safe;
+}
+
 function loadState(){
   try{
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -378,6 +495,7 @@ function loadState(){
       const clean = sanitizeLoaded(loaded);
       state.habits = clean.habits;
       state.entries = clean.entries;
+      state.pushups = clean.pushups;
       saveState(); // persists removal of retired habits (e.g. Flexibility)
     }
   }catch(e){ console.error('load failed — starting from a clean state', e); }
@@ -705,7 +823,205 @@ function renderCalendar(){
     : `<span><i style="background:#FFEBC7"></i>1</span><span><i style="background:#FFCF80"></i>2</span><span><i style="background:#FFAE3D"></i>3</span><span><i style="background:var(--orange)"></i>all ${state.habits.length}</span><span>habits done (number in corner)</span>`;
 }
 
+/* ---------- PRESS UPS ----------
+   Levels go up slowly (one per good session). Full press up sets grow by one rep
+   every 4 levels; knee/negative/variety work builds the strength in between.
+   Every 7th session is a test (max full press ups in a row), which re-calibrates
+   the level up or down so the plan always matches what you can actually do. */
+const PU_GOAL = 50;
+const PU_MAX_LEVEL = 200;
+const PU_VARIETY = [
+  { name:'Wide knee press ups', how:'Knees down, hands wider than your shoulders.' },
+  { name:'Diamond incline press ups', how:'Hands close together under your chest, on a table or bench.' },
+  { name:'Staggered knee press ups', how:'One hand forward, one back. Swap sides between sets.' },
+  { name:'Slow wall press ups', how:'3 seconds down, 3 seconds up. Keep your body straight.' },
+  { name:'Stair press ups', how:'Hands on a step. The lower the step, the harder it is.' },
+  { name:'Paused knee press ups', how:'Hold for 2 seconds just above the floor, then push up.' },
+];
+function puFullReps(L){ return 1 + Math.floor((L-1)/4); }
+function puLevelForReps(r){ return Math.min(PU_MAX_LEVEL, (Math.max(1, r)-1)*4 + 1); }
+function puSessionsBefore(dateStr){ return Object.keys(state.pushups.sessions).filter(d => d < dateStr).length; }
+function puDraft(){
+  const t = todayStr();
+  if(!state.pushups.draft || state.pushups.draft.date !== t) state.pushups.draft = { date:t, sets:{}, forceTest:false };
+  return state.pushups.draft;
+}
+function puBest(){ return state.pushups.tests.reduce((m,t) => Math.max(m, t.max), 0); }
+function puPlan(){
+  const L = state.pushups.level;
+  const r = puFullReps(L);
+  const n = puSessionsBefore(todayStr());
+  const test = puDraft().forceTest || (n % 7 === 6);
+  const ex = [
+    { key:'wall', tag:'warm-up', name:'Wall press ups', how:'Hands on the wall at shoulder height, step back, body straight.', sets:[10] },
+    { key:'incline', tag:'warm-up', name:'Incline press ups', how:'Hands on the edge of a table or bench.', sets:[8] },
+  ];
+  if(test){
+    ex.push({ key:'test', test:true, name:'Test: full press ups in a row', how:'As many as you can with good form: body straight, chest close to the floor. Stop when your form breaks.' });
+  } else {
+    ex.push({ key:'full', full:true, name:'Full press ups', how:'Body straight from head to heels, chest about a fist off the floor. Rest 1–2 min between sets.', sets:[r,r,r] });
+    if(r <= 8){
+      const nr = Math.min(5, 2 + Math.floor(L/10));
+      ex.push({ key:'neg', name:'Negatives', how:'From the top of a full press up, lower yourself slowly over 4 seconds. Drop to your knees to get back up.', sets:[nr,nr,nr] });
+    }
+    const k = Math.min(30, 8 + Math.floor(L/2));
+    ex.push({ key:'knee', name:'Knee press ups', how:'Knees down, hips in line with your back. Go all the way down.', sets:[k,k,k] });
+  }
+  const v = PU_VARIETY[n % PU_VARIETY.length];
+  const vr = Math.min(20, 6 + Math.floor(L/6));
+  ex.push({ key:'var', tag:'variety', name:v.name, how:v.how, sets:[vr,vr] });
+  return { L, r, n, test, ex };
+}
+function puTally(plan){
+  const d = puDraft();
+  let full = 0, total = 0, any = false;
+  plan.ex.forEach(e=>{
+    if(e.test) return;
+    const done = d.sets[e.key] || [];
+    e.sets.forEach((reps,i)=>{ if(done[i]){ any = true; total += reps; if(e.full) full += reps; } });
+  });
+  if(plan.test && d.testVal !== undefined){ full += d.testVal; total += d.testVal; any = true; }
+  return { full, total, any };
+}
+function puFinish(feel){
+  const t = todayStr();
+  const plan = puPlan();
+  const d = puDraft();
+  const { full, total } = puTally(plan);
+  const L = plan.L;
+  let newL;
+  if(plan.test){
+    const M = d.testVal;
+    if(M === undefined){ alert('Enter how many you did first.'); return; }
+    state.pushups.tests = state.pushups.tests.filter(x => x.date !== t).concat({ date:t, max:M });
+    // Train full sets at ~60% of your max. Jump up if you've outgrown the plan, drop down if it's beyond you.
+    const target = puLevelForReps(Math.floor(M * 0.6));
+    newL = (target > L || plan.r > Math.max(1, M)) ? target : L;
+  } else {
+    newL = Math.min(PU_MAX_LEVEL, L + ({ easy:2, right:1, hard:0 })[feel]);
+  }
+  state.pushups.sessions[t] = { level:L, prevLevel:L, full, total, feel: plan.test ? 'test' : feel, ...(plan.test ? { test:d.testVal } : {}) };
+  state.pushups.level = newL;
+  const wasAllDone = allDoneOn(t);
+  setDone(t, PU_HABIT_ID, true);
+  setAmount(t, PU_HABIT_ID, full);
+  render();
+  if(!wasAllDone && allDoneOn(t)) fireConfetti();
+  else if(plan.test && puBest() >= PU_GOAL) fireConfetti();
+}
+function puUndo(){
+  const t = todayStr();
+  const s = state.pushups.sessions[t];
+  if(!s) return;
+  state.pushups.level = s.prevLevel;
+  delete state.pushups.sessions[t];
+  state.pushups.tests = state.pushups.tests.filter(x => x.date !== t);
+  setDone(t, PU_HABIT_ID, false);
+  setAmount(t, PU_HABIT_ID, undefined);
+  render();
+}
+
+function renderPushups(){
+  const el = document.getElementById('puContent');
+  const pu = state.pushups;
+  const plan = puPlan();
+  const best = puBest();
+  const today = pu.sessions[todayStr()];
+  document.getElementById('puLevelPill').textContent = 'Level ' + pu.level;
+
+  const toTest = today ? null : (plan.test ? 0 : 6 - (plan.n % 7));
+  let html = `
+    <div class="pu-card">
+      <div class="pu-dim">Goal: ${PU_GOAL} full press ups in a row</div>
+      <div class="pu-best"><b>${best}</b><span class="pu-dim">best in a row${pu.tests.length ? '' : ' (no test yet)'}</span></div>
+      <div class="pu-bar"><i style="width:${Math.min(100, best/PU_GOAL*100)}%"></i></div>
+      <div class="pu-dim" style="margin-top:8px">${Object.keys(pu.sessions).length} session${Object.keys(pu.sessions).length===1?'':'s'} done${toTest === null ? '' : toTest === 0 ? ' · test day today' : ` · test in ${toTest} session${toTest===1?'':'s'}`}</div>
+    </div>`;
+
+  if(today){
+    html += `
+    <div class="pu-card">
+      <div class="pu-title">✅ Today's session done</div>
+      <div class="pu-dim">${today.test !== undefined ? `Test: <b>${today.test}</b> in a row · ` : ''}${today.full} full · ${today.total} reps in total</div>
+      <div class="pu-dim" style="margin-top:6px">Tomorrow: level ${pu.level} — ${puFullReps(pu.level)} full per set</div>
+      <button class="pu-link" id="puUndo">Undo</button>
+    </div>`;
+  } else {
+    const d = puDraft();
+    html += `<div class="pu-card"><div class="pu-title">${plan.test ? '🏁 Test day' : "Today's session"}</div>
+      <div class="pu-dim">${plan.test ? 'Warm up, then see how many you can do.' : 'Tap each set when you finish it. Easier versions are fine on a bad day.'}</div>`;
+    plan.ex.forEach(e=>{
+      html += `<div class="pu-ex"><div class="pu-ex-name">${e.name}${e.tag ? `<small>${e.tag}</small>` : ''}</div><div class="pu-ex-how">${e.how}</div>`;
+      if(e.test){
+        html += `<div class="pu-test-input">
+          <button class="num-btn btn3d" data-pu-test="-1">–</button>
+          <input type="number" inputmode="numeric" id="puTestVal" placeholder="–" value="${d.testVal ?? ''}">
+          <button class="num-btn btn3d" data-pu-test="1">+</button></div>`;
+      } else {
+        const done = d.sets[e.key] || [];
+        html += `<div class="pu-sets">${e.sets.map((reps,i)=>`<button class="pu-set btn3d ${done[i]?'on':''}" data-pu-ex="${e.key}" data-pu-i="${i}">${done[i]?'✓ ':''}${reps}</button>`).join('')}</div>`;
+      }
+      html += `</div>`;
+    });
+    const { any } = puTally(plan);
+    html += plan.test
+      ? `<button class="pu-main-btn btn3d" id="puSaveTest" ${d.testVal === undefined ? 'disabled' : ''}>Save result</button>`
+      : `<div class="pu-dim" style="margin-top:6px">How did it feel?</div>
+         <div class="pu-feel">
+           <button class="btn3d" data-feel="hard" ${any?'':'disabled'}>Too hard</button>
+           <button class="btn3d" data-feel="right" ${any?'':'disabled'}>Just right</button>
+           <button class="btn3d" data-feel="easy" ${any?'':'disabled'}>Easy</button>
+         </div>`;
+    if(plan.n % 7 !== 6){
+      html += `<button class="pu-link" id="puToggleTest">${d.forceTest ? 'Back to normal session' : 'Do a test today instead'}</button>`;
+    }
+    html += `</div>`;
+  }
+
+  if(pu.tests.length){
+    const last = pu.tests.slice(-6);
+    html += `<div class="pu-card"><div class="pu-title">Tests</div><div class="pu-hist">${last.map(t=>`
+      <div class="pu-hist-row"><span>${new Date(t.date+'T00:00:00').toLocaleDateString(undefined,{day:'numeric',month:'short'})}</span>
+      <div class="pu-bar"><i style="width:${Math.min(100, t.max/PU_GOAL*100)}%"></i></div><b>${t.max}</b></div>`).join('')}</div></div>`;
+  }
+  html += `<footer class="note">Too hard = same level tomorrow. Just right = up 1. Easy = up 2.<br>Sore or tired? Do the warm-up and variety only — it still counts.</footer>`;
+  el.innerHTML = html;
+
+  el.querySelectorAll('.pu-set').forEach(b=>b.addEventListener('click', ()=>{
+    const d = puDraft(); const k = b.dataset.puEx; const i = Number(b.dataset.puI);
+    d.sets[k] = d.sets[k] || []; d.sets[k][i] = !d.sets[k][i];
+    saveState(); renderPushups();
+  }));
+  el.querySelectorAll('[data-feel]').forEach(b=>b.addEventListener('click', ()=>puFinish(b.dataset.feel)));
+  el.querySelectorAll('[data-pu-test]').forEach(b=>b.addEventListener('click', ()=>{
+    const d = puDraft(); d.testVal = Math.max(0, (d.testVal ?? 0) + Number(b.dataset.puTest));
+    saveState(); renderPushups();
+  }));
+  const tv = document.getElementById('puTestVal');
+  if(tv){
+    tv.addEventListener('input', ()=>{
+      const d = puDraft(); d.testVal = tv.value === '' ? undefined : Math.max(0, Math.round(Number(tv.value)) || 0);
+      saveState();
+      document.getElementById('puSaveTest').disabled = d.testVal === undefined;
+    });
+  }
+  const st = document.getElementById('puSaveTest'); if(st) st.addEventListener('click', ()=>puFinish('test'));
+  const tt = document.getElementById('puToggleTest'); if(tt) tt.addEventListener('click', ()=>{ const d = puDraft(); d.forceTest = !d.forceTest; saveState(); renderPushups(); });
+  const un = document.getElementById('puUndo'); if(un) un.addEventListener('click', puUndo);
+}
+
+function showView(name){
+  document.getElementById('viewHabits').hidden = name !== 'habits';
+  document.getElementById('viewPushups').hidden = name !== 'pushups';
+  document.getElementById('tabHabits').classList.toggle('active', name === 'habits');
+  document.getElementById('tabPushups').classList.toggle('active', name === 'pushups');
+  window.scrollTo(0,0);
+}
+document.getElementById('tabHabits').addEventListener('click', ()=>showView('habits'));
+document.getElementById('tabPushups').addEventListener('click', ()=>showView('pushups'));
+
 function render(){
+  renderPushups();
   renderDateNav();
   renderDayProgress();
   renderHabits();
@@ -796,6 +1112,7 @@ document.getElementById('importFile').addEventListener('change', e=>{
       const clean = sanitizeLoaded(loaded);
       state.habits = clean.habits;
       state.entries = clean.entries;
+      state.pushups = clean.pushups;
       saveState();
       render();
       alert('Backup restored.');
