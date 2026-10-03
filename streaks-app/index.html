@@ -33,7 +33,6 @@
     --h2: #1CB0F6; --h2-dark:#0D8FCE;
     --h3: #A560F0; --h3-dark:#8347C9;
     --h4: #2DD4BF; --h4-dark:#1FB3A0;
-    --h5: #FFC800; --h5-dark:#E0AC00;
     --radius: 18px;
   }
   *{box-sizing:border-box; -webkit-tap-highlight-color: transparent;}
@@ -82,6 +81,16 @@
   }
   .combo-banner.show{ display:flex; }
   .combo-banner b{ font-family:'Baloo 2',sans-serif; font-size:15px; }
+
+  /* DAY PROGRESS */
+  .day-progress{
+    background:var(--card); border:2px solid var(--card-border); border-radius:16px;
+    padding:12px 14px; margin-bottom:16px; box-shadow:0 3px 0 var(--card-border);
+  }
+  .day-progress-text{ font-weight:800; font-size:13px; color:var(--ink-dim); margin-bottom:8px; }
+  .day-progress-text b{ font-family:'Baloo 2',sans-serif; font-size:17px; color:var(--orange-dark); }
+  .day-segs{ display:flex; gap:5px; }
+  .day-seg{ flex:1; height:10px; border-radius:999px; background:var(--track); transition:background .3s ease; }
 
   /* HABIT CARDS */
   .habit-list{ display:flex; flex-direction:column; gap:12px; }
@@ -210,8 +219,14 @@
   }
   .cal-cell.empty{ visibility:hidden; cursor:default; }
   .cal-cell.future{ opacity:0.35; cursor:default; }
-  .cal-cell.full{ background:var(--orange); color:#fff; }
-  .cal-cell.partial{ background:#FFE3B0; color:var(--orange-dark); }
+  .cal-cell{ position:relative; }
+  .cal-cell.lvl1{ background:#FFEBC7; color:var(--orange-dark); }
+  .cal-cell.lvl2{ background:#FFCF80; color:var(--orange-dark); }
+  .cal-cell.lvl3{ background:#FFAE3D; color:#fff; }
+  .cal-cell.lvl4{ background:var(--orange); color:#fff; }
+  .cal-count{
+    position:absolute; top:2px; right:4px; font-size:8.5px; font-weight:900; line-height:1; opacity:0.85;
+  }
   .cal-cell.today{ border-color:var(--ink); }
   .cal-cell.selected{ box-shadow:0 0 0 2px var(--ink) inset; }
   .cal-legend{ display:flex; gap:12px; margin-top:12px; font-size:10.5px; color:var(--ink-dim); font-weight:700; flex-wrap:wrap;}
@@ -247,6 +262,11 @@
 
   <div class="combo-banner" id="comboBanner">
     🎉 <div><b id="comboText">All habits done!</b><br>Full-house streak: <span id="comboStreak">0</span> days</div>
+  </div>
+
+  <div class="day-progress" id="dayProgress">
+    <div class="day-progress-text" id="dayProgressText"></div>
+    <div class="day-segs" id="daySegs"></div>
   </div>
 
   <div class="habit-list" id="habitList"></div>
@@ -287,7 +307,6 @@ const DEFAULT_HABITS = [
   { id:'h2', name:'CSHP', color:'var(--h2)', dark:'var(--h2-dark)', hasNumber:true, unit:'min' },
   { id:'h3', name:'OD', color:'var(--h3)', dark:'var(--h3-dark)', hasNumber:false, unit:'' },
   { id:'h4', name:'Press ups', color:'var(--h4)', dark:'var(--h4-dark)', hasNumber:true, unit:'' },
-  { id:'h5', name:'Flexibility', color:'var(--h5)', dark:'var(--h5-dark)', hasNumber:true, unit:'min' },
 ];
 
 let state = { habits: DEFAULT_HABITS, entries: {} };
@@ -359,6 +378,7 @@ function loadState(){
       const clean = sanitizeLoaded(loaded);
       state.habits = clean.habits;
       state.entries = clean.entries;
+      saveState(); // persists removal of retired habits (e.g. Flexibility)
     }
   }catch(e){ console.error('load failed — starting from a clean state', e); }
   render();
@@ -403,10 +423,8 @@ function allDoneOn(dateStr){
   if(!day) return false;
   return state.habits.every(h => isDone(dateStr, h.id));
 }
-function someDoneOn(dateStr){
-  const day = state.entries[dateStr];
-  if(!day) return false;
-  return state.habits.some(h => isDone(dateStr, h.id));
+function doneCountOn(dateStr){
+  return state.habits.filter(h => isDone(dateStr, h.id)).length;
 }
 function computeComboStreak(){
   let cursor = todayStr();
@@ -572,6 +590,21 @@ function renderCombo(){
   }
 }
 
+function renderDayProgress(){
+  const count = doneCountOn(selectedDate);
+  const total = state.habits.length;
+  const label = isToday(selectedDate) ? 'today' : (isYesterday(selectedDate) ? 'yesterday' : 'this day');
+  document.getElementById('dayProgressText').innerHTML = `<b>${count} of ${total}</b> done ${label}`;
+  const segs = document.getElementById('daySegs');
+  segs.innerHTML = '';
+  state.habits.forEach(h=>{
+    const seg = document.createElement('div');
+    seg.className = 'day-seg';
+    if(isDone(selectedDate, h.id)) seg.style.background = h.color;
+    segs.appendChild(seg);
+  });
+}
+
 function renderKudos(){
   const kudos = computeKudos();
   document.getElementById('kudosVal').textContent = kudos;
@@ -641,13 +674,26 @@ function renderCalendar(){
         el.style.color = '#fff';
       }
     } else {
-      if(allDoneOn(dateStr)) cls += ' full';
-      else if(someDoneOn(dateStr)) cls += ' partial';
+      const count = doneCountOn(dateStr);
+      if(count > 0){
+        // Map count onto 4 shade levels so it still works if the habit list changes length.
+        const lvl = Math.max(1, Math.ceil(count / state.habits.length * 4));
+        cls += ' lvl' + lvl;
+      }
     }
     if(dateStr === todayStr()) cls += ' today';
     if(dateStr === selectedDate) cls += ' selected';
     el.className = cls;
     el.textContent = d;
+    if(!habit && dateStr <= todayStr()){
+      const count = doneCountOn(dateStr);
+      if(count > 0){
+        const badge = document.createElement('span');
+        badge.className = 'cal-count';
+        badge.textContent = count;
+        el.appendChild(badge);
+      }
+    }
     if(dateStr <= todayStr()){
       el.addEventListener('click', ()=>{ selectedDate = dateStr; render(); });
     }
@@ -656,11 +702,12 @@ function renderCalendar(){
 
   legend.innerHTML = habit
     ? `<span><i style="background:${habit.color}"></i>${habit.name} done</span><span><i style="background:var(--track)"></i>not logged</span>`
-    : `<span><i style="background:var(--orange)"></i>all done</span><span><i style="background:#FFE3B0"></i>some done</span><span><i style="background:var(--track)"></i>none logged</span>`;
+    : `<span><i style="background:#FFEBC7"></i>1</span><span><i style="background:#FFCF80"></i>2</span><span><i style="background:#FFAE3D"></i>3</span><span><i style="background:var(--orange)"></i>all ${state.habits.length}</span><span>habits done (number in corner)</span>`;
 }
 
 function render(){
   renderDateNav();
+  renderDayProgress();
   renderHabits();
   renderCombo();
   renderKudos();
