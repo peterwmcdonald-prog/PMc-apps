@@ -602,10 +602,23 @@ function computeStreak(habitId){
   let streak = 0;
   let guard = 0;
   while(isDone(cursor, habitId)){
-    streak++; cursor = addDays(cursor, -1);
+    // Partial days keep the streak alive but don't add to the count.
+    if(!isPartial(cursor, habitId)) streak++;
+    cursor = addDays(cursor, -1);
     if(++guard > 20000) break; // safety valve against any unforeseen data loop
   }
   return streak;
+}
+function computeStreakPartials(habitId){
+  let cursor = todayStr();
+  if(!isDone(cursor, habitId)) cursor = addDays(cursor, -1);
+  let n = 0, guard = 0;
+  while(isDone(cursor, habitId)){
+    if(isPartial(cursor, habitId)) n++;
+    cursor = addDays(cursor, -1);
+    if(++guard > 20000) break;
+  }
+  return n;
 }
 function allDoneOn(dateStr){
   const day = state.entries[dateStr];
@@ -702,7 +715,7 @@ function renderHabits(){
       </div>
       <div class="habit-main">
         <input class="habit-name" data-id="${habit.id}" value="${escapeHtml(habit.name)}" maxlength="20" />
-        <div class="habit-sub">${streak>0 ? `<b>${streak}</b> day streak` : 'no streak yet'}${habit.levels && streak>0 ? ` · ${computeFullStreak(habit.id)} full` : ''}</div>
+        <div class="habit-sub">${(()=>{ const p = habit.levels ? computeStreakPartials(habit.id) : 0; const alive = streak>0 || p>0; return alive ? `<b>${streak}</b> day streak${p>0 ? ` · ${p} partial` : ''}` : 'no streak yet'; })()}</div>
       </div>
       <div class="habit-control">
         ${habit.hasNumber ? `
@@ -748,7 +761,7 @@ function renderHabits(){
       const wasAllDone = allDoneOn(selectedDate);
       if(!wasDone){ justToggledId = id; }
       render();
-      if(!wasDone) popStreakGain(id, computeStreak(id));
+      if(!wasDone && !isPartial(selectedDate, id)) popStreakGain(id, computeStreak(id));
       justToggledId = null;
       if(wasAllDone && isToday(selectedDate)) fireConfetti();
     });
