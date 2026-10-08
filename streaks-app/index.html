@@ -165,6 +165,10 @@
   }
   .bool-toggle.on:active{ box-shadow:0 0 0 var(--accent-dark); }
   .bool-toggle:not(.on):active{ box-shadow:0 0 0 var(--card-border); }
+  .level-toggle{ width:auto; padding:0 10px; font-size:13px; color:var(--ink-dim); }
+  .level-toggle.on{ color:#fff; }
+  .level-toggle.partial.on{ background:var(--accent); opacity:0.6; }
+  .cal-cell.partial{ opacity:0.55; }
 
   .num-control{ display:flex; align-items:center; gap:4px; }
   .num-btn{
@@ -412,7 +416,7 @@ function isYesterday(dateStr){ return dateStr === addDays(todayStr(), -1); }
 const DEFAULT_HABITS = [
   { id:'h1', name:'Welsh', color:'var(--h1)', dark:'var(--h1-dark)', hasNumber:true, unit:'min' },
   { id:'h2', name:'CSHP', color:'var(--h2)', dark:'var(--h2-dark)', hasNumber:true, unit:'min' },
-  { id:'h3', name:'OD', color:'var(--h3)', dark:'var(--h3-dark)', hasNumber:false, unit:'' },
+  { id:'h3', name:'OD', color:'var(--h3)', dark:'var(--h3-dark)', hasNumber:false, unit:'', levels:true },
   { id:'h4', name:'Press ups', color:'var(--h4)', dark:'var(--h4-dark)', hasNumber:true, unit:'' },
 ];
 
@@ -468,6 +472,7 @@ function sanitizeLoaded(loaded){
         const cleanEntry = {};
         if(e.done === true) cleanEntry.done = true;
         else if(e.done === false) cleanEntry.done = false;
+        if(e.level === 'partial') cleanEntry.level = 'partial'; // no level = full (all older entries)
         if(e.amount !== undefined){
           const n = Number(e.amount);
           if(Number.isFinite(n)) cleanEntry.amount = Math.max(0, n);
@@ -567,6 +572,22 @@ function setDone(dateStr, habitId, done){
   const cur = state.entries[dateStr][habitId] || {};
   state.entries[dateStr][habitId] = { ...cur, done };
   saveState();
+}
+function isPartial(dateStr, habitId){ const e = getEntry(dateStr, habitId); return e.done === true && e.level === 'partial'; }
+function setLevel(dateStr, habitId, level){
+  if(!state.entries[dateStr]) state.entries[dateStr] = {};
+  const cur = { ...(state.entries[dateStr][habitId] || {}) };
+  if(level === 'partial') cur.level = 'partial'; else delete cur.level;
+  state.entries[dateStr][habitId] = cur;
+  saveState();
+}
+function computeFullStreak(habitId){
+  const full = d => isDone(d, habitId) && !isPartial(d, habitId);
+  let cursor = todayStr();
+  if(!full(cursor)) cursor = addDays(cursor, -1);
+  let n = 0, guard = 0;
+  while(full(cursor)){ n++; cursor = addDays(cursor, -1); if(++guard > 20000) break; }
+  return n;
 }
 function setAmount(dateStr, habitId, amount){
   if(!state.entries[dateStr]) state.entries[dateStr] = {};
@@ -681,7 +702,7 @@ function renderHabits(){
       </div>
       <div class="habit-main">
         <input class="habit-name" data-id="${habit.id}" value="${escapeHtml(habit.name)}" maxlength="20" />
-        <div class="habit-sub">${streak>0 ? `<b>${streak}</b> day streak` : 'no streak yet'}</div>
+        <div class="habit-sub">${streak>0 ? `<b>${streak}</b> day streak` : 'no streak yet'}${habit.levels && streak>0 ? ` · ${computeFullStreak(habit.id)} full` : ''}</div>
       </div>
       <div class="habit-control">
         ${habit.hasNumber ? `
@@ -690,7 +711,10 @@ function renderHabits(){
           <input class="num-val" data-id="${habit.id}" type="number" inputmode="numeric" placeholder="–" value="${amt ?? ''}" />
           <button class="num-btn btn3d" data-id="${habit.id}" data-dir="1">+</button>
         </div>` : ''}
-        <button class="bool-toggle btn3d ${done?'on':''}" data-id="${habit.id}">✓</button>
+        ${habit.levels ? `
+        <button class="bool-toggle level-toggle partial btn3d ${done && entry.level==='partial'?'on':''}" data-id="${habit.id}" data-level="partial">Partial</button>
+        <button class="bool-toggle level-toggle btn3d ${done && entry.level!=='partial'?'on':''}" data-id="${habit.id}" data-level="full">Full</button>`
+        : `<button class="bool-toggle btn3d ${done?'on':''}" data-id="${habit.id}">✓</button>`}
       </div>
     `;
     list.appendChild(card);
@@ -708,7 +732,19 @@ function renderHabits(){
     el.addEventListener('click', e=>{
       const id = e.target.dataset.id;
       const wasDone = isDone(selectedDate, id);
-      setDone(selectedDate, id, !wasDone);
+      const level = e.target.dataset.level;
+      if(level){
+        // Tapping the active level clears it; tapping the other level switches to it.
+        const curLevel = isPartial(selectedDate, id) ? 'partial' : 'full';
+        if(wasDone && curLevel === level){ setDone(selectedDate, id, false); setLevel(selectedDate, id, 'full'); }
+        else {
+          setLevel(selectedDate, id, level);
+          setDone(selectedDate, id, true);
+          if(wasDone){ render(); return; } // just switching level — no streak pop
+        }
+      } else {
+        setDone(selectedDate, id, !wasDone);
+      }
       const wasAllDone = allDoneOn(selectedDate);
       if(!wasDone){ justToggledId = id; }
       render();
@@ -840,6 +876,7 @@ function renderCalendar(){
       if(isDone(dateStr, habit.id)){
         el.style.background = habit.color;
         el.style.color = '#fff';
+        if(habit.levels && isPartial(dateStr, habit.id)) cls += ' partial';
       }
     } else {
       const count = doneCountOn(dateStr);
@@ -869,7 +906,9 @@ function renderCalendar(){
   }
 
   legend.innerHTML = habit
-    ? `<span><i style="background:${habit.color}"></i>${habit.name} done</span><span><i style="background:var(--track)"></i>not logged</span>`
+    ? (habit.levels
+        ? `<span><i style="background:${habit.color}"></i>full</span><span><i style="background:${habit.color};opacity:0.55"></i>partial</span>`
+        : `<span><i style="background:${habit.color}"></i>${habit.name} done</span>`) + `<span><i style="background:var(--track)"></i>not logged</span>`
     : `<span><i style="background:#FFEBC7"></i>1</span><span><i style="background:#FFCF80"></i>2</span><span><i style="background:#FFAE3D"></i>3</span><span><i style="background:var(--orange)"></i>all ${state.habits.length}</span><span>habits done (number in corner)</span>`;
 }
 
@@ -1277,6 +1316,7 @@ function exportCSV(){
   state.habits.forEach(h=>{
     header.push(h.name + ' done');
     if(h.hasNumber) header.push(h.name + (h.unit ? ` (${h.unit})` : ' amount'));
+    if(h.levels) header.push(h.name + ' level');
   });
   header.push('weight (kg)');
   const rows = [header];
@@ -1286,6 +1326,7 @@ function exportCSV(){
       const e = getEntry(dateStr, h.id);
       row.push(e.done === true ? 'yes' : 'no');
       if(h.hasNumber) row.push(e.amount !== undefined ? e.amount : '');
+      if(h.levels) row.push(e.done === true ? (e.level === 'partial' ? 'partial' : 'full') : '');
     });
     row.push(state.weight.entries[dateStr] ?? '');
     rows.push(row);
