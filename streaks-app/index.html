@@ -596,30 +596,29 @@ function setAmount(dateStr, habitId, amount){
   saveState();
 }
 
-function computeStreak(habitId){
+// Partial days put the streak on hold: they keep it alive but don't add to the count.
+// Three partials in a row break it — nothing before that run counts.
+const MAX_PARTIAL_RUN = 2;
+function streakInfo(habitId){
   let cursor = todayStr();
   if(!isDone(cursor, habitId)) cursor = addDays(cursor, -1);
-  let streak = 0;
-  let guard = 0;
+  let streak = 0, partials = 0, run = 0, guard = 0;
   while(isDone(cursor, habitId)){
-    // Partial days keep the streak alive but don't add to the count.
-    if(!isPartial(cursor, habitId)) streak++;
+    if(isPartial(cursor, habitId)){
+      run++;
+      if(run > MAX_PARTIAL_RUN){ partials -= (run - 1); break; } // run of 3 = break; drop that run
+      partials++;
+    } else {
+      run = 0;
+      streak++;
+    }
     cursor = addDays(cursor, -1);
     if(++guard > 20000) break; // safety valve against any unforeseen data loop
   }
-  return streak;
+  return { streak, partials };
 }
-function computeStreakPartials(habitId){
-  let cursor = todayStr();
-  if(!isDone(cursor, habitId)) cursor = addDays(cursor, -1);
-  let n = 0, guard = 0;
-  while(isDone(cursor, habitId)){
-    if(isPartial(cursor, habitId)) n++;
-    cursor = addDays(cursor, -1);
-    if(++guard > 20000) break;
-  }
-  return n;
-}
+function computeStreak(habitId){ return streakInfo(habitId).streak; }
+function computeStreakPartials(habitId){ return streakInfo(habitId).partials; }
 function allDoneOn(dateStr){
   const day = state.entries[dateStr];
   if(!day) return false;
