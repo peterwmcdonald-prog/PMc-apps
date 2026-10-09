@@ -169,6 +169,9 @@
   .level-toggle.on{ color:#fff; }
   .level-toggle.partial.on{ background:var(--accent); opacity:0.6; }
   .cal-cell.partial{ opacity:0.55; }
+  .danger-zone{ margin-top:4px; font-size:12px; font-weight:700; color:#fff; background:#d93025; border-radius:8px; padding:3px 8px; display:inline-block; animation:dangerPulse 1.6s ease-in-out infinite; }
+  @keyframes dangerPulse{ 0%,100%{opacity:1} 50%{opacity:0.6} }
+  .habit-card.danger{ box-shadow:0 0 0 3px #d93025; }
 
   .num-control{ display:flex; align-items:center; gap:4px; }
   .num-btn{
@@ -602,20 +605,23 @@ const MAX_PARTIAL_RUN = 2;
 function streakInfo(habitId){
   let cursor = todayStr();
   if(!isDone(cursor, habitId)) cursor = addDays(cursor, -1);
-  let streak = 0, partials = 0, run = 0, guard = 0;
+  let streak = 0, partials = 0, run = 0, guard = 0, currentRun = null;
   while(isDone(cursor, habitId)){
     if(isPartial(cursor, habitId)){
       run++;
       if(run > MAX_PARTIAL_RUN){ partials -= (run - 1); break; } // run of 3 = break; drop that run
       partials++;
     } else {
+      if(currentRun === null) currentRun = run; // partials in a row at the latest end
       run = 0;
       streak++;
     }
     cursor = addDays(cursor, -1);
     if(++guard > 20000) break; // safety valve against any unforeseen data loop
   }
-  return { streak, partials };
+  if(currentRun === null) currentRun = Math.min(run, MAX_PARTIAL_RUN + 1);
+  if(currentRun > MAX_PARTIAL_RUN) currentRun = 0; // already broken
+  return { streak, partials, currentRun };
 }
 function computeStreak(habitId){ return streakInfo(habitId).streak; }
 function computeStreakPartials(habitId){ return streakInfo(habitId).partials; }
@@ -696,7 +702,7 @@ function renderHabits(){
     const done = entry.done === true;
     const streak = computeStreak(habit.id);
     const card = document.createElement('div');
-    card.className = 'habit-card' + (done ? ' done':'');
+    card.className = 'habit-card' + (done ? ' done':'') + (habit.levels && streakInfo(habit.id).currentRun === MAX_PARTIAL_RUN ? ' danger':'');
     card.style.setProperty('--accent', habit.color);
     card.style.setProperty('--accent-dark', habit.dark);
     card.style.animationDelay = (idx*0.05)+'s';
@@ -714,7 +720,8 @@ function renderHabits(){
       </div>
       <div class="habit-main">
         <input class="habit-name" data-id="${habit.id}" value="${escapeHtml(habit.name)}" maxlength="20" />
-        <div class="habit-sub">${(()=>{ const p = habit.levels ? computeStreakPartials(habit.id) : 0; const alive = streak>0 || p>0; return alive ? `<b>${streak}</b> day streak${p>0 ? ` · ${p} partial` : ''}` : 'no streak yet'; })()}</div>
+        <div class="habit-sub">${(()=>{ const info = habit.levels ? streakInfo(habit.id) : {partials:0, currentRun:0}; const p = info.partials; const alive = streak>0 || p>0; return alive ? `<b>${streak}</b> day streak${p>0 ? ` · ${p} partial` : ''}` : 'no streak yet'; })()}</div>
+        ${habit.levels && streakInfo(habit.id).currentRun === MAX_PARTIAL_RUN ? '<div class="danger-zone">⚠️ 2 partials in a row — next must be Full or streak breaks</div>' : ''}
       </div>
       <div class="habit-control">
         ${habit.hasNumber ? `
