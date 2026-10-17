@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gramadeg – content review</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+body{font-family:'Nunito',sans-serif;color:#3C3C3C;margin:0;background:#fff}
+.wrap{max-width:820px;margin:0 auto;padding:16px}
+h1{font-size:24px;margin:8px 0 4px} h2{margin:28px 0 6px;padding:8px 12px;border-radius:10px;color:#fff;font-size:19px}
+.note{color:#777;font-size:14px}
+.rule{border:2px solid #E5E5E5;border-radius:12px;padding:4px 14px;font-size:15px;margin-bottom:10px}
+.rule table,.q table{border-collapse:collapse;width:100%;margin:8px 0}
+.rule td,.rule th{border:1px solid #E5E5E5;padding:5px 7px;text-align:left}
+.rule i{font-style:normal;font-weight:700;color:#1899D6}
+.q{border-bottom:1px solid #E5E5E5;padding:10px 2px;font-size:15px}
+.q .id{font-weight:900;color:#1899D6;margin-right:6px}
+.q .ty{font-size:11px;font-weight:900;text-transform:uppercase;background:#F0F0F0;border-radius:6px;padding:2px 6px;color:#777}
+.q .p{font-weight:700;margin:4px 0}
+.q .a{color:#58A700;font-weight:800}
+.q .x{color:#777}
+a{color:#1899D6;font-weight:800}
+@media print{h2{color:#000;border:2px solid #000} a.back{display:none}}
+</style>
+</head>
+<body><div class="wrap">
+<a class="back" href="./">← Back to app</a>
+<h1>Content review</h1>
+<p class="note">Every rule and question in the app. Note anything wrong by its ID (e.g. u3-07) and send it to Claude, or use ⚑ Flag inside a lesson.</p>
+<div id="out">Loading…</div>
+</div>
+<script>
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+fetch('content.json',{cache:'no-cache'}).then(r=>r.json()).then(C=>{
+  let h=`<p class="note">Version ${esc(C.version)}. Sources: ${C.sources.map(s=>s.url?`<a href="${esc(s.url)}">${esc(s.name)}</a>`:esc(s.name)).join('; ')}</p>`;
+  C.units.filter(u=>!u.soon).forEach((u,n)=>{
+    h+=`<h2 style="background:${u.colour}">Unit ${n+1}: ${esc(u.title)}</h2><div class="rule">${u.rule}</div>`;
+    u.questions.forEach(q=>{
+      let p='',a='';
+      if(q.type==='mc'){ p=esc(q.prompt)+(q.en?` <span class="x">(${esc(q.en)})</span>`:'')+'<br>Options: '+q.options.map((o,i)=>i===q.answer?`<b>${esc(o)}</b>`:esc(o)).join(' | '); a=q.options[q.answer]; }
+      if(q.type==='tiles'){ p=esc(q.en)+'<br><span class="x">Extra tiles: '+esc((q.distractors||[]).join(', '))+'</span>'; a=q.answer; }
+      if(q.type==='type'){ p=esc(q.text)+` <span class="x">[hint: ${esc(q.hint||'')}]</span>`+(q.en?` <span class="x">(${esc(q.en)})</span>`:''); a=q.answer+((q.alts||[]).length?' (also: '+q.alts.join(', ')+')':''); }
+      if(q.type==='error'){ const t=q.sentence.split(' '); p=t.map((w,i)=>i===q.wrong?`<u><b>${esc(w)}</b></u>`:esc(w)).join(' '); a=q.fix; }
+      h+=`<div class="q"><span class="id">${q.id}</span><span class="ty">${q.type}</span><div class="p">${p}</div><div class="a">✓ ${esc(a)}</div><div class="x">${esc(q.explain||'')}</div></div>`;
+    });
+  });
+  const soon=C.units.filter(u=>u.soon);
+  h+=`<h2 style="background:#AFAFAF">Planned units</h2><p>${soon.map(u=>esc(u.title)+' <span class="x">('+esc(u.subtitle)+')</span>').join('<br>')}</p>`;
+  document.getElementById('out').innerHTML=h;
+});
+</script>
+</body></html>
