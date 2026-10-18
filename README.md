@@ -1,5 +1,5 @@
 # PMc-apps
-Claude-made apps
+Claude-made apps. All apps: https://peterwmcdonald-prog.github.io/PMc-apps/ (`index.html` — add each new app there too).
 
 - [Streaks](https://peterwmcdonald-prog.github.io/PMc-apps/streaks-app/) – habit tracker
 - [Gramadeg](https://peterwmcdonald-prog.github.io/PMc-apps/gramadeg/) – Welsh grammar practice. Questions live in `gramadeg/content.json`; `gramadeg/review.html` lists them all for checking.
