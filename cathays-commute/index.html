@@ -9,6 +9,9 @@
 <meta name="theme-color" content="#BFE3FA">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <title>Cathays Park commute</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icons/favicon.png">
 <style>
   :root{--stone:#DCEEFB;--ink:#123A5E;--slate:#5B7C99;--hair:#B9DAF0;--card:#FFFFFF;
         --signal:#F2691B;--pin:#F5B301;--go:#2FA84F;--calm:#3C8DD6}
@@ -492,6 +495,7 @@ render();
 setInterval(()=>{ if(pinAlive()){render();return;}
                   if(!departTouched||mode!=="now") render(); },20000);
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)render()});
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).catch(()=>{});}
 </script>
 </body>
 </html>
