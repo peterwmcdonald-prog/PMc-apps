@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cathays-v1';
+const CACHE_NAME = 'cathays-v2';
 const APP_SHELL = [
   './',
   './index.html',
