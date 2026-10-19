@@ -227,8 +227,6 @@ svg.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2.4;stro
 .typein.wrong{border-color:var(--red);background:var(--red-bg);color:var(--red-d)}
 .hint{display:inline-flex;align-items:center;gap:6px;background:var(--soft);border-radius:10px;padding:5px 10px;font-size:14px;color:var(--dim);margin-bottom:12px}
 .hint b{color:var(--ink2)}
-.accents{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
-.accents button{border:2px solid var(--line);border-bottom-width:3px;border-radius:10px;background:#fff;font-size:18px;font-weight:900;width:42px;height:42px;color:var(--ink2)}
 .lfoot{padding:16px 16px calc(16px + var(--safe-b));border-top:2px solid var(--line);background:#fff}
 .lfoot.right{background:var(--green-bg);border-color:transparent}
 .lfoot.wrong{background:var(--red-bg);border-color:transparent}
@@ -360,7 +358,6 @@ svg.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2.4;stro
 const KEY = 'gramadeg-v1';
 const LESSON_LEN = 10, MIXED_LEN = 15, TEST_LEN = 20, MISTAKE_LEN = 12, DAILY_GOAL = 20;
 const INTERVALS = [0, 1, 3, 7, 14, 30, 60];
-const ACCENTS = ['â','ê','î','ô','û','ŵ','ŷ','ï',"'"];
 
 /* ================= icons ================= */
 const P = {
@@ -456,7 +453,7 @@ function addXp(n){ S.xp+=n; if(!S.daily || S.daily.date!==today()) S.daily={date
 /* ================= helpers ================= */
 const $ = id => document.getElementById(id);
 const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const norm = s => String(s).toLowerCase().replace(/[’‘`´]/g,"'").replace(/[.,!?;:"]/g,'').replace(/\s+/g,' ').trim();
+const norm = s => String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[’‘`´]/g,"'").replace(/[.,!?;:"]/g,'').replace(/\s+/g,' ').trim();
 const shuffle = a => { a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
 function shade(hex, f){ const n=parseInt(hex.slice(1),16); let r=n>>16,g=n>>8&255,b=n&255; r=Math.round(r*f);g=Math.round(g*f);b=Math.round(b*f); return '#'+((1<<24)+(Math.min(255,r)<<16)+(Math.min(255,g)<<8)+Math.min(255,b)).toString(16).slice(1); }
 function toast(msg){ const t=$('toast'); t.textContent=msg; t.classList.add('on'); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove('on'),1900); }
@@ -690,12 +687,11 @@ function next(){
   else if(q.type==='type'){
     h+=`<div class="qtitle">Fill the gap</div>${speaker(blankify(q.text)+(q.en?`<small>${esc(q.en)}</small>`:''),'think')}`;
     if(q.hint) h+=`<div class="hint">Base word / clue: <b>${esc(q.hint)}</b></div>`;
-    h+=`<input class="typein" id="typein" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Type the missing word"><div class="accents">${ACCENTS.map(a=>`<button data-c="${a}">${a}</button>`).join('')}</div>`;
+    h+=`<input class="typein" id="typein" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Type the missing word (accents optional)">`;
     $('qwrap').innerHTML=h;
     const inp=$('typein');
     inp.oninput=()=>{ L.answer=inp.value; $('checkBtn').disabled=!inp.value.trim(); };
     inp.onkeydown=e=>{ if(e.key==='Enter' && inp.value.trim()) $('checkBtn').click(); };
-    document.querySelectorAll('.accents button').forEach(b=>{ b.onmousedown=e=>e.preventDefault(); b.onclick=()=>{ const s=inp.selectionStart??inp.value.length, e=inp.selectionEnd??s; inp.value=inp.value.slice(0,s)+b.dataset.c+inp.value.slice(e); inp.focus(); inp.setSelectionRange(s+1,s+1); inp.oninput(); }; });
     setTimeout(()=>inp.focus(),60);
   }
   else if(q.type==='error'){
@@ -761,7 +757,7 @@ function finish(){
   const bonus = 5 + (L.firstTotal && L.firstRight===L.firstTotal ? 5 : 0);
   addXp(bonus); L.xp+=bonus;
   const t=today(); if(S.streak.last!==t){ S.streak.n=(S.streak.last===addDays(t,-1))?S.streak.n+1:1; S.streak.last=t; }
-  save();
+  save(); driveSave(false);
   const acc=L.firstTotal?Math.round(L.firstRight/L.firstTotal*100):100;
   $('doneMascot').innerHTML=mascot('cheer','m');
   $('doneTitle').textContent= acc===100?'Perffaith!': acc>=80?'Da iawn!':'Lesson complete!';
@@ -781,15 +777,56 @@ function confetti(){ cancelAnimationFrame(CONF);
   let f=0; (function tick(){ cx.clearRect(0,0,innerWidth,innerHeight); ps.forEach(p=>{p.vy+=.35;p.vx*=.99;p.x+=p.vx;p.y+=p.vy;p.a+=p.va; cx.save();cx.translate(p.x,p.y);cx.rotate(p.a);cx.fillStyle=p.c;cx.fillRect(-p.r/2,-p.r/4,p.r,p.r/2);cx.restore();}); if(performance.now()-t0<2200 && ++f<400) CONF=requestAnimationFrame(tick); else cx.clearRect(0,0,innerWidth,innerHeight); })();
 }
 
+/* ================= Google Drive backup ================= */
+const DKEY='gramadeg-drive';
+function driveCfg(){ try{ return JSON.parse(localStorage.getItem(DKEY))||{}; }catch(e){ return {}; } }
+function setDrive(o){ try{ localStorage.setItem(DKEY, JSON.stringify(Object.assign(driveCfg(),o))); }catch(e){} }
+async function driveSave(manual){
+  const d=driveCfg(); if(!d.url) { if(manual) toast('Connect Google Drive first'); return; }
+  try{
+    const r=await fetch(d.url+'?app=gramadeg',{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(S)});
+    const j=await r.json(); if(!j.ok) throw 0;
+    setDrive({last:new Date().toISOString()}); if(manual){ toast('Saved to Google Drive'); openSettings(); }
+  }catch(e){ if(manual) toast('Drive save failed'); }
+}
+async function driveLoad(url){
+  const r=await fetch(url+'?app=gramadeg'); const j=await r.json(); if(!j.ok) throw 0; return j.data;
+}
+const seenCount = st => Object.values((st&&st.items)||{}).filter(x=>x.seen).length;
+async function driveConnect(){
+  const url=($('driveUrl').value||'').trim();
+  if(!/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(url)){ toast('That doesn’t look like the script link'); return; }
+  toast('Connecting…');
+  let remote=null; try{ remote=await driveLoad(url); }catch(e){ toast('Could not reach the script'); return; }
+  setDrive({url});
+  if(remote && remote.items && seenCount(remote)>seenCount(S) && confirm('Drive has more progress than this phone ('+seenCount(remote)+' vs '+seenCount(S)+' questions seen). Restore it?')){
+    S=Object.assign(blank(),remote); save(); renderTab(); toast('Restored from Drive');
+  } else { await driveSave(false); toast('Connected to Google Drive'); }
+  openSettings();
+}
+async function driveRestore(){
+  const d=driveCfg(); if(!d.url) return;
+  try{ const remote=await driveLoad(d.url); if(!remote||!remote.items){ toast('No backup on Drive yet'); return; }
+    if(!confirm('Replace progress on this phone with the Drive copy ('+seenCount(remote)+' questions seen)?')) return;
+    S=Object.assign(blank(),remote); save(); closeSheet(); renderTab(); toast('Restored from Drive');
+  }catch(e){ toast('Could not reach Drive'); }
+}
+function driveDisconnect(){ if(confirm('Stop saving to Google Drive? Files already in Drive are kept.')){ try{localStorage.removeItem(DKEY);}catch(e){} openSettings(); } }
+function driveDaily(){ const d=driveCfg(); if(d.url && (!d.last || d.last.slice(0,10)!==new Date().toISOString().slice(0,10))) driveSave(false); }
+
 /* ================= settings ================= */
 function flagText(){ return S.flags.map(f=>`${f.id}${f.given?` [I said: ${f.given}]`:''}${f.note?` – ${f.note}`:''}`).join('\n'); }
 function openSettings(){
   const ft=flagText();
-  $('sheet').innerHTML=`<div class="grab"></div><h2>Settings</h2><div class="sub">Progress is saved on this device only.</div>
+  $('sheet').innerHTML=`<div class="grab"></div><h2>Settings</h2><div class="sub">Progress is saved on this phone${driveCfg().url?' and backed up to Google Drive after every lesson':''}.</div>
   <div class="setrow"><b>Flagged questions (${S.flags.length})</b><p>Copy these and paste them to Claude to fix.</p>
     ${S.flags.length?`<div class="flaglist">${esc(ft)}</div><button class="btn blue" onclick="copyFlags()">Copy flags</button><button class="btn ghost" onclick="clearFlags()">Clear flags</button>`:''}</div>
   <div class="setrow"><b>Sound</b><button class="btn ghost" onclick="S.sound=!S.sound;save();openSettings()">${S.sound?'On: tap to mute':'Off: tap to unmute'}</button></div>
-  <div class="setrow"><b>Backup</b><p>Export your progress as a file, or restore one.</p>
+  <div class="setrow"><b>Google Drive backup</b>${(()=>{ const d=driveCfg();
+    return d.url ? `<p>On. Saves to Drive → Welsh → Gramadeg backups after every lesson.<br>Last saved: ${d.last?new Date(d.last).toLocaleString('en-GB',{dateStyle:'medium',timeStyle:'short'}):'not yet'}</p>
+      <button class="btn blue" onclick="driveSave(true)">Save now</button><button class="btn ghost" onclick="driveRestore()">Restore from Drive</button><button class="btn ghost" onclick="driveDisconnect()">Disconnect</button>`
+    : `<p>Off. Paste your backup script link (ends in /exec) to switch it on.</p><input class="typein" id="driveUrl" style="font-size:15px" placeholder="https://script.google.com/macros/s/…/exec" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="btn blue" onclick="driveConnect()">Connect</button>`; })()}</div>
+  <div class="setrow"><b>Backup file</b><p>Export your progress as a file, or restore one.</p>
     <button class="btn blue" onclick="exportData()">Export backup</button><button class="btn ghost" onclick="$('importFile').click()">Import backup</button></div>
   <div class="setrow"><b>Content</b><p>Version ${esc(C.version)} · ${allQs().length} questions in ${built().length} units</p><a class="btn ghost" style="text-decoration:none" href="review.html">Open content review</a></div>
   <div class="setrow"><b>Reset</b><button class="btn red" onclick="resetAll()">Reset all progress</button></div>
@@ -806,7 +843,7 @@ function resetAll(){ if(confirm('Delete all progress? This cannot be undone.')){
 /* ================= boot ================= */
 $('brandMascot').innerHTML=mascot('happy','mini');
 renderNav();
-fetch('content.json',{cache:'no-cache'}).then(r=>r.json()).then(d=>{ C=d; renderTab(); })
+fetch('content.json',{cache:'no-cache'}).then(r=>r.json()).then(d=>{ C=d; renderTab(); driveDaily(); })
   .catch(()=>{ $('tab-learn').innerHTML='<p>Could not load content. Check your connection and reload.</p>'; });
 if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>

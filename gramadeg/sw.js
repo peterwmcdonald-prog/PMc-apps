@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gramadeg-v3';
+const CACHE_NAME = 'gramadeg-v4';
 const APP_SHELL = [
   './',
   './index.html',
@@ -25,6 +25,7 @@ self.addEventListener('activate', event => {
 // Network first, so new content arrives as soon as it's pushed; cache when offline.
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
+  if (new URL(event.request.url).origin !== self.location.origin) return; // never touch Drive backup calls
   event.respondWith(
     fetch(event.request).then(res => {
       if (res && res.status === 200) {
