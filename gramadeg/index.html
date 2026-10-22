@@ -128,6 +128,29 @@ svg.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2.4;stro
 .missed .a{color:var(--green-d);font-weight:900}
 .missed .n{float:right;color:var(--red-d);font-weight:900;font-size:13px}
 
+.nav button{max-width:84px;letter-spacing:.2px;font-size:10.5px}
+/* insights */
+.vchip{font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.4px;padding:4px 8px;border-radius:8px;white-space:nowrap}
+.vchip.weak{background:var(--red-bg);color:var(--red-d)} .vchip.shaky{background:#FFF0D5;color:var(--orange-d)}
+.vchip.solid{background:var(--green-bg);color:var(--green-d)} .vchip.nodata{background:var(--soft);color:var(--dimmer)}
+.sk{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:2px solid var(--line)}
+.sk:last-child{border-bottom:0}
+.sk .mid{flex:1;min-width:0}
+.sk .mid b{display:block;font-size:15px;line-height:1.2}
+.sk .mid small{display:block;font-size:12.5px;color:var(--dim);margin-top:3px;line-height:1.3}
+.sk .right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.sumgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sumgrid div{background:var(--soft);border-radius:12px;padding:10px}
+.sumgrid b{display:block;font-family:'Baloo 2';font-size:22px;line-height:1}
+.sumgrid span{font-size:11.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.4px}
+.solidwrap{display:flex;flex-wrap:wrap;gap:6px}
+.conf{padding:9px 0;border-bottom:2px solid var(--line);font-size:14px}
+.conf:last-child{border-bottom:0}
+.conf .x{color:var(--red-d);font-weight:900} .conf .y{color:var(--green-d);font-weight:900}
+.conf .n{float:right;color:var(--red-d);font-weight:900;font-size:13px}
+.trow{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--line);font-size:14px}
+.trow:last-child{border-bottom:0}
+.note{font-size:13px;color:var(--dim);line-height:1.4;margin:6px 2px 0}
 /* map */
 .overall{display:flex;align-items:center;gap:16px}
 .overall .big{position:relative;width:96px;height:96px;flex:none}
@@ -316,6 +339,7 @@ svg.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2.4;stro
   </div>
   <div class="tab on" id="tab-learn"></div>
   <div class="tab" id="tab-practice"></div>
+  <div class="tab" id="tab-insights"></div>
   <div class="tab" id="tab-map"></div>
   <div class="tab" id="tab-rules"></div>
   <nav class="nav"><div class="nav-in" id="nav"></div></nav>
@@ -368,6 +392,7 @@ svg.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2.4;stro
 const KEY = 'gramadeg-v1';
 const LESSON_LEN = 10, MIXED_LEN = 15, TEST_LEN = 20, MISTAKE_LEN = 12, DAILY_GOAL = 20;
 const INTERVALS = [0, 1, 3, 7, 14, 30, 60];
+const LOG_MAX = 20000, DAY_MS = 864e5;
 
 /* ================= icons ================= */
 const P = {
@@ -399,6 +424,9 @@ const P = {
   layers:'<path d="m12 3.5 9 4.5-9 4.5L3 8z"/><path d="m3 12 9 4.5 9-4.5"/><path d="m3 16 9 4.5 9-4.5"/>',
   x:'<path d="M6 6l12 12M18 6 6 18"/>',
   back:'<path d="M15 5l-7 7 7 7"/>',
+  chart:'<path d="M4 20h16"/><path d="M7 16v-5M12 16V6M17 16v-8"/>',
+  brain:'<path d="M9 4.5a3 3 0 0 0-3 3 3 3 0 0 0-2 5 3 3 0 0 0 2.5 4.5A3 3 0 0 0 12 18V6a2.5 2.5 0 0 0-3-1.5z"/><path d="M15 4.5a3 3 0 0 1 3 3 3 3 0 0 1 2 5 3 3 0 0 1-2.5 4.5A3 3 0 0 1 12 18"/>',
+  copy:'<rect x="8" y="8" width="12" height="12" rx="2.5"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/>',
   cloud:'<path d="M7 18.5h10.5a4 4 0 0 0 .6-8 6 6 0 0 0-11.5-1.3A4.7 4.7 0 0 0 7 18.5z"/>'
 };
 const icon = (n, extra='') => `<svg class="i" viewBox="0 0 24 24" ${extra}>${P[n]||''}</svg>`;
@@ -449,7 +477,7 @@ function mascot(mood='happy', cls='m'){
 
 /* ================= state ================= */
 let C = null, S = loadState(), L = null, TAB = 'learn';
-function blank(){ return {xp:0, streak:{n:0,last:null}, items:{}, flags:[], sound:true, daily:{date:null,xp:0}}; }
+function blank(){ return {xp:0, streak:{n:0,last:null}, items:{}, flags:[], sound:true, daily:{date:null,xp:0}, log:[]}; }
 function clean(d){
   // Accept only well-formed data, so a damaged save or odd import can never break the app.
   const b=blank(); if(!d || typeof d!=='object' || Array.isArray(d)) return b;
@@ -462,6 +490,8 @@ function clean(d){
   if(Array.isArray(d.flags)) b.flags=d.flags.filter(f=>f&&typeof f.id==='string').map(f=>({id:f.id, note:String(f.note||''), given:String(f.given||''), at:day(f.at)}));
   b.sound=d.sound!==false;
   if(d.daily&&typeof d.daily==='object') b.daily={date:day(d.daily.date), xp:num(d.daily.xp)};
+  if(Array.isArray(d.log)) b.log=d.log.filter(e=>e&&typeof e.q==='string'&&Number.isFinite(+e.t)).slice(-LOG_MAX)
+    .map(e=>({t:+e.t, q:e.q, ok:e.ok?1:0, ms:num(e.ms), a:String(e.a==null?'':e.a).slice(0,80), m:String(e.m||''), r:e.r?1:0, ty:String(e.ty||''), v:String(e.v||'')}));
   return b;
 }
 function loadState(){ try{ return clean(JSON.parse(localStorage.getItem(KEY))); }catch(e){ return blank(); } }
@@ -513,7 +543,7 @@ function sfx(kind){
 }
 
 /* ================= chrome ================= */
-const TABS = [['learn','Learn','home'],['practice','Practice','dumbbell'],['map','Map','map'],['rules','Rules','book']];
+const TABS = [['learn','Learn','home'],['practice','Practice','dumbbell'],['insights','Insights','chart'],['map','Map','map'],['rules','Rules','book']];
 function renderNav(){ $('nav').innerHTML = TABS.map(([id,l,ic])=>`<button class="${TAB===id?'on':''}" onclick="go('${id}')">${icon(ic)}${l}</button>`).join(''); }
 function go(tab){ TAB=tab; document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on', t.id==='tab-'+tab)); renderNav(); renderTab(); window.scrollTo(0,0); }
 function renderTop(){
@@ -524,7 +554,7 @@ function renderTop(){
   const g=Math.min(1,dailyXp()/DAILY_GOAL);
   $('goalRing').innerHTML = ring(g, g>=1?'#FFC800':'#58CC02', 30, 4)+`<b>${g>=1?'✓':Math.round(g*100)+'%'}</b>`;
 }
-function renderTab(){ renderTop(); if(!C) return; ({learn:renderLearn, practice:renderPractice, map:renderMap, rules:renderRules})[TAB](); }
+function renderTab(){ renderTop(); if(!C) return; ({learn:renderLearn, practice:renderPractice, insights:renderInsights, map:renderMap, rules:renderRules})[TAB](); }
 
 /* ================= LEARN ================= */
 function renderLearn(){
@@ -588,6 +618,7 @@ function openUnit(uid){
   const u=unitOf(uid); if(!u) return; const s=uStats(u);
   openSheet(u.title, `
     <div class="unit-stats"><div><b>${Math.round(s.strength*100)}%</b><span>Mastery</span></div><div><b>${s.acc==null?'–':Math.round(s.acc*100)+'%'}</b><span>Accuracy</span></div><div><b>${s.fix}</b><span>To fix</span></div></div>
+    ${(()=>{ const K=model().K, ids=[...new Set(u.questions.flatMap(skillsOf))].filter(id=>K[id]&&skillInfo(id).group==='point'); return ids.length?`<div class="solidwrap" style="margin:4px 0 10px">${ids.map(id=>`<span class="vchip ${K[id].verdict}" title="${esc(VLABEL[K[id].verdict])}">${esc(K[id].info.title)}${K[id].mastery!=null?' '+pct(K[id].mastery):''}</span>`).join('')}</div>`:''; })()}
     <div class="rule">${u.rule}</div>
     <button class="btn" onclick="startLesson('unit','${u.id}')">${icon('play')}Lesson</button>
     <button class="btn blue" onclick="startLesson('test','${u.id}')">${icon('trophy')}Unit test (all ${s.total})</button>
@@ -608,6 +639,7 @@ function renderPractice(){
   const msg = fix ? `You have ${fix} question${fix>1?'s':''} to fix. Get each right on 3 separate reviews to clear it.` : started.length ? 'No outstanding mistakes. Mixed review keeps everything fresh.' : 'Start a unit on the Learn tab, then come back here to practise.';
   let h=`<div class="hero">${mascot(fix?'think':'happy','m')}<div class="say">${esc(msg)}</div></div>`;
   const mode=(ic,col,title,sub,count,act,dis)=>`<button class="mode${dis?' disabled':''}" onclick="${dis?`toast('${dis}')`:act}"><div class="ic" style="background:${col};box-shadow:0 4px 0 ${shade(col,.8)}">${icon(ic)}</div><div class="tx"><b>${title}</b><span>${sub}</span></div>${count!=null?`<div class="count" style="color:${col}">${count}</div>`:''}</button>`;
+  h+=mode('brain','#58CC02','Smart practice','Picks what you most need: weak skills, fading memory, recent slips, plus a few spot-checks.',null,"startLesson('smart')", started.length?'':'Start a unit first');
   h+=mode('repeat','#1CB0F6','Review due','Spaced repetition: items scheduled for today.',due,"startLesson('due')", started.length?'':'Start a unit first');
   h+=mode('shuffle','#A560F0','Mixed review','Synoptic: interleaved questions from every unit you have started.',null,"startLesson('mixed')", started.length?'':'Start a unit first');
   h+=mode('target','#FF4B4B','Fix mistakes','Only questions you have got wrong, worst first.',fix,"startLesson('mistakes')", fix?'':'No mistakes to fix');
@@ -631,6 +663,78 @@ function renderPractice(){
   $('tab-practice').innerHTML=h;
 }
 function qText(q){ return q.type==='mc'?q.prompt : q.type==='tiles'?q.en : q.type==='type'?q.text.replace('___','…')+(q.hint?' ('+q.hint+')':'') : q.sentence; }
+
+/* ================= INSIGHTS ================= */
+const VLABEL={weak:'Needs work', shaky:'Shaky', solid:'Solid', nodata:'Too few answers'};
+const TLABEL={mc:'Multiple choice', tiles:'Build the sentence', type:'Type the word', error:'Spot the error'};
+const pct = v => v==null?'–':Math.round(v*100)+'%';
+const secs = ms => ms==null?'–':(ms/1000).toFixed(1)+'s';
+function skRow(k){
+  const col = {weak:'#FF4B4B',shaky:'#FF9600',solid:'#58CC02',nodata:'#D0D0D0'}[k.verdict];
+  const bits=[]; if(k.n) bits.push(pct(k.acc)+' right of '+k.n); bits.push(k.seen+'/'+k.total+' questions seen');
+  if(k.speed&&k.speed>1.6) bits.push('slow'); if(k.speed&&k.speed<0.7&&k.verdict==='solid') bits.push('quick');
+  if(k.trend!=null&&Math.abs(k.trend)>=0.15) bits.push(k.trend>0?'improving ↑':'slipping ↓');
+  if(k.recall!=null&&k.recall<0.5) bits.push('fading');
+  return `<div class="sk"><div class="mid"><b>${esc(k.info.title)}</b><small>${esc(k.info.blurb||'')}</small>
+    <div class="bar"><i style="width:${k.mastery==null?0:Math.round(k.mastery*100)}%;background:${col}"></i></div>
+    <small>${k.mastery==null?'':'<b style="display:inline;font-size:12.5px;color:'+col+'">'+pct(k.mastery)+' mastery</b> · '}${esc(bits.join(' · '))}</small></div>
+    <div class="right"><span class="vchip ${k.verdict}">${VLABEL[k.verdict]}</span><button class="btn sm ${k.verdict==='weak'?'red':'ghost'}" onclick="startLesson('skill','${k.id}')">Drill</button></div></div>`;
+}
+function renderInsights(){
+  const M=model(), ks=Object.values(M.K).filter(k=>k.total && built().some(u=>k.qs[0].unit===u.id||k.qs.some(q=>q.unit===u.id)));
+  const items=Object.values(M.I), totalN=items.reduce((a,o)=>a+o.n,0), totalOk=items.reduce((a,o)=>a+o.ok,0);
+  if(!totalN){ $('tab-insights').innerHTML=`<div class="hero">${mascot('think','m')}<div class="say">Answer a few questions and this page will show which grammar you know and which needs work.</div></div>`; return; }
+  const wk=Date.now()-7*DAY_MS, w7=M.first.filter(e=>e.t>=wk), fading=items.filter(o=>o.recall!=null&&o.recall<0.5).length;
+  const focus=ks.filter(k=>k.verdict==='weak'||k.verdict==='shaky').sort((a,b)=>a.mastery-b.mastery);
+  const solid=ks.filter(k=>k.verdict==='solid').sort((a,b)=>b.mastery-a.mastery);
+  let h=`<div class="hero">${mascot(focus.length?'think':'happy','m')}<div class="say">${focus.length?`Biggest gap: <b>${esc(focus[0].info.title)}</b>. ${fading?fading+' question'+(fading>1?'s are':' is')+' probably fading from memory.':''}`:'No weak spots found yet. Keep going and this gets sharper.'}</div></div>
+  <div class="card sumgrid">
+    <div><b>${totalN}</b><span>Answers</span></div><div><b>${pct(totalOk/totalN)}</b><span>Right first time</span></div>
+    <div><b>${w7.length?pct(w7.filter(e=>e.ok).length/w7.length):'–'}</b><span>Last 7 days</span></div><div><b>${Object.keys(M.days).length}</b><span>Days practised</span></div>
+  </div>
+  <button class="mode" onclick="startLesson('smart')"><div class="ic" style="background:#58CC02;box-shadow:0 4px 0 #46A302">${icon('brain')}</div><div class="tx"><b>Smart practice</b><span>15 questions aimed at the gaps below.</span></div></button>`;
+  h+=`<div class="sec-h">Where to focus</div><div class="card">${focus.length?focus.slice(0,6).map(skRow).join(''):'<p class="note">Nothing below 80% yet.</p>'}</div>`;
+  if(solid.length) h+=`<div class="sec-h">You're solid on</div><div class="card solidwrap">${solid.map(k=>`<span class="vchip solid">${esc(k.info.title)} ${pct(k.mastery)}</span>`).join('')}</div>`;
+  if(M.conf.length){
+    h+=`<div class="sec-h">Mistakes you repeat</div><div class="card">`;
+    M.conf.slice(0,8).forEach(c=>{ h+=`<div class="conf">${c.n>1?`<span class="n">×${c.n}</span>`:''}<div>${esc(qText(c.q))}</div>${c.q.type==='error'?'You tapped':'You put'} <span class="x">${esc(c.given)}</span> · answer <span class="y">${esc(correctText(c.q))}</span></div>`; });
+    h+=`</div>`;
+  }
+  h+=`<div class="sec-h">By question type</div><div class="card">`+Object.keys(TLABEL).filter(t=>M.types[t].n).map(t=>`<div class="trow"><span>${TLABEL[t]}</span><span>${pct(M.types[t].acc)} · ${M.types[t].n} · typical ${secs(M.types[t].med)}</span></div>`).join('')+
+    `<p class="note">Typing is the truest test: you can't recognise your way to the answer.</p></div>`;
+  h+=`<div class="sec-h">Last 4 weeks</div><div class="card">${activitySvg(M.days)}<p class="note">Bar height = answers that day. Colour = accuracy (green 85%+, orange 65%+, red below).</p></div>`;
+  ['point','mutation'].forEach(g=>{
+    const list=ks.filter(k=>k.info.group===g).sort((a,b)=>(a.mastery==null?2:a.mastery)-(b.mastery==null?2:b.mastery));
+    if(!list.length) return;
+    h+=`<div class="sec-h">${g==='point'?'Every grammar point':'Mutations across all units'}</div><div class="card">${list.map(skRow).join('')}</div>`;
+  });
+  h+=`<div class="sec-h">How this works</div><div class="card"><p class="note" style="margin:0">Every answer is logged with the time, what you put and how long you took. Each question gets a memory estimate that grows when you're right and drops when you're wrong, then fades over time. Each skill's mastery blends recent accuracy (older answers count less) with how well you're likely to remember it now. Slow correct answers count as less secure. Lessons and Smart practice pick the questions you most need, plus a few spot-checks of things you seem to know.</p>
+    <button class="btn blue" onclick="copyReport()">${icon('copy')}Copy report for Claude</button><p class="note">Paste it to Claude to get new questions aimed at your weak spots.</p></div>`;
+  $('tab-insights').innerHTML=h;
+}
+function activitySvg(days){
+  const W=340,H=90,n=28,bw=W/n; let mx=1; const ds=[];
+  for(let i=n-1;i>=0;i--){ const k=dayKey(Date.now()-i*DAY_MS); const d=days[k]||{n:0,ok:0}; ds.push(d); mx=Math.max(mx,d.n); }
+  return `<svg viewBox="0 0 ${W} ${H+16}" style="width:100%;height:auto" role="img" aria-label="Answers per day, last 28 days">`+ds.map((d,i)=>{
+    const h=d.n?Math.max(4,d.n/mx*H):2, a=d.n?d.ok/d.n:0, c=!d.n?'#E5E5E5':a>=.85?'#58CC02':a>=.65?'#FF9600':'#FF4B4B';
+    return `<rect x="${i*bw+1.5}" y="${H-h}" width="${bw-3}" height="${h}" rx="2.5" fill="${c}"><title>${d.n} answers${d.n?', '+Math.round(a*100)+'% right':''}</title></rect>`;
+  }).join('')+`<text x="0" y="${H+14}" font-size="10" fill="#777">4 weeks ago</text><text x="${W}" y="${H+14}" font-size="10" fill="#777" text-anchor="end">today</text></svg>`;
+}
+function reportText(){
+  const M=model(), ks=Object.values(M.K).filter(k=>k.n), items=Object.values(M.I);
+  const tn=items.reduce((a,o)=>a+o.n,0), tok=items.reduce((a,o)=>a+o.ok,0);
+  const line=k=>`- ${k.info.title} [${k.id}]: mastery ${pct(k.mastery)}, ${k.ok}/${k.n} right, ${k.seen}/${k.total} questions seen${k.speed&&k.speed>1.6?', slow':''}${k.trend!=null&&Math.abs(k.trend)>=.15?(k.trend>0?', improving':', slipping'):''}`;
+  const by=v=>ks.filter(k=>k.verdict===v).sort((a,b)=>a.mastery-b.mastery);
+  let t=`Gramadeg learner report, ${today()} (content ${C.version})\nAnswers: ${tn}, right first time ${pct(tn?tok/tn:null)}, days practised ${Object.keys(M.days).length}\n`;
+  t+=`\nNEEDS WORK\n${by('weak').map(line).join('\n')||'- none'}\n\nSHAKY\n${by('shaky').map(line).join('\n')||'- none'}\n\nSOLID\n${by('solid').map(line).join('\n')||'- none'}\n`;
+  t+=`\nBY QUESTION TYPE\n`+Object.keys(TLABEL).filter(x=>M.types[x].n).map(x=>`- ${TLABEL[x]}: ${pct(M.types[x].acc)} of ${M.types[x].n}, typical ${secs(M.types[x].med)}`).join('\n')+'\n';
+  if(M.conf.length) t+=`\nREPEATED / RECENT CONFUSIONS\n`+M.conf.slice(0,15).map(c=>`- ${c.q.id} "${qText(c.q)}": I put "${c.given}" (${c.n}x), answer "${correctText(c.q)}"`).join('\n')+'\n';
+  const fad=allQs().filter(q=>{const o=M.I[q.id]; return o&&o.recall!=null&&o.recall<0.5;}).map(q=>q.id);
+  if(fad.length) t+=`\nLIKELY FADING: ${fad.join(', ')}\n`;
+  t+=`\nPlease write new questions targeting the weakest skills and confusions above, in the same format as content.json.`;
+  return t;
+}
+function copyReport(){ const t=reportText(); (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast('Report copied'),()=>{ openSheet('Report', `<textarea style="width:100%;height:60vh;font:12px/1.35 monospace;border:2px solid var(--line);border-radius:10px;padding:8px" readonly>${esc(t)}</textarea>`, 'Select all and copy.'); }); }
 
 /* ================= MAP ================= */
 function renderMap(){
@@ -670,12 +774,89 @@ function renderRules(){
 }
 function toggleAll(o){ document.querySelectorAll('#tab-rules details').forEach(d=>d.open=o); }
 
-/* ================= selection ================= */
-function score(q){ const x=S.items[q.id], t=today();
-  if(!x||!x.seen) return 1+Math.random();
-  if(x.due<=t) return Math.random()*.5 - (6-x.box)*.01;
-  return 2+x.box+Math.random(); }
-const bestOf = (pool,n) => pool.slice().sort((a,b)=>score(a)-score(b)).slice(0,n);
+/* ================= the learner model =================
+   Every answer is logged (time, answer given, speed, mode). From that log the app builds:
+   - a memory estimate per question: a half-life that grows with each correct answer and
+     shrinks sharply with each wrong one; predicted recall = 2^(-days since last seen / half-life)
+   - a mastery score per grammar skill: recent accuracy (older answers count less) blended with
+     predicted recall across that skill's questions, plus speed, trend and coverage
+   - recurring confusions: the same wrong answer given more than once
+   Questions are then chosen by need: low predicted recall and weak skills first. */
+let MODEL=null;
+const median = a => { if(!a.length) return null; const b=a.slice().sort((x,y)=>x-y), m=b.length>>1; return b.length%2?b[m]:(b[m-1]+b[m])/2; };
+const dayKey = t => { const d=new Date(t); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); };
+const skillsOf = q => (q.skills&&q.skills.length)?q.skills:[q.unit];
+function skillInfo(id){ const s=C.skills&&C.skills[id]; if(s) return s; const u=unitOf(id); return {group:'point', title:u?u.title:id, blurb:''}; }
+function logAnswer(q, ok, ms, given, retry){
+  S.log.push({t:Date.now(), q:q.id, ok:ok?1:0, ms:Math.min(ms,180000), a:String(given||'').slice(0,80), m:L.mode, r:retry?1:0, ty:q.type, v:C.version||''});
+  if(S.log.length>LOG_MAX) S.log.splice(0, S.log.length-LOG_MAX);
+  MODEL=null;
+}
+function model(){
+  if(MODEL) return MODEL;
+  const now=Date.now(), Q={}; allQs().forEach(q=>Q[q.id]=q);
+  const first=S.log.filter(e=>!e.r && Q[e.q]);
+  const typeMed={}; ['mc','tiles','type','error'].forEach(ty=>{ typeMed[ty]=median(first.filter(e=>e.ty===ty&&e.ok&&e.ms>0).map(e=>e.ms)); });
+  const I={};
+  const blankItem = () => ({hl:null,last:null,n:0,ok:0,ev:[],speed:[],conf:{},lastOk:null,retries:0,retryOk:0});
+  // Older progress from before the log existed: seed from the review box.
+  Object.keys(S.items).forEach(id=>{ if(!Q[id]) return; const x=S.items[id]; if(!x.seen) return;
+    const logged=first.filter(e=>e.q===id), lr=logged.filter(e=>e.ok).length, lw=logged.length-lr;
+    const r=Math.max(0,(x.right||0)-lr), w=Math.max(0,(x.wrong||0)-lw); if(!r&&!w) return;
+    const o=I[id]=blankItem(), lastDay=x.due?addDays(x.due,-INTERVALS[x.box]||0):(x.lastWrong||today());
+    const t=Date.parse(lastDay+'T12:00:00')||now;
+    o.hl=[0.4,1,3,7,14,30,60][x.box]||1; o.last=t; o.n=r+w; o.ok=r; o.lastOk=x.box>0;
+    for(let k=0;k<w;k++) o.ev.push({t,ok:0}); for(let k=0;k<r;k++) o.ev.push({t,ok:1});
+  });
+  S.log.forEach(e=>{ const q=Q[e.q]; if(!q) return; const o=I[e.q]||(I[e.q]=blankItem());
+    if(!e.ok && e.a) o.conf[e.a]=(o.conf[e.a]||0)+1;
+    if(e.r){ o.retries++; if(e.ok) o.retryOk++; return; }
+    const med=typeMed[e.ty]; const rel = med&&e.ms ? e.ms/med : 1;
+    if(e.ok){ o.speed.push(rel); const f = rel>1.8?1.5 : rel<0.6?2.8 : 2.2; o.hl=Math.min(180,(o.hl||0.7)*f); }
+    else o.hl=Math.max(0.3,(o.hl||1)*0.35);
+    o.last=e.t; o.n++; o.ok+=e.ok; o.lastOk=!!e.ok; o.ev.push({t:e.t, ok:e.ok});
+  });
+  Object.values(I).forEach(o=>{ o.recall = o.last&&o.hl ? Math.pow(2, -Math.max(0,now-o.last)/DAY_MS/o.hl) : null; if(o.recall!=null && o.lastOk===false) o.recall=Math.min(o.recall,0.3); o.slow=median(o.speed); });
+  // skills
+  const K={};
+  allQs().forEach(q=>skillsOf(q).forEach(sk=>{ (K[sk]||(K[sk]={id:sk, qs:[]})).qs.push(q); }));
+  Object.values(K).forEach(k=>{
+    let w=0,wok=0,n=0,ok=0,rec=[],seen=0,spd=[]; const ev=[];
+    k.qs.forEach(q=>{ const o=I[q.id]; if(!o||!o.n) return; seen++; n+=o.n; ok+=o.ok; if(o.recall!=null) rec.push(o.recall); spd.push(...o.speed);
+      o.ev.forEach(e=>{ const wt=Math.pow(0.5,(now-e.t)/DAY_MS/21); w+=wt; wok+=wt*e.ok; ev.push(e); }); });
+    ev.sort((a,b)=>a.t-b.t);
+    const acc=(wok+1)/(w+2), recall=rec.length?rec.reduce((a,b)=>a+b,0)/rec.length:null;
+    k.n=n; k.ok=ok; k.seen=seen; k.total=k.qs.length; k.cover=seen/k.qs.length; k.acc=n?ok/n:null; k.recall=recall;
+    k.speed=spd.length>=3?median(spd):null;
+    k.mastery = n ? 0.55*acc + 0.45*(recall==null?acc:recall) : null;
+    const last=ev.slice(-8), prev=ev.slice(-16,-8), ra=a=>a.length?a.reduce((x,e)=>x+e.ok,0)/a.length:null;
+    k.trend = last.length>=4&&prev.length>=4 ? ra(last)-ra(prev) : null;
+    k.verdict = n<4 ? 'nodata' : k.mastery<0.6 ? 'weak' : (k.mastery<0.8 || n<6 || (k.speed&&k.speed>1.6)) ? 'shaky' : 'solid';
+    k.info=skillInfo(k.id);
+  });
+  // confusions
+  const conf=[];
+  Object.keys(I).forEach(id=>{ const o=I[id]; Object.keys(o.conf).forEach(a=>{ conf.push({q:Q[id], given:a, n:o.conf[a]}); }); });
+  conf.sort((a,b)=>b.n-a.n);
+  // activity and by type
+  const days={}; first.forEach(e=>{ const d=dayKey(e.t); const x=days[d]||(days[d]={n:0,ok:0}); x.n++; x.ok+=e.ok; });
+  const types={}; ['mc','tiles','type','error'].forEach(ty=>{ const es=first.filter(e=>e.ty===ty); types[ty]={n:es.length, acc:es.length?es.filter(e=>e.ok).length/es.length:null, med:typeMed[ty]}; });
+  MODEL={I,K,conf,days,types,first,typeMed};
+  return MODEL;
+}
+function skillMastery(q){ const K=model().K; const ms=skillsOf(q).map(s=>K[s]&&K[s].mastery).filter(v=>v!=null); return ms.length?Math.min(...ms):null; }
+function need(q){
+  const o=model().I[q.id], sm=skillMastery(q), weak = 1-(sm==null?0.5:sm);
+  if(!o||!o.n) return 0.45 + 0.25*weak;
+  return 0.6*(1-(o.recall==null?0.5:o.recall)) + 0.3*weak + (o.lastOk===false?0.15:0) + (o.slow&&o.slow>1.6?0.05:0);
+}
+const bestOf = (pool,n) => pool.map(q=>({q,p:need(q)+Math.random()*0.12})).sort((a,b)=>b.p-a.p).slice(0,n).map(x=>x.q);
+// Mostly the questions you most need, plus some spot-checks of things you seem to know.
+function pickMix(pool, n){
+  if(pool.length<=n) return pool.slice();
+  const k=Math.max(1,Math.round(n*0.75)), top=bestOf(pool,k), rest=shuffle(pool.filter(q=>!top.includes(q)));
+  return top.concat(rest.slice(0,n-k));
+}
 function roundRobin(units, n, filter=()=>true){
   const lists=units.map(u=>bestOf(unitQs(u).filter(filter), 99)).filter(l=>l.length);
   const out=[]; let i=0;
@@ -691,9 +872,11 @@ function startLesson(mode, uid){
   if(!C) return;
   if((mode==='unit'||mode==='test') && !unitOf(uid)) return;
   let qs=[], label='';
-  if(mode==='unit'){ const u=unitOf(uid); qs=bestOf(unitQs(u),LESSON_LEN); label=u.title; }
+  if(mode==='unit'){ const u=unitOf(uid); qs=pickMix(unitQs(u),LESSON_LEN); label=u.title; }
+  else if(mode==='smart'){ const us=built().filter(u=>uStats(u).started); qs=pickMix((us.length?us:built().slice(0,1)).flatMap(unitQs), MIXED_LEN); label='Smart practice'; }
+  else if(mode==='skill'){ qs=pickMix(allQs().filter(q=>skillsOf(q).includes(uid)), LESSON_LEN); label=skillInfo(uid).title; }
   else if(mode==='test'){ const u=unitOf(uid); qs=unitQs(u); label=u.title+': unit test'; }
-  else if(mode==='due'){ qs=allQs().filter(q=>isDue(q.id)).slice(0,MIXED_LEN); if(!qs.length){ qs=bestOf(allQs().filter(q=>it(q.id).seen),LESSON_LEN); } label='Review'; }
+  else if(mode==='due'){ qs=bestOf(allQs().filter(q=>isDue(q.id)),MIXED_LEN); if(!qs.length){ qs=bestOf(allQs().filter(q=>it(q.id).seen),LESSON_LEN); } label='Review'; }
   else if(mode==='mixed'){ qs=roundRobin(built().filter(u=>uStats(u).started), MIXED_LEN); label='Mixed review'; }
   else if(mode==='all'){ qs=roundRobin(shuffle(built()), TEST_LEN); label='Full test'; }
   else if(mode==='mistakes'){ qs=mistakePool(uid); label='Fix mistakes'; }
@@ -713,7 +896,7 @@ function speaker(html, mood='happy'){ return `<div class="speaker">${mascot(mood
 function blankify(s){ return esc(s).replace('___','<span class="blank">&nbsp;</span>'); }
 function next(){
   if(!L.queue.length) return finish();
-  L.cur=L.queue.shift(); L.state='answer'; L.answer=null;
+  L.cur=L.queue.shift(); L.state='answer'; L.answer=null; L.t0=performance.now();
   const {q,retry}=L.cur;
   $('progFill').style.width=(L.done/L.total*100)+'%';
   $('combo').innerHTML = L.combo>=3 ? icon('flame')+L.combo : '';
@@ -772,7 +955,8 @@ function grade(q){
 function givenText(q){ if(L.answer==null) return ''; if(q.type==='mc') return q.options[L.answer]; if(q.type==='error') return q.sentence.split(' ')[L.answer]; return String(L.answer); }
 $('checkBtn').onclick=()=>{
   if(L.state==='feedback'){ if(L.cur.ok) L.done++; next(); return; }
-  const {q,retry}=L.cur, ok=grade(q);
+  const {q,retry}=L.cur, ok=grade(q), ms=Math.round(performance.now()-L.t0);
+  logAnswer(q, ok, ms, givenText(q), retry); if(retry) save();
   L.cur.ok=ok; L.state='feedback';
   if(q.type==='mc') document.querySelectorAll('.opt').forEach(b=>{ const i=+b.dataset.i; b.classList.remove('sel'); if(i===q.answer) b.classList.add('right'); else if(i===L.answer) b.classList.add('wrongsel'); });
   if(q.type==='error') document.querySelectorAll('.chip').forEach(b=>{ const i=+b.dataset.i; b.classList.remove('sel'); if(i===q.wrong) b.classList.add('right'); else if(i===L.answer) b.classList.add('wrongsel'); });
@@ -816,6 +1000,8 @@ function finish(){
   countUp($('dAcc'), acc, '', '%');
   $('dStreak').innerHTML=icon('flame')+S.streak.n;
   $('recap').innerHTML = L.missed.length ? `<h3>Your mistakes this time</h3>`+L.missed.map(q=>`<div>${esc(qText(q))}<br><b>${esc(correctText(q))}</b></div>`).join('')+`<p style="font-size:13px;color:var(--dim);margin:6px 2px 0">These are now in Practice → Fix mistakes.</p>` : '';
+  const focus=Object.values(model().K).filter(k=>k.verdict==='weak'||k.verdict==='shaky').sort((a,b)=>a.mastery-b.mastery)[0];
+  if(focus) $('recap').innerHTML+=`<p style="font-size:14px;margin:12px 2px 0">Next focus: <b style="color:var(--red-d)">${esc(focus.info.title)}</b> (${Math.round(focus.mastery*100)}%). See Insights.</p>`;
   show('done'); sfx('done'); confetti();
 }
 function countUp(el, to, pre='', post=''){ let n=0; const step=Math.max(1,Math.ceil(to/20)); const t=setInterval(()=>{ n=Math.min(to,n+step); el.innerHTML=pre+n+post; if(n>=to) clearInterval(t); },35); }
@@ -878,6 +1064,8 @@ function driveDisconnect(){ if(confirm('Stop saving to Google Drive? Files alrea
 function driveDaily(){ const d=driveCfg(); if(d.url && d.lastDay!==today() && navigator.onLine!==false) driveSave(false); }
 document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState==='visible'){ driveDaily(); if(C && document.querySelector('#home.on')) renderTop(); } });
 window.addEventListener('online', driveDaily);
+// Time away from the app doesn't count towards answer speed.
+let HIDDEN_AT=0; document.addEventListener('visibilitychange', ()=>{ if(document.hidden) HIDDEN_AT=performance.now(); else if(HIDDEN_AT){ if(L&&L.t0) L.t0+=performance.now()-HIDDEN_AT; HIDDEN_AT=0; } });
 function loadScriptText(){ if(SCRIPT_TEXT) return; timed(SCRIPT_URL,{cache:'no-cache'}).then(r=>r.ok?r.text():'').then(t=>{ SCRIPT_TEXT=t; const ta=$('scriptBox'); if(ta) ta.value=t; }).catch(()=>{}); }
 function copyScript(){
   const ta=$('scriptBox'); if(!SCRIPT_TEXT||!ta){ toast('Script still loading – try again'); loadScriptText(); return; }

@@ -65,7 +65,10 @@
       "Dyn"
      ],
      "answer": 0,
-     "explain": "First person statement: Dw i. Ydw i is the question form; Dydw i needs ddim."
+     "explain": "First person statement: Dw i. Ydw i is the question form; Dydw i needs ddim.",
+     "skills": [
+      "bod-statement"
+     ]
     },
     {
      "id": "u1-02",
@@ -81,7 +84,10 @@
       "Dydyn"
      ],
      "answer": 1,
-     "explain": "Statement with nhw: Maen nhw. Ydyn nhw is the question."
+     "explain": "Statement with nhw: Maen nhw. Ydyn nhw is the question.",
+     "skills": [
+      "bod-statement"
+     ]
     },
     {
      "id": "u1-03",
@@ -97,7 +103,10 @@
       "Dyw"
      ],
      "answer": 1,
-     "explain": "A noun subject always takes mae, even a plural one. Maen only goes with nhw."
+     "explain": "A noun subject always takes mae, even a plural one. Maen only goes with nhw.",
+     "skills": [
+      "bod-noun-mae"
+     ]
     },
     {
      "id": "u1-04",
@@ -113,7 +122,10 @@
       "Do"
      ],
      "answer": 1,
-     "explain": "Answer with the verb of the question: Ydy hi? → Ydy."
+     "explain": "Answer with the verb of the question: Ydy hi? → Ydy.",
+     "skills": [
+      "bod-answer"
+     ]
     },
     {
      "id": "u1-05",
@@ -129,7 +141,10 @@
       "Ydych"
      ],
      "answer": 1,
-     "explain": "The answer is about me, so use the 'I' answer form: Ydw. Do is only for past-tense questions."
+     "explain": "The answer is about me, so use the 'I' answer form: Ydw. Do is only for past-tense questions.",
+     "skills": [
+      "bod-answer"
+     ]
     },
     {
      "id": "u1-06",
@@ -145,7 +160,10 @@
       "Nac wyt"
      ],
      "answer": 1,
-     "explain": "No = Nac + the verb for the person answering: Nac ydw. Naddo is only for past-tense questions."
+     "explain": "No = Nac + the verb for the person answering: Nac ydw. Naddo is only for past-tense questions.",
+     "skills": [
+      "bod-answer"
+     ]
     },
     {
      "id": "u1-07",
@@ -160,7 +178,10 @@
       "Ydyn",
       "ddysgu"
      ],
-     "explain": "Dyn ni + 'n + verbnoun."
+     "explain": "Dyn ni + 'n + verbnoun.",
+     "skills": [
+      "bod-statement"
+     ]
     },
     {
      "id": "u1-08",
@@ -175,7 +196,10 @@
       "Ydych",
       "weithio"
      ],
-     "explain": "Question form for he: Ydy e?"
+     "explain": "Question form for he: Ydy e?",
+     "skills": [
+      "bod-question"
+     ]
     },
     {
      "id": "u1-09",
@@ -190,7 +214,12 @@
       "Dyn",
       "fynd"
      ],
-     "explain": "Maen nhw. Also: i causes soft mutation, Caerdydd → Gaerdydd."
+     "explain": "Maen nhw. Also: i causes soft mutation, Caerdydd → Gaerdydd.",
+     "skills": [
+      "bod-statement",
+      "sm-prep",
+      "mut-soft"
+     ]
     },
     {
      "id": "u1-10",
@@ -198,7 +227,10 @@
      "sentence": "Maen y plant yn cysgu.",
      "wrong": 0,
      "fix": "Mae'r plant yn cysgu.",
-     "explain": "Noun subject takes mae, not maen. (Mae + y contracts to mae'r.)"
+     "explain": "Noun subject takes mae, not maen. (Mae + y contracts to mae'r.)",
+     "skills": [
+      "bod-noun-mae"
+     ]
     },
     {
      "id": "u1-11",
@@ -206,7 +238,10 @@
      "sentence": "Ydw ti'n hapus?",
      "wrong": 0,
      "fix": "Wyt ti'n hapus?",
-     "explain": "The question form for ti is Wyt ti?"
+     "explain": "The question form for ti is Wyt ti?",
+     "skills": [
+      "bod-question"
+     ]
     },
     {
      "id": "u1-12",
@@ -216,7 +251,10 @@
      "en": "Do they live in Cardiff?",
      "answer": "Ydyn",
      "alts": [],
-     "explain": "Question form for nhw: Ydyn nhw?"
+     "explain": "Question form for nhw: Ydyn nhw?",
+     "skills": [
+      "bod-question"
+     ]
     },
     {
      "id": "u1-13",
@@ -232,7 +270,10 @@
       "Nac ydyn"
      ],
      "answer": 1,
-     "explain": "Answering about them: Ydyn (they are)."
+     "explain": "Answering about them: Ydyn (they are).",
+     "skills": [
+      "bod-answer"
+     ]
     },
     {
      "id": "u1-14",
@@ -247,7 +288,12 @@
       "Ydy Siân yn weithio?"
      ],
      "answer": 0,
-     "explain": "Noun subject: Ydy. After a consonant use the full yn; 'n only follows a vowel."
+     "explain": "Noun subject: Ydy. After a consonant use the full yn; 'n only follows a vowel.",
+     "skills": [
+      "bod-question",
+      "bod-noun-mae",
+      "yn-vs-n"
+     ]
     },
     {
      "id": "u1-15",
@@ -257,7 +303,10 @@
      "en": "The children are playing.",
      "answer": "yn",
      "alts": [],
-     "explain": "Plant ends in a consonant, so the full yn."
+     "explain": "Plant ends in a consonant, so the full yn.",
+     "skills": [
+      "yn-vs-n"
+     ]
     }
    ]
   },
@@ -283,7 +332,10 @@
       "Dydw i dim yn gweithio heddiw."
      ],
      "answer": 0,
-     "explain": "Subject + ddim + yn + verbnoun. Ddim (mutated dim), no 'n on the subject, and keep the yn."
+     "explain": "Subject + ddim + yn + verbnoun. Ddim (mutated dim), no 'n on the subject, and keep the yn.",
+     "skills": [
+      "neg-ddim"
+     ]
     },
     {
      "id": "u2-02",
@@ -298,7 +350,10 @@
       "Does",
       "ddod"
      ],
-     "explain": "Dyw e ddim + yn + verbnoun. (Dydy e ddim is also correct.)"
+     "explain": "Dyw e ddim + yn + verbnoun. (Dydy e ddim is also correct.)",
+     "skills": [
+      "neg-ddim"
+     ]
     },
     {
      "id": "u2-03",
@@ -314,7 +369,10 @@
       "Dydyn"
      ],
      "answer": 1,
-     "explain": "Definite noun subject (y bws): dyw. Does dim is only for indefinite nouns."
+     "explain": "Definite noun subject (y bws): dyw. Does dim is only for indefinite nouns.",
+     "skills": [
+      "neg-does-dim"
+     ]
     },
     {
      "id": "u2-04",
@@ -329,7 +387,10 @@
       "Dydy dim llaeth."
      ],
      "answer": 0,
-     "explain": "Indefinite 'there isn't': Does dim + noun. Dim stays unmutated, and so does the noun."
+     "explain": "Indefinite 'there isn't': Does dim + noun. Dim stays unmutated, and so does the noun.",
+     "skills": [
+      "neg-does-dim"
+     ]
     },
     {
      "id": "u2-05",
@@ -337,7 +398,10 @@
      "sentence": "Dw i dim yn hoffi te.",
      "wrong": 2,
      "fix": "Dw i ddim yn hoffi te.",
-     "explain": "After the subject it is ddim (mutated), not dim."
+     "explain": "After the subject it is ddim (mutated), not dim.",
+     "skills": [
+      "neg-ddim"
+     ]
     },
     {
      "id": "u2-06",
@@ -352,7 +416,10 @@
       "Dydw",
       "fyw"
      ],
-     "explain": "Dyn ni ddim yn..."
+     "explain": "Dyn ni ddim yn...",
+     "skills": [
+      "neg-ddim"
+     ]
     },
     {
      "id": "u2-07",
@@ -362,7 +429,10 @@
      "en": "You're not listening.",
      "answer": "ddim",
      "alts": [],
-     "explain": "Negative marker after the subject: ddim."
+     "explain": "Negative marker after the subject: ddim.",
+     "skills": [
+      "neg-ddim"
+     ]
     },
     {
      "id": "u2-08",
@@ -377,7 +447,10 @@
       "Does dim nhw yn hapus."
      ],
      "answer": 0,
-     "explain": "Negative of maen nhw is dyn / dydyn nhw ddim. Maen never takes ddim."
+     "explain": "Negative of maen nhw is dyn / dydyn nhw ddim. Maen never takes ddim.",
+     "skills": [
+      "neg-ddim"
+     ]
     },
     {
      "id": "u2-09",
@@ -385,7 +458,10 @@
      "sentence": "Does y plant ddim yma.",
      "wrong": 0,
      "fix": "Dyw'r plant ddim yma.",
-     "explain": "Does only goes with indefinite nouns (does dim plant = there are no children). For 'the children', use dyw."
+     "explain": "Does only goes with indefinite nouns (does dim plant = there are no children). For 'the children', use dyw.",
+     "skills": [
+      "neg-does-dim"
+     ]
     },
     {
      "id": "u2-10",
@@ -400,7 +476,10 @@
       "It isn't warm."
      ],
      "answer": 0,
-     "explain": "Dyw = present. Hi is used for weather 'it'. Oer = cold (old = hen)."
+     "explain": "Dyw = present. Hi is used for weather 'it'. Oer = cold (old = hen).",
+     "skills": [
+      "meaning"
+     ]
     },
     {
      "id": "u2-11",
@@ -410,7 +489,10 @@
      "en": "There's no bread in the house.",
      "answer": "Does",
      "alts": [],
-     "explain": "Indefinite noun (bara): Does dim."
+     "explain": "Indefinite noun (bara): Does dim.",
+     "skills": [
+      "neg-does-dim"
+     ]
     },
     {
      "id": "u2-12",
@@ -425,7 +507,10 @@
       "Dyw Tom ddim yn y waith."
      ],
      "answer": 0,
-     "explain": "A name is definite: Dyw Tom ddim."
+     "explain": "A name is definite: Dyw Tom ddim.",
+     "skills": [
+      "neg-does-dim"
+     ]
     },
     {
      "id": "u2-13",
@@ -440,7 +525,10 @@
       "Dyw'r plant ddim yn yr ardd."
      ],
      "answer": 0,
-     "explain": "Indefinite subject (plant, no 'the'): Does dim + noun."
+     "explain": "Indefinite subject (plant, no 'the'): Does dim + noun.",
+     "skills": [
+      "neg-does-dim"
+     ]
     }
    ]
   },
@@ -461,7 +549,11 @@
      "en": "I'm going to Cardiff.",
      "answer": "Gaerdydd",
      "alts": [],
-     "explain": "i causes soft mutation: c → g."
+     "explain": "i causes soft mutation: c → g.",
+     "skills": [
+      "sm-prep",
+      "mut-soft"
+     ]
     },
     {
      "id": "u3-02",
@@ -471,7 +563,11 @@
      "en": "He comes from Bangor.",
      "answer": "Fangor",
      "alts": [],
-     "explain": "o causes soft mutation: b → f."
+     "explain": "o causes soft mutation: b → f.",
+     "skills": [
+      "sm-prep",
+      "mut-soft"
+     ]
     },
     {
      "id": "u3-03",
@@ -481,7 +577,11 @@
      "en": "the cat",
      "answer": "gath",
      "alts": [],
-     "explain": "y + feminine singular noun: soft mutation."
+     "explain": "y + feminine singular noun: soft mutation.",
+     "skills": [
+      "sm-fem-noun",
+      "mut-soft"
+     ]
     },
     {
      "id": "u3-04",
@@ -491,7 +591,11 @@
      "en": "a big cat",
      "answer": "fawr",
      "alts": [],
-     "explain": "Adjective after a feminine singular noun: m → f."
+     "explain": "Adjective after a feminine singular noun: m → f.",
+     "skills": [
+      "sm-fem-adj",
+      "mut-soft"
+     ]
     },
     {
      "id": "u3-05",
@@ -501,7 +605,11 @@
      "en": "a big dog",
      "answer": "mawr",
      "alts": [],
-     "explain": "Ci is masculine: no mutation of the adjective."
+     "explain": "Ci is masculine: no mutation of the adjective.",
+     "skills": [
+      "sm-gender",
+      "mut-none"
+     ]
     },
     {
      "id": "u3-06",
@@ -511,7 +619,12 @@
      "en": "two dogs",
      "answer": "gi",
      "alts": [],
-     "explain": "dau / dwy + soft mutation, and the noun stays singular."
+     "explain": "dau / dwy + soft mutation, and the noun stays singular.",
+     "skills": [
+      "num-mutation",
+      "num-singular",
+      "mut-soft"
+     ]
     },
     {
      "id": "u3-07",
@@ -521,7 +634,11 @@
      "en": "She's tall.",
      "answer": "dal",
      "alts": [],
-     "explain": "yn + adjective: soft mutation, t → d."
+     "explain": "yn + adjective: soft mutation, t → d.",
+     "skills": [
+      "sm-yn-pred",
+      "mut-soft"
+     ]
     },
     {
      "id": "u3-08",
@@ -531,7 +648,11 @@
      "en": "He's a doctor.",
      "answer": "feddyg",
      "alts": [],
-     "explain": "yn + noun (describing): soft mutation, m → f."
+     "explain": "yn + noun (describing): soft mutation, m → f.",
+     "skills": [
+      "sm-yn-pred",
+      "mut-soft"
+     ]
     },
     {
      "id": "u3-09",
@@ -541,7 +662,11 @@
      "en": "The room is full.",
      "answer": "llawn",
      "alts": [],
-     "explain": "Exception: ll does not mutate after yn."
+     "explain": "Exception: ll does not mutate after yn.",
+     "skills": [
+      "sm-exceptions",
+      "mut-none"
+     ]
     },
     {
      "id": "u3-10",
@@ -551,7 +676,11 @@
      "en": "the spoon",
      "answer": "llwy",
      "alts": [],
-     "explain": "Exception: ll does not mutate after y, even with a feminine noun."
+     "explain": "Exception: ll does not mutate after y, even with a feminine noun.",
+     "skills": [
+      "sm-exceptions",
+      "mut-none"
+     ]
     },
     {
      "id": "u3-11",
@@ -561,7 +690,12 @@
      "en": "tea without milk",
      "answer": "laeth",
      "alts": [],
-     "explain": "After a preposition, ll does mutate: llaeth → laeth."
+     "explain": "After a preposition, ll does mutate: llaeth → laeth.",
+     "skills": [
+      "sm-prep",
+      "sm-exceptions",
+      "mut-soft"
+     ]
     },
     {
      "id": "u3-12",
@@ -571,7 +705,11 @@
      "en": "I bought a new car.",
      "answer": "gar",
      "alts": [],
-     "explain": "Object straight after an inflected verb + subject: soft mutation."
+     "explain": "Object straight after an inflected verb + subject: soft mutation.",
+     "skills": [
+      "sm-object",
+      "mut-soft"
+     ]
     },
     {
      "id": "u3-13",
@@ -586,7 +724,11 @@
       "y ferch a y bachgen"
      ],
      "answer": 0,
-     "explain": "Merch is feminine (mutates after y); bachgen is masculine (does not). And + the = a'r."
+     "explain": "Merch is feminine (mutates after y); bachgen is masculine (does not). And + the = a'r.",
+     "skills": [
+      "sm-fem-noun",
+      "sm-gender"
+     ]
     },
     {
      "id": "u3-14",
@@ -594,7 +736,11 @@
      "sentence": "Mae hi'n mynd i Caerdydd.",
      "wrong": 4,
      "fix": "Mae hi'n mynd i Gaerdydd.",
-     "explain": "i causes soft mutation."
+     "explain": "i causes soft mutation.",
+     "skills": [
+      "sm-prep",
+      "mut-soft"
+     ]
     },
     {
      "id": "u3-15",
@@ -602,7 +748,11 @@
      "sentence": "Mae'r ddyn yn dal.",
      "wrong": 1,
      "fix": "Mae'r dyn yn dal.",
-     "explain": "Dyn is masculine: no mutation after y / 'r."
+     "explain": "Dyn is masculine: no mutation after y / 'r.",
+     "skills": [
+      "sm-gender",
+      "mut-none"
+     ]
     },
     {
      "id": "u3-16",
@@ -617,7 +767,11 @@
       "i Ffangor"
      ],
      "answer": 0,
-     "explain": "Soft mutation b → f. Ym Mangor means in Bangor (nasal mutation after yn)."
+     "explain": "Soft mutation b → f. Ym Mangor means in Bangor (nasal mutation after yn).",
+     "skills": [
+      "sm-prep",
+      "mut-soft"
+     ]
     },
     {
      "id": "u3-17",
@@ -632,7 +786,11 @@
       "y tŷ mawr"
      ],
      "answer": 0,
-     "explain": "Tŷ is masculine: no mutation of the adjective."
+     "explain": "Tŷ is masculine: no mutation of the adjective.",
+     "skills": [
+      "sm-gender",
+      "mut-none"
+     ]
     },
     {
      "id": "u3-18",
@@ -647,7 +805,11 @@
       "Aethon",
       "Chaerdydd"
      ],
-     "explain": "o and i both trigger soft mutation."
+     "explain": "o and i both trigger soft mutation.",
+     "skills": [
+      "sm-prep",
+      "mut-soft"
+     ]
     },
     {
      "id": "u3-19",
@@ -663,7 +825,11 @@
       "fwlyb"
      ],
      "answer": 0,
-     "explain": "yn + adjective: g drops. Gwlyb → wlyb."
+     "explain": "yn + adjective: g drops. Gwlyb → wlyb.",
+     "skills": [
+      "sm-yn-pred",
+      "mut-soft"
+     ]
     }
    ]
   },
@@ -684,7 +850,11 @@
      "en": "my father",
      "answer": "nhad",
      "alts": [],
-     "explain": "fy + nasal: t → nh."
+     "explain": "fy + nasal: t → nh.",
+     "skills": [
+      "poss-fy",
+      "mut-nasal"
+     ]
     },
     {
      "id": "u4-02",
@@ -694,7 +864,11 @@
      "en": "my brother",
      "answer": "mrawd",
      "alts": [],
-     "explain": "fy + nasal: b → m."
+     "explain": "fy + nasal: b → m.",
+     "skills": [
+      "poss-fy",
+      "mut-nasal"
+     ]
     },
     {
      "id": "u4-03",
@@ -704,7 +878,11 @@
      "en": "my bed",
      "answer": "ngwely",
      "alts": [],
-     "explain": "fy + nasal: g → ng."
+     "explain": "fy + nasal: g → ng.",
+     "skills": [
+      "poss-fy",
+      "mut-nasal"
+     ]
     },
     {
      "id": "u4-04",
@@ -714,7 +892,11 @@
      "en": "her car",
      "answer": "char",
      "alts": [],
-     "explain": "ei (her) + aspirate: c → ch."
+     "explain": "ei (her) + aspirate: c → ch.",
+     "skills": [
+      "poss-ei-her",
+      "mut-aspirate"
+     ]
     },
     {
      "id": "u4-05",
@@ -724,7 +906,11 @@
      "en": "his car",
      "answer": "gar",
      "alts": [],
-     "explain": "ei (his) + soft: c → g."
+     "explain": "ei (his) + soft: c → g.",
+     "skills": [
+      "poss-ei-his",
+      "mut-soft"
+     ]
     },
     {
      "id": "u4-06",
@@ -734,7 +920,11 @@
      "en": "your mother",
      "answer": "fam",
      "alts": [],
-     "explain": "dy + soft: m → f."
+     "explain": "dy + soft: m → f.",
+     "skills": [
+      "poss-dy",
+      "mut-soft"
+     ]
     },
     {
      "id": "u4-07",
@@ -744,7 +934,11 @@
      "en": "her name",
      "answer": "henw",
      "alts": [],
-     "explain": "ei (her) adds h before a vowel."
+     "explain": "ei (her) adds h before a vowel.",
+     "skills": [
+      "poss-ei-her",
+      "poss-h-vowel"
+     ]
     },
     {
      "id": "u4-08",
@@ -754,7 +948,10 @@
      "en": "our school",
      "answer": "hysgol",
      "alts": [],
-     "explain": "ein adds h before a vowel (y counts as a vowel)."
+     "explain": "ein adds h before a vowel (y counts as a vowel).",
+     "skills": [
+      "poss-h-vowel"
+     ]
     },
     {
      "id": "u4-09",
@@ -766,7 +963,11 @@
      "alts": [
       "ty"
      ],
-     "explain": "eich causes no mutation."
+     "explain": "eich causes no mutation.",
+     "skills": [
+      "poss-no-mut",
+      "mut-none"
+     ]
     },
     {
      "id": "u4-10",
@@ -776,7 +977,11 @@
      "en": "her father",
      "answer": "thad",
      "alts": [],
-     "explain": "ei (her) + aspirate: t → th."
+     "explain": "ei (her) + aspirate: t → th.",
+     "skills": [
+      "poss-ei-her",
+      "mut-aspirate"
+     ]
     },
     {
      "id": "u4-11",
@@ -786,7 +991,12 @@
      "en": "their friends",
      "answer": "ffrindiau",
      "alts": [],
-     "explain": "eu only adds h before vowels; ff never mutates."
+     "explain": "eu only adds h before vowels; ff never mutates.",
+     "skills": [
+      "poss-no-mut",
+      "poss-h-vowel",
+      "mut-none"
+     ]
     },
     {
      "id": "u4-12",
@@ -801,7 +1011,11 @@
       "eu enw e"
      ],
      "answer": 0,
-     "explain": "His: soft mutation, which doesn't affect vowels. Her adds h: ei henw hi."
+     "explain": "His: soft mutation, which doesn't affect vowels. Her adds h: ei henw hi.",
+     "skills": [
+      "poss-ei-his",
+      "poss-h-vowel"
+     ]
     },
     {
      "id": "u4-13",
@@ -816,7 +1030,11 @@
       "athrawon",
       "e'n"
      ],
-     "explain": "m is unaffected by the nasal mutation: fy mam."
+     "explain": "m is unaffected by the nasal mutation: fy mam.",
+     "skills": [
+      "poss-fy",
+      "mut-nasal"
+     ]
     },
     {
      "id": "u4-14",
@@ -824,7 +1042,11 @@
      "sentence": "Mae fy car i yn y garej.",
      "wrong": 2,
      "fix": "Mae fy nghar i yn y garej.",
-     "explain": "fy + nasal mutation: car → nghar."
+     "explain": "fy + nasal mutation: car → nghar.",
+     "skills": [
+      "poss-fy",
+      "mut-nasal"
+     ]
     },
     {
      "id": "u4-15",
@@ -839,7 +1061,11 @@
       "ei nhad i"
      ],
      "answer": 0,
-     "explain": "fy + nasal: t → nh."
+     "explain": "fy + nasal: t → nh.",
+     "skills": [
+      "poss-fy",
+      "mut-nasal"
+     ]
     },
     {
      "id": "u4-16",
@@ -854,7 +1080,11 @@
       "eu char hi"
      ],
      "answer": 0,
-     "explain": "Her: aspirate, c → ch. Ei gar would mean his car."
+     "explain": "Her: aspirate, c → ch. Ei gar would mean his car.",
+     "skills": [
+      "poss-ei-her",
+      "mut-aspirate"
+     ]
     },
     {
      "id": "u4-17",
@@ -869,7 +1099,11 @@
       "eu tŷ hi"
      ],
      "answer": 0,
-     "explain": "eu causes no consonant mutation; it only adds h before vowels."
+     "explain": "eu causes no consonant mutation; it only adds h before vowels.",
+     "skills": [
+      "poss-no-mut",
+      "mut-none"
+     ]
     },
     {
      "id": "u4-18",
@@ -884,7 +1118,11 @@
       "eu",
       "weithio"
      ],
-     "explain": "ei (his) + soft: b → f."
+     "explain": "ei (his) + soft: b → f.",
+     "skills": [
+      "poss-ei-his",
+      "mut-soft"
+     ]
     }
    ]
   },
@@ -905,7 +1143,10 @@
      "en": "I went to town yesterday.",
      "answer": "Es",
      "alts": [],
-     "explain": "Mynd is irregular: Es i."
+     "explain": "Mynd is irregular: Es i.",
+     "skills": [
+      "past-irregular"
+     ]
     },
     {
      "id": "u5-02",
@@ -921,7 +1162,10 @@
       "Oes"
      ],
      "answer": 1,
-     "explain": "Every past-tense question is answered Do / Naddo."
+     "explain": "Every past-tense question is answered Do / Naddo.",
+     "skills": [
+      "past-do-naddo"
+     ]
     },
     {
      "id": "u5-03",
@@ -931,7 +1175,10 @@
      "en": "He bought a new book.",
      "answer": "Prynodd",
      "alts": [],
-     "explain": "He / she ending: -odd."
+     "explain": "He / she ending: -odd.",
+     "skills": [
+      "past-endings"
+     ]
     },
     {
      "id": "u5-04",
@@ -946,7 +1193,10 @@
       "Bwytodd",
       "Bwyta"
      ],
-     "explain": "We ending: -on. Bwyta → bwyt- → bwyton ni."
+     "explain": "We ending: -on. Bwyta → bwyt- → bwyton ni.",
+     "skills": [
+      "past-endings"
+     ]
     },
     {
      "id": "u5-05",
@@ -961,7 +1211,11 @@
       "Brynon i ddim byd."
      ],
      "answer": 0,
-     "explain": "Negative: mutate the verb + ddim. Formal written form: Phrynais i ddim byd."
+     "explain": "Negative: mutate the verb + ddim. Formal written form: Phrynais i ddim byd.",
+     "skills": [
+      "past-negative",
+      "mut-soft"
+     ]
     },
     {
      "id": "u5-06",
@@ -969,7 +1223,11 @@
      "sentence": "Gwelaist ti'r gêm?",
      "wrong": 0,
      "fix": "Welaist ti'r gêm?",
-     "explain": "Past-tense questions soft-mutate the verb: g drops."
+     "explain": "Past-tense questions soft-mutate the verb: g drops.",
+     "skills": [
+      "past-question",
+      "mut-soft"
+     ]
     },
     {
      "id": "u5-07",
@@ -981,7 +1239,12 @@
      "alts": [
       "Cest"
      ],
-     "explain": "Cest ti → question soft-mutates: Gest ti?"
+     "explain": "Cest ti → question soft-mutates: Gest ti?",
+     "skills": [
+      "past-irregular",
+      "past-question",
+      "mut-soft"
+     ]
     },
     {
      "id": "u5-08",
@@ -997,7 +1260,10 @@
       "Nac ydw"
      ],
      "answer": 1,
-     "explain": "Past-tense no: Naddo."
+     "explain": "Past-tense no: Naddo.",
+     "skills": [
+      "past-do-naddo"
+     ]
     },
     {
      "id": "u5-09",
@@ -1009,7 +1275,10 @@
      "alts": [
       "Ddaethon"
      ],
-     "explain": "Dod is irregular: Daethon nhw."
+     "explain": "Dod is irregular: Daethon nhw.",
+     "skills": [
+      "past-irregular"
+     ]
     },
     {
      "id": "u5-10",
@@ -1024,7 +1293,12 @@
       "Gwnaethon",
       "waith"
      ],
-     "explain": "Gwneud: Gwnes i. Fy + nasal: gwaith → ngwaith."
+     "explain": "Gwneud: Gwnes i. Fy + nasal: gwaith → ngwaith.",
+     "skills": [
+      "past-irregular",
+      "poss-fy",
+      "mut-nasal"
+     ]
     },
     {
      "id": "u5-11",
@@ -1032,7 +1306,10 @@
      "sentence": "Prynon i fara.",
      "wrong": 0,
      "fix": "Prynais i fara.",
-     "explain": "I ending: -ais. -on is we / they."
+     "explain": "I ending: -ais. -on is we / they.",
+     "skills": [
+      "past-endings"
+     ]
     },
     {
      "id": "u5-12",
@@ -1042,7 +1319,10 @@
      "en": "I read the book yesterday.",
      "answer": "Darllenais",
      "alts": [],
-     "explain": "Darllen → darllen- + ais."
+     "explain": "Darllen → darllen- + ais.",
+     "skills": [
+      "past-endings"
+     ]
     },
     {
      "id": "u5-13",
@@ -1057,7 +1337,12 @@
       "Ches i ddim lythyr."
      ],
      "answer": 0,
-     "explain": "Negative of ces i: Ches i ddim (Ges i ddim is also heard)."
+     "explain": "Negative of ces i: Ches i ddim (Ges i ddim is also heard).",
+     "skills": [
+      "past-negative",
+      "past-irregular",
+      "mut-aspirate"
+     ]
     },
     {
      "id": "u5-14",
@@ -1072,7 +1357,10 @@
       "Aeth e i Abertawe."
      ],
      "answer": 0,
-     "explain": "Mynd, he / she: Aeth."
+     "explain": "Mynd, he / she: Aeth.",
+     "skills": [
+      "past-irregular"
+     ]
     },
     {
      "id": "u5-15",
@@ -1087,7 +1375,12 @@
       "Ddaethon ni?"
      ],
      "answer": 0,
-     "explain": "Dod, they: daethon. Question soft-mutates: Ddaethon nhw?"
+     "explain": "Dod, they: daethon. Question soft-mutates: Ddaethon nhw?",
+     "skills": [
+      "past-irregular",
+      "past-question",
+      "mut-soft"
+     ]
     },
     {
      "id": "u5-16",
@@ -1099,7 +1392,12 @@
      "alts": [
       "Taloch"
      ],
-     "explain": "Tal- + och = Taloch. Question soft-mutates: Daloch chi?"
+     "explain": "Tal- + och = Taloch. Question soft-mutates: Daloch chi?",
+     "skills": [
+      "past-endings",
+      "past-question",
+      "mut-soft"
+     ]
     }
    ]
   },
@@ -1125,7 +1423,12 @@
       "bod",
       "golli"
      ],
-     "explain": "Rhaid i fi + soft (fynd); cyn i fi + soft (golli)."
+     "explain": "Rhaid i fi + soft (fynd); cyn i fi + soft (golli).",
+     "skills": [
+      "rhaid",
+      "i-person-sm",
+      "mut-soft"
+     ]
     },
     {
      "id": "u6-02",
@@ -1135,7 +1438,12 @@
      "en": "I must go.",
      "answer": "fynd",
      "alts": [],
-     "explain": "i + person + soft mutation: m → f."
+     "explain": "i + person + soft mutation: m → f.",
+     "skills": [
+      "rhaid",
+      "i-person-sm",
+      "mut-soft"
+     ]
     },
     {
      "id": "u6-03",
@@ -1150,7 +1458,12 @@
       "cyn iddo fe'n gyrraedd"
      ],
      "answer": 0,
-     "explain": "i inflects for he: iddo fe. Then soft mutation: cyrraedd → gyrraedd."
+     "explain": "i inflects for he: iddo fe. Then soft mutation: cyrraedd → gyrraedd.",
+     "skills": [
+      "i-person",
+      "i-person-sm",
+      "mut-soft"
+     ]
     },
     {
      "id": "u6-04",
@@ -1160,7 +1473,11 @@
      "en": "after we arrive(d)",
      "answer": "gyrraedd",
      "alts": [],
-     "explain": "i + person + soft mutation: c → g."
+     "explain": "i + person + soft mutation: c → g.",
+     "skills": [
+      "i-person-sm",
+      "mut-soft"
+     ]
     },
     {
      "id": "u6-05",
@@ -1175,7 +1492,10 @@
       "cyn y gyfarfod"
      ],
      "answer": 0,
-     "explain": "Before a plain noun (no verb), no i: cyn y cyfarfod."
+     "explain": "Before a plain noun (no verb), no i: cyn y cyfarfod.",
+     "skills": [
+      "cyn-use"
+     ]
     },
     {
      "id": "u6-06",
@@ -1190,7 +1510,12 @@
       "Gadawodd",
       "iddyn"
      ],
-     "explain": "Iddi hi + soft mutation. The past meaning comes from Gadawais."
+     "explain": "Iddi hi + soft mutation. The past meaning comes from Gadawais.",
+     "skills": [
+      "i-person",
+      "i-person-sm",
+      "mut-soft"
+     ]
     },
     {
      "id": "u6-07",
@@ -1198,7 +1523,11 @@
      "sentence": "Ar ôl i ni bwyta, aethon ni allan.",
      "wrong": 4,
      "fix": "Ar ôl i ni fwyta, aethon ni allan.",
-     "explain": "The verbnoun after i + person soft-mutates: bwyta → fwyta."
+     "explain": "The verbnoun after i + person soft-mutates: bwyta → fwyta.",
+     "skills": [
+      "i-person-sm",
+      "mut-soft"
+     ]
     },
     {
      "id": "u6-08",
@@ -1206,7 +1535,11 @@
      "sentence": "Cyn dw i'n mynd adre, rhaid i fi siopa.",
      "wrong": 1,
      "fix": "Cyn i fi fynd adre, rhaid i fi siopa.",
-     "explain": "No normal tense after cyn. Use i + person + mutated verbnoun."
+     "explain": "No normal tense after cyn. Use i + person + mutated verbnoun.",
+     "skills": [
+      "cyn-use",
+      "i-person-sm"
+     ]
     },
     {
      "id": "u6-09",
@@ -1221,7 +1554,10 @@
       "While I was walking home, it was raining."
      ],
      "answer": 0,
-     "explain": "Wrth i = as / while."
+     "explain": "Wrth i = as / while.",
+     "skills": [
+      "meaning"
+     ]
     },
     {
      "id": "u6-10",
@@ -1231,7 +1567,11 @@
      "en": "I'll wait until you come.",
      "answer": "ddod",
      "alts": [],
-     "explain": "Nes i = until. Soft mutation: d → dd."
+     "explain": "Nes i = until. Soft mutation: d → dd.",
+     "skills": [
+      "i-person-sm",
+      "mut-soft"
+     ]
     },
     {
      "id": "u6-11",
@@ -1246,7 +1586,12 @@
       "ar ôl iddyn nhw'n gadael"
      ],
      "answer": 0,
-     "explain": "Iddyn nhw + soft mutation: gadael → adael (g drops)."
+     "explain": "Iddyn nhw + soft mutation: gadael → adael (g drops).",
+     "skills": [
+      "i-person",
+      "i-person-sm",
+      "mut-soft"
+     ]
     },
     {
      "id": "u6-12",
@@ -1261,7 +1606,10 @@
       "Bwytais i cyn yn mynd."
      ],
      "answer": 0,
-     "explain": "Same subject in both halves: cyn + verbnoun, with no i and no mutation."
+     "explain": "Same subject in both halves: cyn + verbnoun, with no i and no mutation.",
+     "skills": [
+      "cyn-use"
+     ]
     },
     {
      "id": "u6-13",
@@ -1271,7 +1619,12 @@
      "en": "The children must go to bed.",
      "answer": "fynd",
      "alts": [],
-     "explain": "i + noun + soft-mutated verbnoun."
+     "explain": "i + noun + soft-mutated verbnoun.",
+     "skills": [
+      "rhaid",
+      "i-person-sm",
+      "mut-soft"
+     ]
     },
     {
      "id": "u6-14",
@@ -1286,7 +1639,11 @@
       "nes iddi hi'n ffonio"
      ],
      "answer": 0,
-     "explain": "Iddi hi. Ff never mutates."
+     "explain": "Iddi hi. Ff never mutates.",
+     "skills": [
+      "i-person",
+      "mut-none"
+     ]
     }
    ]
   },
@@ -1312,7 +1669,12 @@
       "tri gi"
      ],
      "answer": 0,
-     "explain": "Number + singular noun. Tri + aspirate: c → ch."
+     "explain": "Number + singular noun. Tri + aspirate: c → ch.",
+     "skills": [
+      "num-mutation",
+      "num-singular",
+      "mut-aspirate"
+     ]
     },
     {
      "id": "u7-02",
@@ -1327,7 +1689,12 @@
       "dwy chath"
      ],
      "answer": 0,
-     "explain": "Cath is feminine → dwy. Soft mutation, singular noun."
+     "explain": "Cath is feminine → dwy. Soft mutation, singular noun.",
+     "skills": [
+      "num-gender",
+      "num-mutation",
+      "mut-soft"
+     ]
     },
     {
      "id": "u7-03",
@@ -1342,7 +1709,11 @@
       "pedwar merched"
      ],
      "answer": 0,
-     "explain": "Merch is feminine → pedair. Pedair causes no mutation; noun stays singular."
+     "explain": "Merch is feminine → pedair. Pedair causes no mutation; noun stays singular.",
+     "skills": [
+      "num-gender",
+      "num-singular"
+     ]
     },
     {
      "id": "u7-04",
@@ -1357,7 +1728,11 @@
       "llawer blant"
      ],
      "answer": 0,
-     "explain": "Quantity word + o + plural. O soft-mutates: plant → blant."
+     "explain": "Quantity word + o + plural. O soft-mutates: plant → blant.",
+     "skills": [
+      "quantity-o",
+      "mut-soft"
+     ]
     },
     {
      "id": "u7-05",
@@ -1372,7 +1747,11 @@
       "pum blwyddyn"
      ],
      "answer": 0,
-     "explain": "Pump shortens to pum before a noun, and blynedd takes nasal mutation after it."
+     "explain": "Pump shortens to pum before a noun, and blynedd takes nasal mutation after it.",
+     "skills": [
+      "blynedd",
+      "mut-nasal"
+     ]
     },
     {
      "id": "u7-06",
@@ -1387,7 +1766,12 @@
       "dau mlynedd"
      ],
      "answer": 0,
-     "explain": "Blynedd is feminine → dwy, which soft-mutates: b → f."
+     "explain": "Blynedd is feminine → dwy, which soft-mutates: b → f.",
+     "skills": [
+      "blynedd",
+      "num-gender",
+      "mut-soft"
+     ]
     },
     {
      "id": "u7-07",
@@ -1397,7 +1781,12 @@
      "en": "six children",
      "answer": "phlentyn",
      "alts": [],
-     "explain": "Chwe + aspirate: p → ph. Singular noun."
+     "explain": "Chwe + aspirate: p → ph. Singular noun.",
+     "skills": [
+      "num-mutation",
+      "num-singular",
+      "mut-aspirate"
+     ]
     },
     {
      "id": "u7-08",
@@ -1407,7 +1796,12 @@
      "en": "one cat",
      "answer": "gath",
      "alts": [],
-     "explain": "Un + feminine noun: soft mutation."
+     "explain": "Un + feminine noun: soft mutation.",
+     "skills": [
+      "num-mutation",
+      "num-gender",
+      "mut-soft"
+     ]
     },
     {
      "id": "u7-09",
@@ -1417,7 +1811,11 @@
      "en": "one dog",
      "answer": "ci",
      "alts": [],
-     "explain": "Un + masculine noun: no mutation."
+     "explain": "Un + masculine noun: no mutation.",
+     "skills": [
+      "num-mutation",
+      "mut-none"
+     ]
     },
     {
      "id": "u7-10",
@@ -1427,7 +1825,12 @@
      "en": "two boys",
      "answer": "fachgen",
      "alts": [],
-     "explain": "Dau + soft mutation: b → f. Singular noun."
+     "explain": "Dau + soft mutation: b → f. Singular noun.",
+     "skills": [
+      "num-mutation",
+      "num-singular",
+      "mut-soft"
+     ]
     },
     {
      "id": "u7-11",
@@ -1437,7 +1840,11 @@
      "en": "three cats",
      "answer": "cath",
      "alts": [],
-     "explain": "Tair (feminine 3) causes no mutation."
+     "explain": "Tair (feminine 3) causes no mutation.",
+     "skills": [
+      "num-gender",
+      "mut-none"
+     ]
     },
     {
      "id": "u7-12",
@@ -1447,7 +1854,12 @@
      "en": "two hands",
      "answer": "law",
      "alts": [],
-     "explain": "Dwy mutates ll too: llaw → law. (Dwylo is a special word for a person's own two hands.)"
+     "explain": "Dwy mutates ll too: llaw → law. (Dwylo is a special word for a person's own two hands.)",
+     "skills": [
+      "num-mutation",
+      "sm-exceptions",
+      "mut-soft"
+     ]
     },
     {
      "id": "u7-13",
@@ -1455,7 +1867,10 @@
      "sentence": "Mae dau blant yn yr ardd.",
      "wrong": 2,
      "fix": "Mae dau blentyn yn yr ardd.",
-     "explain": "After a number the noun is singular: plentyn, not plant."
+     "explain": "After a number the noun is singular: plentyn, not plant.",
+     "skills": [
+      "num-singular"
+     ]
     },
     {
      "id": "u7-14",
@@ -1463,7 +1878,10 @@
      "sentence": "Mae pedwar merch yn y dosbarth.",
      "wrong": 1,
      "fix": "Mae pedair merch yn y dosbarth.",
-     "explain": "Merch is feminine, so pedair."
+     "explain": "Merch is feminine, so pedair.",
+     "skills": [
+      "num-gender"
+     ]
     },
     {
      "id": "u7-15",
@@ -1478,7 +1896,12 @@
       "phlant",
       "Maen"
      ],
-     "explain": "Tri + aspirate + singular: tri phlentyn."
+     "explain": "Tri + aspirate + singular: tri phlentyn.",
+     "skills": [
+      "num-mutation",
+      "num-singular",
+      "mut-aspirate"
+     ]
     },
     {
      "id": "u7-16",
@@ -1493,7 +1916,10 @@
       "dau o'r blant"
      ],
      "answer": 0,
-     "explain": "'Of the' + plural: dau o'r plant."
+     "explain": "'Of the' + plural: dau o'r plant.",
+     "skills": [
+      "quantity-o"
+     ]
     },
     {
      "id": "u7-17",
@@ -1508,7 +1934,11 @@
       "gormod o'r geir"
      ],
      "answer": 0,
-     "explain": "Gormod + o + plural, soft-mutated: ceir → geir."
+     "explain": "Gormod + o + plural, soft-mutated: ceir → geir.",
+     "skills": [
+      "quantity-o",
+      "mut-soft"
+     ]
     },
     {
      "id": "u7-18",
@@ -1523,7 +1953,12 @@
       "tri flynedd"
      ],
      "answer": 0,
-     "explain": "Blynedd is feminine → tair, which causes no mutation."
+     "explain": "Blynedd is feminine → tair, which causes no mutation.",
+     "skills": [
+      "blynedd",
+      "num-gender",
+      "mut-none"
+     ]
     }
    ]
   },
@@ -1639,5 +2074,202 @@
    "subtitle": "Gwela i, a i",
    "soon": true
   }
- ]
+ ],
+ "skills": {
+  "bod-statement": {
+   "group": "point",
+   "title": "Bod: statements",
+   "blurb": "Dw i, mae e, maen nhw"
+  },
+  "bod-noun-mae": {
+   "group": "point",
+   "title": "Bod with a noun subject",
+   "blurb": "Mae / ydy / dyw with a noun, never maen"
+  },
+  "bod-question": {
+   "group": "point",
+   "title": "Bod: question forms",
+   "blurb": "Wyt ti? Ydy e? Ydyn nhw?"
+  },
+  "bod-answer": {
+   "group": "point",
+   "title": "Yes / no answers (present)",
+   "blurb": "Ydw, ydy, nac ydw…"
+  },
+  "yn-vs-n": {
+   "group": "point",
+   "title": "yn or 'n",
+   "blurb": "Full yn after a consonant"
+  },
+  "neg-ddim": {
+   "group": "point",
+   "title": "Negatives with ddim",
+   "blurb": "Dw i ddim, dyn nhw ddim"
+  },
+  "neg-does-dim": {
+   "group": "point",
+   "title": "Does dim vs dyw",
+   "blurb": "Indefinite vs definite subject"
+  },
+  "meaning": {
+   "group": "point",
+   "title": "Reading for meaning",
+   "blurb": "Understanding a whole sentence"
+  },
+  "sm-prep": {
+   "group": "point",
+   "title": "Mutation after i, o, heb…",
+   "blurb": "Prepositions trigger soft mutation"
+  },
+  "sm-fem-noun": {
+   "group": "point",
+   "title": "y + feminine noun",
+   "blurb": "y gath, y ferch"
+  },
+  "sm-fem-adj": {
+   "group": "point",
+   "title": "Adjective after feminine noun",
+   "blurb": "cath fawr"
+  },
+  "sm-gender": {
+   "group": "point",
+   "title": "Noun gender",
+   "blurb": "Knowing masculine from feminine"
+  },
+  "sm-yn-pred": {
+   "group": "point",
+   "title": "yn + adjective / noun",
+   "blurb": "Mae hi'n dal, mae e'n feddyg"
+  },
+  "sm-exceptions": {
+   "group": "point",
+   "title": "ll / rh exceptions",
+   "blurb": "When ll and rh resist mutation"
+  },
+  "sm-object": {
+   "group": "point",
+   "title": "Object after a short-form verb",
+   "blurb": "Prynais i gar"
+  },
+  "poss-fy": {
+   "group": "point",
+   "title": "fy (my)",
+   "blurb": "Nasal: fy nhad, fy nghar"
+  },
+  "poss-dy": {
+   "group": "point",
+   "title": "dy (your)",
+   "blurb": "Soft: dy fam di"
+  },
+  "poss-ei-his": {
+   "group": "point",
+   "title": "ei (his)",
+   "blurb": "Soft: ei gar e"
+  },
+  "poss-ei-her": {
+   "group": "point",
+   "title": "ei (her)",
+   "blurb": "Aspirate: ei char hi"
+  },
+  "poss-h-vowel": {
+   "group": "point",
+   "title": "h before vowels",
+   "blurb": "ei henw hi, ein hysgol ni"
+  },
+  "poss-no-mut": {
+   "group": "point",
+   "title": "eich / eu: no mutation",
+   "blurb": "eich tŷ chi, eu tŷ nhw"
+  },
+  "past-endings": {
+   "group": "point",
+   "title": "Past tense endings",
+   "blurb": "-ais, -aist, -odd, -on, -och"
+  },
+  "past-irregular": {
+   "group": "point",
+   "title": "Irregular past verbs",
+   "blurb": "es, aeth, ces, daeth, gwnes"
+  },
+  "past-question": {
+   "group": "point",
+   "title": "Past questions mutate",
+   "blurb": "Welaist ti? Ddaethon nhw?"
+  },
+  "past-do-naddo": {
+   "group": "point",
+   "title": "Do / Naddo",
+   "blurb": "Answering past questions"
+  },
+  "past-negative": {
+   "group": "point",
+   "title": "Past negatives",
+   "blurb": "Brynais i ddim, ches i ddim"
+  },
+  "i-person": {
+   "group": "point",
+   "title": "i + person forms",
+   "blurb": "iddo fe, iddi hi, iddyn nhw"
+  },
+  "i-person-sm": {
+   "group": "point",
+   "title": "Mutation after i + person",
+   "blurb": "cyn i fi fynd"
+  },
+  "cyn-use": {
+   "group": "point",
+   "title": "When to use cyn i",
+   "blurb": "cyn i fi fynd vs cyn mynd vs cyn y cyfarfod"
+  },
+  "rhaid": {
+   "group": "point",
+   "title": "Rhaid i",
+   "blurb": "Rhaid i fi fynd"
+  },
+  "num-gender": {
+   "group": "point",
+   "title": "Feminine numbers",
+   "blurb": "dwy, tair, pedair"
+  },
+  "num-singular": {
+   "group": "point",
+   "title": "Singular after numbers",
+   "blurb": "tri chi, not tri chŵn"
+  },
+  "num-mutation": {
+   "group": "point",
+   "title": "Mutations after numbers",
+   "blurb": "un, dau/dwy, tri, chwe"
+  },
+  "blynedd": {
+   "group": "point",
+   "title": "Years: blynedd",
+   "blurb": "dwy flynedd, pum mlynedd"
+  },
+  "quantity-o": {
+   "group": "point",
+   "title": "Quantity + o + plural",
+   "blurb": "llawer o blant"
+  },
+  "mut-soft": {
+   "group": "mutation",
+   "title": "Soft mutation",
+   "blurb": "c→g, p→b, t→d, b→f, m→f, g drops…"
+  },
+  "mut-nasal": {
+   "group": "mutation",
+   "title": "Nasal mutation",
+   "blurb": "c→ngh, t→nh, b→m, g→ng…"
+  },
+  "mut-aspirate": {
+   "group": "mutation",
+   "title": "Aspirate mutation",
+   "blurb": "c→ch, p→ph, t→th"
+  },
+  "mut-none": {
+   "group": "mutation",
+   "title": "Knowing when NOT to mutate",
+   "blurb": "Masculine nouns, eich/eu, tair, ll after y…"
+  }
+ }
 }

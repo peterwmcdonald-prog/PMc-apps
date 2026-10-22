@@ -43,7 +43,7 @@ fetch('content.json',{cache:'no-cache'}).then(r=>r.json()).then(C=>{
       if(q.type==='tiles'){ p=esc(q.en)+'<br><span class="x">Extra tiles: '+esc((q.distractors||[]).join(', '))+'</span>'; a=q.answer; }
       if(q.type==='type'){ p=esc(q.text)+` <span class="x">[hint: ${esc(q.hint||'')}]</span>`+(q.en?` <span class="x">(${esc(q.en)})</span>`:''); a=q.answer+((q.alts||[]).length?' (also: '+q.alts.join(', ')+')':''); }
       if(q.type==='error'){ const t=q.sentence.split(' '); p=t.map((w,i)=>i===q.wrong?`<u><b>${esc(w)}</b></u>`:esc(w)).join(' '); a=q.fix; }
-      h+=`<div class="q"><span class="id">${q.id}</span><span class="ty">${q.type}</span><div class="p">${p}</div><div class="a">✓ ${esc(a)}</div><div class="x">${esc(q.explain||'')}</div></div>`;
+      h+=`<div class="q"><span class="id">${q.id}</span><span class="ty">${q.type}</span><div class="p">${p}</div><div class="a">✓ ${esc(a)}</div><div class="x">${esc(q.explain||'')}</div><div class="x" style="font-size:12px">Skills: ${esc((q.skills||[]).map(k=>(C.skills&&C.skills[k]?C.skills[k].title:k)).join(', '))}</div></div>`;
     });
   });
   const soon=C.units.filter(u=>u.soon);
