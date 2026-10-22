@@ -1,5 +1,5 @@
 {
- "version": "2026-10-19",
+ "version": "2026-10-22",
  "sources": [
   {
    "name": "Wikipedia: Colloquial Welsh morphology (CC BY-SA)",
@@ -61,7 +61,8 @@
       "Ydw",
       "Wyt",
       "Mae",
-      "Dydw"
+      "Dydw",
+      "Dyn"
      ],
      "answer": 0,
      "explain": "First person statement: Dw i. Ydw i is the question form; Dydw i needs ddim."
@@ -76,7 +77,8 @@
       "Maen",
       "Dyn",
       "Ydyn",
-      "Dych"
+      "Dych",
+      "Dydyn"
      ],
      "answer": 1,
      "explain": "Statement with nhw: Maen nhw. Ydyn nhw is the question."
@@ -91,7 +93,8 @@
       "Mae",
       "Ydy",
       "Dyn",
-      "Ydyn"
+      "Ydyn",
+      "Dyw"
      ],
      "answer": 1,
      "explain": "A noun subject always takes mae, even a plural one. Maen only goes with nhw."
@@ -106,7 +109,8 @@
       "Ydy",
       "Ydyn",
       "Ydych",
-      "Ie"
+      "Ie",
+      "Do"
      ],
      "answer": 1,
      "explain": "Answer with the verb of the question: Ydy hi? → Ydy."
@@ -121,7 +125,8 @@
       "Ydw",
       "Ydy",
       "Do",
-      "Ydyn"
+      "Ydyn",
+      "Ydych"
      ],
      "answer": 1,
      "explain": "The answer is about me, so use the 'I' answer form: Ydw. Do is only for past-tense questions."
@@ -136,7 +141,8 @@
       "Nac ydw",
       "Nac ydy",
       "Nac ydych",
-      "Nac ydyn"
+      "Nac ydyn",
+      "Nac wyt"
      ],
      "answer": 1,
      "explain": "No = Nac + the verb for the person answering: Nac ydw. Naddo is only for past-tense questions."
@@ -150,7 +156,9 @@
       "Dych",
       "Maen",
       "ni",
-      "dysgu'n"
+      "dysgu'n",
+      "Ydyn",
+      "ddysgu"
      ],
      "explain": "Dyn ni + 'n + verbnoun."
     },
@@ -163,7 +171,9 @@
       "Mae",
       "Ydw",
       "Ydyn",
-      "e"
+      "e",
+      "Ydych",
+      "weithio"
      ],
      "explain": "Question form for he: Ydy e?"
     },
@@ -176,7 +186,9 @@
       "Caerdydd",
       "Mae",
       "Ydyn",
-      "nhw"
+      "nhw",
+      "Dyn",
+      "fynd"
      ],
      "explain": "Maen nhw. Also: i causes soft mutation, Caerdydd → Gaerdydd."
     },
@@ -216,7 +228,8 @@
       "Ydyn",
       "Ydych",
       "Ydw",
-      "Do"
+      "Do",
+      "Nac ydyn"
      ],
      "answer": 1,
      "explain": "Answering about them: Ydyn (they are)."
@@ -230,7 +243,8 @@
       "Ydy Siân'n gweithio?",
       "Ydyn Siân yn gweithio?",
       "Mae Siân yn gweithio?",
-      "Ydy Siân gweithio?"
+      "Ydy Siân gweithio?",
+      "Ydy Siân yn weithio?"
      ],
      "answer": 0,
      "explain": "Noun subject: Ydy. After a consonant use the full yn; 'n only follows a vowel."
@@ -265,7 +279,8 @@
       "Dw i dim yn gweithio heddiw.",
       "Dw i ddim gweithio heddiw.",
       "Dw i'n ddim yn gweithio heddiw.",
-      "Dw i ddim yn weithio heddiw."
+      "Dw i ddim yn weithio heddiw.",
+      "Dydw i dim yn gweithio heddiw."
      ],
      "answer": 0,
      "explain": "Subject + ddim + yn + verbnoun. Ddim (mutated dim), no 'n on the subject, and keep the yn."
@@ -279,7 +294,9 @@
       "Mae",
       "dim",
       "e'n",
-      "Dydw"
+      "Dydw",
+      "Does",
+      "ddod"
      ],
      "explain": "Dyw e ddim + yn + verbnoun. (Dydy e ddim is also correct.)"
     },
@@ -293,7 +310,8 @@
       "Dyw",
       "Dyn",
       "Dydw",
-      "Dwyt"
+      "Dwyt",
+      "Dydyn"
      ],
      "answer": 1,
      "explain": "Definite noun subject (y bws): dyw. Does dim is only for indefinite nouns."
@@ -307,7 +325,8 @@
       "Does ddim llaeth.",
       "Dyw dim llaeth.",
       "Dyw ddim llaeth.",
-      "Does dim laeth."
+      "Does dim laeth.",
+      "Dydy dim llaeth."
      ],
      "answer": 0,
      "explain": "Indefinite 'there isn't': Does dim + noun. Dim stays unmutated, and so does the noun."
@@ -329,7 +348,9 @@
       "dim",
       "Mae",
       "ni'n",
-      "Dych"
+      "Dych",
+      "Dydw",
+      "fyw"
      ],
      "explain": "Dyn ni ddim yn..."
     },
@@ -352,7 +373,8 @@
       "Maen nhw ddim yn hapus.",
       "Dyw nhw ddim yn hapus.",
       "Dydyn nhw dim yn hapus.",
-      "Dydyn nhw'n ddim hapus."
+      "Dydyn nhw'n ddim hapus.",
+      "Does dim nhw yn hapus."
      ],
      "answer": 0,
      "explain": "Negative of maen nhw is dyn / dydyn nhw ddim. Maen never takes ddim."
@@ -374,7 +396,8 @@
       "It wasn't cold.",
       "It isn't old.",
       "It won't be cold.",
-      "It hasn't been cold."
+      "It hasn't been cold.",
+      "It isn't warm."
      ],
      "answer": 0,
      "explain": "Dyw = present. Hi is used for weather 'it'. Oer = cold (old = hen)."
@@ -398,7 +421,8 @@
       "Does Tom ddim yn y gwaith.",
       "Dyw Tom dim yn y gwaith.",
       "Dyn Tom ddim yn y gwaith.",
-      "Does dim Tom yn y gwaith."
+      "Does dim Tom yn y gwaith.",
+      "Dyw Tom ddim yn y waith."
      ],
      "answer": 0,
      "explain": "A name is definite: Dyw Tom ddim."
@@ -412,7 +436,8 @@
       "Dyw plant ddim yn yr ardd.",
       "Does plant ddim yn yr ardd.",
       "Dyw dim plant yn yr ardd.",
-      "Does ddim plant yn yr ardd."
+      "Does ddim plant yn yr ardd.",
+      "Dyw'r plant ddim yn yr ardd."
      ],
      "answer": 0,
      "explain": "Indefinite subject (plant, no 'the'): Does dim + noun."
@@ -557,7 +582,8 @@
       "y merch a'r fachgen",
       "y ferch a'r fachgen",
       "y merch a'r bachgen",
-      "y ferch ac y bachgen"
+      "y ferch ac y bachgen",
+      "y ferch a y bachgen"
      ],
      "answer": 0,
      "explain": "Merch is feminine (mutates after y); bachgen is masculine (does not). And + the = a'r."
@@ -587,7 +613,8 @@
       "i Bangor",
       "i Mangor",
       "ym Mangor",
-      "i'r Bangor"
+      "i'r Bangor",
+      "i Ffangor"
      ],
      "answer": 0,
      "explain": "Soft mutation b → f. Ym Mangor means in Bangor (nasal mutation after yn)."
@@ -601,7 +628,8 @@
       "tŷ fawr",
       "dŷ mawr",
       "dŷ fawr",
-      "tŷ'n fawr"
+      "tŷ'n fawr",
+      "y tŷ mawr"
      ],
      "answer": 0,
      "explain": "Tŷ is masculine: no mutation of the adjective."
@@ -615,7 +643,9 @@
       "Bangor",
       "Caerdydd",
       "Mangor",
-      "Nghaerdydd"
+      "Nghaerdydd",
+      "Aethon",
+      "Chaerdydd"
      ],
      "explain": "o and i both trigger soft mutation."
     },
@@ -629,7 +659,8 @@
       "gwlyb",
       "ngwlyb",
       "lyb",
-      "chwlyb"
+      "chwlyb",
+      "fwlyb"
      ],
      "answer": 0,
      "explain": "yn + adjective: g drops. Gwlyb → wlyb."
@@ -766,7 +797,8 @@
       "ei henw e",
       "ei enw hi",
       "ei henw hi",
-      "ei fenw e"
+      "ei fenw e",
+      "eu enw e"
      ],
      "answer": 0,
      "explain": "His: soft mutation, which doesn't affect vowels. Her adds h: ei henw hi."
@@ -780,7 +812,9 @@
       "fam",
       "nam",
       "mham",
-      "ei"
+      "ei",
+      "athrawon",
+      "e'n"
      ],
      "explain": "m is unaffected by the nasal mutation: fy mam."
     },
@@ -801,7 +835,8 @@
       "fy nad i",
       "fy nhad e",
       "fy dad i",
-      "fy thad i"
+      "fy thad i",
+      "ei nhad i"
      ],
      "answer": 0,
      "explain": "fy + nasal: t → nh."
@@ -815,7 +850,8 @@
       "ei gar hi",
       "ei nghar hi",
       "ei car hi",
-      "ei char e"
+      "ei char e",
+      "eu char hi"
      ],
      "answer": 0,
      "explain": "Her: aspirate, c → ch. Ei gar would mean his car."
@@ -829,7 +865,8 @@
       "eu dŷ nhw",
       "eu thŷ nhw",
       "eu nhŷ nhw",
-      "ei dŷ nhw"
+      "ei dŷ nhw",
+      "eu tŷ hi"
      ],
      "answer": 0,
      "explain": "eu causes no consonant mutation; it only adds h before vowels."
@@ -843,7 +880,9 @@
       "brawd",
       "mrawd",
       "hi'n",
-      "fy"
+      "fy",
+      "eu",
+      "weithio"
      ],
      "explain": "ei (his) + soft: b → f."
     }
@@ -878,7 +917,8 @@
       "Do",
       "Oeddwn",
       "Ie",
-      "Naddo"
+      "Naddo",
+      "Oes"
      ],
      "answer": 1,
      "explain": "Every past-tense question is answered Do / Naddo."
@@ -902,7 +942,9 @@
       "Bwytais",
       "Bwytoch",
       "Fwyton",
-      "yn"
+      "yn",
+      "Bwytodd",
+      "Bwyta"
      ],
      "explain": "We ending: -on. Bwyta → bwyt- → bwyton ni."
     },
@@ -915,7 +957,8 @@
       "Prynais i ddim byd.",
       "Brynais i dim byd.",
       "Brynodd i ddim byd.",
-      "Dw i ddim yn prynu dim byd."
+      "Dw i ddim yn prynu dim byd.",
+      "Brynon i ddim byd."
      ],
      "answer": 0,
      "explain": "Negative: mutate the verb + ddim. Formal written form: Phrynais i ddim byd."
@@ -950,7 +993,8 @@
       "Naddo",
       "Nac ydy",
       "Na",
-      "Do"
+      "Do",
+      "Nac ydw"
      ],
      "answer": 1,
      "explain": "Past-tense no: Naddo."
@@ -976,7 +1020,9 @@
       "gwaith",
       "Gwnaeth",
       "Wnes",
-      "nghartref"
+      "nghartref",
+      "Gwnaethon",
+      "waith"
      ],
      "explain": "Gwneud: Gwnes i. Fy + nasal: gwaith → ngwaith."
     },
@@ -1007,7 +1053,8 @@
       "Ces i ddim llythyr.",
       "Ches i dim llythyr.",
       "Chafodd i ddim llythyr.",
-      "Chaeth i ddim llythyr."
+      "Chaeth i ddim llythyr.",
+      "Ches i ddim lythyr."
      ],
      "answer": 0,
      "explain": "Negative of ces i: Ches i ddim (Ges i ddim is also heard)."
@@ -1021,7 +1068,8 @@
       "Es hi i Abertawe.",
       "Aethodd hi i Abertawe.",
       "Aethon hi i Abertawe.",
-      "Aeth hi yn Abertawe."
+      "Aeth hi yn Abertawe.",
+      "Aeth e i Abertawe."
      ],
      "answer": 0,
      "explain": "Mynd, he / she: Aeth."
@@ -1035,7 +1083,8 @@
       "Ddaethoch nhw?",
       "Ddaeth nhw?",
       "Ddodon nhw?",
-      "Daethon nhw?"
+      "Daethon nhw?",
+      "Ddaethon ni?"
      ],
      "answer": 0,
      "explain": "Dod, they: daethon. Question soft-mutates: Ddaethon nhw?"
@@ -1072,7 +1121,9 @@
       "dw",
       "colli'r",
       "mynd",
-      "iddo"
+      "iddo",
+      "bod",
+      "golli"
      ],
      "explain": "Rhaid i fi + soft (fynd); cyn i fi + soft (golli)."
     },
@@ -1095,7 +1146,8 @@
       "cyn i fe gyrraedd",
       "cyn iddo fe cyrraedd",
       "cyn bod e'n cyrraedd",
-      "cyn iddi hi gyrraedd"
+      "cyn iddi hi gyrraedd",
+      "cyn iddo fe'n gyrraedd"
      ],
      "answer": 0,
      "explain": "i inflects for he: iddo fe. Then soft mutation: cyrraedd → gyrraedd."
@@ -1119,7 +1171,8 @@
       "cyn i'r cyfarfod",
       "cyn i y cyfarfod",
       "cyn iddo'r cyfarfod",
-      "cyn gyfarfod"
+      "cyn gyfarfod",
+      "cyn y gyfarfod"
      ],
      "answer": 0,
      "explain": "Before a plain noun (no verb), no i: cyn y cyfarfod."
@@ -1133,7 +1186,9 @@
       "iddo",
       "cyrraedd",
       "Gadael",
-      "ei"
+      "ei",
+      "Gadawodd",
+      "iddyn"
      ],
      "explain": "Iddi hi + soft mutation. The past meaning comes from Gadawais."
     },
@@ -1162,7 +1217,8 @@
       "Before I walked home, it started to rain.",
       "After I walked home, it started to rain.",
       "Until I walked home, it was raining.",
-      "As I was walking home, it stopped raining."
+      "As I was walking home, it stopped raining.",
+      "While I was walking home, it was raining."
      ],
      "answer": 0,
      "explain": "Wrth i = as / while."
@@ -1186,7 +1242,8 @@
       "ar ôl iddyn nhw gadael",
       "ar ôl i nhw gadael",
       "ar ôl maen nhw'n gadael",
-      "ar ôl iddo fe adael"
+      "ar ôl iddo fe adael",
+      "ar ôl iddyn nhw'n gadael"
      ],
      "answer": 0,
      "explain": "Iddyn nhw + soft mutation: gadael → adael (g drops)."
@@ -1200,7 +1257,8 @@
       "Bwytais i cyn fynd.",
       "Bwytais i cyn i mynd.",
       "Bwytais i cyn es i.",
-      "Bwytais i ar ôl mynd."
+      "Bwytais i ar ôl mynd.",
+      "Bwytais i cyn yn mynd."
      ],
      "answer": 0,
      "explain": "Same subject in both halves: cyn + verbnoun, with no i and no mutation."
@@ -1224,7 +1282,8 @@
       "nes iddi hi fonio",
       "nes i hi ffonio",
       "nes mae hi'n ffonio",
-      "nes iddo fe ffonio"
+      "nes iddo fe ffonio",
+      "nes iddi hi'n ffonio"
      ],
      "answer": 0,
      "explain": "Iddi hi. Ff never mutates."
@@ -1249,7 +1308,8 @@
       "tri chŵn",
       "tri ci",
       "tair ci",
-      "tri o gi"
+      "tri o gi",
+      "tri gi"
      ],
      "answer": 0,
      "explain": "Number + singular noun. Tri + aspirate: c → ch."
@@ -1263,7 +1323,8 @@
       "dau gath",
       "dwy gathod",
       "dwy cath",
-      "dau gathod"
+      "dau gathod",
+      "dwy chath"
      ],
      "answer": 0,
      "explain": "Cath is feminine → dwy. Soft mutation, singular noun."
@@ -1277,7 +1338,8 @@
       "pedwar merch",
       "pedair merched",
       "pedair ferch",
-      "pedwar ferch"
+      "pedwar ferch",
+      "pedwar merched"
      ],
      "answer": 0,
      "explain": "Merch is feminine → pedair. Pedair causes no mutation; noun stays singular."
@@ -1291,7 +1353,8 @@
       "llawer o blentyn",
       "llawer o plant",
       "llawer plant",
-      "llawer o phlant"
+      "llawer o phlant",
+      "llawer blant"
      ],
      "answer": 0,
      "explain": "Quantity word + o + plural. O soft-mutates: plant → blant."
@@ -1305,7 +1368,8 @@
       "pum blynedd",
       "pump blynedd",
       "pum flynedd",
-      "pump mlynedd"
+      "pump mlynedd",
+      "pum blwyddyn"
      ],
      "answer": 0,
      "explain": "Pump shortens to pum before a noun, and blynedd takes nasal mutation after it."
@@ -1319,7 +1383,8 @@
       "dau flynedd",
       "dwy blynedd",
       "dwy mlynedd",
-      "dau blynedd"
+      "dau blynedd",
+      "dau mlynedd"
      ],
      "answer": 0,
      "explain": "Blynedd is feminine → dwy, which soft-mutates: b → f."
@@ -1409,7 +1474,9 @@
       "plant",
       "plentyn",
       "tair",
-      "blentyn"
+      "blentyn",
+      "phlant",
+      "Maen"
      ],
      "explain": "Tri + aspirate + singular: tri phlentyn."
     },
@@ -1422,7 +1489,8 @@
       "dau o'r plentyn",
       "dau'r plant",
       "dau blant",
-      "dau o blant"
+      "dau o blant",
+      "dau o'r blant"
      ],
      "answer": 0,
      "explain": "'Of the' + plural: dau o'r plant."
@@ -1436,7 +1504,8 @@
       "gormod o gar",
       "gormod o ceir",
       "gormod geir",
-      "gormod o'r ceir"
+      "gormod o'r ceir",
+      "gormod o'r geir"
      ],
      "answer": 0,
      "explain": "Gormod + o + plural, soft-mutated: ceir → geir."
@@ -1450,7 +1519,8 @@
       "tri blynedd",
       "tair flynedd",
       "tri mlynedd",
-      "tair mlynedd"
+      "tair mlynedd",
+      "tri flynedd"
      ],
      "answer": 0,
      "explain": "Blynedd is feminine → tair, which causes no mutation."

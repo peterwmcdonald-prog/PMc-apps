@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Gramadeg – content review</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
@@ -21,10 +21,11 @@ h1{font-size:24px;margin:8px 0 4px} h2{margin:28px 0 6px;padding:8px 12px;border
 .q .a{color:#58A700;font-weight:800}
 .q .x{color:#777}
 a{color:#1899D6;font-weight:800}
+a.back{position:sticky;top:0;display:block;background:#fff;padding:12px 0;border-bottom:2px solid #E5E5E5;font-size:17px;text-decoration:none;z-index:2}
 @media print{h2{color:#000;border:2px solid #000} a.back{display:none}}
 </style>
 </head>
-<body><div class="wrap">
+<body style="padding-top:env(safe-area-inset-top)"><div class="wrap">
 <a class="back" href="./">← Back to app</a>
 <h1>Content review</h1>
 <p class="note">Every rule and question in the app. Note anything wrong by its ID (e.g. u3-07) and send it to Claude, or use ⚑ Flag inside a lesson.</p>
@@ -48,6 +49,6 @@ fetch('content.json',{cache:'no-cache'}).then(r=>r.json()).then(C=>{
   const soon=C.units.filter(u=>u.soon);
   h+=`<h2 style="background:#AFAFAF">Planned units</h2><p>${soon.map(u=>esc(u.title)+' <span class="x">('+esc(u.subtitle)+')</span>').join('<br>')}</p>`;
   document.getElementById('out').innerHTML=h;
-});
+}).catch(()=>{ document.getElementById('out').textContent='Could not load the questions. Check your connection.'; });
 </script>
 </body></html>
