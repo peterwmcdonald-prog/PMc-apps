@@ -1,5 +1,5 @@
 {
- "version": "2026-10-22",
+ "version": "2026-10-23",
  "sources": [
   {
    "name": "Wikipedia: Colloquial Welsh morphology (CC BY-SA)",
@@ -1963,6 +1963,370 @@
    ]
   },
   {
+   "id": "u8",
+   "section": "nouns",
+   "icon": "trophy",
+   "title": "Comparing",
+   "subtitle": "talach na, mwy diddorol, mor dal â, gorau",
+   "colour": "#FFC800",
+   "rule": "<p><b>Three ways to compare.</b></p><table><tr><th></th><th>Short adjective</th><th>Long adjective</th></tr><tr><td>-er (than)</td><td>tal<b>ach</b> na</td><td><b>mwy</b> diddorol na</td></tr><tr><td>-est</td><td>tal<b>a</b></td><td><b>mwya</b> diddorol</td></tr><tr><td>as … as</td><td colspan=\"2\"><b>mor</b> + soft mutation + <b>â</b>: <i>mor dal â, mor ddiddorol â</i></td></tr></table><p><b>Than = na</b> (<b>nag</b> before a vowel): <i>talach na Tom, iau nag e</i>. <b>As = â</b> (<b>ag</b> before a vowel). Both take the aspirate formally: <i>na thad, â thŷ</i>.</p><p><b>Spelling:</b> b, d, g harden before -ach / -a: <i>rhad → rhatach, gwlyb → gwlypach, teg → tecach</i>.</p><p><b>Irregulars</b> (learn these):</p><table><tr><th></th><th>-er</th><th>-est</th><th>as … as</th></tr><tr><td>da (good)</td><td>gwell</td><td>gorau</td><td>cystal â</td></tr><tr><td>drwg (bad)</td><td>gwaeth</td><td>gwaetha</td><td>cynddrwg â</td></tr><tr><td>mawr (big)</td><td>mwy</td><td>mwya</td><td>cymaint â</td></tr><tr><td>bach (small)</td><td>llai</td><td>lleia</td><td>mor fach â</td></tr><tr><td>hen (old)</td><td>hŷn</td><td>hyna</td><td>mor hen â</td></tr><tr><td>ifanc (young)</td><td>iau / ifancach</td><td>ieuenga / ifanca</td><td>mor ifanc â</td></tr><tr><td>hawdd (easy)</td><td>haws</td><td>hawsa</td><td>mor hawdd â</td></tr></table><p><b>After yn</b> the comparative soft-mutates like any adjective: <i>Mae e'n <b>well</b>. Mae Caerdydd yn <b>fwy</b>.</i> ll / rh don't change: <i>yn llai, yn rhatach</i>.</p><p><b>Superlative with a noun:</b> <i>Dyma'r caffi gorau.</i> <i>Tad-cu yw'r hyna.</i> Written Welsh adds -f: <i>gorau, hynaf, talaf</i>.</p>",
+   "questions": [
+    {
+     "id": "u8-01",
+     "type": "mc",
+     "prompt": "taller than Tom",
+     "options": [
+      "talach na Tom",
+      "mor dal na Tom",
+      "talach nag Tom",
+      "tala na Tom",
+      "talach â Tom",
+      "dalach na Tom"
+     ],
+     "answer": 0,
+     "explain": "Short adjective + -ach, then na. Nag only before a vowel; â means 'as'.",
+     "skills": [
+      "cmp-ach",
+      "cmp-na"
+     ]
+    },
+    {
+     "id": "u8-02",
+     "type": "mc",
+     "prompt": "more interesting",
+     "options": [
+      "mwy diddorol",
+      "diddorolach",
+      "mwya diddorol",
+      "mor ddiddorol",
+      "mwy ddiddorol",
+      "yn fwy na diddorol"
+     ],
+     "answer": 0,
+     "explain": "Long adjectives use mwy + adjective, no mutation after mwy. Mwya = most; mor = as.",
+     "skills": [
+      "cmp-mwy"
+     ]
+    },
+    {
+     "id": "u8-03",
+     "type": "mc",
+     "prompt": "Mae'r tywydd yn ___ heddiw.",
+     "en": "The weather is better today.",
+     "options": [
+      "well",
+      "gwell",
+      "dda",
+      "gorau",
+      "waeth",
+      "fwy da"
+     ],
+     "answer": 0,
+     "explain": "Da → gwell (irregular). After yn it soft-mutates: yn well.",
+     "skills": [
+      "cmp-irregular",
+      "cmp-yn-sm"
+     ]
+    },
+    {
+     "id": "u8-04",
+     "type": "mc",
+     "prompt": "Mae Caerdydd yn ___ na Phenarth.",
+     "en": "Cardiff is bigger than Penarth.",
+     "options": [
+      "fwy",
+      "mwy",
+      "fawrach",
+      "fwya",
+      "fawr",
+      "mwyach"
+     ],
+     "answer": 0,
+     "explain": "Mawr → mwy (irregular). After yn: yn fwy. Na Phenarth: na takes the aspirate.",
+     "skills": [
+      "cmp-irregular",
+      "cmp-yn-sm"
+     ]
+    },
+    {
+     "id": "u8-05",
+     "type": "mc",
+     "prompt": "the best",
+     "options": [
+      "y gorau",
+      "y gwell",
+      "y mwya da",
+      "y da",
+      "y well",
+      "y dda"
+     ],
+     "answer": 0,
+     "explain": "Da → gwell → gorau. Superlative after y: y gorau.",
+     "skills": [
+      "cmp-superlative",
+      "cmp-irregular"
+     ]
+    },
+    {
+     "id": "u8-06",
+     "type": "type",
+     "text": "Mae Siân yn hŷn ___ fi.",
+     "hint": "than",
+     "en": "Siân is older than me.",
+     "answer": "na",
+     "alts": [],
+     "explain": "Than = na before a consonant. Hŷn is the irregular comparative of hen.",
+     "skills": [
+      "cmp-na"
+     ]
+    },
+    {
+     "id": "u8-07",
+     "type": "type",
+     "text": "Dw i ddim mor ___ â ti.",
+     "hint": "tal",
+     "en": "I'm not as tall as you.",
+     "answer": "dal",
+     "alts": [],
+     "explain": "Mor + soft mutation + â: mor dal â.",
+     "skills": [
+      "cmp-equative",
+      "mut-soft"
+     ]
+    },
+    {
+     "id": "u8-08",
+     "type": "type",
+     "text": "Mae hi'n ___ nag e.",
+     "hint": "ifanc: comparative",
+     "en": "She's younger than him.",
+     "answer": "iau",
+     "alts": [
+      "ifancach"
+     ],
+     "explain": "Ifanc → iau (ifancach is also heard). Nag before the vowel in e.",
+     "skills": [
+      "cmp-irregular"
+     ]
+    },
+    {
+     "id": "u8-09",
+     "type": "type",
+     "text": "Dyma'r caffi ___ ym Mhenarth.",
+     "hint": "best",
+     "en": "This is the best café in Penarth.",
+     "answer": "gorau",
+     "alts": [],
+     "explain": "Superlative follows the noun: y caffi gorau.",
+     "skills": [
+      "cmp-superlative",
+      "cmp-irregular"
+     ]
+    },
+    {
+     "id": "u8-10",
+     "type": "tiles",
+     "en": "The bus is cheaper than the train.",
+     "answer": "Mae'r bws yn rhatach na'r trên",
+     "distractors": [
+      "rhadach",
+      "ratach",
+      "nag",
+      "â'r",
+      "fwy",
+      "rhad"
+     ],
+     "explain": "Rhad → rhatach (d hardens to t). Rh doesn't mutate after yn. Na + 'r = na'r.",
+     "skills": [
+      "cmp-ach",
+      "cmp-na",
+      "mut-none"
+     ]
+    },
+    {
+     "id": "u8-11",
+     "type": "tiles",
+     "en": "The tea is as hot as the coffee.",
+     "answer": "Mae'r te mor boeth â'r coffi",
+     "distractors": [
+      "poeth",
+      "phoeth",
+      "na'r",
+      "ag",
+      "yn",
+      "fwy"
+     ],
+     "explain": "Mor + soft mutation (poeth → boeth) + â. No yn before mor.",
+     "skills": [
+      "cmp-equative",
+      "mut-soft"
+     ]
+    },
+    {
+     "id": "u8-12",
+     "type": "error",
+     "sentence": "Mae'r car yn mwy na'r bws.",
+     "wrong": 3,
+     "fix": "Mae'r car yn fwy na'r bws.",
+     "explain": "Comparatives soft-mutate after yn like any adjective: yn fwy.",
+     "skills": [
+      "cmp-yn-sm",
+      "mut-soft"
+     ]
+    },
+    {
+     "id": "u8-13",
+     "type": "error",
+     "sentence": "Mae hi'n gyflymach nag fi.",
+     "wrong": 3,
+     "fix": "Mae hi'n gyflymach na fi.",
+     "explain": "Fi starts with a consonant, so na, not nag.",
+     "skills": [
+      "cmp-na"
+     ]
+    },
+    {
+     "id": "u8-14",
+     "type": "error",
+     "sentence": "Dw i mor dal na Siôn.",
+     "wrong": 4,
+     "fix": "Dw i mor dal â Siôn.",
+     "explain": "Mor … pairs with â (as). Na (than) goes with comparatives.",
+     "skills": [
+      "cmp-equative",
+      "cmp-na"
+     ]
+    },
+    {
+     "id": "u8-15",
+     "type": "mc",
+     "prompt": "Mae'r traffig yn ___ heddiw.",
+     "en": "The traffic is worse today.",
+     "options": [
+      "waeth",
+      "gwaeth",
+      "ddrwgach",
+      "waetha",
+      "ddrwg",
+      "fwy drwg"
+     ],
+     "answer": 0,
+     "explain": "Drwg → gwaeth (irregular). After yn: yn waeth. Waetha = worst.",
+     "skills": [
+      "cmp-irregular",
+      "cmp-yn-sm"
+     ]
+    },
+    {
+     "id": "u8-16",
+     "type": "mc",
+     "prompt": "Tad-cu yw'r ___.",
+     "en": "Grandad is the oldest.",
+     "options": [
+      "hyna",
+      "hŷn",
+      "hena",
+      "mwya hen",
+      "hen",
+      "henach"
+     ],
+     "answer": 0,
+     "explain": "Hen → hŷn → hyna (written hynaf). Hŷn = older.",
+     "skills": [
+      "cmp-superlative",
+      "cmp-irregular"
+     ]
+    },
+    {
+     "id": "u8-17",
+     "type": "type",
+     "text": "Mae'r tŷ 'ma'n ___ na'r llall.",
+     "hint": "bach",
+     "en": "This house is smaller than the other one.",
+     "answer": "llai",
+     "alts": [],
+     "explain": "Bach → llai (irregular). Ll doesn't mutate after yn.",
+     "skills": [
+      "cmp-irregular",
+      "mut-none"
+     ]
+    },
+    {
+     "id": "u8-18",
+     "type": "mc",
+     "prompt": "as big as a house",
+     "options": [
+      "mor fawr â thŷ",
+      "mor mawr â thŷ",
+      "mor fawr na thŷ",
+      "mor fawr ag tŷ",
+      "mwy fawr â thŷ",
+      "mor fawr â dŷ"
+     ],
+     "answer": 0,
+     "explain": "Mor + soft (mawr → fawr) + â. Â takes the aspirate: tŷ → thŷ. Ag only before a vowel.",
+     "skills": [
+      "cmp-equative",
+      "mut-soft",
+      "mut-aspirate"
+     ]
+    },
+    {
+     "id": "u8-19",
+     "type": "type",
+     "text": "Mae Cymraeg yn ___ na Ffrangeg.",
+     "hint": "hawdd",
+     "en": "Welsh is easier than French.",
+     "answer": "haws",
+     "alts": [],
+     "explain": "Hawdd → haws (irregular).",
+     "skills": [
+      "cmp-irregular"
+     ]
+    },
+    {
+     "id": "u8-20",
+     "type": "mc",
+     "prompt": "Dyma'r un ___.",
+     "en": "This is the cheapest one.",
+     "options": [
+      "rhata",
+      "rhatach",
+      "rhada",
+      "mwya rhad",
+      "rata",
+      "rhad"
+     ],
+     "answer": 0,
+     "explain": "Superlative -a, with d → t: rhad → rhata. Rhatach = cheaper.",
+     "skills": [
+      "cmp-superlative",
+      "cmp-ach"
+     ]
+    },
+    {
+     "id": "u8-21",
+     "type": "mc",
+     "prompt": "Mae hi ___ â'i brawd.",
+     "en": "She's as good as her brother.",
+     "options": [
+      "cystal",
+      "mor dda",
+      "mor ddaf",
+      "cyn dda",
+      "gwell",
+      "cystal na"
+     ],
+     "answer": 0,
+     "explain": "As good as = cystal â (irregular). Mor dda â is heard but cystal is standard.",
+     "skills": [
+      "cmp-equative",
+      "cmp-irregular"
+     ]
+    }
+   ]
+  },
+  {
    "id": "p1",
    "section": "verbs",
    "title": "Bod: imperfect",
@@ -2037,13 +2401,6 @@
    "section": "verbs",
    "title": "Commands",
    "subtitle": "Ewch, cer, paid",
-   "soon": true
-  },
-  {
-   "id": "p12",
-   "section": "nouns",
-   "title": "Comparing",
-   "subtitle": "mwy, gwell, cystal â",
    "soon": true
   },
   {
@@ -2270,6 +2627,41 @@
    "group": "mutation",
    "title": "Knowing when NOT to mutate",
    "blurb": "Masculine nouns, eich/eu, tair, ll after y…"
+  },
+  "cmp-ach": {
+   "group": "point",
+   "title": "Comparative -ach",
+   "blurb": "talach, rhatach"
+  },
+  "cmp-mwy": {
+   "group": "point",
+   "title": "Mwy + long adjective",
+   "blurb": "mwy diddorol"
+  },
+  "cmp-na": {
+   "group": "point",
+   "title": "Than: na / nag",
+   "blurb": "na Tom, nag e"
+  },
+  "cmp-irregular": {
+   "group": "point",
+   "title": "Irregular comparisons",
+   "blurb": "gwell, gwaeth, mwy, llai, hŷn"
+  },
+  "cmp-yn-sm": {
+   "group": "point",
+   "title": "Yn + comparative",
+   "blurb": "yn well, yn fwy"
+  },
+  "cmp-equative": {
+   "group": "point",
+   "title": "As … as: mor … â",
+   "blurb": "mor dal â, cystal â"
+  },
+  "cmp-superlative": {
+   "group": "point",
+   "title": "Superlative",
+   "blurb": "y gorau, tala, mwya diddorol"
   }
  }
 }
