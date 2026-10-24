@@ -1,5 +1,5 @@
 {
- "version": "2026-10-23",
+ "version": "2026-10-24",
  "sources": [
   {
    "name": "Wikipedia: Colloquial Welsh morphology (CC BY-SA)",
@@ -308,7 +308,10 @@
       "yn-vs-n"
      ]
     }
-   ]
+   ],
+   "term": "Present tense of bod (to be)",
+   "tense": "Present",
+   "termDef": "A tense places an action in time. The present covers what is happening now and what is generally true. Welsh builds it from bod + yn + verbnoun, so Dw i'n mynd means both 'I am going' (present continuous) and 'I go' (simple present). A verbnoun is the dictionary form of a verb, like 'going / to go'."
   },
   {
    "id": "u2",
@@ -530,7 +533,10 @@
       "neg-does-dim"
      ]
     }
-   ]
+   ],
+   "term": "Negation: present tense",
+   "tense": "Present",
+   "termDef": "Negation turns a positive statement into a 'not' statement. In Welsh the verb changes shape (dw → dw i ddim, mae → dyw … ddim) and ddim or dim is added."
   },
   {
    "id": "u3",
@@ -831,7 +837,9 @@
       "mut-soft"
      ]
     }
-   ]
+   ],
+   "term": "Soft mutation (treiglad meddal)",
+   "termDef": "A mutation is a regular change to the first consonant of a word, caused by the word before it (the trigger). Soft mutation is the most common: p→b, t→d, c→g, b→f, d→dd, g drops, m→f, ll→l, rh→r."
   },
   {
    "id": "u4",
@@ -1124,7 +1132,9 @@
       "mut-soft"
      ]
     }
-   ]
+   ],
+   "term": "Possessive determiners",
+   "termDef": "Possessive determiners say whose something is: my, your, his, her, our, their. In Welsh they come before the noun, often trigger a mutation, and are echoed by a pronoun after it: fy nghar i (my car)."
   },
   {
    "id": "u5",
@@ -1399,7 +1409,10 @@
       "mut-soft"
      ]
     }
-   ]
+   ],
+   "term": "Simple past tense (preterite)",
+   "tense": "Simple past",
+   "termDef": "The simple past (preterite) describes a completed action at a point in the past: 'I went', 'she bought'. Welsh adds personal endings to the verb stem: an inflected or short-form verb (prynais i, prynodd hi)."
   },
   {
    "id": "u6",
@@ -1645,7 +1658,9 @@
       "mut-none"
      ]
     }
-   ]
+   ],
+   "term": "Subordinate clauses: i + verbnoun",
+   "termDef": "A subordinate clause depends on a main clause and can't stand alone: 'before I miss the bus'. It is introduced by a conjunction (before, after, until). Welsh uses conjunction + i + person + verbnoun, with no tense of its own: the main clause sets the time."
   },
   {
    "id": "u7",
@@ -1960,7 +1975,9 @@
       "mut-none"
      ]
     }
-   ]
+   ],
+   "term": "Numerals, gender and number",
+   "termDef": "Cardinal numerals are counting numbers (one, two, three). Grammatical gender sorts nouns into masculine and feminine; number means singular or plural. After a numeral Welsh uses the singular noun, and some numerals change with gender (dau / dwy, tri / tair)."
   },
   {
    "id": "u8",
@@ -2324,112 +2341,3826 @@
       "cmp-irregular"
      ]
     }
-   ]
+   ],
+   "term": "Degrees of comparison",
+   "termDef": "Adjectives describe nouns. Comparison has three degrees: equative (as big as: mor fawr â), comparative (bigger than: mwy na / talach na) and superlative (biggest: mwya / tala)."
   },
   {
    "id": "p1",
    "section": "verbs",
+   "icon": "hourglass",
    "title": "Bod: imperfect",
    "subtitle": "Ro'n i, o'n i",
-   "soon": true
-  },
-  {
-   "id": "p2",
-   "section": "verbs",
-   "title": "Future",
-   "subtitle": "Bydda i",
-   "soon": true
+   "colour": "#0EA5E9",
+   "rule": "<p><b>Was / were / used to.</b> Describes a state or ongoing action in the past: <i>Ro'n i'n byw yn Abertawe</i> (I was living / used to live in Swansea).</p><table><tr><th></th><th>Statement</th><th>Question</th><th>Negative</th></tr><tr><td>I</td><td>Ro'n i</td><td>O'n i?</td><td>Do'n i ddim</td></tr><tr><td>you (ti)</td><td>Ro't ti</td><td>O't ti?</td><td>Do't ti ddim</td></tr><tr><td>he / she</td><td>Roedd e / hi</td><td>Oedd e / hi?</td><td>Doedd e / hi ddim</td></tr><tr><td>we</td><td>Ro'n ni</td><td>O'n ni?</td><td>Do'n ni ddim</td></tr><tr><td>you (chi)</td><td>Ro'ch chi</td><td>O'ch chi?</td><td>Do'ch chi ddim</td></tr><tr><td>they</td><td>Ro'n nhw</td><td>O'n nhw?</td><td>Do'n nhw ddim</td></tr></table><p><b>Answers</b> repeat the verb: <i>O't ti'n hapus?</i> → <i>O'n</i> / <i>Nac o'n</i>. <i>Oedd e?</i> → <i>Oedd</i> / <i>Nac oedd</i>. Never <i>Do</i> (that's only for the short past).</p><p><b>Noun subject:</b> always singular <i>Roedd</i>: <i>Roedd y plant yn chwarae.</i> <b>There was / wasn't:</b> <i>Roedd bara</i>, <i>Doedd dim bara</i>.</p>",
+   "questions": [
+    {
+     "id": "p1-01",
+     "type": "mc",
+     "prompt": "___ i'n byw yn Abertawe.",
+     "options": [
+      "Ro'n",
+      "Roedd",
+      "Ro't",
+      "O'n",
+      "Do'n",
+      "Rydw"
+     ],
+     "answer": 0,
+     "explain": "Statement for I: Ro'n i. O'n i is the question form; Roedd is for he, she and nouns.",
+     "skills": [
+      "imp-statement"
+     ],
+     "en": "I was living in Swansea."
+    },
+    {
+     "id": "p1-02",
+     "type": "type",
+     "text": "___ hi'n bwrw glaw drwy'r dydd.",
+     "hint": "it was",
+     "en": "It was raining all day.",
+     "answer": "Roedd",
+     "alts": [
+      "Ro'dd"
+     ],
+     "explain": "He / she / it: Roedd.",
+     "skills": [
+      "imp-statement"
+     ]
+    },
+    {
+     "id": "p1-03",
+     "type": "mc",
+     "prompt": "___ nhw'n hapus?",
+     "options": [
+      "O'n",
+      "Ro'n",
+      "Oedd",
+      "O'ch",
+      "Ydyn",
+      "O't"
+     ],
+     "answer": 0,
+     "explain": "Question for they: O'n nhw? (Ro'n is the statement.)",
+     "skills": [
+      "imp-question"
+     ],
+     "en": "Were they happy?"
+    },
+    {
+     "id": "p1-04",
+     "type": "mc",
+     "prompt": "Oedd e'n gweithio ddoe? (Yes)",
+     "options": [
+      "Oedd",
+      "Do",
+      "Ydy",
+      "O'n",
+      "Roedd",
+      "Ie"
+     ],
+     "answer": 0,
+     "explain": "Imperfect questions answer with the verb: Oedd / Nac oedd. Do is only for the short past (gwelais, aeth…).",
+     "skills": [
+      "imp-answer"
+     ]
+    },
+    {
+     "id": "p1-05",
+     "type": "mc",
+     "prompt": "O't ti'n hapus yno? (Yes, I was)",
+     "options": [
+      "O'n",
+      "O't",
+      "Oedd",
+      "Do",
+      "Ydw",
+      "Ro'n"
+     ],
+     "answer": 0,
+     "explain": "Answer for yourself: O'n (I was).",
+     "skills": [
+      "imp-answer"
+     ]
+    },
+    {
+     "id": "p1-06",
+     "type": "type",
+     "text": "___ i ddim yn gwybod.",
+     "hint": "I wasn't",
+     "en": "I didn't know.",
+     "answer": "Do'n",
+     "alts": [
+      "Doeddwn"
+     ],
+     "explain": "Negative: Do'n i ddim.",
+     "skills": [
+      "imp-negative"
+     ]
+    },
+    {
+     "id": "p1-07",
+     "type": "tiles",
+     "en": "They weren't at home.",
+     "answer": "Do'n nhw ddim gartre",
+     "distractors": [
+      "Doedd",
+      "Ro'n",
+      "Dyn",
+      "yn",
+      "dim",
+      "oedd"
+     ],
+     "explain": "They: Do'n nhw ddim.",
+     "skills": [
+      "imp-negative"
+     ]
+    },
+    {
+     "id": "p1-08",
+     "type": "error",
+     "sentence": "Ro'n y plant yn chwarae yn yr ardd.",
+     "wrong": 0,
+     "fix": "Roedd y plant yn chwarae yn yr ardd.",
+     "explain": "With a noun subject the verb stays singular: Roedd, even for plural nouns.",
+     "skills": [
+      "imp-noun"
+     ]
+    },
+    {
+     "id": "p1-09",
+     "type": "mc",
+     "prompt": "There wasn't any bread.",
+     "options": [
+      "Doedd dim bara.",
+      "Doedd bara ddim.",
+      "Do'n nhw ddim bara.",
+      "Roedd dim bara.",
+      "Doedd ddim bara.",
+      "Dim oedd bara."
+     ],
+     "answer": 0,
+     "explain": "There wasn't any X: Doedd dim X.",
+     "skills": [
+      "imp-negative",
+      "imp-noun"
+     ]
+    },
+    {
+     "id": "p1-10",
+     "type": "type",
+     "text": "___ chi'n byw yng Nghaerdydd?",
+     "hint": "were you (chi)",
+     "en": "Were you living in Cardiff?",
+     "answer": "O'ch",
+     "alts": [
+      "Oeddech"
+     ],
+     "explain": "Question for chi: O'ch chi?",
+     "skills": [
+      "imp-question"
+     ]
+    },
+    {
+     "id": "p1-11",
+     "type": "tiles",
+     "en": "We were watching the match.",
+     "answer": "Ro'n ni'n gwylio'r gêm",
+     "distractors": [
+      "Roedd",
+      "O'n",
+      "gwylio",
+      "y",
+      "Rydyn",
+      "ni"
+     ],
+     "explain": "We: Ro'n ni.",
+     "skills": [
+      "imp-statement"
+     ]
+    },
+    {
+     "id": "p1-12",
+     "type": "error",
+     "sentence": "Ro'n e'n chwarae rygbi bob wythnos.",
+     "wrong": 0,
+     "fix": "Roedd e'n chwarae rygbi bob wythnos.",
+     "explain": "He / she: Roedd. Ro'n is for i, ni and nhw.",
+     "skills": [
+      "imp-statement"
+     ]
+    },
+    {
+     "id": "p1-13",
+     "type": "mc",
+     "prompt": "Was Siân at work?",
+     "options": [
+      "Oedd Siân yn y gwaith?",
+      "O'n Siân yn y gwaith?",
+      "Roedd Siân yn y gwaith?",
+      "Ydy Siân yn y gwaith?",
+      "Oedd Siân ddim yn y gwaith?",
+      "Oedd Siân yn gwaith?"
+     ],
+     "answer": 0,
+     "explain": "Question with a noun: Oedd + noun.",
+     "skills": [
+      "imp-question",
+      "imp-noun"
+     ]
+    },
+    {
+     "id": "p1-14",
+     "type": "mc",
+     "prompt": "O'ch chi'n byw yma? (No, we weren't)",
+     "options": [
+      "Nac o'n",
+      "Nac oedd",
+      "Nac o'ch",
+      "Naddo",
+      "Na",
+      "Nac ydyn"
+     ],
+     "answer": 0,
+     "explain": "Answering for we: (Nac) o'n.",
+     "skills": [
+      "imp-answer"
+     ]
+    }
+   ],
+   "term": "Imperfect tense (past continuous)",
+   "tense": "Imperfect",
+   "termDef": "The imperfect describes an ongoing state or a repeated action in the past: 'I was living', 'I used to live', 'it was raining'. Compare the simple past (preterite), which is a single completed event."
   },
   {
    "id": "p3",
    "section": "verbs",
+   "icon": "check",
    "title": "Perfect with wedi",
    "subtitle": "Dw i wedi bwyta",
-   "soon": true
+   "colour": "#8B5CF6",
+   "rule": "<p><b>Have done:</b> swap <i>yn</i> for <i>wedi</i>. <i>Dw i'n bwyta</i> (I'm eating) → <i>Dw i wedi bwyta</i> (I have eaten).</p><p><b>No mutation after wedi</b>, and never <i>wedi'n</i>.</p><p>Questions and negatives come from bod as usual: <i>Wyt ti wedi gorffen?</i> → <i>Ydw / Nac ydw</i>. <i>Dyn ni ddim wedi gorffen.</i></p><p><b>Had done:</b> imperfect + wedi: <i>Ro'n i wedi gadael</i> (I had left).</p><p><b>Just done:</b> <i>newydd</i> + soft mutation: <i>Dw i newydd gyrraedd</i> (I've just arrived).</p>",
+   "questions": [
+    {
+     "id": "p3-01",
+     "type": "mc",
+     "prompt": "Dw i ___ bwyta.",
+     "options": [
+      "wedi",
+      "yn",
+      "'n",
+      "wedi'n",
+      "wnes",
+      "newydd'n"
+     ],
+     "answer": 0,
+     "explain": "Have done: wedi in place of yn.",
+     "skills": [
+      "perf-wedi"
+     ],
+     "en": "I have eaten."
+    },
+    {
+     "id": "p3-02",
+     "type": "tiles",
+     "en": "She has gone home.",
+     "answer": "Mae hi wedi mynd adre",
+     "distractors": [
+      "yn",
+      "fynd",
+      "aeth",
+      "wedi'n",
+      "hi'n",
+      "Mae'n"
+     ],
+     "explain": "Mae hi wedi + verbnoun, no mutation.",
+     "skills": [
+      "perf-wedi"
+     ]
+    },
+    {
+     "id": "p3-03",
+     "type": "error",
+     "sentence": "Mae e wedi fwyta'r gacen.",
+     "wrong": 3,
+     "fix": "Mae e wedi bwyta'r gacen.",
+     "explain": "No mutation after wedi.",
+     "skills": [
+      "perf-wedi"
+     ]
+    },
+    {
+     "id": "p3-04",
+     "type": "type",
+     "text": "Dyn ni ddim ___ gorffen eto.",
+     "hint": "have",
+     "en": "We haven't finished yet.",
+     "answer": "wedi",
+     "alts": [],
+     "explain": "Negative perfect: Dyn ni ddim wedi…",
+     "skills": [
+      "perf-negq"
+     ]
+    },
+    {
+     "id": "p3-05",
+     "type": "mc",
+     "prompt": "Wyt ti wedi gweld y ffilm? (Yes)",
+     "options": [
+      "Ydw",
+      "Do",
+      "Wedi",
+      "Ydy",
+      "O'n",
+      "Ie"
+     ],
+     "answer": 0,
+     "explain": "Wedi questions use present bod: Wyt ti…? → Ydw / Nac ydw.",
+     "skills": [
+      "perf-negq"
+     ]
+    },
+    {
+     "id": "p3-06",
+     "type": "mc",
+     "prompt": "Have they arrived?",
+     "options": [
+      "Ydyn nhw wedi cyrraedd?",
+      "Maen nhw wedi gyrraedd?",
+      "Ydyn nhw wedi gyrraedd?",
+      "Ydyn nhw'n wedi cyrraedd?",
+      "Ydy nhw wedi cyrraedd?",
+      "Oedd nhw wedi cyrraedd?"
+     ],
+     "answer": 0,
+     "explain": "Ydyn nhw + wedi + verbnoun, no mutation.",
+     "skills": [
+      "perf-negq"
+     ]
+    },
+    {
+     "id": "p3-07",
+     "type": "type",
+     "text": "___ i wedi gadael cyn naw.",
+     "hint": "I had",
+     "en": "I had left before nine.",
+     "answer": "Ro'n",
+     "alts": [
+      "Roeddwn"
+     ],
+     "explain": "Had done: Ro'n i wedi…",
+     "skills": [
+      "perf-plu"
+     ],
+     "tense": "Pluperfect"
+    },
+    {
+     "id": "p3-08",
+     "type": "mc",
+     "prompt": "I've just arrived.",
+     "options": [
+      "Dw i newydd gyrraedd.",
+      "Dw i newydd cyrraedd.",
+      "Dw i wedi newydd cyrraedd.",
+      "Dw i'n newydd gyrraedd.",
+      "Dw i newydd i gyrraedd.",
+      "Newydd dw i gyrraedd."
+     ],
+     "answer": 0,
+     "explain": "Newydd = just. Unlike wedi, it takes soft mutation: c → g.",
+     "skills": [
+      "perf-newydd"
+     ]
+    },
+    {
+     "id": "p3-09",
+     "type": "type",
+     "text": "Mae'r trên newydd ___.",
+     "hint": "gadael",
+     "en": "The train has just left.",
+     "answer": "adael",
+     "alts": [],
+     "explain": "Newydd + soft mutation: g drops.",
+     "skills": [
+      "perf-newydd",
+      "mut-soft"
+     ]
+    },
+    {
+     "id": "p3-10",
+     "type": "tiles",
+     "en": "Have you (chi) eaten?",
+     "answer": "Dych chi wedi bwyta",
+     "distractors": [
+      "Dyn",
+      "yn",
+      "fwyta",
+      "Wyt",
+      "ti",
+      "Ydy"
+     ],
+     "explain": "Dych chi wedi…? No mutation after wedi.",
+     "skills": [
+      "perf-negq"
+     ]
+    },
+    {
+     "id": "p3-11",
+     "type": "error",
+     "sentence": "Dw i ddim wedi'n gweld e.",
+     "wrong": 3,
+     "fix": "Dw i ddim wedi gweld e.",
+     "explain": "Wedi replaces yn. Never wedi'n.",
+     "skills": [
+      "perf-wedi"
+     ]
+    },
+    {
+     "id": "p3-12",
+     "type": "mc",
+     "prompt": "Mae hi wedi gorffen.",
+     "options": [
+      "She has finished.",
+      "She is finishing.",
+      "She finished yesterday.",
+      "She had finished.",
+      "She will finish.",
+      "She has just finished."
+     ],
+     "answer": 0,
+     "explain": "Mae … wedi = has done. Had = Roedd … wedi; just = newydd.",
+     "skills": [
+      "perf-wedi"
+     ],
+     "noType": true
+    },
+    {
+     "id": "p3-13",
+     "type": "type",
+     "text": "Oedd hi wedi ___ y llythyr?",
+     "hint": "darllen",
+     "en": "Had she read the letter?",
+     "answer": "darllen",
+     "alts": [],
+     "explain": "No mutation after wedi.",
+     "skills": [
+      "perf-plu"
+     ],
+     "tense": "Pluperfect"
+    },
+    {
+     "id": "p3-14",
+     "type": "mc",
+     "prompt": "We had just eaten.",
+     "options": [
+      "Ro'n ni newydd fwyta.",
+      "Ro'n ni newydd bwyta.",
+      "Ro'n ni wedi newydd bwyta.",
+      "Roedd ni newydd fwyta.",
+      "Dyn ni newydd fwyta.",
+      "Ro'n ni'n newydd fwyta."
+     ],
+     "answer": 0,
+     "explain": "Had just: Ro'n ni newydd + soft mutation.",
+     "skills": [
+      "perf-newydd",
+      "perf-plu"
+     ],
+     "tense": "Pluperfect"
+    }
+   ],
+   "term": "Perfect and pluperfect",
+   "tense": "Perfect",
+   "termDef": "Aspect shows how an action relates to a time, rather than the time itself. The perfect links a past action to now: 'I have eaten' (Dw i wedi bwyta). The pluperfect (past perfect) puts it before another past moment: 'I had eaten' (Ro'n i wedi bwyta)."
   },
   {
-   "id": "p4",
-   "section": "nouns",
-   "title": "Having",
-   "subtitle": "Mae gen i / mae ... gyda fi",
-   "soon": true
-  },
-  {
-   "id": "p5",
+   "id": "p2",
    "section": "verbs",
-   "title": "Conditional",
-   "subtitle": "Baswn i, hoffwn i",
-   "soon": true
-  },
-  {
-   "id": "p6",
-   "section": "mutations",
-   "title": "Nasal mutation: yn (in)",
-   "subtitle": "yng Nghaerdydd",
-   "soon": true
-  },
-  {
-   "id": "p7",
-   "section": "mutations",
-   "title": "Aspirate mutation",
-   "subtitle": "a, â, gyda, tri, chwe",
-   "soon": true
-  },
-  {
-   "id": "p8",
-   "section": "sentences",
-   "title": "Inflected prepositions",
-   "subtitle": "arna i, ata i, amdana i",
-   "soon": true
-  },
-  {
-   "id": "p9",
-   "section": "sentences",
-   "title": "'That' clauses",
-   "subtitle": "bod, fy mod i",
-   "soon": true
-  },
-  {
-   "id": "p10",
-   "section": "verbs",
-   "title": "Negatives with mo",
-   "subtitle": "Welais i mo'r ffilm",
-   "soon": true
-  },
-  {
-   "id": "p11",
-   "section": "verbs",
-   "title": "Commands",
-   "subtitle": "Ewch, cer, paid",
-   "soon": true
-  },
-  {
-   "id": "p13",
-   "section": "sentences",
-   "title": "Emphatic sentences",
-   "subtitle": "Fi sy'n...",
-   "soon": true
-  },
-  {
-   "id": "p14",
-   "section": "sentences",
-   "title": "Relative clauses",
-   "subtitle": "sy, a",
-   "soon": true
-  },
-  {
-   "id": "p15",
-   "section": "nouns",
-   "title": "Gender and plurals",
-   "subtitle": "-au, -on, vowel change",
-   "soon": true
+   "icon": "forward",
+   "title": "Future",
+   "subtitle": "Bydda i",
+   "colour": "#F97316",
+   "rule": "<p><b>Will be / will be doing.</b></p><table><tr><th></th><th>Statement</th><th>Question / negative</th></tr><tr><td>I</td><td>Bydda i</td><td>Fydda i? · Fydda i ddim</td></tr><tr><td>you (ti)</td><td>Byddi di</td><td>Fyddi di? · Fyddi di ddim</td></tr><tr><td>he / she</td><td>Bydd e / hi</td><td>Fydd e? · Fydd e ddim</td></tr><tr><td>we</td><td>Byddwn ni</td><td>Fyddwn ni? · Fyddwn ni ddim</td></tr><tr><td>you (chi)</td><td>Byddwch chi</td><td>Fyddwch chi? · Fyddwch chi ddim</td></tr><tr><td>they</td><td>Byddan nhw</td><td>Fyddan nhw? · Fyddan nhw ddim</td></tr></table><p><b>Questions and negatives soft-mutate:</b> B → F.</p><p><b>Answers:</b> <i>Fyddi di yno?</i> → <i>Bydda / Na fydda</i>. <i>Fydd e?</i> → <i>Bydd / Na fydd</i>.</p><p><b>Noun subject:</b> singular <i>Bydd</i>: <i>Bydd y plant yn yr ysgol.</i></p>",
+   "questions": [
+    {
+     "id": "p2-01",
+     "type": "mc",
+     "prompt": "___ i'n mynd i'r gwaith yfory.",
+     "options": [
+      "Bydda",
+      "Bydd",
+      "Byddi",
+      "Fydda",
+      "Byddwn",
+      "Dw"
+     ],
+     "answer": 0,
+     "explain": "I will: Bydda i. Fydda is for questions and negatives.",
+     "skills": [
+      "fut-statement"
+     ],
+     "en": "I'll be going to work tomorrow."
+    },
+    {
+     "id": "p2-02",
+     "type": "type",
+     "text": "___ hi'n braf yfory.",
+     "hint": "it will be",
+     "en": "It will be fine tomorrow.",
+     "answer": "Bydd",
+     "alts": [],
+     "explain": "He / she / it: Bydd.",
+     "skills": [
+      "fut-statement"
+     ]
+    },
+    {
+     "id": "p2-03",
+     "type": "mc",
+     "prompt": "Fyddi di yno? (Yes, I will)",
+     "options": [
+      "Bydda",
+      "Byddi",
+      "Bydd",
+      "Do",
+      "Ydw",
+      "Fydda"
+     ],
+     "answer": 0,
+     "explain": "Answer for I: Bydda (no mutation in a yes).",
+     "skills": [
+      "fut-answer"
+     ]
+    },
+    {
+     "id": "p2-04",
+     "type": "type",
+     "text": "___ nhw ddim yn dod.",
+     "hint": "they won't",
+     "en": "They won't be coming.",
+     "answer": "Fyddan",
+     "alts": [],
+     "explain": "Negative: soft mutation B → F, plus ddim.",
+     "skills": [
+      "fut-negative"
+     ]
+    },
+    {
+     "id": "p2-05",
+     "type": "tiles",
+     "en": "We will be late.",
+     "answer": "Byddwn ni'n hwyr",
+     "distractors": [
+      "Bydd",
+      "Fyddwn",
+      "Dyn",
+      "hwyr",
+      "ni",
+      "Byddan"
+     ],
+     "explain": "We will: Byddwn ni.",
+     "skills": [
+      "fut-statement"
+     ]
+    },
+    {
+     "id": "p2-06",
+     "type": "mc",
+     "prompt": "Will the children be at school?",
+     "options": [
+      "Fydd y plant yn yr ysgol?",
+      "Fyddan y plant yn yr ysgol?",
+      "Bydd y plant yn yr ysgol?",
+      "Fyddan nhw'r plant yn yr ysgol?",
+      "Ydy'r plant yn yr ysgol?",
+      "Fydd y plant yn ysgol?"
+     ],
+     "answer": 0,
+     "explain": "Noun subject: singular Fydd, even for plural nouns. Questions soft-mutate.",
+     "skills": [
+      "fut-question"
+     ]
+    },
+    {
+     "id": "p2-07",
+     "type": "error",
+     "sentence": "Byddan y bobl yn hapus.",
+     "wrong": 0,
+     "fix": "Bydd y bobl yn hapus.",
+     "explain": "Noun subject: singular Bydd.",
+     "skills": [
+      "fut-statement"
+     ]
+    },
+    {
+     "id": "p2-08",
+     "type": "mc",
+     "prompt": "Fydd e'n dod heno? (No)",
+     "options": [
+      "Na fydd",
+      "Na fydda",
+      "Nac ydy",
+      "Naddo",
+      "Na fyddan",
+      "Nac oedd"
+     ],
+     "answer": 0,
+     "explain": "For he: (Na) fydd.",
+     "skills": [
+      "fut-answer"
+     ]
+    },
+    {
+     "id": "p2-09",
+     "type": "type",
+     "text": "___ chi'n barod erbyn saith?",
+     "hint": "will you be (chi)",
+     "en": "Will you be ready by seven?",
+     "answer": "Fyddwch",
+     "alts": [],
+     "explain": "Question: soft mutation B → F.",
+     "skills": [
+      "fut-question"
+     ]
+    },
+    {
+     "id": "p2-10",
+     "type": "tiles",
+     "en": "I won't be home tonight.",
+     "answer": "Fydda i ddim adre heno",
+     "distractors": [
+      "Bydda",
+      "dim",
+      "yn",
+      "Bydd",
+      "heddiw",
+      "Dw"
+     ],
+     "explain": "Negative: Fydda i ddim.",
+     "skills": [
+      "fut-negative"
+     ]
+    },
+    {
+     "id": "p2-11",
+     "type": "mc",
+     "prompt": "Byddi di'n hoffi'r llyfr.",
+     "options": [
+      "You will like the book.",
+      "You like the book.",
+      "You liked the book.",
+      "You would like the book.",
+      "They will like the book.",
+      "You had liked the book."
+     ],
+     "answer": 0,
+     "explain": "Byddi di = you (ti) will.",
+     "skills": [
+      "fut-statement"
+     ],
+     "noType": true
+    },
+    {
+     "id": "p2-12",
+     "type": "error",
+     "sentence": "Bydda i ddim yn gweithio fory.",
+     "wrong": 0,
+     "fix": "Fydda i ddim yn gweithio fory.",
+     "explain": "Negatives soft-mutate: B → F.",
+     "skills": [
+      "fut-negative"
+     ]
+    },
+    {
+     "id": "p2-13",
+     "type": "mc",
+     "prompt": "It will rain.",
+     "options": [
+      "Bydd hi'n bwrw glaw.",
+      "Bydda i'n bwrw glaw.",
+      "Mae hi'n bwrw glaw.",
+      "Fydd hi'n bwrw glaw.",
+      "Bydd hi bwrw glaw.",
+      "Byddan nhw'n bwrw glaw."
+     ],
+     "answer": 0,
+     "explain": "Weather: Bydd hi'n…",
+     "skills": [
+      "fut-statement"
+     ]
+    },
+    {
+     "id": "p2-14",
+     "type": "type",
+     "text": "___ ni'n eich gweld chi yfory!",
+     "hint": "we will",
+     "en": "We'll see you tomorrow!",
+     "answer": "Byddwn",
+     "alts": [],
+     "explain": "We will: Byddwn ni.",
+     "skills": [
+      "fut-statement"
+     ]
+    }
+   ],
+   "term": "Future tense (periphrastic)",
+   "tense": "Future",
+   "termDef": "The future describes what will happen. Periphrastic means it is built from an auxiliary (helping) verb, bydd-, plus yn + verbnoun, like English 'will be doing': Bydda i'n mynd."
   },
   {
    "id": "p16",
    "section": "verbs",
+   "icon": "bolt",
    "title": "Short-form future",
    "subtitle": "Gwela i, a i",
-   "soon": true
+   "colour": "#EC4899",
+   "rule": "<p><b>Stem + ending</b>, no bod: <i>Gwela i di yfory</i> (I'll see you tomorrow).</p><table><tr><td>gwel<b>a</b> i</td><td>gwel<b>wn</b> ni</td></tr><tr><td>gwel<b>i</b> di</td><td>gwel<b>wch</b> chi</td></tr><tr><td>gwel<b>ith</b> e / hi</td><td>gwel<b>an</b> nhw</td></tr></table><p><b>Irregulars:</b></p><table><tr><th>mynd</th><th>gwneud</th><th>dod</th><th>cael</th></tr><tr><td>a i</td><td>gwna i</td><td>do i</td><td>ca i</td></tr><tr><td>ei di</td><td>gwnei di</td><td>doi di</td><td>cei di</td></tr><tr><td>eith e</td><td>gwneith e</td><td>daw / dith e</td><td>caiff / ceith e</td></tr><tr><td>awn ni</td><td>gwnawn ni</td><td>down ni</td><td>cawn ni</td></tr><tr><td>ewch chi</td><td>gwnewch chi</td><td>dewch chi</td><td>cewch chi</td></tr><tr><td>ân nhw</td><td>gwnân nhw</td><td>dôn nhw</td><td>cân nhw</td></tr></table><p><b>Object soft-mutates:</b> <i>Prynwn ni gar.</i></p><p><b>Questions:</b> soft mutation: <i>Weli di?</i> <i>Ga i goffi?</i> (May I have a coffee?)</p><p><b>Negatives:</b> c, p, t take aspirate (<i>Cha i ddim, Thala i ddim</i>); everything else soft (<i>Wela i ddim</i>).</p>",
+   "questions": [
+    {
+     "id": "p16-01",
+     "type": "mc",
+     "prompt": "___ i di yfory.",
+     "options": [
+      "Gwela",
+      "Gweli",
+      "Gwelith",
+      "Gwelais",
+      "Wela",
+      "Gwelwn"
+     ],
+     "answer": 0,
+     "explain": "I will: stem + -a: Gwela i.",
+     "skills": [
+      "sf-endings"
+     ],
+     "en": "I'll see you tomorrow."
+    },
+    {
+     "id": "p16-02",
+     "type": "type",
+     "text": "___ nhw'r gêm heno.",
+     "hint": "gweld (they)",
+     "en": "They'll see the game tonight.",
+     "answer": "Gwelan",
+     "alts": [],
+     "explain": "They: stem + -an.",
+     "skills": [
+      "sf-endings"
+     ]
+    },
+    {
+     "id": "p16-03",
+     "type": "mc",
+     "prompt": "I'll go to town.",
+     "options": [
+      "A i i'r dre.",
+      "Ei di i'r dre.",
+      "Es i i'r dre.",
+      "Eith i i'r dre.",
+      "Awn i i'r dre.",
+      "Mynda i i'r dre."
+     ],
+     "answer": 0,
+     "explain": "Mynd is irregular: a i (I'll go). Es i = I went.",
+     "skills": [
+      "sf-irregular"
+     ]
+    },
+    {
+     "id": "p16-04",
+     "type": "type",
+     "text": "___ i fe nawr.",
+     "hint": "gwneud (I)",
+     "en": "I'll do it now.",
+     "answer": "Gwna",
+     "alts": [],
+     "explain": "Gwneud: gwna i.",
+     "skills": [
+      "sf-irregular"
+     ]
+    },
+    {
+     "id": "p16-05",
+     "type": "mc",
+     "prompt": "Ga i goffi, os gwelwch yn dda?",
+     "options": [
+      "May I have a coffee, please?",
+      "I had a coffee, please.",
+      "Will you have a coffee?",
+      "Do you want a coffee?",
+      "I'll make a coffee.",
+      "Did you get a coffee?"
+     ],
+     "answer": 0,
+     "explain": "Ga i…? = May I have…? (cael, question form).",
+     "skills": [
+      "sf-irregular",
+      "sf-qneg"
+     ],
+     "noType": true
+    },
+    {
+     "id": "p16-06",
+     "type": "type",
+     "text": "___ i ddim byd.",
+     "hint": "gweld (I won't)",
+     "en": "I won't see anything.",
+     "answer": "Wela",
+     "alts": [],
+     "explain": "Negative: soft mutation, G drops.",
+     "skills": [
+      "sf-qneg"
+     ]
+    },
+    {
+     "id": "p16-07",
+     "type": "mc",
+     "prompt": "I won't get a chance.",
+     "options": [
+      "Cha i ddim cyfle.",
+      "Ga i ddim cyfle.",
+      "Ca i ddim cyfle.",
+      "Ches i ddim cyfle.",
+      "Cha i dim cyfle.",
+      "Chaf i ddim cyfle."
+     ],
+     "answer": 0,
+     "explain": "Negatives of c, p, t verbs take aspirate: c → ch. (Ches i ddim = I didn't get.)",
+     "skills": [
+      "sf-qneg",
+      "mut-aspirate"
+     ]
+    },
+    {
+     "id": "p16-08",
+     "type": "tiles",
+     "en": "Will you (ti) come with me?",
+     "answer": "Ddoi di gyda fi",
+     "distractors": [
+      "Doi",
+      "Ddewch",
+      "chi",
+      "Dod",
+      "i",
+      "fi'n"
+     ],
+     "explain": "Dod: doi di; question soft-mutates D → Dd.",
+     "skills": [
+      "sf-irregular",
+      "sf-qneg"
+     ]
+    },
+    {
+     "id": "p16-09",
+     "type": "type",
+     "text": "___ e'n hwyr, siŵr o fod.",
+     "hint": "dod (he)",
+     "en": "He'll come late, probably.",
+     "answer": "Daw",
+     "alts": [
+      "Dith"
+     ],
+     "explain": "Dod, he: daw e (or dith e in the south).",
+     "skills": [
+      "sf-irregular"
+     ]
+    },
+    {
+     "id": "p16-10",
+     "type": "mc",
+     "prompt": "We'll buy a car.",
+     "options": [
+      "Prynwn ni gar.",
+      "Prynwn ni car.",
+      "Prynon ni gar.",
+      "Prynan ni gar.",
+      "Pryna ni gar.",
+      "Prynwn ni'n gar."
+     ],
+     "answer": 0,
+     "explain": "We: -wn. The object after a short-form verb soft-mutates: car → gar. (Prynon ni = we bought.)",
+     "skills": [
+      "sf-endings",
+      "mut-soft"
+     ]
+    },
+    {
+     "id": "p16-11",
+     "type": "error",
+     "sentence": "Gwelith hi'r ffilm heno?",
+     "wrong": 0,
+     "fix": "Welith hi'r ffilm heno?",
+     "explain": "Questions soft-mutate the verb: G drops.",
+     "skills": [
+      "sf-qneg"
+     ]
+    },
+    {
+     "id": "p16-12",
+     "type": "mc",
+     "prompt": "They'll do the work.",
+     "options": [
+      "Gwnân nhw'r gwaith.",
+      "Gwnawn nhw'r gwaith.",
+      "Gwnaethon nhw'r gwaith.",
+      "Gwnewch nhw'r gwaith.",
+      "Gwneith nhw'r gwaith.",
+      "Gwnei nhw'r gwaith."
+     ],
+     "answer": 0,
+     "explain": "Gwneud, they: gwnân nhw. (Gwnaethon nhw = they did.)",
+     "skills": [
+      "sf-irregular"
+     ]
+    },
+    {
+     "id": "p16-13",
+     "type": "type",
+     "text": "___ ni i Gaerdydd dydd Sadwrn.",
+     "hint": "mynd (we)",
+     "en": "We'll go to Cardiff on Saturday.",
+     "answer": "Awn",
+     "alts": [],
+     "explain": "Mynd, we: awn ni.",
+     "skills": [
+      "sf-irregular"
+     ]
+    },
+    {
+     "id": "p16-14",
+     "type": "mc",
+     "prompt": "I won't pay.",
+     "options": [
+      "Thala i ddim.",
+      "Dala i ddim.",
+      "Tala i ddim.",
+      "Thalais i ddim.",
+      "Tala i dim.",
+      "Nhala i ddim."
+     ],
+     "answer": 0,
+     "explain": "Negative of a t verb: aspirate t → th. (Thalais i ddim = I didn't pay.)",
+     "skills": [
+      "sf-qneg",
+      "mut-aspirate"
+     ]
+    }
+   ],
+   "term": "Future tense (short-form, inflected)",
+   "tense": "Future",
+   "termDef": "An inflected future: the verb itself takes a personal ending instead of using bod. Gwela i = I'll see. In speech it can also express a present habit."
+  },
+  {
+   "id": "p5",
+   "section": "verbs",
+   "icon": "cloud",
+   "title": "Conditional",
+   "subtitle": "Baswn i, hoffwn i",
+   "colour": "#14B8A6",
+   "rule": "<p><b>Would be / would do.</b></p><table><tr><td>Baswn i</td><td>Basen ni</td></tr><tr><td>Baset ti</td><td>Basech chi</td></tr><tr><td>Basai fe / hi</td><td>Basen nhw</td></tr></table><p>In the south you'll also hear <i>Byddwn i, byddet ti, byddai fe…</i>: same meaning.</p><p><b>Questions and negatives soft-mutate:</b> <i>Faset ti'n dod?</i> → <i>Baswn / Na faswn</i>. <i>Faswn i ddim.</i></p><p><b>Handy short forms</b> (same endings): <i>hoffwn i</i> (I'd like), <i>gallwn i</i> (I could), <i>dylwn i</i> (I should). They're followed by a <b>soft-mutated</b> word: <i>Hoffwn i goffi. Dylech chi orffwys.</i></p><p><b>If I were:</b> <i>Pe bawn i'n gyfoethog, baswn i'n prynu cwch.</i></p>",
+   "questions": [
+    {
+     "id": "p5-01",
+     "type": "mc",
+     "prompt": "___ i'n hoffi mynd.",
+     "options": [
+      "Baswn",
+      "Basai",
+      "Baset",
+      "Bydda",
+      "Faswn",
+      "Basen"
+     ],
+     "answer": 0,
+     "explain": "I would: Baswn i (south also Byddwn i).",
+     "skills": [
+      "cond-bod"
+     ],
+     "en": "I would like to go."
+    },
+    {
+     "id": "p5-02",
+     "type": "type",
+     "text": "___ i baned, plîs.",
+     "hint": "hoffi (I'd like)",
+     "en": "I'd like a cuppa, please.",
+     "answer": "Hoffwn",
+     "alts": [],
+     "explain": "Hoffwn i = I'd like.",
+     "skills": [
+      "cond-modal"
+     ]
+    },
+    {
+     "id": "p5-03",
+     "type": "mc",
+     "prompt": "Would you (ti) like a drink?",
+     "options": [
+      "Hoffet ti ddiod?",
+      "Hoffet ti diod?",
+      "Hoffwn ti ddiod?",
+      "Hoffech ti ddiod?",
+      "Hoffai ti ddiod?",
+      "Wyt ti'n hoffi diod?"
+     ],
+     "answer": 0,
+     "explain": "Ti: hoffet ti. The object soft-mutates: diod → ddiod.",
+     "skills": [
+      "cond-modal",
+      "mut-soft"
+     ]
+    },
+    {
+     "id": "p5-04",
+     "type": "type",
+     "text": "___ i ddim yn gwneud hynny.",
+     "hint": "I wouldn't",
+     "en": "I wouldn't do that.",
+     "answer": "Faswn",
+     "alts": [
+      "Fyddwn"
+     ],
+     "explain": "Negative: soft mutation B → F.",
+     "skills": [
+      "cond-qneg"
+     ]
+    },
+    {
+     "id": "p5-05",
+     "type": "mc",
+     "prompt": "Faset ti'n dod? (Yes, I would)",
+     "options": [
+      "Baswn",
+      "Baset",
+      "Basai",
+      "Bydda",
+      "Ydw",
+      "Do"
+     ],
+     "answer": 0,
+     "explain": "Answer for I: Baswn.",
+     "skills": [
+      "cond-qneg"
+     ]
+    },
+    {
+     "id": "p5-06",
+     "type": "tiles",
+     "en": "I could help you (ti).",
+     "answer": "Gallwn i dy helpu di",
+     "distractors": [
+      "Galla",
+      "chi",
+      "Dylwn",
+      "Gallet",
+      "Baswn",
+      "fy"
+     ],
+     "explain": "Gallwn i = I could.",
+     "skills": [
+      "cond-modal"
+     ],
+     "alts": [
+      "Gallwn i helpu ti"
+     ]
+    },
+    {
+     "id": "p5-07",
+     "type": "mc",
+     "prompt": "You (chi) should rest.",
+     "options": [
+      "Dylech chi orffwys.",
+      "Dylech chi gorffwys.",
+      "Dylwn chi orffwys.",
+      "Dylai chi orffwys.",
+      "Ddylech chi orffwys.",
+      "Dylet chi orffwys."
+     ],
+     "answer": 0,
+     "explain": "Chi: dylech chi, then soft mutation (gorffwys → orffwys).",
+     "skills": [
+      "cond-modal",
+      "mut-soft"
+     ]
+    },
+    {
+     "id": "p5-08",
+     "type": "error",
+     "sentence": "Basai nhw'n hapus yno.",
+     "wrong": 0,
+     "fix": "Basen nhw'n hapus yno.",
+     "explain": "They: Basen nhw. Basai is he / she.",
+     "skills": [
+      "cond-bod"
+     ]
+    },
+    {
+     "id": "p5-09",
+     "type": "mc",
+     "prompt": "If I were rich, I'd buy a boat.",
+     "options": [
+      "Pe bawn i'n gyfoethog, baswn i'n prynu cwch.",
+      "Os dw i'n gyfoethog, baswn i'n prynu cwch.",
+      "Pe bawn i'n gyfoethog, bydda i'n prynu cwch.",
+      "Pe bawn i gyfoethog, baswn i'n prynu cwch.",
+      "Pe bawn i'n gyfoethog, prynais i gwch.",
+      "Os bawn i'n gyfoethog, baswn i'n prynu cwch."
+     ],
+     "answer": 0,
+     "explain": "Unreal 'if': pe bawn i…, then the conditional.",
+     "skills": [
+      "cond-bod"
+     ]
+    },
+    {
+     "id": "p5-10",
+     "type": "type",
+     "text": "Dylwn i ___ adre.",
+     "hint": "mynd",
+     "en": "I should go home.",
+     "answer": "fynd",
+     "alts": [],
+     "explain": "After dylwn i: soft mutation, m → f.",
+     "skills": [
+      "cond-modal",
+      "mut-soft"
+     ]
+    },
+    {
+     "id": "p5-11",
+     "type": "mc",
+     "prompt": "Hoffech chi ddod?",
+     "options": [
+      "Would you like to come?",
+      "Do you like coming?",
+      "Did you like coming?",
+      "Will you come?",
+      "Could you come?",
+      "Should you come?"
+     ],
+     "answer": 0,
+     "explain": "Hoffech chi = would you (chi) like.",
+     "skills": [
+      "cond-modal"
+     ],
+     "noType": true
+    },
+    {
+     "id": "p5-12",
+     "type": "type",
+     "text": "___ hi'n hoffi'r ffilm.",
+     "hint": "she would (bod)",
+     "en": "She would like the film.",
+     "answer": "Basai",
+     "alts": [
+      "Base",
+      "Byddai",
+      "Bydde"
+     ],
+     "explain": "He / she: Basai (also Base, Byddai).",
+     "skills": [
+      "cond-bod"
+     ]
+    },
+    {
+     "id": "p5-13",
+     "type": "error",
+     "sentence": "Gallwn i ddim dod heno.",
+     "wrong": 0,
+     "fix": "Allwn i ddim dod heno.",
+     "explain": "Negative soft-mutates: G drops → Allwn i ddim.",
+     "skills": [
+      "cond-qneg",
+      "cond-modal"
+     ]
+    },
+    {
+     "id": "p5-14",
+     "type": "tiles",
+     "en": "Would they help?",
+     "answer": "Fasen nhw'n helpu",
+     "distractors": [
+      "Basen",
+      "Fasai",
+      "helpu",
+      "Faset",
+      "yn",
+      "Basai"
+     ],
+     "explain": "Question: soft mutation, and they → Fasen nhw.",
+     "skills": [
+      "cond-qneg"
+     ],
+     "alts": [
+      "Fydden nhw'n helpu"
+     ]
+    }
+   ],
+   "term": "Conditional mood",
+   "tense": "Conditional",
+   "termDef": "Mood shows the speaker's attitude to an action. The conditional expresses what would happen, often depending on a condition (an if-clause): 'I would go if…'. Modal verbs such as could, should and would like (gallwn, dylwn, hoffwn) use the same endings."
+  },
+  {
+   "id": "p4",
+   "section": "nouns",
+   "icon": "gift",
+   "title": "Having",
+   "subtitle": "Mae ... gyda fi / mae gen i",
+   "colour": "#84CC16",
+   "rule": "<p>Welsh says <b>there's a car with me</b>: <i>Mae car gyda fi</i> (I have a car).</p><table><tr><td>gyda fi</td><td>gyda ni</td></tr><tr><td>gyda ti</td><td>gyda chi</td></tr><tr><td>gyda fe / hi</td><td>gyda nhw</td></tr></table><p><b>Questions:</b> <i>Oes</i> (is there): <i>Oes car gyda ti?</i> → <i>Oes / Nac oes</i>.</p><p><b>Negative:</b> <i>Does dim car gyda fi.</i></p><p><b>Past:</b> <i>Roedd ci gyda ni. Oedd car gyda nhw?</i> → <i>Oedd / Nac oedd</i>.</p><p><b>North Wales:</b> <i>Mae gen i gar</i>: the thing comes after <i>gen i</i> and soft-mutates.</p>",
+   "questions": [
+    {
+     "id": "p4-01",
+     "type": "mc",
+     "prompt": "I have a car.",
+     "options": [
+      "Mae car gyda fi.",
+      "Mae gyda fi car.",
+      "Dw i'n car gyda fi.",
+      "Mae car gyda i.",
+      "Mae fi car gyda.",
+      "Mae'n car gyda fi."
+     ],
+     "answer": 0,
+     "explain": "Mae + thing + gyda + person.",
+     "skills": [
+      "have-gyda"
+     ]
+    },
+    {
+     "id": "p4-02",
+     "type": "type",
+     "text": "Mae dau blentyn ___ ni.",
+     "hint": "with",
+     "en": "We have two children.",
+     "answer": "gyda",
+     "alts": [],
+     "explain": "Having: gyda + person.",
+     "skills": [
+      "have-gyda"
+     ]
+    },
+    {
+     "id": "p4-03",
+     "type": "mc",
+     "prompt": "Oes ci gyda chi? (No)",
+     "options": [
+      "Nac oes",
+      "Nac ydw",
+      "Naddo",
+      "Na",
+      "Does dim",
+      "Nac oedd"
+     ],
+     "answer": 0,
+     "explain": "Oes …? → Oes / Nac oes.",
+     "skills": [
+      "have-oes"
+     ]
+    },
+    {
+     "id": "p4-04",
+     "type": "tiles",
+     "en": "I don't have any money.",
+     "answer": "Does dim arian gyda fi",
+     "distractors": [
+      "Dw",
+      "ddim",
+      "Mae",
+      "gen",
+      "i",
+      "yn"
+     ],
+     "explain": "Does dim + thing + gyda + person.",
+     "skills": [
+      "have-neg"
+     ]
+    },
+    {
+     "id": "p4-05",
+     "type": "mc",
+     "prompt": "Have you (ti) got a pen?",
+     "options": [
+      "Oes beiro gyda ti?",
+      "Ydy beiro gyda ti?",
+      "Wyt ti beiro gyda?",
+      "Oes gyda ti beiro?",
+      "Mae beiro gyda ti?",
+      "Oes beiro i ti?"
+     ],
+     "answer": 0,
+     "explain": "Question: Oes + thing + gyda + person.",
+     "skills": [
+      "have-oes"
+     ]
+    },
+    {
+     "id": "p4-06",
+     "type": "error",
+     "sentence": "Ydy car gyda nhw?",
+     "wrong": 0,
+     "fix": "Oes car gyda nhw?",
+     "explain": "An indefinite thing (a car): the question is Oes.",
+     "skills": [
+      "have-oes"
+     ]
+    },
+    {
+     "id": "p4-07",
+     "type": "type",
+     "text": "___ amser gyda ti?",
+     "hint": "is there",
+     "en": "Do you have time?",
+     "answer": "Oes",
+     "alts": [],
+     "explain": "Oes = is there / are there.",
+     "skills": [
+      "have-oes"
+     ]
+    },
+    {
+     "id": "p4-08",
+     "type": "mc",
+     "prompt": "I have a dog. (north)",
+     "options": [
+      "Mae gen i gi.",
+      "Mae gen i ci.",
+      "Mae gen fi gi.",
+      "Mae i gen gi.",
+      "Mae gen i'n gi.",
+      "Mae gi gen i."
+     ],
+     "answer": 0,
+     "explain": "North: gen i + soft-mutated thing: ci → gi.",
+     "skills": [
+      "have-gen",
+      "mut-soft"
+     ]
+    },
+    {
+     "id": "p4-09",
+     "type": "type",
+     "text": "Roedd tŷ mawr ___ nhw.",
+     "hint": "with",
+     "en": "They had a big house.",
+     "answer": "gyda",
+     "alts": [],
+     "explain": "Past: Roedd + thing + gyda.",
+     "skills": [
+      "have-gyda"
+     ],
+     "tense": "Imperfect"
+    },
+    {
+     "id": "p4-10",
+     "type": "mc",
+     "prompt": "She has a sister.",
+     "options": [
+      "Mae chwaer gyda hi.",
+      "Mae chwaer gyda fe.",
+      "Mae hi chwaer gyda.",
+      "Mae'r chwaer gyda hi.",
+      "Mae hi'n chwaer gyda.",
+      "Mae gyda hi chwaer."
+     ],
+     "answer": 0,
+     "explain": "Mae + thing + gyda hi.",
+     "skills": [
+      "have-gyda"
+     ]
+    },
+    {
+     "id": "p4-11",
+     "type": "error",
+     "sentence": "Does ddim bara gyda ni.",
+     "wrong": 1,
+     "fix": "Does dim bara gyda ni.",
+     "explain": "Does dim = there isn't any. Not ddim.",
+     "skills": [
+      "have-neg"
+     ]
+    },
+    {
+     "id": "p4-12",
+     "type": "tiles",
+     "en": "We had a dog.",
+     "answer": "Roedd ci gyda ni",
+     "distractors": [
+      "Mae",
+      "Ro'n",
+      "ni'n",
+      "gi",
+      "gen",
+      "Oedd"
+     ],
+     "explain": "Past having: Roedd + thing + gyda.",
+     "skills": [
+      "have-gyda"
+     ],
+     "tense": "Imperfect"
+    },
+    {
+     "id": "p4-13",
+     "type": "mc",
+     "prompt": "Oedd car gyda nhw? (Yes)",
+     "options": [
+      "Oedd",
+      "Oes",
+      "O'n",
+      "Do",
+      "Ydyn",
+      "Roedd"
+     ],
+     "answer": 0,
+     "explain": "Past: Oedd / Nac oedd.",
+     "skills": [
+      "have-oes"
+     ],
+     "tense": "Imperfect"
+    },
+    {
+     "id": "p4-14",
+     "type": "type",
+     "text": "Mae dau gar gyda ___.",
+     "hint": "he",
+     "en": "He has two cars.",
+     "answer": "fe",
+     "alts": [
+      "fo",
+      "e"
+     ],
+     "explain": "gyda fe (gyda fo in the north).",
+     "skills": [
+      "have-gyda"
+     ]
+    }
+   ],
+   "term": "Possession (to have)",
+   "termDef": "Welsh has no verb 'to have'. It uses an existential sentence, 'there is X with me': Mae car gyda fi. Questions use oes (is there?)."
+  },
+  {
+   "id": "p15",
+   "section": "nouns",
+   "icon": "layers",
+   "title": "Gender and plurals",
+   "subtitle": "-au, -on, vowel change",
+   "colour": "#6366F1",
+   "rule": "<p><b>Plurals have to be learnt</b>, but the common patterns are:</p><table><tr><td>add -au</td><td>llyfr → llyfrau, afal → afalau</td></tr><tr><td>add -od</td><td>cath → cathod</td></tr><tr><td>add -ion</td><td>dyn → dynion, ysgol → ysgolion</td></tr><tr><td>add -ed</td><td>merch → merched</td></tr><tr><td>add -i</td><td>ffenest → ffenestri, gardd → gerddi</td></tr><tr><td>vowel change</td><td>bachgen → bechgyn, car → ceir, tŷ → tai</td></tr><tr><td>drop -yn / -en</td><td>plentyn → plant, coeden → coed, blodyn → blodau</td></tr><tr><td>irregular</td><td>ci → cŵn, llaw → dwylo (pair), athro → athrawon</td></tr></table><p><b>Gender:</b> feminine singular nouns soft-mutate after <i>y</i> and mutate their adjective: <i>y gath fach</i>. Masculine: <i>y ci bach</i>. <b>Plurals never mutate after y:</b> <i>y cathod, y merched</i>.</p>",
+   "questions": [
+    {
+     "id": "p15-01",
+     "type": "mc",
+     "prompt": "books",
+     "options": [
+      "llyfrau",
+      "llyfron",
+      "llyfrod",
+      "llyfryn",
+      "llyfrydd",
+      "llyfriau"
+     ],
+     "answer": 0,
+     "explain": "llyfr + -au.",
+     "skills": [
+      "pl-endings"
+     ]
+    },
+    {
+     "id": "p15-02",
+     "type": "type",
+     "text": "llawer o ___",
+     "hint": "cath, plural",
+     "en": "lots of cats",
+     "answer": "gathod",
+     "alts": [],
+     "explain": "cath → cathod, and llawer o + soft mutation → gathod.",
+     "skills": [
+      "pl-endings",
+      "mut-soft"
+     ]
+    },
+    {
+     "id": "p15-03",
+     "type": "mc",
+     "prompt": "children",
+     "options": [
+      "plant",
+      "plentynau",
+      "plentynod",
+      "plantau",
+      "plentyniaid",
+      "plentod"
+     ],
+     "answer": 0,
+     "explain": "Singulars in -yn drop it in the plural: plentyn → plant.",
+     "skills": [
+      "pl-yn"
+     ]
+    },
+    {
+     "id": "p15-04",
+     "type": "type",
+     "text": "y ___",
+     "hint": "tŷ, plural",
+     "en": "the houses",
+     "answer": "tai",
+     "alts": [],
+     "explain": "tŷ → tai (vowel change).",
+     "skills": [
+      "pl-vowel"
+     ]
+    },
+    {
+     "id": "p15-05",
+     "type": "mc",
+     "prompt": "the girls",
+     "options": [
+      "y merched",
+      "y ferched",
+      "y merchod",
+      "y ferch",
+      "y merchau",
+      "y merchion"
+     ],
+     "answer": 0,
+     "explain": "Plurals never soft-mutate after y, even feminine ones.",
+     "skills": [
+      "pl-endings",
+      "gender-mut"
+     ]
+    },
+    {
+     "id": "p15-06",
+     "type": "tiles",
+     "en": "the big cats",
+     "answer": "y cathod mawr",
+     "distractors": [
+      "gathod",
+      "fawr",
+      "gath",
+      "yr",
+      "fach"
+     ],
+     "explain": "Plural: no mutation of the noun or the adjective.",
+     "skills": [
+      "gender-mut"
+     ]
+    },
+    {
+     "id": "p15-07",
+     "type": "mc",
+     "prompt": "boys",
+     "options": [
+      "bechgyn",
+      "bachgenau",
+      "bachgennod",
+      "bechgen",
+      "bachgyn",
+      "bechgynod"
+     ],
+     "answer": 0,
+     "explain": "Vowel change: bachgen → bechgyn.",
+     "skills": [
+      "pl-vowel"
+     ]
+    },
+    {
+     "id": "p15-08",
+     "type": "type",
+     "text": "Mae'r ___ ar agor.",
+     "hint": "ffenest, plural",
+     "en": "The windows are open.",
+     "answer": "ffenestri",
+     "alts": [],
+     "explain": "ffenest + -ri.",
+     "skills": [
+      "pl-endings"
+     ]
+    },
+    {
+     "id": "p15-09",
+     "type": "error",
+     "sentence": "Mae'r gath fawr a'r ci fach yn chwarae.",
+     "wrong": 5,
+     "fix": "Mae'r gath fawr a'r ci bach yn chwarae.",
+     "explain": "Ci is masculine: the adjective doesn't mutate.",
+     "skills": [
+      "gender-mut"
+     ]
+    },
+    {
+     "id": "p15-10",
+     "type": "mc",
+     "prompt": "teachers",
+     "options": [
+      "athrawon",
+      "athroau",
+      "athrod",
+      "athroon",
+      "athrawau",
+      "athrowyr"
+     ],
+     "answer": 0,
+     "explain": "athro → athrawon.",
+     "skills": [
+      "pl-endings"
+     ]
+    },
+    {
+     "id": "p15-11",
+     "type": "type",
+     "text": "Mae dau ___ gyda fi.",
+     "hint": "car",
+     "en": "I have two cars.",
+     "answer": "gar",
+     "alts": [],
+     "explain": "Numbers take the singular: dau + soft mutation → dau gar.",
+     "skills": [
+      "num-singular",
+      "mut-soft"
+     ]
+    },
+    {
+     "id": "p15-12",
+     "type": "mc",
+     "prompt": "dogs",
+     "options": [
+      "cŵn",
+      "cion",
+      "ciau",
+      "ciod",
+      "cwnod",
+      "cwnau"
+     ],
+     "answer": 0,
+     "explain": "ci → cŵn (irregular).",
+     "skills": [
+      "pl-vowel"
+     ]
+    },
+    {
+     "id": "p15-13",
+     "type": "error",
+     "sentence": "Dyma'r ferched.",
+     "wrong": 1,
+     "fix": "Dyma'r merched.",
+     "explain": "Plurals don't mutate after y / 'r.",
+     "skills": [
+      "gender-mut"
+     ]
+    },
+    {
+     "id": "p15-14",
+     "type": "mc",
+     "prompt": "the hands",
+     "options": [
+      "y dwylo",
+      "y llawiau",
+      "y llawau",
+      "y ddwylo",
+      "y llawod",
+      "y llaw"
+     ],
+     "answer": 0,
+     "explain": "llaw → dwylo (literally 'two hands').",
+     "skills": [
+      "pl-vowel"
+     ]
+    }
+   ],
+   "term": "Grammatical gender and plural formation",
+   "termDef": "Every Welsh noun is masculine or feminine (grammatical gender), which affects mutation after y and on adjectives. Plurals are formed by adding an ending (a suffix), by vowel change (internal change), or by removing a singular ending."
+  },
+  {
+   "id": "p17",
+   "section": "nouns",
+   "icon": "pointer",
+   "title": "This and that",
+   "subtitle": "hwn, hon, hyn, 'ma, 'na",
+   "colour": "#F43F5E",
+   "rule": "<p><b>After a noun</b> (with <i>y / yr / 'r</i> in front):</p><table><tr><th></th><th>this / these</th><th>that / those</th></tr><tr><td>masculine</td><td>y llyfr <b>hwn</b></td><td>y llyfr <b>hwnnw</b></td></tr><tr><td>feminine</td><td>y gath <b>hon</b></td><td>y gath <b>honno</b></td></tr><tr><td>plural</td><td>y plant <b>hyn</b></td><td>y plant <b>hynny</b></td></tr><tr><td>speech, any</td><td>y llyfr <b>'ma</b></td><td>y llyfr <b>'na</b></td></tr></table><p>Feminine nouns still soft-mutate after <i>y</i>: <i>y gath hon</i>.</p><p><b>On their own</b> (pronouns): <i>hwn / hon</i> (this one), <i>hwnna / honna</i> (that one), <i>hyn</i> (this, these: ideas), <i>hynny</i> (that, those: ideas). <i>Beth ydy hwnna?</i> <i>ar hyn o bryd</i> (at the moment).</p><p><b>Dyma</b> (here is / this is) and <b>dyna</b> (there is / that is) + soft mutation: <i>Dyma gar newydd. Dyna'r broblem.</i></p><p><b>Time:</b> <i>y bore 'ma</i> (this morning), <i>y prynhawn 'ma</i>, <i>heno</i> (tonight), <i>eleni</i> (this year).</p>",
+   "questions": [
+    {
+     "id": "p17-01",
+     "type": "mc",
+     "prompt": "this book",
+     "options": [
+      "y llyfr hwn",
+      "y llyfr hon",
+      "y llyfr hyn",
+      "llyfr hwn",
+      "y llyfr hwnnw",
+      "yr llyfr hwn"
+     ],
+     "answer": 0,
+     "explain": "Llyfr is masculine: hwn. Keep y in front.",
+     "skills": [
+      "dem-adj"
+     ]
+    },
+    {
+     "id": "p17-02",
+     "type": "mc",
+     "prompt": "this cat",
+     "options": [
+      "y gath hon",
+      "y gath hwn",
+      "y cath hon",
+      "y gath hyn",
+      "y gath honno",
+      "y cathod hon"
+     ],
+     "answer": 0,
+     "explain": "Cath is feminine: hon, and soft mutation after y.",
+     "skills": [
+      "dem-adj",
+      "gender-mut"
+     ]
+    },
+    {
+     "id": "p17-03",
+     "type": "type",
+     "text": "y plant ___",
+     "hint": "these",
+     "en": "these children",
+     "answer": "hyn",
+     "alts": [
+      "'ma",
+      "ma"
+     ],
+     "explain": "Plural: hyn (in speech, 'ma).",
+     "skills": [
+      "dem-adj"
+     ]
+    },
+    {
+     "id": "p17-04",
+     "type": "type",
+     "text": "y dyn ___",
+     "hint": "that (spoken)",
+     "en": "that man",
+     "answer": "'na",
+     "alts": [
+      "na",
+      "hwnnw"
+     ],
+     "explain": "In speech: 'na for 'that' with any noun (carefully: hwnnw).",
+     "skills": [
+      "dem-colloq"
+     ]
+    },
+    {
+     "id": "p17-05",
+     "type": "mc",
+     "prompt": "those houses",
+     "options": [
+      "y tai hynny",
+      "y tai hwnnw",
+      "y tai honno",
+      "y tai hyn",
+      "tai hynny",
+      "y tŷ hynny"
+     ],
+     "answer": 0,
+     "explain": "Plural 'those': hynny (in speech, y tai 'na).",
+     "skills": [
+      "dem-adj"
+     ]
+    },
+    {
+     "id": "p17-06",
+     "type": "tiles",
+     "en": "this morning",
+     "answer": "y bore 'ma",
+     "distractors": [
+      "bore'n",
+      "hon",
+      "nos",
+      "'na",
+      "heno"
+     ],
+     "explain": "This morning: y bore 'ma.",
+     "skills": [
+      "dem-colloq"
+     ],
+     "alts": [
+      "y bore hwn"
+     ]
+    },
+    {
+     "id": "p17-07",
+     "type": "mc",
+     "prompt": "What's that?",
+     "options": [
+      "Beth ydy hwnna?",
+      "Beth ydy hwn?",
+      "Beth ydy'r 'na?",
+      "Beth sy hwnna?",
+      "Beth mae hwnna?",
+      "Pwy ydy hwnna?"
+     ],
+     "answer": 0,
+     "explain": "That (thing): hwnna. Hwn = this.",
+     "skills": [
+      "dem-pron"
+     ]
+    },
+    {
+     "id": "p17-08",
+     "type": "type",
+     "text": "Dyma ___ newydd.",
+     "hint": "car",
+     "en": "Here's a new car.",
+     "answer": "gar",
+     "alts": [],
+     "explain": "Dyma + soft mutation: c → g.",
+     "skills": [
+      "dem-dyma",
+      "mut-soft"
+     ]
+    },
+    {
+     "id": "p17-09",
+     "type": "mc",
+     "prompt": "That's the problem.",
+     "options": [
+      "Dyna'r broblem.",
+      "Dyma'r broblem.",
+      "Dyna'r problem.",
+      "Dyna y broblem.",
+      "Dyna broblem.",
+      "Dyna'r broblemau."
+     ],
+     "answer": 0,
+     "explain": "Dyna = that is / there is. Problem is feminine: y broblem.",
+     "skills": [
+      "dem-dyma"
+     ]
+    },
+    {
+     "id": "p17-10",
+     "type": "error",
+     "sentence": "Dw i'n hoffi'r gath hwn.",
+     "wrong": 4,
+     "fix": "Dw i'n hoffi'r gath hon.",
+     "explain": "Cath is feminine: hon, not hwn.",
+     "skills": [
+      "dem-adj"
+     ]
+    },
+    {
+     "id": "p17-11",
+     "type": "mc",
+     "prompt": "at the moment",
+     "options": [
+      "ar hyn o bryd",
+      "ar hwn o bryd",
+      "ar hynny o bryd",
+      "yn hyn o bryd",
+      "ar hyn o amser",
+      "ar y bryd hyn"
+     ],
+     "answer": 0,
+     "explain": "Hyn = this (as an idea): ar hyn o bryd.",
+     "skills": [
+      "dem-pron"
+     ]
+    },
+    {
+     "id": "p17-12",
+     "type": "type",
+     "text": "Dw i ddim yn gwybod dim am ___.",
+     "hint": "that (the idea)",
+     "en": "I don't know anything about that.",
+     "answer": "hynny",
+     "alts": [
+      "hwnna"
+     ],
+     "explain": "An idea or situation: hynny (in speech also hwnna).",
+     "skills": [
+      "dem-pron"
+     ]
+    },
+    {
+     "id": "p17-13",
+     "type": "tiles",
+     "en": "these shoes",
+     "answer": "yr esgidiau 'ma",
+     "distractors": [
+      "hwn",
+      "hon",
+      "'na",
+      "esgid",
+      "y"
+     ],
+     "explain": "Plural, spoken: 'ma (carefully: yr esgidiau hyn).",
+     "skills": [
+      "dem-colloq"
+     ],
+     "alts": [
+      "yr esgidiau hyn"
+     ]
+    },
+    {
+     "id": "p17-14",
+     "type": "mc",
+     "prompt": "Which one do you want, this one or that one? (masculine)",
+     "options": [
+      "Pa un dych chi eisiau, hwn neu hwnna?",
+      "Pa un dych chi eisiau, hon neu honna?",
+      "Pa un dych chi eisiau, hyn neu hynny?",
+      "Pa un dych chi eisiau, 'ma neu 'na?",
+      "Pa un dych chi'n eisiau, hwn neu hwnna?",
+      "Pwy un dych chi eisiau, hwn neu hwnna?"
+     ],
+     "answer": 0,
+     "explain": "Masculine pronouns: hwn (this one), hwnna (that one). 'Ma and 'na only follow a noun.",
+     "skills": [
+      "dem-pron"
+     ]
+    }
+   ],
+   "term": "Demonstratives (this, that, these, those)",
+   "termDef": "Demonstratives point to something by nearness. As determiners they go with a noun (this book: y llyfr hwn); as pronouns they stand alone (this one: hwn). This / these are near; that / those are further away or already mentioned."
+  },
+  {
+   "id": "p6",
+   "section": "mutations",
+   "icon": "pin",
+   "title": "Nasal mutation: yn (in)",
+   "subtitle": "yng Nghaerdydd",
+   "colour": "#06B6D4",
+   "rule": "<p><b>yn = in</b> causes nasal mutation, and changes its own shape to match:</p><table><tr><td>c → ngh</td><td>yng Nghaerdydd</td></tr><tr><td>g → ng</td><td>yng Ngwynedd</td></tr><tr><td>p → mh</td><td>ym Mhen-y-bont</td></tr><tr><td>b → m</td><td>ym Mangor</td></tr><tr><td>t → nh</td><td>yn Nhregaron</td></tr><tr><td>d → n</td><td>yn Ninbych</td></tr></table><p>Other letters don't change: <i>yn Llundain, yn Aberystwyth</i>.</p><p><b>yn</b> is for definite places (names, <i>y / 'r</i>): <i>yn y tŷ</i>. For <b>a</b> / any: <i>mewn tŷ</i> (in a house).</p>",
+   "questions": [
+    {
+     "id": "p6-01",
+     "type": "mc",
+     "prompt": "in Cardiff",
+     "options": [
+      "yng Nghaerdydd",
+      "yn Caerdydd",
+      "yn Nghaerdydd",
+      "yng Caerdydd",
+      "yn Gaerdydd",
+      "ym Nghaerdydd"
+     ],
+     "answer": 0,
+     "explain": "c → ngh, and yn → yng.",
+     "skills": [
+      "nas-yn",
+      "nas-yn-form"
+     ]
+    },
+    {
+     "id": "p6-02",
+     "type": "type",
+     "text": "Dw i'n byw ym ___.",
+     "hint": "Bangor",
+     "en": "I live in Bangor.",
+     "answer": "Mangor",
+     "alts": [],
+     "explain": "b → m.",
+     "skills": [
+      "nas-yn"
+     ]
+    },
+    {
+     "id": "p6-03",
+     "type": "type",
+     "text": "Mae hi'n gweithio yn ___.",
+     "hint": "Tregaron",
+     "en": "She works in Tregaron.",
+     "answer": "Nhregaron",
+     "alts": [],
+     "explain": "t → nh.",
+     "skills": [
+      "nas-yn"
+     ]
+    },
+    {
+     "id": "p6-04",
+     "type": "mc",
+     "prompt": "in Bridgend (Pen-y-bont)",
+     "options": [
+      "ym Mhen-y-bont",
+      "yn Mhen-y-bont",
+      "ym Pen-y-bont",
+      "yn Phen-y-bont",
+      "yn Ben-y-bont",
+      "ym Mben-y-bont"
+     ],
+     "answer": 0,
+     "explain": "p → mh, and yn → ym.",
+     "skills": [
+      "nas-yn",
+      "nas-yn-form"
+     ]
+    },
+    {
+     "id": "p6-05",
+     "type": "mc",
+     "prompt": "in London",
+     "options": [
+      "yn Llundain",
+      "yng Llundain",
+      "yn Lundain",
+      "ym Llundain",
+      "yn Nllundain",
+      "mewn Llundain"
+     ],
+     "answer": 0,
+     "explain": "Only c, p, t, g, b, d change. Ll stays.",
+     "skills": [
+      "nas-yn",
+      "mut-none"
+     ]
+    },
+    {
+     "id": "p6-06",
+     "type": "tiles",
+     "en": "My sister lives in Gwynedd.",
+     "answer": "Mae fy chwaer yn byw yng Ngwynedd",
+     "distractors": [
+      "Gwynedd",
+      "ym",
+      "chwaer'n",
+      "Ngwynedd'n",
+      "yn"
+     ],
+     "explain": "g → ng, and yn → yng.",
+     "skills": [
+      "nas-yn",
+      "nas-yn-form"
+     ]
+    },
+    {
+     "id": "p6-07",
+     "type": "error",
+     "sentence": "Ro'n i'n byw yn Dinbych.",
+     "wrong": 4,
+     "fix": "Ro'n i'n byw yn Ninbych.",
+     "explain": "d → n after yn (in).",
+     "skills": [
+      "nas-yn"
+     ],
+     "tense": "Imperfect"
+    },
+    {
+     "id": "p6-08",
+     "type": "mc",
+     "prompt": "in a house",
+     "options": [
+      "mewn tŷ",
+      "yn tŷ",
+      "yn nhŷ",
+      "mewn nhŷ",
+      "yn y tŷ",
+      "ym tŷ"
+     ],
+     "answer": 0,
+     "explain": "In a (indefinite): mewn, no mutation. Yn y tŷ = in the house.",
+     "skills": [
+      "mewn"
+     ]
+    },
+    {
+     "id": "p6-09",
+     "type": "type",
+     "text": "Mae'r gêm yng ___.",
+     "hint": "Caernarfon",
+     "en": "The game is in Caernarfon.",
+     "answer": "Nghaernarfon",
+     "alts": [],
+     "explain": "c → ngh.",
+     "skills": [
+      "nas-yn"
+     ]
+    },
+    {
+     "id": "p6-10",
+     "type": "mc",
+     "prompt": "in Aberystwyth",
+     "options": [
+      "yn Aberystwyth",
+      "yng Aberystwyth",
+      "yn Naberystwyth",
+      "ym Aberystwyth",
+      "yn Haberystwyth",
+      "mewn Aberystwyth"
+     ],
+     "answer": 0,
+     "explain": "Vowels don't change.",
+     "skills": [
+      "nas-yn",
+      "mut-none"
+     ]
+    },
+    {
+     "id": "p6-11",
+     "type": "error",
+     "sentence": "Mae'r swyddfa yng Caerdydd.",
+     "wrong": 3,
+     "fix": "Mae'r swyddfa yng Nghaerdydd.",
+     "explain": "c → ngh after yn (in).",
+     "skills": [
+      "nas-yn"
+     ]
+    },
+    {
+     "id": "p6-12",
+     "type": "type",
+     "text": "Ces i fy ngeni ym ___.",
+     "hint": "Bethesda",
+     "en": "I was born in Bethesda.",
+     "answer": "Methesda",
+     "alts": [],
+     "explain": "b → m.",
+     "skills": [
+      "nas-yn"
+     ],
+     "tense": "Simple past"
+    },
+    {
+     "id": "p6-13",
+     "type": "mc",
+     "prompt": "in Treorchy (Treorci)",
+     "options": [
+      "yn Nhreorci",
+      "yn Treorci",
+      "ym Nhreorci",
+      "yn Dreorci",
+      "yng Nhreorci",
+      "yn Threorci"
+     ],
+     "answer": 0,
+     "explain": "t → nh, and yn stays yn.",
+     "skills": [
+      "nas-yn",
+      "nas-yn-form"
+     ]
+    },
+    {
+     "id": "p6-14",
+     "type": "tiles",
+     "en": "We were on holiday in Barmouth (Bermo).",
+     "answer": "Ro'n ni ar wyliau ym Mermo",
+     "distractors": [
+      "Bermo",
+      "yn",
+      "Fermo",
+      "gwyliau",
+      "Roedd",
+      "mewn"
+     ],
+     "explain": "b → m, and yn → ym.",
+     "skills": [
+      "nas-yn",
+      "nas-yn-form"
+     ],
+     "tense": "Imperfect"
+    }
+   ],
+   "term": "Nasal mutation (treiglad trwynol)",
+   "termDef": "Nasal mutation changes p→mh, t→nh, c→ngh, b→m, d→n, g→ng. Its main triggers are fy (my) and yn meaning 'in'."
+  },
+  {
+   "id": "p7",
+   "section": "mutations",
+   "icon": "wind",
+   "title": "Aspirate mutation",
+   "subtitle": "a, â, gyda, tri, chwe",
+   "colour": "#D946EF",
+   "rule": "<p>Only <b>c, p, t</b> change: c → <b>ch</b>, p → <b>ph</b>, t → <b>th</b>.</p><table><tr><td>a (and)</td><td>bara a chaws</td></tr><tr><td>â, gyda (with)</td><td>gyda Thom</td></tr><tr><td>tri (3, masculine)</td><td>tri phlentyn</td></tr><tr><td>chwe (6)</td><td>chwe chath</td></tr><tr><td>ei (her)</td><td>ei thad hi</td></tr><tr><td>tua (about)</td><td>tua thri o'r gloch</td></tr><tr><td>na (than / nor)</td><td>yn dalach na Thom</td></tr></table><p><b>Before a vowel</b> a → <i>ac</i>, â → <i>ag</i>, gyda → <i>gydag</i>: <i>afal ac oren</i>.</p><p><b>Tair</b> (3, feminine) causes no mutation: <i>tair cath</i>.</p>",
+   "questions": [
+    {
+     "id": "p7-01",
+     "type": "type",
+     "text": "bara a ___",
+     "hint": "caws",
+     "en": "bread and cheese",
+     "answer": "chaws",
+     "alts": [],
+     "explain": "a (and) + aspirate: c → ch.",
+     "skills": [
+      "asp-a"
+     ]
+    },
+    {
+     "id": "p7-02",
+     "type": "mc",
+     "prompt": "tea and coffee",
+     "options": [
+      "te a choffi",
+      "te a coffi",
+      "te a goffi",
+      "te ac coffi",
+      "te a nghoffi",
+      "te ac choffi"
+     ],
+     "answer": 0,
+     "explain": "a + aspirate: c → ch. (ac only before a vowel.)",
+     "skills": [
+      "asp-a"
+     ]
+    },
+    {
+     "id": "p7-03",
+     "type": "type",
+     "text": "tri ___",
+     "hint": "plentyn",
+     "en": "three children",
+     "answer": "phlentyn",
+     "alts": [],
+     "explain": "tri + singular + aspirate: p → ph.",
+     "skills": [
+      "asp-num"
+     ]
+    },
+    {
+     "id": "p7-04",
+     "type": "mc",
+     "prompt": "six cats",
+     "options": [
+      "chwe chath",
+      "chwe cath",
+      "chwe gath",
+      "chwech cath",
+      "chwe cathod",
+      "chwech chath"
+     ],
+     "answer": 0,
+     "explain": "chwe before a noun (chwech on its own) + aspirate.",
+     "skills": [
+      "asp-num"
+     ]
+    },
+    {
+     "id": "p7-05",
+     "type": "type",
+     "text": "Ewch gyda ___.",
+     "hint": "Tom",
+     "en": "Go with Tom.",
+     "answer": "Thom",
+     "alts": [],
+     "explain": "gyda + aspirate: T → Th.",
+     "skills": [
+      "asp-a"
+     ]
+    },
+    {
+     "id": "p7-06",
+     "type": "mc",
+     "prompt": "her father",
+     "options": [
+      "ei thad hi",
+      "ei dad hi",
+      "ei nhad hi",
+      "ei tad hi",
+      "ei thad e",
+      "ei ddad hi"
+     ],
+     "answer": 0,
+     "explain": "ei (her) + aspirate. ei dad e = his father.",
+     "skills": [
+      "asp-ei"
+     ]
+    },
+    {
+     "id": "p7-07",
+     "type": "mc",
+     "prompt": "about three o'clock",
+     "options": [
+      "tua thri o'r gloch",
+      "tua tri o'r gloch",
+      "tua dri o'r gloch",
+      "tua nhri o'r gloch",
+      "tua thri o'r cloch",
+      "tuag tri o'r gloch"
+     ],
+     "answer": 0,
+     "explain": "tua + aspirate: t → th.",
+     "skills": [
+      "asp-other"
+     ]
+    },
+    {
+     "id": "p7-08",
+     "type": "tiles",
+     "en": "I went with Catrin and Pedr.",
+     "answer": "Es i gyda Chatrin a Phedr",
+     "distractors": [
+      "Catrin",
+      "Pedr",
+      "Gatrin",
+      "Bedr",
+      "ac",
+      "gydag"
+     ],
+     "explain": "gyda and a both aspirate: C → Ch, P → Ph.",
+     "skills": [
+      "asp-a"
+     ]
+    },
+    {
+     "id": "p7-09",
+     "type": "error",
+     "sentence": "Dw i'n hoffi te a coffi.",
+     "wrong": 5,
+     "fix": "Dw i'n hoffi te a choffi.",
+     "explain": "a (and) + aspirate: c → ch.",
+     "skills": [
+      "asp-a"
+     ]
+    },
+    {
+     "id": "p7-10",
+     "type": "type",
+     "text": "Mae hi'n dalach na ___.",
+     "hint": "Tom",
+     "en": "She's taller than Tom.",
+     "answer": "Thom",
+     "alts": [],
+     "explain": "na (than) + aspirate.",
+     "skills": [
+      "asp-other",
+      "cmp-na"
+     ]
+    },
+    {
+     "id": "p7-11",
+     "type": "mc",
+     "prompt": "three cars",
+     "options": [
+      "tri char",
+      "tri car",
+      "tri gar",
+      "tri cheir",
+      "tri ceir",
+      "tair char"
+     ],
+     "answer": 0,
+     "explain": "Car is masculine: tri + singular + aspirate.",
+     "skills": [
+      "asp-num"
+     ]
+    },
+    {
+     "id": "p7-12",
+     "type": "error",
+     "sentence": "Mae tri cath yn yr ardd.",
+     "wrong": 1,
+     "fix": "Mae tair cath yn yr ardd.",
+     "explain": "Cath is feminine: tair, which causes no mutation.",
+     "skills": [
+      "asp-num",
+      "num-gender"
+     ]
+    },
+    {
+     "id": "p7-13",
+     "type": "type",
+     "text": "afal ___ oren",
+     "hint": "and",
+     "en": "an apple and an orange",
+     "answer": "ac",
+     "alts": [],
+     "explain": "Before a vowel, a → ac.",
+     "skills": [
+      "asp-a"
+     ]
+    },
+    {
+     "id": "p7-14",
+     "type": "mc",
+     "prompt": "with Paul",
+     "options": [
+      "gyda Phaul",
+      "gyda Paul",
+      "gyda Baul",
+      "gyda Mhaul",
+      "gydag Paul",
+      "gyda Ffaul"
+     ],
+     "answer": 0,
+     "explain": "gyda + aspirate: P → Ph. (gydag only before a vowel.)",
+     "skills": [
+      "asp-a"
+     ]
+    }
+   ],
+   "term": "Aspirate mutation (treiglad llaes)",
+   "termDef": "Aspirate mutation only affects c→ch, p→ph, t→th. Its triggers include a (and), â / gyda (with), tri, chwe, ei (her), tua and na."
+  },
+  {
+   "id": "p8",
+   "section": "sentences",
+   "icon": "at",
+   "title": "Inflected prepositions",
+   "subtitle": "arna i, ata i, amdana i",
+   "colour": "#22C55E",
+   "rule": "<p>Some prepositions take a personal ending before a pronoun.</p><table><tr><th></th><th>ar (on)</th><th>at (to, towards)</th><th>am (about, for)</th></tr><tr><td>i</td><td>arna i</td><td>ata i</td><td>amdana i</td></tr><tr><td>ti</td><td>arnat ti</td><td>atat ti</td><td>amdanat ti</td></tr><tr><td>fe</td><td>arno fe</td><td>ato fe</td><td>amdano fe</td></tr><tr><td>hi</td><td>arni hi</td><td>ati hi</td><td>amdani hi</td></tr><tr><td>ni</td><td>arnon ni</td><td>aton ni</td><td>amdanon ni</td></tr><tr><td>chi</td><td>arnoch chi</td><td>atoch chi</td><td>amdanoch chi</td></tr><tr><td>nhw</td><td>arnyn nhw</td><td>atyn nhw</td><td>amdanyn nhw</td></tr></table><p><b>Feelings sit 'on' you:</b> <i>Mae annwyd arna i</i> (I've a cold), <i>ofn</i> (afraid), <i>syched</i> (thirsty), <i>eisiau bwyd</i> (hungry), <i>hiraeth</i> (longing). Questions: <i>Oes ofn arni hi?</i></p><p><b>Verbs that need them:</b> edrych ar, gwrando ar, aros am, meddwl am, poeni am, ysgrifennu at, anfon at.</p>",
+   "questions": [
+    {
+     "id": "p8-01",
+     "type": "type",
+     "text": "Mae annwyd ___ i.",
+     "hint": "ar",
+     "en": "I've got a cold.",
+     "answer": "arna",
+     "alts": [],
+     "explain": "ar + i → arna i.",
+     "skills": [
+      "prep-ar",
+      "prep-feel"
+     ]
+    },
+    {
+     "id": "p8-02",
+     "type": "mc",
+     "prompt": "I'm thinking about you (ti).",
+     "options": [
+      "Dw i'n meddwl amdanat ti.",
+      "Dw i'n meddwl am ti.",
+      "Dw i'n meddwl amdano ti.",
+      "Dw i'n meddwl arnat ti.",
+      "Dw i'n meddwl amdanoch ti.",
+      "Dw i'n meddwl atat ti."
+     ],
+     "answer": 0,
+     "explain": "meddwl am; am + ti → amdanat ti.",
+     "skills": [
+      "prep-am"
+     ]
+    },
+    {
+     "id": "p8-03",
+     "type": "type",
+     "text": "Edrychwch ___ fe!",
+     "hint": "ar",
+     "en": "Look at him!",
+     "answer": "arno",
+     "alts": [],
+     "explain": "ar + fe → arno fe.",
+     "skills": [
+      "prep-ar"
+     ]
+    },
+    {
+     "id": "p8-04",
+     "type": "mc",
+     "prompt": "Is she afraid?",
+     "options": [
+      "Oes ofn arni hi?",
+      "Ydy ofn arni hi?",
+      "Oes ofn ar hi?",
+      "Oes ofn arno hi?",
+      "Ydy hi'n ofn?",
+      "Oes ofn ati hi?"
+     ],
+     "answer": 0,
+     "explain": "Feelings: Oes + feeling + ar + person.",
+     "skills": [
+      "prep-feel"
+     ]
+    },
+    {
+     "id": "p8-05",
+     "type": "tiles",
+     "en": "I wrote to them.",
+     "answer": "Ysgrifennais i atyn nhw",
+     "distractors": [
+      "at",
+      "arnyn",
+      "nhw'n",
+      "iddyn",
+      "ato",
+      "Ysgrifennu"
+     ],
+     "explain": "ysgrifennu at; at + nhw → atyn nhw.",
+     "skills": [
+      "prep-at"
+     ],
+     "tense": "Simple past"
+    },
+    {
+     "id": "p8-06",
+     "type": "error",
+     "sentence": "Gwrandewch ar fi!",
+     "wrong": 1,
+     "fix": "Gwrandewch arna i!",
+     "explain": "ar + me → arna i.",
+     "skills": [
+      "prep-ar"
+     ]
+    },
+    {
+     "id": "p8-07",
+     "type": "type",
+     "text": "Mae syched ___ ni.",
+     "hint": "ar",
+     "en": "We're thirsty.",
+     "answer": "arnon",
+     "alts": [],
+     "explain": "ar + ni → arnon ni.",
+     "skills": [
+      "prep-ar",
+      "prep-feel"
+     ]
+    },
+    {
+     "id": "p8-08",
+     "type": "mc",
+     "prompt": "about him",
+     "options": [
+      "amdano fe",
+      "am fe",
+      "amdani fe",
+      "arno fe",
+      "amdanyn fe",
+      "amdanat fe"
+     ],
+     "answer": 0,
+     "explain": "am + fe → amdano fe.",
+     "skills": [
+      "prep-am"
+     ]
+    },
+    {
+     "id": "p8-09",
+     "type": "type",
+     "text": "Anfonais i neges ___ hi.",
+     "hint": "at",
+     "en": "I sent her a message.",
+     "answer": "ati",
+     "alts": [],
+     "explain": "at + hi → ati hi.",
+     "skills": [
+      "prep-at"
+     ],
+     "tense": "Simple past"
+    },
+    {
+     "id": "p8-10",
+     "type": "mc",
+     "prompt": "We're hungry.",
+     "options": [
+      "Mae eisiau bwyd arnon ni.",
+      "Dyn ni'n eisiau bwyd.",
+      "Mae eisiau bwyd ar ni.",
+      "Mae eisiau bwyd arnyn ni.",
+      "Mae eisiau bwyd gyda ni.",
+      "Mae bwyd arnon ni."
+     ],
+     "answer": 0,
+     "explain": "Hungry = eisiau bwyd ar + person.",
+     "skills": [
+      "prep-feel"
+     ]
+    },
+    {
+     "id": "p8-11",
+     "type": "error",
+     "sentence": "Mae hiraeth arnyn fe.",
+     "wrong": 2,
+     "fix": "Mae hiraeth arno fe.",
+     "explain": "Match the person: arno fe (him), arnyn nhw (them).",
+     "skills": [
+      "prep-ar"
+     ]
+    },
+    {
+     "id": "p8-12",
+     "type": "tiles",
+     "en": "Wait for me! (chi)",
+     "answer": "Arhoswch amdana i",
+     "distractors": [
+      "am",
+      "fi",
+      "ata",
+      "arna",
+      "Aros",
+      "i'n"
+     ],
+     "explain": "aros am; am + i → amdana i.",
+     "skills": [
+      "prep-am"
+     ]
+    },
+    {
+     "id": "p8-13",
+     "type": "mc",
+     "prompt": "I'm worried about them.",
+     "options": [
+      "Dw i'n poeni amdanyn nhw.",
+      "Dw i'n poeni am nhw.",
+      "Dw i'n poeni amdanon nhw.",
+      "Dw i'n poeni arnyn nhw.",
+      "Dw i'n poeni amdano nhw.",
+      "Dw i'n poeni atyn nhw."
+     ],
+     "answer": 0,
+     "explain": "poeni am; am + nhw → amdanyn nhw.",
+     "skills": [
+      "prep-am"
+     ]
+    },
+    {
+     "id": "p8-14",
+     "type": "type",
+     "text": "Beth sy'n bod ___ ti?",
+     "hint": "ar",
+     "en": "What's wrong with you?",
+     "answer": "arnat",
+     "alts": [],
+     "explain": "ar + ti → arnat ti.",
+     "skills": [
+      "prep-ar"
+     ]
+    }
+   ],
+   "term": "Inflected prepositions",
+   "termDef": "A preposition shows a relationship of place, direction or topic: on, to, about. Inflected (conjugated) prepositions take a personal ending before a pronoun: ar + i → arna i."
+  },
+  {
+   "id": "p9",
+   "section": "sentences",
+   "icon": "quote",
+   "title": "'That' clauses",
+   "subtitle": "bod, fy mod i",
+   "colour": "#F59E0B",
+   "rule": "<p>After saying, thinking, knowing etc., <b>mae / roedd becomes bod</b>: <i>Dw i'n credu bod hi'n bwrw glaw.</i> It covers is, are, was and were. <i>Dwedodd e bod y bws yn hwyr.</i></p><p><b>With pronouns</b> (careful style; colloquially <i>bod fi, bod ti</i>…):</p><table><tr><td>fy mod i</td><td>ein bod ni</td></tr><tr><td>dy fod ti</td><td>eich bod chi</td></tr><tr><td>ei fod e</td><td>eu bod nhw</td></tr><tr><td>ei bod hi</td><td></td></tr></table><p>The mutations are the usual possessive ones: <i>fy</i> nasal (mod), <i>dy / ei (his)</i> soft (fod), <i>ei (her)</i> none (bod).</p><p><b>Had / has done:</b> bod … wedi: <i>Clywais i eich bod chi wedi gadael.</i></p>",
+   "questions": [
+    {
+     "id": "p9-01",
+     "type": "mc",
+     "prompt": "I think it's raining.",
+     "options": [
+      "Dw i'n credu bod hi'n bwrw glaw.",
+      "Dw i'n credu mae hi'n bwrw glaw.",
+      "Dw i'n credu bod hi bwrw glaw.",
+      "Dw i'n credu ydy hi'n bwrw glaw.",
+      "Dw i'n credu bod hi'n bwrw'n glaw.",
+      "Dw i'n credu yn bod hi'n bwrw glaw."
+     ],
+     "answer": 0,
+     "explain": "After credu: bod replaces mae.",
+     "skills": [
+      "that-bod"
+     ]
+    },
+    {
+     "id": "p9-02",
+     "type": "type",
+     "text": "Mae Siân yn dweud ___ hi'n brysur.",
+     "hint": "that",
+     "en": "Siân says she's busy.",
+     "answer": "bod",
+     "alts": [
+      "fod"
+     ],
+     "explain": "that (is) = bod.",
+     "skills": [
+      "that-bod"
+     ]
+    },
+    {
+     "id": "p9-03",
+     "type": "mc",
+     "prompt": "I know that he's at home.",
+     "options": [
+      "Dw i'n gwybod ei fod e gartre.",
+      "Dw i'n gwybod ei bod e gartre.",
+      "Dw i'n gwybod ei fod hi gartre.",
+      "Dw i'n gwybod mae e gartre.",
+      "Dw i'n gwybod ei mod e gartre.",
+      "Dw i'n gwybod fy mod e gartre."
+     ],
+     "answer": 0,
+     "explain": "He: ei fod e (soft mutation after ei = his).",
+     "skills": [
+      "that-pron"
+     ]
+    },
+    {
+     "id": "p9-04",
+     "type": "type",
+     "text": "Dw i'n siŵr ei ___ hi'n iawn.",
+     "hint": "bod (her)",
+     "en": "I'm sure she's OK.",
+     "answer": "bod",
+     "alts": [],
+     "explain": "ei (her): b doesn't change → ei bod hi.",
+     "skills": [
+      "that-pron"
+     ]
+    },
+    {
+     "id": "p9-05",
+     "type": "type",
+     "text": "Mae'n amlwg fy ___ i'n hwyr.",
+     "hint": "bod (my)",
+     "en": "It's obvious I'm late.",
+     "answer": "mod",
+     "alts": [],
+     "explain": "fy + nasal mutation: b → m.",
+     "skills": [
+      "that-pron",
+      "mut-nasal"
+     ]
+    },
+    {
+     "id": "p9-06",
+     "type": "tiles",
+     "en": "He said that they were tired.",
+     "answer": "Dwedodd e eu bod nhw wedi blino",
+     "distractors": [
+      "ei",
+      "fod",
+      "maen",
+      "roedden",
+      "mod",
+      "yn"
+     ],
+     "explain": "They: eu bod nhw. Bod also covers 'were'.",
+     "skills": [
+      "that-pron"
+     ],
+     "alts": [
+      "Dwedodd e bod nhw wedi blino"
+     ],
+     "tense": "Simple past"
+    },
+    {
+     "id": "p9-07",
+     "type": "mc",
+     "prompt": "I heard that you (chi) had left.",
+     "options": [
+      "Clywais i eich bod chi wedi gadael.",
+      "Clywais i eich fod chi wedi gadael.",
+      "Clywais i eich bod chi'n wedi gadael.",
+      "Clywais i roeddech chi wedi gadael.",
+      "Clywais i eu bod chi wedi gadael.",
+      "Clywais i ein bod chi wedi gadael."
+     ],
+     "answer": 0,
+     "explain": "You (chi): eich bod chi; had left: wedi gadael.",
+     "skills": [
+      "that-pron",
+      "perf-wedi"
+     ],
+     "tense": "Pluperfect"
+    },
+    {
+     "id": "p9-08",
+     "type": "error",
+     "sentence": "Dw i'n meddwl mae'r siop ar gau.",
+     "wrong": 3,
+     "fix": "Dw i'n meddwl bod y siop ar gau.",
+     "explain": "After meddwl / credu / gwybod, mae becomes bod.",
+     "skills": [
+      "that-bod"
+     ]
+    },
+    {
+     "id": "p9-09",
+     "type": "mc",
+     "prompt": "I'm glad you're (ti) here.",
+     "options": [
+      "Dw i'n falch dy fod ti yma.",
+      "Dw i'n falch dy bod ti yma.",
+      "Dw i'n falch ti fod yma.",
+      "Dw i'n falch wyt ti yma.",
+      "Dw i'n falch dy fod ti'n yma.",
+      "Dw i'n falch dy mod ti yma."
+     ],
+     "answer": 0,
+     "explain": "dy + soft mutation: dy fod ti. No 'n before yma.",
+     "skills": [
+      "that-pron"
+     ]
+    },
+    {
+     "id": "p9-10",
+     "type": "type",
+     "text": "Dwedon nhw ___ bod nhw'n dod.",
+     "hint": "their",
+     "en": "They said they were coming.",
+     "answer": "eu",
+     "alts": [],
+     "explain": "They: eu bod nhw.",
+     "skills": [
+      "that-pron"
+     ]
+    },
+    {
+     "id": "p9-11",
+     "type": "mc",
+     "prompt": "I didn't know that the shop had closed.",
+     "options": [
+      "Do'n i ddim yn gwybod bod y siop wedi cau.",
+      "Do'n i ddim yn gwybod bod y siop wedi gau.",
+      "Do'n i ddim yn gwybod roedd y siop wedi cau.",
+      "Do'n i ddim yn gwybod bod y siop yn wedi cau.",
+      "Do'n i ddim yn gwybod mae'r siop wedi cau.",
+      "Do'n i ddim yn gwybod bod siop wedi cau."
+     ],
+     "answer": 0,
+     "explain": "Had closed: bod … wedi cau (no mutation after wedi).",
+     "skills": [
+      "that-bod",
+      "perf-wedi"
+     ],
+     "tense": "Pluperfect"
+    },
+    {
+     "id": "p9-12",
+     "type": "error",
+     "sentence": "Mae e'n dweud ei bod e'n sâl.",
+     "wrong": 4,
+     "fix": "Mae e'n dweud ei fod e'n sâl.",
+     "explain": "He: ei fod e. Ei bod is for hi.",
+     "skills": [
+      "that-pron"
+     ]
+    },
+    {
+     "id": "p9-13",
+     "type": "tiles",
+     "en": "I think that we're late.",
+     "answer": "Dw i'n credu ein bod ni'n hwyr",
+     "distractors": [
+      "ei",
+      "mae",
+      "fod",
+      "dyn",
+      "fy",
+      "eu"
+     ],
+     "explain": "We: ein bod ni.",
+     "skills": [
+      "that-pron"
+     ],
+     "alts": [
+      "Dw i'n credu bod ni'n hwyr"
+     ]
+    },
+    {
+     "id": "p9-14",
+     "type": "type",
+     "text": "Gobeithio ___ ti'n well.",
+     "hint": "that (bod)",
+     "en": "Hope you're better.",
+     "answer": "bod",
+     "alts": [
+      "fod",
+      "dy fod"
+     ],
+     "explain": "Colloquially bod ti; carefully dy fod ti.",
+     "skills": [
+      "that-bod"
+     ]
+    }
+   ],
+   "term": "Noun clauses: reported speech ('that')",
+   "termDef": "A noun clause works as the object of a verb such as say, think or know: 'I think [that it's raining]'. Reporting what someone said this way is indirect (reported) speech. In Welsh, bod replaces mae / roedd in the clause."
+  },
+  {
+   "id": "p10",
+   "section": "verbs",
+   "icon": "no",
+   "title": "Negatives with mo",
+   "subtitle": "Welais i mo'r ffilm",
+   "colour": "#3B82F6",
+   "rule": "<p>With a <b>short-form verb</b> (past or future) and a <b>definite</b> object (the…, a name, a pronoun), <i>ddim</i> becomes <b>mo</b>:</p><p><i>Welais i mo'r ffilm</i> (I didn't see the film). <i>Welon ni mo Siân.</i></p><table><tr><td>mohono i</td><td>mohonon ni</td></tr><tr><td>mohonot ti</td><td>mohonoch chi</td></tr><tr><td>mohono fe / mohoni hi</td><td>mohonyn nhw</td></tr></table><p><b>Indefinite</b> object (a / any / none): keep <i>ddim</i>, no mutation: <i>Brynais i ddim car.</i></p><p><b>Bod sentences</b> never use mo: <i>Dw i ddim yn nabod y dyn.</i></p>",
+   "questions": [
+    {
+     "id": "p10-01",
+     "type": "mc",
+     "prompt": "I didn't see the film.",
+     "options": [
+      "Welais i mo'r ffilm.",
+      "Welais i ddim y ffilm.",
+      "Welais i mo ffilm.",
+      "Gwelais i mo'r ffilm.",
+      "Welais i mohono'r ffilm.",
+      "Welais i dim y ffilm."
+     ],
+     "answer": 0,
+     "explain": "Definite object after a short-form verb: mo'r (= ddim + o'r).",
+     "skills": [
+      "mo-def"
+     ]
+    },
+    {
+     "id": "p10-02",
+     "type": "type",
+     "text": "Chlywais i ___ newyddion.",
+     "hint": "not … the",
+     "en": "I didn't hear the news.",
+     "answer": "mo'r",
+     "alts": [],
+     "explain": "Definite: mo'r.",
+     "skills": [
+      "mo-def"
+     ]
+    },
+    {
+     "id": "p10-03",
+     "type": "mc",
+     "prompt": "I didn't see him.",
+     "options": [
+      "Welais i mohono fe.",
+      "Welais i ddim fe.",
+      "Welais i mo fe.",
+      "Welais i mohoni fe.",
+      "Welais i ddim ohono fe.",
+      "Welais i mohonon fe."
+     ],
+     "answer": 0,
+     "explain": "Pronoun: mo + ending: mohono fe.",
+     "skills": [
+      "mo-pron"
+     ]
+    },
+    {
+     "id": "p10-04",
+     "type": "mc",
+     "prompt": "I didn't buy a car.",
+     "options": [
+      "Brynais i ddim car.",
+      "Brynais i mo car.",
+      "Brynais i mo'r car.",
+      "Brynais i ddim gar.",
+      "Prynais i ddim car.",
+      "Brynais i dim car."
+     ],
+     "answer": 0,
+     "explain": "Indefinite object (a car): ddim, no mutation of car.",
+     "skills": [
+      "mo-vs-ddim"
+     ]
+    },
+    {
+     "id": "p10-05",
+     "type": "type",
+     "text": "Ddarllenon nhw ___ llyfr.",
+     "hint": "not … the",
+     "en": "They didn't read the book.",
+     "answer": "mo'r",
+     "alts": [],
+     "explain": "Definite: mo'r.",
+     "skills": [
+      "mo-def"
+     ]
+    },
+    {
+     "id": "p10-06",
+     "type": "error",
+     "sentence": "Welodd hi ddim y gêm.",
+     "wrong": 2,
+     "fix": "Welodd hi mo'r gêm.",
+     "explain": "Definite object: mo'r, not ddim y.",
+     "skills": [
+      "mo-def"
+     ]
+    },
+    {
+     "id": "p10-07",
+     "type": "type",
+     "text": "Chofiais i ___ hi.",
+     "hint": "not … her",
+     "en": "I didn't remember her.",
+     "answer": "mohoni",
+     "alts": [],
+     "explain": "Her: mohoni hi.",
+     "skills": [
+      "mo-pron"
+     ]
+    },
+    {
+     "id": "p10-08",
+     "type": "tiles",
+     "en": "We didn't see Siân.",
+     "answer": "Welon ni mo Siân",
+     "distractors": [
+      "ddim",
+      "mo'r",
+      "Gwelon",
+      "mohoni",
+      "y",
+      "ni'n"
+     ],
+     "explain": "A name is definite: mo, and no 'r.",
+     "skills": [
+      "mo-def"
+     ]
+    },
+    {
+     "id": "p10-09",
+     "type": "mc",
+     "prompt": "They didn't find the keys.",
+     "options": [
+      "Ffeindion nhw mo'r allweddi.",
+      "Ffeindion nhw ddim yr allweddi.",
+      "Ffeindion nhw mo allweddi.",
+      "Ffeindion nhw mohono'r allweddi.",
+      "Ffeindion nhw mohonyn yr allweddi.",
+      "Ffeindion nhw ddim mo'r allweddi."
+     ],
+     "answer": 0,
+     "explain": "Definite plural: still mo'r. (Ff never mutates.)",
+     "skills": [
+      "mo-def"
+     ]
+    },
+    {
+     "id": "p10-10",
+     "type": "mc",
+     "prompt": "I didn't see them.",
+     "options": [
+      "Welais i mohonyn nhw.",
+      "Welais i ddim nhw.",
+      "Welais i mohonon nhw.",
+      "Welais i mo nhw.",
+      "Welais i mohoni nhw.",
+      "Welais i mo'r nhw."
+     ],
+     "answer": 0,
+     "explain": "Them: mohonyn nhw.",
+     "skills": [
+      "mo-pron"
+     ]
+    },
+    {
+     "id": "p10-11",
+     "type": "error",
+     "sentence": "Brynodd e mo bara.",
+     "wrong": 2,
+     "fix": "Brynodd e ddim bara.",
+     "explain": "Indefinite (any bread): ddim, not mo.",
+     "skills": [
+      "mo-vs-ddim"
+     ]
+    },
+    {
+     "id": "p10-12",
+     "type": "type",
+     "text": "Ddeallais i ___ chi.",
+     "hint": "not … you (chi)",
+     "en": "I didn't understand you.",
+     "answer": "mohonoch",
+     "alts": [],
+     "explain": "You (chi): mohonoch chi.",
+     "skills": [
+      "mo-pron"
+     ]
+    },
+    {
+     "id": "p10-13",
+     "type": "mc",
+     "prompt": "I don't know the man.",
+     "options": [
+      "Dw i ddim yn nabod y dyn.",
+      "Dw i mo'n nabod y dyn.",
+      "Dw i ddim yn nabod mo'r dyn.",
+      "Dw i mo nabod y dyn.",
+      "Dw i mo'r yn nabod dyn.",
+      "Dw i ddim nabod y dyn."
+     ],
+     "answer": 0,
+     "explain": "Mo is only for short-form verbs. With bod + yn, just ddim.",
+     "skills": [
+      "mo-vs-ddim"
+     ],
+     "tense": "Present"
+    },
+    {
+     "id": "p10-14",
+     "type": "tiles",
+     "en": "She didn't drink the tea.",
+     "answer": "Yfodd hi mo'r te",
+     "distractors": [
+      "ddim",
+      "y",
+      "Yfais",
+      "yfed",
+      "mohono",
+      "hi'n"
+     ],
+     "explain": "Definite: mo'r te.",
+     "skills": [
+      "mo-def"
+     ]
+    }
+   ],
+   "term": "Negation with a definite object",
+   "tense": "Simple past",
+   "termDef": "Negative sentences with an inflected verb and a definite object (the…, a name or a pronoun) use mo instead of ddim. Definite means a specific known thing; indefinite means 'a' or 'any'."
+  },
+  {
+   "id": "p11",
+   "section": "verbs",
+   "icon": "megaphone",
+   "title": "Commands",
+   "subtitle": "Ewch, cer, paid",
+   "colour": "#E11D48",
+   "rule": "<p><b>Chi</b> (polite or plural): stem + <b>-wch</b>: <i>Eisteddwch, Edrychwch, Gwrandewch, Arhoswch, Rhowch</i>.</p><p><b>Ti</b> (friend, child): stem + <b>-a</b>: <i>Eistedda, Edrycha, Gwranda, Arhosa</i>.</p><table><tr><th></th><th>chi</th><th>ti (south)</th></tr><tr><td>go</td><td>Ewch</td><td>Cer</td></tr><tr><td>come</td><td>Dewch</td><td>Dere</td></tr><tr><td>do</td><td>Gwnewch</td><td>Gwna</td></tr><tr><td>give</td><td>Rhowch</td><td>Rho</td></tr></table><p><b>Don't:</b> <i>Peidiwch â</i> (chi) / <i>Paid â</i> (ti) + verbnoun with <b>aspirate</b>: <i>Peidiwch â phoeni. Paid â chyffwrdd.</i> Before a vowel â → <i>ag</i>: <i>Peidiwch ag anghofio.</i></p>",
+   "questions": [
+    {
+     "id": "p11-01",
+     "type": "type",
+     "text": "___ i mewn!",
+     "hint": "dod (chi)",
+     "en": "Come in!",
+     "answer": "Dewch",
+     "alts": [],
+     "explain": "Dod, chi: Dewch.",
+     "skills": [
+      "cmd-irr",
+      "cmd-chi"
+     ]
+    },
+    {
+     "id": "p11-02",
+     "type": "mc",
+     "prompt": "Go home! (ti, south)",
+     "options": [
+      "Cer adre!",
+      "Ewch adre!",
+      "Mynda adre!",
+      "Ea adre!",
+      "Myndwch adre!",
+      "Cerdda adre!"
+     ],
+     "answer": 0,
+     "explain": "Mynd, ti: Cer (Dos in the north). Ewch is chi.",
+     "skills": [
+      "cmd-irr",
+      "cmd-ti"
+     ]
+    },
+    {
+     "id": "p11-03",
+     "type": "type",
+     "text": "___ ar hwn!",
+     "hint": "edrych (chi)",
+     "en": "Look at this!",
+     "answer": "Edrychwch",
+     "alts": [],
+     "explain": "Stem + -wch.",
+     "skills": [
+      "cmd-chi"
+     ]
+    },
+    {
+     "id": "p11-04",
+     "type": "mc",
+     "prompt": "Don't worry! (chi)",
+     "options": [
+      "Peidiwch â phoeni!",
+      "Peidiwch â poeni!",
+      "Paid â phoeni!",
+      "Peidiwch poeni'n!",
+      "Peidiwch â boeni!",
+      "Peidiwch ddim poeni!"
+     ],
+     "answer": 0,
+     "explain": "Peidiwch â + aspirate: p → ph. Paid is for ti.",
+     "skills": [
+      "cmd-neg",
+      "mut-aspirate"
+     ]
+    },
+    {
+     "id": "p11-05",
+     "type": "type",
+     "text": "Paid â ___!",
+     "hint": "cyffwrdd",
+     "en": "Don't touch!",
+     "answer": "chyffwrdd",
+     "alts": [],
+     "explain": "â + aspirate: c → ch.",
+     "skills": [
+      "cmd-neg",
+      "mut-aspirate"
+     ]
+    },
+    {
+     "id": "p11-06",
+     "type": "tiles",
+     "en": "Sit down, please (chi).",
+     "answer": "Eisteddwch os gwelwch yn dda",
+     "distractors": [
+      "Eistedda",
+      "gweli",
+      "Eistedd",
+      "di",
+      "plîs"
+     ],
+     "explain": "Chi: -wch; please: os gwelwch yn dda.",
+     "skills": [
+      "cmd-chi"
+     ],
+     "tense": "Imperative"
+    },
+    {
+     "id": "p11-07",
+     "type": "mc",
+     "prompt": "Come here! (ti, south)",
+     "options": [
+      "Dere 'ma!",
+      "Dewch 'ma!",
+      "Doa 'ma!",
+      "Dod 'ma!",
+      "Dera 'ma!",
+      "Deriwch 'ma!"
+     ],
+     "answer": 0,
+     "explain": "Dod, ti: Dere (Tyrd in the north).",
+     "skills": [
+      "cmd-irr",
+      "cmd-ti"
+     ]
+    },
+    {
+     "id": "p11-08",
+     "type": "error",
+     "sentence": "Peidiwch â talu nawr.",
+     "wrong": 2,
+     "fix": "Peidiwch â thalu nawr.",
+     "explain": "â + aspirate: t → th.",
+     "skills": [
+      "cmd-neg",
+      "mut-aspirate"
+     ]
+    },
+    {
+     "id": "p11-09",
+     "type": "type",
+     "text": "___ hwnna i fi!",
+     "hint": "rhoi (ti)",
+     "en": "Give me that!",
+     "answer": "Rho",
+     "alts": [],
+     "explain": "Rhoi, ti: Rho (chi: Rhowch).",
+     "skills": [
+      "cmd-irr",
+      "cmd-ti"
+     ]
+    },
+    {
+     "id": "p11-10",
+     "type": "mc",
+     "prompt": "Listen! (chi)",
+     "options": [
+      "Gwrandewch!",
+      "Gwrandawch!",
+      "Gwrandwch!",
+      "Gwrandowch!",
+      "Gwranda!",
+      "Gwrando!"
+     ],
+     "answer": 0,
+     "explain": "Gwrando, chi: Gwrandewch. Gwranda is ti.",
+     "skills": [
+      "cmd-chi"
+     ]
+    },
+    {
+     "id": "p11-11",
+     "type": "type",
+     "text": "Peidiwch ___ anghofio!",
+     "hint": "with (before a vowel)",
+     "en": "Don't forget!",
+     "answer": "ag",
+     "alts": [],
+     "explain": "Before a vowel, â → ag.",
+     "skills": [
+      "cmd-neg"
+     ]
+    },
+    {
+     "id": "p11-12",
+     "type": "mc",
+     "prompt": "Do it now! (ti)",
+     "options": [
+      "Gwna fe nawr!",
+      "Gwnewch fe nawr!",
+      "Gwneud fe nawr!",
+      "Gwnes fe nawr!",
+      "Gwnei fe nawr!",
+      "Gwnâ'n fe nawr!"
+     ],
+     "answer": 0,
+     "explain": "Gwneud, ti: Gwna. Gwnewch is chi.",
+     "skills": [
+      "cmd-irr",
+      "cmd-ti"
+     ]
+    },
+    {
+     "id": "p11-13",
+     "type": "tiles",
+     "en": "Don't be late! (ti)",
+     "answer": "Paid â bod yn hwyr",
+     "distractors": [
+      "Peidiwch",
+      "fod",
+      "ddim",
+      "phod",
+      "Bydd",
+      "ag"
+     ],
+     "explain": "Paid â + bod (b doesn't aspirate).",
+     "skills": [
+      "cmd-neg"
+     ]
+    },
+    {
+     "id": "p11-14",
+     "type": "error",
+     "sentence": "Edrycha, Mr Jones!",
+     "wrong": 0,
+     "fix": "Edrychwch, Mr Jones!",
+     "explain": "Someone you'd call chi: -wch.",
+     "skills": [
+      "cmd-chi"
+     ]
+    }
+   ],
+   "term": "Imperative mood",
+   "tense": "Imperative",
+   "termDef": "The imperative mood gives commands, instructions and requests: 'Sit down', 'Don't worry'. Welsh has a familiar singular form (ti) and a polite or plural form (chi). A negative imperative uses paid / peidiwch â."
+  },
+  {
+   "id": "p13",
+   "section": "sentences",
+   "icon": "spot",
+   "title": "Emphatic sentences",
+   "subtitle": "Fi sy'n...",
+   "colour": "#10B981",
+   "rule": "<p>Put the important word <b>first</b>.</p><p><b>Subject first → sy:</b> <i>Fi sy'n gyrru</i> (It's me who's driving). <i>Pwy sy'n dod?</i> Never <i>Pwy mae</i>.</p><p><b>Past:</b> subject + short-form verb (3rd person): <i>Tom enillodd</i> (It was Tom who won). <i>Pwy wnaeth e?</i> (Who did it?)</p><p><b>Identity:</b> <i>Athro ydy e</i> (He's a teacher). <i>Meddyg dw i.</i> <i>Cymraes ydy hi.</i></p><p><b>Anything else first</b> keeps the normal verb: <i>Yn y gegin mae hi. Coffi dw i eisiau.</i></p><p><b>Negative:</b> <i>Nid fi sy ar fai</i> (colloquially <i>Dim fi…</i>).</p>",
+   "questions": [
+    {
+     "id": "p13-01",
+     "type": "mc",
+     "prompt": "It's me who's driving.",
+     "options": [
+      "Fi sy'n gyrru.",
+      "Fi mae'n gyrru.",
+      "Fi ydy'n gyrru.",
+      "Dw i sy'n gyrru.",
+      "Mae fi'n gyrru.",
+      "Fi sydd'n gyrru."
+     ],
+     "answer": 0,
+     "explain": "Fronted subject + sy.",
+     "skills": [
+      "emph-sy"
+     ]
+    },
+    {
+     "id": "p13-02",
+     "type": "type",
+     "text": "Pwy ___ dod heno?",
+     "hint": "who is (doing)",
+     "en": "Who's coming tonight?",
+     "answer": "sy'n",
+     "alts": [
+      "sydd yn",
+      "sy yn"
+     ],
+     "explain": "Pwy as subject: Pwy sy'n…",
+     "skills": [
+      "emph-sy"
+     ]
+    },
+    {
+     "id": "p13-03",
+     "type": "mc",
+     "prompt": "He's a teacher. (emphatic)",
+     "options": [
+      "Athro ydy e.",
+      "Athro mae e.",
+      "Mae e athro.",
+      "Athro sy e.",
+      "Athro yw'n e.",
+      "Ydy e athro."
+     ],
+     "answer": 0,
+     "explain": "Identity: noun first, then ydy (also yw).",
+     "skills": [
+      "emph-ydy"
+     ]
+    },
+    {
+     "id": "p13-04",
+     "type": "tiles",
+     "en": "I'm a doctor. (emphatic)",
+     "answer": "Meddyg dw i",
+     "distractors": [
+      "Dw",
+      "sy",
+      "Mae",
+      "ydy",
+      "feddyg"
+     ],
+     "explain": "Noun first: Meddyg dw i.",
+     "skills": [
+      "emph-ydy"
+     ]
+    },
+    {
+     "id": "p13-05",
+     "type": "mc",
+     "prompt": "It was Tom who won.",
+     "options": [
+      "Tom enillodd.",
+      "Tom sy'n ennill.",
+      "Tom enillon.",
+      "Tom mae'n ennill.",
+      "Tom oedd ennill.",
+      "Tom ydy ennill."
+     ],
+     "answer": 0,
+     "explain": "Past emphatic: subject + 3rd-person past verb.",
+     "skills": [
+      "emph-sy"
+     ]
+    },
+    {
+     "id": "p13-06",
+     "type": "error",
+     "sentence": "Fi mae'n coginio heno.",
+     "wrong": 1,
+     "fix": "Fi sy'n coginio heno.",
+     "explain": "Fronted subject: sy, not mae.",
+     "skills": [
+      "emph-sy"
+     ]
+    },
+    {
+     "id": "p13-07",
+     "type": "type",
+     "text": "Pwy ___ e?",
+     "hint": "gwneud, past",
+     "en": "Who did it?",
+     "answer": "wnaeth",
+     "alts": [],
+     "explain": "Pwy + 3rd-person past: wnaeth.",
+     "skills": [
+      "emph-sy"
+     ]
+    },
+    {
+     "id": "p13-08",
+     "type": "type",
+     "text": "Nid ___ sy ar fai.",
+     "hint": "me",
+     "en": "It's not me who's to blame.",
+     "answer": "fi",
+     "alts": [],
+     "explain": "Nid + fronted subject + sy.",
+     "skills": [
+      "emph-sy"
+     ]
+    },
+    {
+     "id": "p13-09",
+     "type": "mc",
+     "prompt": "Is it you (chi) who's speaking?",
+     "options": [
+      "Chi sy'n siarad?",
+      "Chi mae'n siarad?",
+      "Ydych chi sy'n siarad?",
+      "Chi'n sy siarad?",
+      "Chi ydy'n siarad?",
+      "Sy chi'n siarad?"
+     ],
+     "answer": 0,
+     "explain": "Question: same order, rising tone.",
+     "skills": [
+      "emph-sy"
+     ]
+    },
+    {
+     "id": "p13-10",
+     "type": "tiles",
+     "en": "It's the children who are making the noise.",
+     "answer": "Y plant sy'n gwneud y sŵn",
+     "distractors": [
+      "mae",
+      "maen",
+      "plant'n",
+      "sydd",
+      "nhw'n"
+     ],
+     "explain": "Plural subject still takes sy.",
+     "skills": [
+      "emph-sy"
+     ]
+    },
+    {
+     "id": "p13-11",
+     "type": "mc",
+     "prompt": "Cymraes ydy hi.",
+     "options": [
+      "She's a Welshwoman.",
+      "She is speaking Welsh.",
+      "She's in Wales.",
+      "She was Welsh.",
+      "She's learning Welsh.",
+      "She likes Wales."
+     ],
+     "answer": 0,
+     "explain": "Identity, noun first: Cymraes ydy hi.",
+     "skills": [
+      "emph-ydy"
+     ],
+     "noType": true
+    },
+    {
+     "id": "p13-12",
+     "type": "error",
+     "sentence": "Pwy mae'n byw yma?",
+     "wrong": 1,
+     "fix": "Pwy sy'n byw yma?",
+     "explain": "Who as subject: Pwy sy…, never Pwy mae.",
+     "skills": [
+      "emph-sy"
+     ]
+    },
+    {
+     "id": "p13-13",
+     "type": "type",
+     "text": "Yn y gegin ___ hi.",
+     "hint": "is",
+     "en": "It's in the kitchen that she is.",
+     "answer": "mae",
+     "alts": [],
+     "explain": "Fronting a place keeps mae. Sy only replaces a fronted subject.",
+     "skills": [
+      "emph-other"
+     ]
+    },
+    {
+     "id": "p13-14",
+     "type": "mc",
+     "prompt": "It's coffee I want, not tea.",
+     "options": [
+      "Coffi dw i eisiau, nid te.",
+      "Coffi sy i eisiau, nid te.",
+      "Dw i coffi eisiau, nid te.",
+      "Coffi mae i eisiau, nid te.",
+      "Coffi dw i'n eisiau, nid te.",
+      "Coffi ydy i eisiau, nid te."
+     ],
+     "answer": 0,
+     "explain": "Object first: normal verb (dw i). Eisiau never takes 'n.",
+     "skills": [
+      "emph-other"
+     ]
+    }
+   ],
+   "term": "Emphatic (cleft) sentences",
+   "termDef": "A cleft sentence splits a statement to highlight one part: 'It's me who is driving'. Welsh does this by fronting: moving the emphasised element to the start of the sentence."
+  },
+  {
+   "id": "p14",
+   "section": "sentences",
+   "icon": "users",
+   "title": "Relative clauses",
+   "subtitle": "sy, a",
+   "colour": "#0284C7",
+   "rule": "<p><b>Who / which is:</b> <i>sy</i>: <i>y dyn sy'n byw drws nesa</i>. <i>y siop sy ar gau</i>.</p><p><b>Was / will be:</b> <i>oedd</i>, <i>fydd</i>: <i>y fenyw oedd yn canu</i>, <i>y bobl fydd yn dod</i>.</p><p><b>Short-form verbs:</b> <i>a</i> + soft mutation: <i>y llyfr a brynais i</i> (the book I bought), <i>y dyn a ffoniodd</i>. In speech <i>a</i> is often dropped but the mutation stays: <i>y ffilm welais i</i>.</p><p><b>Never pwy</b> in these: pwy is only for questions.</p><p><b>Negative:</b> <i>y plant sy ddim yn dod</i>.</p>",
+   "questions": [
+    {
+     "id": "p14-01",
+     "type": "mc",
+     "prompt": "the man who lives next door",
+     "options": [
+      "y dyn sy'n byw drws nesa",
+      "y dyn mae'n byw drws nesa",
+      "y dyn pwy sy'n byw drws nesa",
+      "y dyn sydd byw drws nesa",
+      "y dyn yn byw sy drws nesa",
+      "y dyn a'n byw drws nesa"
+     ],
+     "answer": 0,
+     "explain": "Who is (doing): sy'n.",
+     "skills": [
+      "rel-sy"
+     ]
+    },
+    {
+     "id": "p14-02",
+     "type": "type",
+     "text": "y llyfr a ___ i",
+     "hint": "prynu (I bought)",
+     "en": "the book I bought",
+     "answer": "brynais",
+     "alts": [
+      "brynes"
+     ],
+     "explain": "a + soft mutation: p → b.",
+     "skills": [
+      "rel-a",
+      "mut-soft"
+     ]
+    },
+    {
+     "id": "p14-03",
+     "type": "mc",
+     "prompt": "the woman who was singing",
+     "options": [
+      "y fenyw oedd yn canu",
+      "y fenyw sy'n canu",
+      "y fenyw roedd yn canu",
+      "y fenyw a oedd'n canu",
+      "y fenyw pwy oedd yn canu",
+      "y fenyw oedd canu"
+     ],
+     "answer": 0,
+     "explain": "Who was: oedd (not roedd).",
+     "skills": [
+      "rel-tense"
+     ]
+    },
+    {
+     "id": "p14-04",
+     "type": "tiles",
+     "en": "the film I saw yesterday",
+     "answer": "y ffilm a welais i ddoe",
+     "distractors": [
+      "gwelais",
+      "sy",
+      "oedd",
+      "gwelodd",
+      "pwy"
+     ],
+     "explain": "a + soft mutation: gwelais → welais.",
+     "skills": [
+      "rel-a"
+     ],
+     "alts": [
+      "y ffilm welais i ddoe"
+     ]
+    },
+    {
+     "id": "p14-05",
+     "type": "error",
+     "sentence": "Dyna'r dyn pwy sy'n gyrru.",
+     "wrong": 2,
+     "fix": "Dyna'r dyn sy'n gyrru.",
+     "explain": "Pwy is only for questions.",
+     "skills": [
+      "rel-sy"
+     ]
+    },
+    {
+     "id": "p14-06",
+     "type": "type",
+     "text": "y bobl ___ yn dod yfory",
+     "hint": "who will be",
+     "en": "the people who'll be coming tomorrow",
+     "answer": "fydd",
+     "alts": [],
+     "explain": "Who will be: fydd (soft-mutated bydd).",
+     "skills": [
+      "rel-tense"
+     ]
+    },
+    {
+     "id": "p14-07",
+     "type": "mc",
+     "prompt": "the children who aren't coming",
+     "options": [
+      "y plant sy ddim yn dod",
+      "y plant dyn nhw ddim yn dod",
+      "y plant sy'n ddim dod",
+      "y plant maen nhw ddim yn dod",
+      "y plant does dim yn dod",
+      "y plant sy ddim dod"
+     ],
+     "answer": 0,
+     "explain": "Negative: sy ddim yn…",
+     "skills": [
+      "rel-sy"
+     ]
+    },
+    {
+     "id": "p14-08",
+     "type": "type",
+     "text": "y gân a ___ hi",
+     "hint": "canu (she sang)",
+     "en": "the song she sang",
+     "answer": "ganodd",
+     "alts": [],
+     "explain": "a + soft mutation: c → g.",
+     "skills": [
+      "rel-a",
+      "mut-soft"
+     ]
+    },
+    {
+     "id": "p14-09",
+     "type": "mc",
+     "prompt": "the man who phoned",
+     "options": [
+      "y dyn a ffoniodd",
+      "y dyn a phoniodd",
+      "y dyn a foniodd",
+      "y dyn sy ffoniodd",
+      "y dyn pwy ffoniodd",
+      "y dyn a'n ffonio"
+     ],
+     "answer": 0,
+     "explain": "a + soft mutation, but ff never mutates.",
+     "skills": [
+      "rel-a",
+      "mut-none"
+     ]
+    },
+    {
+     "id": "p14-10",
+     "type": "error",
+     "sentence": "y car a prynodd e",
+     "wrong": 3,
+     "fix": "y car a brynodd e",
+     "explain": "a + soft mutation: p → b.",
+     "skills": [
+      "rel-a"
+     ]
+    },
+    {
+     "id": "p14-11",
+     "type": "mc",
+     "prompt": "the shop which is closed",
+     "options": [
+      "y siop sy ar gau",
+      "y siop sy'n ar gau",
+      "y siop mae ar gau",
+      "y siop a ar gau",
+      "y siop sydd'n ar gau",
+      "y siop sy gau"
+     ],
+     "answer": 0,
+     "explain": "sy + phrase like ar gau: no 'n.",
+     "skills": [
+      "rel-sy"
+     ]
+    },
+    {
+     "id": "p14-12",
+     "type": "tiles",
+     "en": "the people who were waiting",
+     "answer": "y bobl oedd yn aros",
+     "distractors": [
+      "sy'n",
+      "roedd",
+      "pwy",
+      "o'n",
+      "aros'n"
+     ],
+     "explain": "Who were: oedd (singular even for plurals).",
+     "skills": [
+      "rel-tense"
+     ]
+    },
+    {
+     "id": "p14-13",
+     "type": "type",
+     "text": "Dyma'r ferch a ___ y wobr.",
+     "hint": "ennill (she won)",
+     "en": "Here's the girl who won the prize.",
+     "answer": "enillodd",
+     "alts": [],
+     "explain": "Vowels don't mutate.",
+     "skills": [
+      "rel-a"
+     ]
+    },
+    {
+     "id": "p14-14",
+     "type": "mc",
+     "prompt": "everyone who's here",
+     "options": [
+      "pawb sy yma",
+      "pawb sy'n yma",
+      "pawb mae yma",
+      "pawb pwy yma",
+      "pawb sydd'n yma",
+      "pawb a yma"
+     ],
+     "answer": 0,
+     "explain": "sy + place word: no 'n.",
+     "skills": [
+      "rel-sy"
+     ]
+    }
+   ],
+   "term": "Relative clauses",
+   "termDef": "A relative clause describes a noun, like an adjective: 'the man [who lives next door]'. English uses relative pronouns (who, which, that). Welsh uses sy, a + soft mutation, oedd or fydd."
   }
  ],
  "skills": {
@@ -2662,6 +6393,429 @@
    "group": "point",
    "title": "Superlative",
    "blurb": "y gorau, tala, mwya diddorol"
+  },
+  "imp-statement": {
+   "group": "point",
+   "title": "Imperfect: statements",
+   "blurb": "Ro'n i, roedd e, ro'n nhw"
+  },
+  "imp-question": {
+   "group": "point",
+   "title": "Imperfect: questions",
+   "blurb": "O't ti? Oedd e? O'n nhw?"
+  },
+  "imp-answer": {
+   "group": "point",
+   "title": "Imperfect: yes / no",
+   "blurb": "O'n, oedd, nac oedd"
+  },
+  "imp-negative": {
+   "group": "point",
+   "title": "Imperfect: negatives",
+   "blurb": "Do'n i ddim, doedd dim"
+  },
+  "imp-noun": {
+   "group": "point",
+   "title": "Imperfect with a noun subject",
+   "blurb": "Roedd y plant, never ro'n y plant"
+  },
+  "perf-wedi": {
+   "group": "point",
+   "title": "Perfect with wedi",
+   "blurb": "Dw i wedi bwyta: wedi replaces yn"
+  },
+  "perf-negq": {
+   "group": "point",
+   "title": "Perfect: questions & negatives",
+   "blurb": "Wyt ti wedi…? Dw i ddim wedi…"
+  },
+  "perf-plu": {
+   "group": "point",
+   "title": "Pluperfect",
+   "blurb": "Ro'n i wedi… (I had…)"
+  },
+  "perf-newydd": {
+   "group": "point",
+   "title": "Newydd (just)",
+   "blurb": "Dw i newydd fwyta: soft mutation"
+  },
+  "fut-statement": {
+   "group": "point",
+   "title": "Future: statements",
+   "blurb": "Bydda i, bydd e, byddan nhw"
+  },
+  "fut-question": {
+   "group": "point",
+   "title": "Future: questions",
+   "blurb": "Fyddi di? Fydd e?"
+  },
+  "fut-answer": {
+   "group": "point",
+   "title": "Future: yes / no",
+   "blurb": "Bydda, na fydd"
+  },
+  "fut-negative": {
+   "group": "point",
+   "title": "Future: negatives",
+   "blurb": "Fydda i ddim"
+  },
+  "sf-endings": {
+   "group": "point",
+   "title": "Short future: endings",
+   "blurb": "-a i, -i di, -ith e, -wn ni, -wch chi, -an nhw"
+  },
+  "sf-irregular": {
+   "group": "point",
+   "title": "Short future: irregulars",
+   "blurb": "a i, gwna i, do i, ca i"
+  },
+  "sf-qneg": {
+   "group": "point",
+   "title": "Short future: questions & negatives",
+   "blurb": "Weli di? Wela i ddim, cha i ddim"
+  },
+  "cond-bod": {
+   "group": "point",
+   "title": "Conditional of bod",
+   "blurb": "Baswn i, basai fe, basen nhw"
+  },
+  "cond-modal": {
+   "group": "point",
+   "title": "Hoffwn, gallwn, dylwn",
+   "blurb": "would like, could, should"
+  },
+  "cond-qneg": {
+   "group": "point",
+   "title": "Conditional: questions & negatives",
+   "blurb": "Faset ti? Faswn i ddim"
+  },
+  "have-gyda": {
+   "group": "point",
+   "title": "Having: … gyda fi",
+   "blurb": "Mae car gyda fi"
+  },
+  "have-oes": {
+   "group": "point",
+   "title": "Having: questions with Oes",
+   "blurb": "Oes car gyda ti? Oes / Nac oes"
+  },
+  "have-neg": {
+   "group": "point",
+   "title": "Having: negatives",
+   "blurb": "Does dim car gyda fi"
+  },
+  "have-gen": {
+   "group": "point",
+   "title": "Having: north (gen i)",
+   "blurb": "Mae gen i gar"
+  },
+  "pl-endings": {
+   "group": "point",
+   "title": "Plural endings",
+   "blurb": "-au, -od, -ion, -ed, -i"
+  },
+  "pl-vowel": {
+   "group": "point",
+   "title": "Plurals by vowel change",
+   "blurb": "bachgen → bechgyn, car → ceir"
+  },
+  "pl-yn": {
+   "group": "point",
+   "title": "Singulars ending -yn / -en",
+   "blurb": "plentyn → plant, coeden → coed"
+  },
+  "gender-mut": {
+   "group": "point",
+   "title": "Gender and mutation",
+   "blurb": "y gath fach, y ci bach, y cathod"
+  },
+  "nas-yn": {
+   "group": "point",
+   "title": "Nasal after yn (in)",
+   "blurb": "yng Nghaerdydd, ym Mangor"
+  },
+  "nas-yn-form": {
+   "group": "point",
+   "title": "yn → yng / ym",
+   "blurb": "yng before ngh / ng, ym before mh / m"
+  },
+  "mewn": {
+   "group": "point",
+   "title": "Mewn vs yn",
+   "blurb": "mewn tŷ (a), yn y tŷ (the)"
+  },
+  "asp-a": {
+   "group": "point",
+   "title": "Aspirate after a / â",
+   "blurb": "te a choffi, gyda / â"
+  },
+  "asp-num": {
+   "group": "point",
+   "title": "Aspirate after tri, chwe",
+   "blurb": "tri char, chwe chath"
+  },
+  "asp-ei": {
+   "group": "point",
+   "title": "Aspirate after ei (her)",
+   "blurb": "ei thad hi"
+  },
+  "asp-other": {
+   "group": "point",
+   "title": "Aspirate after tua, na",
+   "blurb": "tua thri, na Thom"
+  },
+  "prep-ar": {
+   "group": "point",
+   "title": "ar → arna i",
+   "blurb": "edrych arno fe, gwrando arnyn nhw"
+  },
+  "prep-at": {
+   "group": "point",
+   "title": "at → ata i",
+   "blurb": "ysgrifennu ati hi"
+  },
+  "prep-am": {
+   "group": "point",
+   "title": "am → amdana i",
+   "blurb": "meddwl amdanat ti"
+  },
+  "prep-feel": {
+   "group": "point",
+   "title": "Feelings with ar",
+   "blurb": "Mae annwyd / ofn / syched arna i"
+  },
+  "that-bod": {
+   "group": "point",
+   "title": "That: bod",
+   "blurb": "Dw i'n credu bod…"
+  },
+  "that-pron": {
+   "group": "point",
+   "title": "That + pronoun",
+   "blurb": "fy mod i, ei fod e, ei bod hi"
+  },
+  "mo-def": {
+   "group": "point",
+   "title": "mo + definite object",
+   "blurb": "Welais i mo'r ffilm"
+  },
+  "mo-pron": {
+   "group": "point",
+   "title": "mo + pronoun",
+   "blurb": "mohono fe, mohoni hi"
+  },
+  "mo-vs-ddim": {
+   "group": "point",
+   "title": "mo or ddim",
+   "blurb": "ddim before 'a / any'; only short-form verbs"
+  },
+  "cmd-chi": {
+   "group": "point",
+   "title": "Commands: chi",
+   "blurb": "-wch: Eisteddwch, Edrychwch"
+  },
+  "cmd-ti": {
+   "group": "point",
+   "title": "Commands: ti",
+   "blurb": "-a: Eistedda, Edrycha"
+  },
+  "cmd-irr": {
+   "group": "point",
+   "title": "Irregular commands",
+   "blurb": "Ewch / Cer, Dewch / Dere, Gwna, Rho"
+  },
+  "cmd-neg": {
+   "group": "point",
+   "title": "Don't: Paid / Peidiwch â",
+   "blurb": "+ aspirate: Peidiwch â phoeni"
+  },
+  "emph-sy": {
+   "group": "point",
+   "title": "Fronted subject + sy",
+   "blurb": "Fi sy'n gyrru, Pwy sy'n dod?"
+  },
+  "emph-ydy": {
+   "group": "point",
+   "title": "Identity: Athro ydy e",
+   "blurb": "Noun first, then ydy / dw i"
+  },
+  "emph-other": {
+   "group": "point",
+   "title": "Fronting other parts",
+   "blurb": "Yn y gegin mae hi, Coffi dw i eisiau"
+  },
+  "rel-sy": {
+   "group": "point",
+   "title": "Relative sy",
+   "blurb": "y dyn sy'n byw drws nesa"
+  },
+  "rel-a": {
+   "group": "point",
+   "title": "Relative a + soft",
+   "blurb": "y llyfr a brynais i"
+  },
+  "rel-tense": {
+   "group": "point",
+   "title": "Relative oedd / fydd",
+   "blurb": "y fenyw oedd yn canu"
+  },
+  "dem-adj": {
+   "group": "point",
+   "title": "This / that after a noun",
+   "blurb": "y llyfr hwn, y gath hon, y plant hyn"
+  },
+  "dem-colloq": {
+   "group": "point",
+   "title": "'ma and 'na",
+   "blurb": "y dyn 'ma, y dyn 'na"
+  },
+  "dem-pron": {
+   "group": "point",
+   "title": "Demonstrative pronouns",
+   "blurb": "hwn, hwnna, hyn, hynny"
+  },
+  "dem-dyma": {
+   "group": "point",
+   "title": "Dyma / dyna",
+   "blurb": "Dyma'r car, dyna broblem"
   }
- }
+ },
+ "glossary": [
+  {
+   "term": "Tense",
+   "def": "When an action happens: present, past, future."
+  },
+  {
+   "term": "Aspect",
+   "def": "How an action relates to a time: ongoing, completed, or connected to now (perfect)."
+  },
+  {
+   "term": "Mood",
+   "def": "The speaker's attitude: indicative (facts), imperative (commands), conditional (would)."
+  },
+  {
+   "term": "Present tense",
+   "def": "Now or generally true: Dw i'n mynd (I'm going / I go)."
+  },
+  {
+   "term": "Simple past (preterite)",
+   "def": "A completed past event: Es i (I went)."
+  },
+  {
+   "term": "Imperfect (past continuous)",
+   "def": "An ongoing or habitual past state: Ro'n i'n mynd (I was going / used to go)."
+  },
+  {
+   "term": "Perfect",
+   "def": "A past action linked to now: Dw i wedi mynd (I have gone)."
+  },
+  {
+   "term": "Pluperfect (past perfect)",
+   "def": "Before another past moment: Ro'n i wedi mynd (I had gone)."
+  },
+  {
+   "term": "Future",
+   "def": "Will happen: Bydda i'n mynd, A i (I'll go)."
+  },
+  {
+   "term": "Conditional",
+   "def": "Would happen: Baswn i'n mynd (I would go)."
+  },
+  {
+   "term": "Imperative",
+   "def": "A command: Ewch! Cer! (Go!)"
+  },
+  {
+   "term": "Auxiliary verb",
+   "def": "A helping verb used to build a tense: bod, bydd-, gwneud."
+  },
+  {
+   "term": "Periphrastic",
+   "def": "Built with an auxiliary verb plus a verbnoun: Bydda i'n gweld."
+  },
+  {
+   "term": "Inflected (short-form) verb",
+   "def": "The verb takes a personal ending: gwelais i, gwela i."
+  },
+  {
+   "term": "Verbnoun",
+   "def": "The basic form of a verb (to go / going): mynd, bwyta. Welsh's 'infinitive'."
+  },
+  {
+   "term": "Stem",
+   "def": "The part of a verb that endings attach to: gwel- in gweld, pryn- in prynu."
+  },
+  {
+   "term": "Subject / object",
+   "def": "Subject: who does the action. Object: what it is done to. In 'Siân bought a car', Siân is the subject, a car the object."
+  },
+  {
+   "term": "Definite / indefinite",
+   "def": "Definite: a specific known thing (the car, Siân, it). Indefinite: a / any (a car)."
+  },
+  {
+   "term": "Noun / adjective",
+   "def": "Noun: a thing, person or place. Adjective: describes a noun (big, small)."
+  },
+  {
+   "term": "Grammatical gender",
+   "def": "Every noun is masculine or feminine; it affects mutations and some numbers."
+  },
+  {
+   "term": "Determiner",
+   "def": "A word before a noun that specifies it: the, this, my."
+  },
+  {
+   "term": "Possessive",
+   "def": "Shows ownership: my, your, his, her (fy, dy, ei)."
+  },
+  {
+   "term": "Demonstrative",
+   "def": "Points to something: this, that, these, those (hwn, hon, hyn, 'na)."
+  },
+  {
+   "term": "Preposition",
+   "def": "Shows a relationship: on, to, with, about (ar, at, gyda, am)."
+  },
+  {
+   "term": "Inflected preposition",
+   "def": "A preposition with a personal ending: arna i, ati hi."
+  },
+  {
+   "term": "Pronoun",
+   "def": "Stands in for a noun: I, you, he, she, it (fi, ti, fe, hi)."
+  },
+  {
+   "term": "Clause",
+   "def": "A group of words with its own verb. Main clause: stands alone. Subordinate clause: depends on another."
+  },
+  {
+   "term": "Conjunction",
+   "def": "Joins words or clauses: and, before, after, until (a, cyn, ar ôl, nes)."
+  },
+  {
+   "term": "Relative clause",
+   "def": "Describes a noun: the man who lives here (y dyn sy'n byw yma)."
+  },
+  {
+   "term": "Noun clause / reported speech",
+   "def": "A clause that is the object of say / think / know: I think that… (bod)."
+  },
+  {
+   "term": "Cleft (emphatic) sentence",
+   "def": "Highlights one part by moving it to the front: Fi sy'n gyrru."
+  },
+  {
+   "term": "Negation",
+   "def": "Making a sentence negative: ddim, dim, mo."
+  },
+  {
+   "term": "Mutation",
+   "def": "A change to the first consonant of a word caused by the word before it."
+  },
+  {
+   "term": "Equative / comparative / superlative",
+   "def": "as big as / bigger / biggest: mor fawr â, mwy, mwya."
+  }
+ ]
 }
