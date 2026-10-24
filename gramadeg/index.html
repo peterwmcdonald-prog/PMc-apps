@@ -927,14 +927,27 @@ function need(q){
   return 0.6*(1-(o.recall==null?0.5:o.recall)) + 0.3*weak + (o.lastOk===false?0.15:0) + (o.slow&&o.slow>1.6?0.05:0);
 }
 const bestOf = (pool,n) => pool.map(q=>({q,p:need(q)+Math.random()*0.12})).sort((a,b)=>b.p-a.p).slice(0,n).map(x=>x.q);
-// Mostly the questions you most need, plus some spot-checks of things you seem to know.
-function pickMix(pool, n){
-  if(pool.length<=n) return pool.slice();
-  const k=Math.max(1,Math.round(n*0.75)), top=bestOf(pool,k), rest=shuffle(pool.filter(q=>!top.includes(q)));
-  return top.concat(rest.slice(0,n-k));
+// Known: a skill you're solid on, a question you'd still remember, and nothing to fix.
+// Known questions are rationed to a small spot-check share; the rest goes on what you need.
+function known(q){
+  if(needsFix(q.id)) return false;
+  const o=model().I[q.id], sm=skillMastery(q);
+  if(!o||!o.n) return sm!=null && sm>=0.85 && !!it(q.id).ft;
+  return sm!=null && sm>=0.8 && o.lastOk && (o.recall==null||o.recall>=0.75);
+}
+// The known question most worth re-checking: the one most likely to be fading.
+const staleOf = (pool,n) => pool.map(q=>{ const o=model().I[q.id]; return {q,p:(o&&o.recall!=null?1-o.recall:0.2)+Math.random()*0.05}; }).sort((a,b)=>b.p-a.p).slice(0,n).map(x=>x.q);
+function pickMix(pool, n, minLen=5){
+  const fresh=pool.filter(q=>!known(q)), kn=pool.filter(known);
+  const spots=Math.min(kn.length, Math.max(1, Math.round(n*0.15)));
+  const take=Math.min(fresh.length, n-spots);
+  let out=bestOf(fresh,take).concat(staleOf(kn,spots));
+  if(out.length<minLen) out=out.concat(staleOf(kn.filter(q=>!out.includes(q)), minLen-out.length));
+  return out;
 }
 function roundRobin(units, n, filter=()=>true){
-  const lists=units.map(u=>bestOf(unitQs(u).filter(filter), 99)).filter(l=>l.length);
+  // Units you've mastered give one spot-check each; the rest share the session by need.
+  const lists=units.map(u=>{ const qs=unitQs(u).filter(filter), f=qs.filter(q=>!known(q)); return f.length ? bestOf(f,99) : staleOf(qs,1); }).filter(l=>l.length);
   const out=[]; let i=0;
   while(out.length<n && lists.some(l=>l.length)){ const l=lists[i%lists.length]; if(l.length) out.push(l.shift()); i++; }
   return out;
@@ -1005,7 +1018,8 @@ function startLesson(mode, uid, kind){
   if(!C) return;
   if((mode==='unit'||mode==='test'||mode==='testout') && !unitOf(uid)) return;
   let qs=[], label='';
-  if(mode==='unit'){ const u=unitOf(uid), all=unitQs(u), f=KIND_TEST[kind], pool=f?all.filter(f):all;
+  if(mode==='unit' && unitQs(unitOf(uid)).every(known)){ const u=unitOf(uid); qs=staleOf(unitQs(u).sort((a,b)=>hardness(b)-hardness(a)).slice(0,10),5); label=u.title+' · quick check'; mode='check'; }
+  else if(mode==='unit'){ const u=unitOf(uid), all=unitQs(u), f=KIND_TEST[kind], pool=f?all.filter(f):all;
     qs = pool.length>=6 ? pickMix(pool,LESSON_LEN) : pickMix(all,LESSON_LEN);
     if(f && pool.length>=6 && qs.length<LESSON_LEN) qs=qs.concat(pickMix(all.filter(q=>!qs.includes(q)),LESSON_LEN-qs.length));
     label=u.title+(kind&&kind!=='mix'?' · '+KIND_LABEL[kind]:''); }
@@ -1023,7 +1037,7 @@ function startLesson(mode, uid, kind){
   if($('overlay').classList.contains('on')){ $('overlay').classList.remove('on'); try{ history.replaceState({layer:'lesson'},''); }catch(e){} }
   else { try{ history.pushState({layer:'lesson'},''); }catch(e){} }
   if(mode!=='place') qs=shuffle(qs);
-  L={asked:[], probes:0, kind, mode, uid, label, queue:qs.map(q=>({q,retry:false})), total:qs.length, done:0, firstRight:0, firstTotal:0, combo:0, best:0, missed:[], xp:0};
+  L={asked:[], probes:0, cleanRun:0, kind, mode, uid, label, queue:qs.map(q=>({q,retry:false})), total:qs.length, done:0, firstRight:0, firstTotal:0, combo:0, best:0, missed:[], xp:0};
   show('lesson'); next();
 }
 $('quitBtn').innerHTML=icon('x');
@@ -1034,6 +1048,8 @@ function speaker(html, mood='happy'){ return `<div class="speaker">${mascot(mood
 function blankify(s){ return esc(s).replace('___','<span class="blank">&nbsp;</span>'); }
 function next(){
   if(!L.queue.length) return finish();
+  if(['unit','smart','mixed','due','skill','check'].includes(L.mode) && L.cleanRun>=5 && !L.queue.some(x=>x.retry||x.probe||!known(x.q))){
+    L.skipped=L.queue.length; L.queue=[]; return finish(); }
   L.cur=L.queue.shift(); L.state='answer'; L.answer=null; L.t0=performance.now();
   const {q,retry}=L.cur; L.cur.hard=challenge(q,retry); if(!retry) L.asked.push(q.id);
   $('progFill').style.width=(L.done/L.total*100)+'%';
@@ -1117,7 +1133,10 @@ $('checkBtn').onclick=()=>{
   if(!retry){
     const x=item(q.id), fresh=!x.seen; x.seen++; L.firstTotal++;
     (L.res||(L.res={}))[q.unit]=L.res[q.unit]||{n:0,ok:0}; L.res[q.unit].n++; if(ok) L.res[q.unit].ok++;
-    if(ok){ x.right=(x.right||0)+1; x.box=Math.min(fresh?(L.cur.hard||q.type==='type'?3:2):x.box+(L.cur.hard?2:1),INTERVALS.length-1); if(L.mode==='place'||L.mode==='testout') x.box=Math.max(x.box,3); x.due=addDays(today(),INTERVALS[x.box]); L.firstRight++; addXp(1); L.xp++; }
+    const med=model().typeMed[L.cur.hard?'type':q.type], quick=!med||ms<med*1.1, solid=(skillMastery(q)||0)>=0.8;
+    L.cleanRun = ok ? L.cleanRun+1 : 0;
+    // Quick, correct answers on a skill you're solid on move further ahead, so they come round less often.
+    if(ok){ x.right=(x.right||0)+1; x.box=Math.min(fresh?((L.cur.hard||q.type==='type'||quick)?3:2):x.box+((L.cur.hard||(quick&&solid))?2:1),INTERVALS.length-1); if(L.mode==='place'||L.mode==='testout') x.box=Math.max(x.box,3); x.due=addDays(today(),INTERVALS[x.box]); L.firstRight++; addXp(1); L.xp++; }
     else { x.wrong=(x.wrong||0)+1; x.ft=0; x.box=0; x.due=today(); x.lastWrong=today(); L.missed.push(q); followUp(q); }
     save();
   }
@@ -1149,12 +1168,13 @@ function finish(){
   const t=today(); if(S.streak.last!==t){ S.streak.n=(S.streak.last===addDays(t,-1))?S.streak.n+1:1; S.streak.last=t; }
   save(); if(L.mode!=='place'&&L.mode!=='testout') driveSave(false);
   const acc=L.firstTotal?Math.round(L.firstRight/L.firstTotal*100):100;
+  const skipNote = L.skipped ? `<p style="font-size:14px;margin:0 2px 10px"><b>Finished early.</b> Clean run, and the ${L.skipped} question${L.skipped>1?'s':''} left were ones you already know, so they were skipped.</p>` : L.mode==='check' ? `<p style="font-size:14px;margin:0 2px 10px">You've mastered this unit, so it's a 5-question quick check rather than a full lesson.</p>` : '';
   $('doneMascot').innerHTML=mascot('cheer','m');
   $('doneTitle').textContent= acc===100?'Perffaith!': acc>=80?'Da iawn!':'Lesson complete!';
   countUp($('dXp'), L.xp, icon('bolt'));
   countUp($('dAcc'), acc, '', '%');
   $('dStreak').innerHTML=icon('flame')+S.streak.n;
-  $('recap').innerHTML = L.missed.length ? `<h3>Your mistakes this time</h3>`+L.missed.map(q=>`<div>${esc(qText(q))}<br><b>${esc(correctText(q))}</b></div>`).join('')+`<p style="font-size:13px;color:var(--dim);margin:6px 2px 0">These are now in Practice → Fix mistakes.</p>` : '';
+  $('recap').innerHTML = skipNote + (L.missed.length ? `<h3>Your mistakes this time</h3>`+L.missed.map(q=>`<div>${esc(qText(q))}<br><b>${esc(correctText(q))}</b></div>`).join('')+`<p style="font-size:13px;color:var(--dim);margin:6px 2px 0">These are now in Practice → Fix mistakes.</p>` : '');
   if(L.mode==='place'||L.mode==='testout'){
     const rows=applyPlacement(L.res||{}, L.mode);
     if(L.mode==='place'){ S.placed=today(); S.placeV=2; } save(); driveSave(false);
