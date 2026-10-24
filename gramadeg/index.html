@@ -477,7 +477,7 @@ function mascot(mood='happy', cls='m'){
 
 /* ================= state ================= */
 let C = null, S = loadState(), L = null, TAB = 'learn';
-function blank(){ return {xp:0, streak:{n:0,last:null}, items:{}, flags:[], sound:true, daily:{date:null,xp:0}, log:[]}; }
+function blank(){ return {xp:0, streak:{n:0,last:null}, items:{}, flags:[], sound:true, daily:{date:null,xp:0}, log:[], placed:null}; }
 function clean(d){
   // Accept only well-formed data, so a damaged save or odd import can never break the app.
   const b=blank(); if(!d || typeof d!=='object' || Array.isArray(d)) return b;
@@ -486,12 +486,13 @@ function clean(d){
   b.xp=num(d.xp);
   if(d.streak&&typeof d.streak==='object') b.streak={n:num(d.streak.n), last:day(d.streak.last)};
   if(d.items&&typeof d.items==='object') Object.keys(d.items).forEach(k=>{ const x=d.items[k]; if(!x||typeof x!=='object') return;
-    b.items[k]={box:Math.min(num(x.box),INTERVALS.length-1), due:day(x.due), seen:num(x.seen), right:num(x.right), wrong:num(x.wrong), lastWrong:day(x.lastWrong)}; });
+    b.items[k]={box:Math.min(num(x.box),INTERVALS.length-1), due:day(x.due), seen:num(x.seen), right:num(x.right), wrong:num(x.wrong), lastWrong:day(x.lastWrong), ft:x.ft?1:0}; });
   if(Array.isArray(d.flags)) b.flags=d.flags.filter(f=>f&&typeof f.id==='string').map(f=>({id:f.id, note:String(f.note||''), given:String(f.given||''), at:day(f.at)}));
   b.sound=d.sound!==false;
   if(d.daily&&typeof d.daily==='object') b.daily={date:day(d.daily.date), xp:num(d.daily.xp)};
   if(Array.isArray(d.log)) b.log=d.log.filter(e=>e&&typeof e.q==='string'&&Number.isFinite(+e.t)).slice(-LOG_MAX)
-    .map(e=>({t:+e.t, q:e.q, ok:e.ok?1:0, ms:num(e.ms), a:String(e.a==null?'':e.a).slice(0,80), m:String(e.m||''), r:e.r?1:0, ty:String(e.ty||''), v:String(e.v||'')}));
+    .map(e=>({t:+e.t, q:e.q, ok:e.ok?1:0, ms:num(e.ms), a:String(e.a==null?'':e.a).slice(0,80), m:String(e.m||''), r:e.r?1:0, ty:String(e.ty||''), v:String(e.v||''), h:e.h?1:0}));
+  b.placed=day(d.placed);
   return b;
 }
 function loadState(){ try{ return clean(JSON.parse(localStorage.getItem(KEY))); }catch(e){ return blank(); } }
@@ -524,7 +525,7 @@ function ring(p, col, size=98, w=8, track='#E5E5E5'){
   return `<svg class="ring" viewBox="0 0 ${size} ${size}"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${track}" stroke-width="${w}"/>${len>0?`<circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${col}" stroke-width="${w}" stroke-linecap="round" stroke-dasharray="${len} ${c}" transform="rotate(-90 ${size/2} ${size/2})"/>`:''}</svg>`;
 }
 function strength(u){ const qs=u.questions; return qs.length ? qs.reduce((a,q)=>a+Math.min(it(q.id).box,4),0)/(qs.length*4) : 0; }
-function uStats(u){ let seen=0,right=0,wrong=0,fix=0,started=0; u.questions.forEach(q=>{const x=it(q.id); if(x.seen)started++; right+=x.right||0; wrong+=x.wrong||0; if(needsFix(q.id))fix++;}); const tot=right+wrong; return {started, total:u.questions.length, acc: tot? right/tot : null, right, wrong, fix, strength:strength(u)}; }
+function uStats(u){ let seen=0,right=0,wrong=0,fix=0,started=0; u.questions.forEach(q=>{const x=it(q.id); if(x.seen)started++; right+=Math.max(0,(x.right||0)-(x.ft?1:0)); wrong+=x.wrong||0; if(needsFix(q.id))fix++;}); const tot=right+wrong; return {started, total:u.questions.length, acc: tot? right/tot : null, right, wrong, fix, strength:strength(u)}; }
 function status(u){ const s=uStats(u); if(!s.started) return ['new','New']; if(s.strength>=.75) return ['strong','Strong']; return ['learn', Math.round(s.strength*100)+'%']; }
 
 /* ================= sound ================= */
@@ -560,6 +561,7 @@ function renderTab(){ renderTop(); if(!C) return; ({learn:renderLearn, practice:
 function renderLearn(){
   const wave=[0,55,80,55,0,-25];
   let h='', foundCurrent=false;
+  if(!S.placed) h+=`<button class="mode" style="margin-bottom:18px" onclick="startLesson('place')"><div class="ic" style="background:#FF9600;box-shadow:0 4px 0 #CC7800">${icon('bolt')}</div><div class="tx"><b>Already know some Welsh? Placement test</b><span>${built().length*3} hard questions (about 6 min). Units you get fully right are fast-tracked.</span></div></button>`;
   built().forEach((u,ui)=>{
     const sec=C.sections.findIndex(s=>s.id===u.section)+1;
     const dark=shade(u.colour,.8), p=strength(u);
@@ -574,7 +576,7 @@ function renderLearn(){
       const trophy = j===n;
       const seg = trophy ? 1 : Math.min(1,Math.max(0,(p - j/n)*n));
       const filled = trophy ? p>=.999 : seg>=.999;
-      const cur = !foundCurrent && !filled;
+      const cur = !foundCurrent && !filled && p<.75;
       if(cur) foundCurrent=true;
       const bg = filled ? '#FFC800' : u.colour, sh = filled ? '#E5A500' : dark;
       const ic = filled ? (trophy?'trophy':'star') : trophy ? 'trophy' : (cur ? 'play' : (u.icon||'star'));
@@ -621,6 +623,7 @@ function openUnit(uid){
     ${(()=>{ const K=model().K, ids=[...new Set(u.questions.flatMap(skillsOf))].filter(id=>K[id]&&skillInfo(id).group==='point'); return ids.length?`<div class="solidwrap" style="margin:4px 0 10px">${ids.map(id=>`<span class="vchip ${K[id].verdict}" title="${esc(VLABEL[K[id].verdict])}">${esc(K[id].info.title)}${K[id].mastery!=null?' '+pct(K[id].mastery):''}</span>`).join('')}</div>`:''; })()}
     <div class="rule">${u.rule}</div>
     <button class="btn" onclick="startLesson('unit','${u.id}')">${icon('play')}Lesson</button>
+    ${s.strength<.75?`<button class="btn" style="background:#FF9600;box-shadow:0 4px 0 #CC7800" onclick="startLesson('testout','${u.id}')">${icon('bolt')}Test out (${Math.min(8,s.total)} hard questions)</button>`:''}
     <button class="btn blue" onclick="startLesson('test','${u.id}')">${icon('trophy')}Unit test (all ${s.total})</button>
     ${s.fix?`<button class="btn red" onclick="startLesson('mistakes','${u.id}')">${icon('target')}Fix ${s.fix} mistake${s.fix>1?'s':''}</button>`:''}
     <button class="btn ghost" onclick="closeSheet()">Close</button>`, u.subtitle||'');
@@ -644,6 +647,7 @@ function renderPractice(){
   h+=mode('shuffle','#A560F0','Mixed review','Synoptic: interleaved questions from every unit you have started.',null,"startLesson('mixed')", started.length?'':'Start a unit first');
   h+=mode('target','#FF4B4B','Fix mistakes','Only questions you have got wrong, worst first.',fix,"startLesson('mistakes')", fix?'':'No mistakes to fix');
   h+=mode('layers','#FF9600','Full test','20 questions across all units, seen or not.',null,"startLesson('all')");
+  h+=mode('bolt','#FF9600','Placement test',(S.placed?'Last taken '+S.placed+'. ':'')+'3 hard questions per unit; full marks fast-tracks the unit.',null,"startLesson('place')");
 
   h+=`<div class="sec-h">Weak spots by unit</div><div class="card">`;
   const rows=built().map(u=>({u,s:uStats(u)})).sort((a,b)=>(a.s.acc==null?2:a.s.acc)-(b.s.acc==null?2:b.s.acc));
@@ -682,7 +686,7 @@ function skRow(k){
 }
 function renderInsights(){
   const M=model(), ks=Object.values(M.K).filter(k=>k.total && built().some(u=>k.qs[0].unit===u.id||k.qs.some(q=>q.unit===u.id)));
-  const items=Object.values(M.I), totalN=items.reduce((a,o)=>a+o.n,0), totalOk=items.reduce((a,o)=>a+o.ok,0);
+  const items=Object.values(M.I), totalN=M.first.length, totalOk=M.first.filter(e=>e.ok).length;
   if(!totalN){ $('tab-insights').innerHTML=`<div class="hero">${mascot('think','m')}<div class="say">Answer a few questions and this page will show which grammar you know and which needs work.</div></div>`; return; }
   const wk=Date.now()-7*DAY_MS, w7=M.first.filter(e=>e.t>=wk), fading=items.filter(o=>o.recall!=null&&o.recall<0.5).length;
   const focus=ks.filter(k=>k.verdict==='weak'||k.verdict==='shaky').sort((a,b)=>a.mastery-b.mastery);
@@ -788,7 +792,7 @@ const dayKey = t => { const d=new Date(t); return d.getFullYear()+'-'+String(d.g
 const skillsOf = q => (q.skills&&q.skills.length)?q.skills:[q.unit];
 function skillInfo(id){ const s=C.skills&&C.skills[id]; if(s) return s; const u=unitOf(id); return {group:'point', title:u?u.title:id, blurb:''}; }
 function logAnswer(q, ok, ms, given, retry){
-  S.log.push({t:Date.now(), q:q.id, ok:ok?1:0, ms:Math.min(ms,180000), a:String(given||'').slice(0,80), m:L.mode, r:retry?1:0, ty:q.type, v:C.version||''});
+  S.log.push({t:Date.now(), q:q.id, ok:ok?1:0, ms:Math.min(ms,180000), a:String(given||'').slice(0,80), m:L.mode, r:retry?1:0, ty:L.cur&&L.cur.hard?'type':q.type, v:C.version||'', h:L.cur&&L.cur.hard?1:0});
   if(S.log.length>LOG_MAX) S.log.splice(0, S.log.length-LOG_MAX);
   MODEL=null;
 }
@@ -805,14 +809,16 @@ function model(){
     const r=Math.max(0,(x.right||0)-lr), w=Math.max(0,(x.wrong||0)-lw); if(!r&&!w) return;
     const o=I[id]=blankItem(), lastDay=x.due?addDays(x.due,-INTERVALS[x.box]||0):(x.lastWrong||today());
     const t=Date.parse(lastDay+'T12:00:00')||now;
-    o.hl=[0.4,1,3,7,14,30,60][x.box]||1; o.last=t; o.n=r+w; o.ok=r; o.lastOk=x.box>0;
+    o.hl=x.ft&&!w?10:([0.4,1,3,7,14,30,60][x.box]||1); o.last=t; o.n=r+w; o.ok=r; o.lastOk=x.box>0;
     for(let k=0;k<w;k++) o.ev.push({t,ok:0}); for(let k=0;k<r;k++) o.ev.push({t,ok:1});
   });
   S.log.forEach(e=>{ const q=Q[e.q]; if(!q) return; const o=I[e.q]||(I[e.q]=blankItem());
     if(!e.ok && e.a) o.conf[e.a]=(o.conf[e.a]||0)+1;
     if(e.r){ o.retries++; if(e.ok) o.retryOk++; return; }
     const med=typeMed[e.ty]; const rel = med&&e.ms ? e.ms/med : 1;
-    if(e.ok){ o.speed.push(rel); const f = rel>1.8?1.5 : rel<0.6?2.8 : 2.2; o.hl=Math.min(180,(o.hl||0.7)*f); }
+    if(e.ok){ o.speed.push(rel); const f = rel>1.8?1.5 : rel<0.6?2.8 : 2.2;
+      if(o.hl==null && !o.n) o.hl = (e.ty==='type'||e.h) ? (rel>1.8?3:6) : (rel>1.8?2:4);
+      else o.hl=Math.min(180,(o.hl||0.7)*f*(e.h?1.3:1)); }
     else o.hl=Math.max(0.3,(o.hl||1)*0.35);
     o.last=e.t; o.n++; o.ok+=e.ok; o.lastOk=!!e.ok; o.ev.push({t:e.t, ok:e.ok});
   });
@@ -868,9 +874,44 @@ function mistakePool(uid){
   const pr=q=>{ const x=it(q.id); const rate=x.wrong/Math.max(1,x.seen); const recent=x.lastWrong? Math.max(0,30-(Date.parse(today())-Date.parse(x.lastWrong))/864e5)/30 : 0; return rate+recent*.5+(3-x.box)*.2; };
   return pool.sort((a,b)=>pr(b)-pr(a)).slice(0, MISTAKE_LEN);
 }
+/* ================= adaptive difficulty =================
+   - Placement test: 3 hard questions per unit. All right = unit fast-tracked: its unseen
+     questions are credited and scheduled for a spot-check review over the next 1-2 weeks.
+   - Test out: 8 hard questions from one unit, pass at 7+.
+   - Challenge: on skills you're solid on, multiple choice becomes type-the-answer.
+   - Follow-ups: get one wrong and a different question on the same skill is added. */
+const ENGLISH = /\b(it|the|is|isn't|was|as|started|walking|rain|cold)\b/i;
+function typeable(q){ if(q.type!=='mc') return false; const a=q.options[q.answer]; return a.split(' ').length<=4 && !ENGLISH.test(a); }
+function hardness(q){ return q.type==='type'?3 : q.type==='tiles'||q.type==='error'||typeable(q)?2 : 1; }
+function challenge(q, retry){
+  if(retry || !typeable(q)) return false;
+  if(L && (L.mode==='place'||L.mode==='testout')) return true;
+  const sm=skillMastery(q), o=model().I[q.id];
+  return (sm!=null && sm>=0.8) || !!(o && o.lastOk && o.recall!=null && o.recall>0.8);
+}
+function hardPick(u, n){
+  const qs=shuffle(unitQs(u)).sort((a,b)=>(!!it(a.id).seen-!!it(b.id).seen) || (hardness(b)-hardness(a)));
+  const out=[], used=new Set();
+  qs.forEach(q=>{ const k=skillsOf(q)[0]; if(out.length<n && !used.has(k)){ out.push(q); used.add(k); } });
+  qs.forEach(q=>{ if(out.length<n && !out.includes(q)) out.push(q); });
+  return out;
+}
+function fastTrack(u){
+  let n=0;
+  unitQs(u).forEach((q,i)=>{ const x=S.items[q.id]; if(x&&x.seen) return;
+    S.items[q.id]={box:3, due:addDays(today(), 3+(i%10)), seen:1, right:1, wrong:0, lastWrong:null, ft:1}; n++; });
+  MODEL=null; return n;
+}
+function followUp(q){
+  if(!L || ['test','place','testout','mistakes'].includes(L.mode) || (L.probes||0)>=3) return;
+  const sk=skillsOf(q)[0], have=new Set(L.asked.concat(L.queue.map(x=>x.q.id)));
+  const pool=allQs().filter(x=>x.id!==q.id && !have.has(x.id) && skillsOf(x).includes(sk));
+  const pick=bestOf(pool,1)[0]; if(!pick) return;
+  L.queue.splice(Math.min(2,L.queue.length),0,{q:pick,retry:false,probe:sk}); L.total++; L.probes=(L.probes||0)+1;
+}
 function startLesson(mode, uid){
   if(!C) return;
-  if((mode==='unit'||mode==='test') && !unitOf(uid)) return;
+  if((mode==='unit'||mode==='test'||mode==='testout') && !unitOf(uid)) return;
   let qs=[], label='';
   if(mode==='unit'){ const u=unitOf(uid); qs=pickMix(unitQs(u),LESSON_LEN); label=u.title; }
   else if(mode==='smart'){ const us=built().filter(u=>uStats(u).started); qs=pickMix((us.length?us:built().slice(0,1)).flatMap(unitQs), MIXED_LEN); label='Smart practice'; }
@@ -880,12 +921,14 @@ function startLesson(mode, uid){
   else if(mode==='mixed'){ qs=roundRobin(built().filter(u=>uStats(u).started), MIXED_LEN); label='Mixed review'; }
   else if(mode==='all'){ qs=roundRobin(shuffle(built()), TEST_LEN); label='Full test'; }
   else if(mode==='mistakes'){ qs=mistakePool(uid); label='Fix mistakes'; }
+  else if(mode==='place'){ qs=built().flatMap(u=>hardPick(u,3)); label='Placement test'; }
+  else if(mode==='testout'){ const u=unitOf(uid); qs=hardPick(u,Math.min(8,u.questions.length)); label=u.title+': test out'; }
   if(!qs.length){ toast(mode==='mistakes'?'No mistakes to fix':'Nothing to practise yet'); return; }
   // Take the place of an open sheet in the back-button history, or add a new step.
   if($('overlay').classList.contains('on')){ $('overlay').classList.remove('on'); try{ history.replaceState({layer:'lesson'},''); }catch(e){} }
   else { try{ history.pushState({layer:'lesson'},''); }catch(e){} }
-  qs=shuffle(qs);
-  L={mode, uid, label, queue:qs.map(q=>({q,retry:false})), total:qs.length, done:0, firstRight:0, firstTotal:0, combo:0, best:0, missed:[], xp:0};
+  if(mode!=='place') qs=shuffle(qs);
+  L={asked:[], probes:0, mode, uid, label, queue:qs.map(q=>({q,retry:false})), total:qs.length, done:0, firstRight:0, firstTotal:0, combo:0, best:0, missed:[], xp:0};
   show('lesson'); next();
 }
 $('quitBtn').innerHTML=icon('x');
@@ -897,14 +940,26 @@ function blankify(s){ return esc(s).replace('___','<span class="blank">&nbsp;</s
 function next(){
   if(!L.queue.length) return finish();
   L.cur=L.queue.shift(); L.state='answer'; L.answer=null; L.t0=performance.now();
-  const {q,retry}=L.cur;
+  const {q,retry}=L.cur; L.cur.hard=challenge(q,retry); if(!retry) L.asked.push(q.id);
   $('progFill').style.width=(L.done/L.total*100)+'%';
   $('combo').innerHTML = L.combo>=3 ? icon('flame')+L.combo : '';
   $('lfoot').className='lfoot';
   const cb=$('checkBtn'); cb.textContent='Check'; cb.className='btn'; cb.disabled=true;
   const u=unitOf(q.unit);
-  let h = retry ? `<div class="qkicker again">${icon('repeat')} Previous mistake</div>` : `<div class="qkicker" style="color:${u.colour}">${icon(u.icon)} ${esc(u.title)}</div>`;
-  if(q.type==='mc'){
+  let h = retry ? `<div class="qkicker again">${icon('repeat')} Previous mistake</div>`
+    : L.cur.probe ? `<div class="qkicker again">${icon('target')} Follow-up: ${esc(skillInfo(L.cur.probe).title)}</div>`
+    : `<div class="qkicker" style="color:${u.colour}">${icon(u.icon)} ${esc(u.title)}${L.cur.hard&&L.mode!=='place'&&L.mode!=='testout'?' · <span style="color:var(--orange)">Challenge</span>':''}</div>`;
+  if(q.type==='mc' && L.cur.hard){
+    const gap=q.prompt.includes('___');
+    h+=`<div class="qtitle">${gap?'Type the missing word':'Type it in Welsh'}</div>${speaker((gap?blankify(q.prompt):esc(q.prompt))+(q.en&&gap?`<small>${esc(q.en)}</small>`:''),'think')}`;
+    h+=`<input class="typein" id="typein" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Type your answer (accents optional)">`;
+    $('qwrap').innerHTML=h;
+    const inp=$('typein');
+    inp.oninput=()=>{ L.answer=inp.value; $('checkBtn').disabled=!inp.value.trim(); };
+    inp.onkeydown=e=>{ if(e.key==='Enter' && inp.value.trim()) $('checkBtn').click(); };
+    setTimeout(()=>inp.focus(),60);
+  }
+  else if(q.type==='mc'){
     const order=shuffle(q.options.map((o,i)=>i));
     h+=`<div class="qtitle">Choose the correct answer</div>${speaker(blankify(q.prompt)+(q.en?`<small>${esc(q.en)}</small>`:''))}<div class="opts">`;
     order.forEach((i,n)=>{ h+=`<button class="opt" data-i="${i}"><span class="k">${n+1}</span><span>${esc(q.options[i])}</span></button>`; });
@@ -947,24 +1002,28 @@ function drawTiles(){
 
 /* ================= checking ================= */
 function correctText(q){ return q.type==='mc'?q.options[q.answer] : q.type==='tiles'?q.answer : q.type==='type'?q.text.replace('___',q.answer) : q.fix; }
+const ECHO=new Set(['i','e','fe','fo','hi','ni','chi','nhw']);
 function grade(q){
+  if(q.type==='mc' && L.cur.hard){ const a=norm(L.answer||''), t=norm(q.options[q.answer]), w=t.split(' ');
+    return a===t || (w.length>=3 && ECHO.has(w[w.length-1]) && a===w.slice(0,-1).join(' ')); }
   if(q.type==='mc') return L.answer===q.answer;
   if(q.type==='error') return L.answer===q.wrong;
   const a=norm(L.answer||''); return [q.answer].concat(q.alts||[]).some(x=>norm(x)===a);
 }
-function givenText(q){ if(L.answer==null) return ''; if(q.type==='mc') return q.options[L.answer]; if(q.type==='error') return q.sentence.split(' ')[L.answer]; return String(L.answer); }
+function givenText(q){ if(L.answer==null) return ''; if(q.type==='mc'&&L.cur.hard) return String(L.answer); if(q.type==='mc') return q.options[L.answer]; if(q.type==='error') return q.sentence.split(' ')[L.answer]; return String(L.answer); }
 $('checkBtn').onclick=()=>{
   if(L.state==='feedback'){ if(L.cur.ok) L.done++; next(); return; }
   const {q,retry}=L.cur, ok=grade(q), ms=Math.round(performance.now()-L.t0);
   logAnswer(q, ok, ms, givenText(q), retry); if(retry) save();
   L.cur.ok=ok; L.state='feedback';
-  if(q.type==='mc') document.querySelectorAll('.opt').forEach(b=>{ const i=+b.dataset.i; b.classList.remove('sel'); if(i===q.answer) b.classList.add('right'); else if(i===L.answer) b.classList.add('wrongsel'); });
+  if(q.type==='mc'&&!L.cur.hard) document.querySelectorAll('.opt').forEach(b=>{ const i=+b.dataset.i; b.classList.remove('sel'); if(i===q.answer) b.classList.add('right'); else if(i===L.answer) b.classList.add('wrongsel'); });
   if(q.type==='error') document.querySelectorAll('.chip').forEach(b=>{ const i=+b.dataset.i; b.classList.remove('sel'); if(i===q.wrong) b.classList.add('right'); else if(i===L.answer) b.classList.add('wrongsel'); });
-  if(q.type==='type'){ const inp=$('typein'); inp.disabled=true; inp.classList.add(ok?'right':'wrong'); }
+  if(q.type==='type'||L.cur.hard){ const inp=$('typein'); inp.disabled=true; inp.classList.add(ok?'right':'wrong'); }
   if(!retry){
-    const x=item(q.id); x.seen++; L.firstTotal++;
-    if(ok){ x.right=(x.right||0)+1; x.box=Math.min(x.box+1,INTERVALS.length-1); x.due=addDays(today(),INTERVALS[x.box]); L.firstRight++; addXp(1); L.xp++; }
-    else { x.wrong=(x.wrong||0)+1; x.box=0; x.due=today(); x.lastWrong=today(); L.missed.push(q); }
+    const x=item(q.id), fresh=!x.seen; x.seen++; L.firstTotal++;
+    (L.res||(L.res={}))[q.unit]=L.res[q.unit]||{n:0,ok:0}; L.res[q.unit].n++; if(ok) L.res[q.unit].ok++;
+    if(ok){ x.right=(x.right||0)+1; x.box=Math.min(fresh?(L.cur.hard||q.type==='type'?3:2):x.box+(L.cur.hard?2:1),INTERVALS.length-1); if(L.mode==='place'||L.mode==='testout') x.box=Math.max(x.box,3); x.due=addDays(today(),INTERVALS[x.box]); L.firstRight++; addXp(1); L.xp++; }
+    else { x.wrong=(x.wrong||0)+1; x.ft=0; x.box=0; x.due=today(); x.lastWrong=today(); L.missed.push(q); followUp(q); }
     save();
   }
   if(ok){ L.combo++; L.best=Math.max(L.best,L.combo); } else { L.combo=0; L.queue.push({q,retry:true}); }
@@ -992,7 +1051,7 @@ function finish(){
   const bonus = 5 + (L.firstTotal && L.firstRight===L.firstTotal ? 5 : 0);
   addXp(bonus); L.xp+=bonus;
   const t=today(); if(S.streak.last!==t){ S.streak.n=(S.streak.last===addDays(t,-1))?S.streak.n+1:1; S.streak.last=t; }
-  save(); driveSave(false);
+  save(); if(L.mode!=='place'&&L.mode!=='testout') driveSave(false);
   const acc=L.firstTotal?Math.round(L.firstRight/L.firstTotal*100):100;
   $('doneMascot').innerHTML=mascot('cheer','m');
   $('doneTitle').textContent= acc===100?'Perffaith!': acc>=80?'Da iawn!':'Lesson complete!';
@@ -1000,6 +1059,15 @@ function finish(){
   countUp($('dAcc'), acc, '', '%');
   $('dStreak').innerHTML=icon('flame')+S.streak.n;
   $('recap').innerHTML = L.missed.length ? `<h3>Your mistakes this time</h3>`+L.missed.map(q=>`<div>${esc(qText(q))}<br><b>${esc(correctText(q))}</b></div>`).join('')+`<p style="font-size:13px;color:var(--dim);margin:6px 2px 0">These are now in Practice → Fix mistakes.</p>` : '';
+  if(L.mode==='place'||L.mode==='testout'){
+    const rows=Object.keys(L.res||{}).map(uid=>{ const u=unitOf(uid), r=L.res[uid];
+      const pass = L.mode==='place' ? r.ok===r.n : r.ok>=r.n-1 && r.ok/r.n>=0.85;
+      const n = pass ? fastTrack(u) : 0; return {u,r,pass,n}; });
+    if(L.mode==='place') S.placed=today(); save(); driveSave(false);
+    const first=rows.find(x=>!x.pass);
+    $('recap').innerHTML = `<h3>${L.mode==='place'?'Placement results':'Test-out result'}</h3>`+rows.map(x=>`<div><b>${esc(x.u.title)}</b> ${x.r.ok}/${x.r.n} – ${x.pass?`<span style="color:var(--green-d,#46A302)">fast-tracked</span> (${x.n} questions credited, spot-checked over the next 2 weeks)`:'<span style="color:var(--red-d)">work through this unit</span>'}</div>`).join('')
+      + (first?`<p style="font-size:14px;margin:12px 2px 0">Start with <b>${esc(first.u.title)}</b>. Wrong answers are in Practice → Fix mistakes.</p>`:'');
+  }
   const focus=Object.values(model().K).filter(k=>k.verdict==='weak'||k.verdict==='shaky').sort((a,b)=>a.mastery-b.mastery)[0];
   if(focus) $('recap').innerHTML+=`<p style="font-size:14px;margin:12px 2px 0">Next focus: <b style="color:var(--red-d)">${esc(focus.info.title)}</b> (${Math.round(focus.mastery*100)}%). See Insights.</p>`;
   show('done'); sfx('done'); confetti();
