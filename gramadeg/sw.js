@@ -1,10 +1,11 @@
-const CACHE_NAME = 'gramadeg-v8';
+const CACHE_NAME = 'gramadeg-v9';
 const APP_SHELL = [
   './',
   './index.html',
   './review.html',
   './content.json',
   './manifest.json',
+  './fonts/fonts.css',
   './icons/icon-192.png',
   './icons/icon-512.png',
   './icons/apple-touch-icon.png'

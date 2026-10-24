@@ -12,8 +12,7 @@
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="icon" href="icons/favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fonts/fonts.css">
 <style>
 :root{
   --bg:#FFFFFF; --ink:#3C3C3C; --ink2:#4B4B4B; --dim:#777777; --dimmer:#AFAFAF; --line:#E5E5E5; --soft:#F7F7F7;
@@ -22,17 +21,19 @@
   --blue:#1CB0F6; --blue-d:#1899D6; --blue-bg:#DDF4FF; --blue-line:#84D8FF;
   --orange:#FF9600; --orange-d:#E08600; --gold:#FFC800; --gold-d:#E5A500; --purple:#CE82FF;
   --dragon:#E8453C;
+  --fd:'Baloo 2',ui-rounded,'SF Pro Rounded','Arial Rounded MT Bold',system-ui,sans-serif;
+  --fb:'Nunito',ui-rounded,'SF Pro Rounded',system-ui,-apple-system,sans-serif;
   --r:16px; --nav:72px;
   --safe-b: env(safe-area-inset-bottom);
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;background:var(--bg);color:var(--ink);font-family:'Nunito',sans-serif;font-weight:700;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--fb);font-weight:700;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 body{padding-top:env(safe-area-inset-top)}
 button{font-family:inherit;cursor:pointer;-webkit-user-select:none;user-select:none}
 svg.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;flex:none}
 .screen{display:none;max-width:600px;margin:0 auto;min-height:100vh;min-height:100dvh}
 .screen.on{display:flex;flex-direction:column}
-.h-title{font-family:'Baloo 2',sans-serif;font-weight:800;letter-spacing:-.2px}
+.h-title{font-family:var(--fd);font-weight:800;letter-spacing:-.2px}
 
 /* buttons */
 .btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border:0;border-radius:var(--r);padding:14px 16px 15px;font-weight:900;font-size:16px;letter-spacing:.8px;text-transform:uppercase;color:#fff;background:var(--green);box-shadow:0 4px 0 var(--green-d);transition:transform .06s,box-shadow .06s,filter .15s}
@@ -50,7 +51,7 @@ svg.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2.4;stro
 
 /* top bar */
 .top{position:sticky;top:0;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:10;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:2px solid var(--line)}
-.brand{display:flex;align-items:center;gap:8px;font-family:'Baloo 2';font-weight:800;font-size:23px;color:var(--dragon)}
+.brand{display:flex;align-items:center;gap:8px;font-family:var(--fd);font-weight:800;font-size:23px;color:var(--dragon)}
 .brand .mini{width:34px;height:34px}
 .stats-row{display:flex;gap:12px;align-items:center}
 .stat-pill{font-weight:900;font-size:16px;display:flex;align-items:center;gap:3px}
@@ -75,7 +76,7 @@ svg.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2.4;stro
 .unit-banner::after{content:'';position:absolute;right:-30px;top:-40px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.1)}
 .unit-banner .meta{flex:1;position:relative;z-index:1}
 .unit-banner .kicker{font-size:12px;font-weight:900;letter-spacing:.8px;text-transform:uppercase;opacity:.85}
-.unit-banner .t{font-family:'Baloo 2';font-weight:800;font-size:21px;line-height:1.1;margin:2px 0}
+.unit-banner .t{font-family:var(--fd);font-weight:800;font-size:21px;line-height:1.1;margin:2px 0}
 .unit-banner .s{font-size:14px;opacity:.92}
 .unit-banner .guide{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:2px;border:2px solid rgba(255,255,255,.4);border-bottom-width:4px;background:rgba(255,255,255,.12);color:#fff;border-radius:14px;padding:8px 10px 6px;font-weight:900;font-size:11px;letter-spacing:.5px;text-transform:uppercase}
 .path{position:relative;display:flex;flex-direction:column;align-items:center;gap:22px;margin:0 0 40px;padding-top:40px;min-height:100px}
@@ -110,7 +111,7 @@ svg.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2.4;stro
 .mode .tx{flex:1}
 .mode b{display:block;font-size:17px;font-weight:900}
 .mode span{display:block;font-size:13.5px;color:var(--dim);line-height:1.3;margin-top:2px}
-.mode .count{font-family:'Baloo 2';font-size:22px;font-weight:800;min-width:30px;text-align:right}
+.mode .count{font-family:var(--fd);font-size:22px;font-weight:800;min-width:30px;text-align:right}
 .mode.disabled{opacity:.5}
 .sec-h{font-size:13px;font-weight:900;color:var(--dim);text-transform:uppercase;letter-spacing:.8px;margin:24px 0 10px}
 .weak{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:2px solid var(--line)}
@@ -141,7 +142,7 @@ svg.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2.4;stro
 .sk .right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
 .sumgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .sumgrid div{background:var(--soft);border-radius:12px;padding:10px}
-.sumgrid b{display:block;font-family:'Baloo 2';font-size:22px;line-height:1}
+.sumgrid b{display:block;font-family:var(--fd);font-size:22px;line-height:1}
 .sumgrid span{font-size:11.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.4px}
 .solidwrap{display:flex;flex-wrap:wrap;gap:6px}
 .conf{padding:9px 0;border-bottom:2px solid var(--line);font-size:14px}
@@ -155,17 +156,17 @@ svg.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2.4;stro
 .overall{display:flex;align-items:center;gap:16px}
 .overall .big{position:relative;width:96px;height:96px;flex:none}
 .overall .big svg{width:96px;height:96px}
-.overall .big b{position:absolute;inset:0;display:grid;place-items:center;font-family:'Baloo 2';font-size:24px;font-weight:800;color:var(--green-d)}
+.overall .big b{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--fd);font-size:24px;font-weight:800;color:var(--green-d)}
 .kv{display:grid;grid-template-columns:1fr 1fr;gap:8px;flex:1}
 .kv div{background:var(--soft);border-radius:12px;padding:8px 10px}
-.kv b{display:block;font-family:'Baloo 2';font-size:20px;line-height:1}
+.kv b{display:block;font-family:var(--fd);font-size:20px;line-height:1}
 .kv span{font-size:11.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.4px}
 .legend{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--dim);margin:6px 0 4px}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
 .tree{position:relative;margin-top:8px}
 .tsec{position:relative;margin-bottom:6px}
 .tsec .root{display:flex;align-items:center;gap:10px;padding:8px 0}
-.tsec .root .badge{width:40px;height:40px;border-radius:12px;background:var(--ink2);color:#fff;display:grid;place-items:center;font-family:'Baloo 2';font-weight:800;font-size:18px}
+.tsec .root .badge{width:40px;height:40px;border-radius:12px;background:var(--ink2);color:#fff;display:grid;place-items:center;font-family:var(--fd);font-weight:800;font-size:18px}
 .tsec .root b{display:block;font-size:17px}
 .tsec .root span{font-size:13px;color:var(--dim)}
 .tsec .kids{position:relative;margin-left:19px;padding-left:22px;border-left:3px solid var(--line)}
@@ -217,7 +218,7 @@ svg.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2.4;stro
 .qwrap{flex:1;padding:6px 16px 20px;overflow-y:auto}
 .qkicker{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px}
 .qkicker.again{color:var(--orange)}
-.qtitle{font-family:'Baloo 2';font-weight:800;font-size:25px;line-height:1.15;margin:0 0 14px;color:var(--ink2)}
+.qtitle{font-family:var(--fd);font-weight:800;font-size:25px;line-height:1.15;margin:0 0 14px;color:var(--ink2)}
 .speaker{display:flex;align-items:flex-end;gap:8px;margin-bottom:20px}
 .speaker svg.m{width:96px;height:96px;flex:none;margin-bottom:-4px}
 .sb{position:relative;flex:1;border:2px solid var(--line);border-radius:16px;padding:12px 14px;font-size:19px;font-weight:800;line-height:1.35;color:var(--ink2)}
@@ -261,7 +262,7 @@ svg.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2.4;stro
 .fb .badge svg.i{width:26px;height:26px;stroke-width:3.4}
 .lfoot.right .badge{color:var(--green)} .lfoot.wrong .badge{color:var(--red)}
 .fb .tx{flex:1;min-width:0}
-.fb-title{font-family:'Baloo 2';font-weight:800;font-size:22px;line-height:1.1}
+.fb-title{font-family:var(--fd);font-weight:800;font-size:22px;line-height:1.1}
 .lfoot.right .fb-title,.lfoot.right .fb-ans{color:var(--green-d)}
 .lfoot.wrong .fb-title,.lfoot.wrong .fb-ans{color:var(--red-d)}
 .fb-ans{font-weight:900;font-size:16.5px;margin-top:3px}
@@ -275,7 +276,7 @@ svg.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2.4;stro
 .done{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 20px;text-align:center}
 .done svg.m{width:150px;height:150px;animation:jump 1s ease-in-out infinite}
 @keyframes jump{0%,100%{transform:translateY(0)}40%{transform:translateY(-12px)}}
-.done h1{font-family:'Baloo 2';color:var(--gold);font-size:34px;margin:8px 0 22px;text-shadow:0 2px 0 var(--gold-d)}
+.done h1{font-family:var(--fd);color:var(--gold);font-size:34px;margin:8px 0 22px;text-shadow:0 2px 0 var(--gold-d)}
 .tiles3{display:flex;gap:10px;width:100%;max-width:380px;margin-bottom:20px}
 .t3{flex:1;border:2px solid;border-radius:var(--r);overflow:hidden}
 .t3 .h{color:#fff;font-weight:900;font-size:11px;padding:5px;text-transform:uppercase;letter-spacing:.5px}
@@ -297,7 +298,7 @@ svg.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2.4;stro
 .shead .iconbtn{color:var(--ink2);padding:8px}
 .shead .iconbtn svg.i{width:28px;height:28px}
 .shead h2{flex:1;min-width:0;margin:0!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sheet h2{font-family:'Baloo 2';margin:0 0 2px;font-size:24px;line-height:1.15}
+.sheet h2{font-family:var(--fd);margin:0 0 2px;font-size:24px;line-height:1.15}
 .steps{margin:6px 0 10px;padding-left:22px;font-size:14px;line-height:1.45;color:var(--ink2)}
 .steps li{margin-bottom:6px}
 .setrow .steps b,.setrow p b{display:inline;margin:0}
@@ -308,7 +309,7 @@ svg.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2.4;stro
 .sheet .btn{margin-top:10px}
 .unit-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:6px 0 10px}
 .unit-stats div{background:var(--soft);border-radius:12px;padding:8px;text-align:center}
-.unit-stats b{display:block;font-family:'Baloo 2';font-size:20px}
+.unit-stats b{display:block;font-family:var(--fd);font-size:20px}
 .unit-stats span{font-size:11px;color:var(--dim);text-transform:uppercase}
 .setrow{border-top:2px solid var(--line);padding:14px 0}
 .setrow b{display:block;margin-bottom:4px}
@@ -317,6 +318,29 @@ svg.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2.4;stro
 .flaglist{font-size:14px;background:var(--soft);border-radius:12px;padding:10px;white-space:pre-wrap;max-height:160px;overflow:auto}
 .toast{position:fixed;left:50%;bottom:calc(var(--nav) + 20px);transform:translateX(-50%);background:var(--ink2);color:#fff;padding:10px 16px;border-radius:12px;font-weight:800;font-size:14px;opacity:0;transition:opacity .2s;z-index:60;pointer-events:none;white-space:nowrap}
 .toast.on{opacity:1}
+/* polish */
+.node button::before{content:'';position:absolute;top:9px;left:15px;width:20px;height:9px;border-radius:50%;background:rgba(255,255,255,.38);transform:rotate(-24deg);pointer-events:none}
+.node.trophy button::before{left:12px}
+.node button.gold{background:linear-gradient(180deg,#FFD84D,#FFC800)!important}
+.unit-banner .prog2{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:12px;font-weight:900;letter-spacing:.3px}
+.unit-banner .prog2 .bar2{flex:1;max-width:150px;height:8px;border-radius:6px;background:rgba(0,0,0,.18);overflow:hidden}
+.unit-banner .prog2 .bar2 i{display:block;height:100%;border-radius:6px;background:#fff}
+.unit-banner .ftpill{display:inline-flex;align-items:center;gap:3px;background:rgba(255,255,255,.22);border-radius:20px;padding:2px 8px 2px 5px;font-size:11px;font-weight:900;letter-spacing:.4px;text-transform:uppercase;margin-left:6px;vertical-align:2px}
+.unit-banner .ftpill svg.i{width:13px;height:13px;stroke-width:3}
+.hero-cta{position:relative;overflow:hidden;border-radius:20px;background:linear-gradient(160deg,#6BDB12,#58CC02 55%,#4DB302);box-shadow:0 5px 0 #46A302;color:#fff;padding:18px 18px 16px;margin-bottom:18px}
+.hero-cta::after{content:'';position:absolute;right:-40px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.1)}
+.hero-cta .row{display:flex;gap:14px;align-items:center;position:relative;z-index:1}
+.hero-cta .m{width:74px;height:74px;flex:none}
+.hero-cta h3{margin:0;font-family:var(--fd);font-weight:800;font-size:23px;line-height:1.1}
+.hero-cta p{margin:4px 0 0;font-size:14px;opacity:.95;line-height:1.3}
+.hero-cta .btn{margin-top:14px;background:#fff;color:var(--green-d);box-shadow:0 4px 0 rgba(0,0,0,.15);position:relative;z-index:1}
+.mode.sm{padding:9px 12px;margin-bottom:9px}
+.mode.sm .ic{width:42px;height:42px;border-radius:12px}
+.mode.sm .ic svg.i{width:23px;height:23px}
+.mode.sm b{font-size:16px} .mode.sm span{font-size:12.5px}
+.lfoot.right .badge,.lfoot.wrong .badge{animation:pop .35s ease-out}
+.speaker .react{animation:pop .4s ease-out}
+.lfoot.right .fb-title .plus{display:inline-block;margin-left:8px;font-size:15px;color:var(--gold-d);animation:pop .4s ease-out}
 @keyframes pop{0%{transform:scale(.88)}60%{transform:scale(1.05)}100%{transform:scale(1)}}
 .shake{animation:shake .35s}
 @keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
@@ -477,7 +501,7 @@ function mascot(mood='happy', cls='m'){
 
 /* ================= state ================= */
 let C = null, S = loadState(), L = null, TAB = 'learn';
-function blank(){ return {xp:0, streak:{n:0,last:null}, items:{}, flags:[], sound:true, daily:{date:null,xp:0}, log:[], placed:null}; }
+function blank(){ return {xp:0, streak:{n:0,last:null}, items:{}, flags:[], sound:true, loud:true, daily:{date:null,xp:0}, log:[], placed:null, placeV:0}; }
 function clean(d){
   // Accept only well-formed data, so a damaged save or odd import can never break the app.
   const b=blank(); if(!d || typeof d!=='object' || Array.isArray(d)) return b;
@@ -488,11 +512,11 @@ function clean(d){
   if(d.items&&typeof d.items==='object') Object.keys(d.items).forEach(k=>{ const x=d.items[k]; if(!x||typeof x!=='object') return;
     b.items[k]={box:Math.min(num(x.box),INTERVALS.length-1), due:day(x.due), seen:num(x.seen), right:num(x.right), wrong:num(x.wrong), lastWrong:day(x.lastWrong), ft:x.ft?1:0}; });
   if(Array.isArray(d.flags)) b.flags=d.flags.filter(f=>f&&typeof f.id==='string').map(f=>({id:f.id, note:String(f.note||''), given:String(f.given||''), at:day(f.at)}));
-  b.sound=d.sound!==false;
+  b.sound=d.sound!==false; b.loud=d.loud!==false;
   if(d.daily&&typeof d.daily==='object') b.daily={date:day(d.daily.date), xp:num(d.daily.xp)};
   if(Array.isArray(d.log)) b.log=d.log.filter(e=>e&&typeof e.q==='string'&&Number.isFinite(+e.t)).slice(-LOG_MAX)
     .map(e=>({t:+e.t, q:e.q, ok:e.ok?1:0, ms:num(e.ms), a:String(e.a==null?'':e.a).slice(0,80), m:String(e.m||''), r:e.r?1:0, ty:String(e.ty||''), v:String(e.v||''), h:e.h?1:0}));
-  b.placed=day(d.placed);
+  b.placed=day(d.placed); b.placeV=num(d.placeV);
   return b;
 }
 function loadState(){ try{ return clean(JSON.parse(localStorage.getItem(KEY))); }catch(e){ return blank(); } }
@@ -530,18 +554,28 @@ function status(u){ const s=uStats(u); if(!s.started) return ['new','New']; if(s
 
 /* ================= sound ================= */
 let AC=null;
-function sfx(kind){
+function audio(){
+  try{ if(navigator.audioSession) navigator.audioSession.type = S.loud ? 'playback' : 'ambient'; }catch(e){}
+  AC = AC || new (window.AudioContext||window.webkitAudioContext)(); if(AC.state==='suspended') AC.resume(); return AC;
+}
+// A bell-like note: fundamental plus soft overtones, quick attack, ringing decay.
+function bell(f, at, vol, len){
+  const ac=AC, t=ac.currentTime+at, out=ac.createGain(); out.connect(ac.destination);
+  out.gain.setValueAtTime(0.0001,t); out.gain.exponentialRampToValueAtTime(vol,t+0.006); out.gain.exponentialRampToValueAtTime(0.0001,t+len);
+  [[1,1,'sine'],[2,.28,'sine'],[3,.08,'triangle']].forEach(([m,v,ty])=>{ const o=ac.createOscillator(), g=ac.createGain(); o.type=ty; o.frequency.value=f*m; g.gain.value=v; o.connect(g).connect(out); o.start(t); o.stop(t+len+.05); });
+}
+function sfx(kind, combo){
   if(!S.sound) return;
   try{
-    AC = AC || new (window.AudioContext||window.webkitAudioContext)(); if(AC.state==='suspended') AC.resume();
-    const seq = {ok:[[784,0],[1046,.09]], bad:[[233,0],[196,.11]], done:[[523,0],[659,.1],[784,.2],[1046,.3]]}[kind];
-    seq.forEach(([f,d])=>{
-      const o=AC.createOscillator(), g=AC.createGain(); o.type = kind==='bad'?'triangle':'sine'; o.frequency.value=f;
-      const t=AC.currentTime+d; g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(kind==='bad'?0.12:0.16,t+0.012); g.gain.exponentialRampToValueAtTime(0.0001,t+0.22);
-      o.connect(g).connect(AC.destination); o.start(t); o.stop(t+0.25);
-    });
+    audio();
+    if(kind==='ok'){ const up=Math.pow(2,Math.min(combo||0,8)/24); bell(880*up,0,.14,.32); bell(1319*up,.075,.13,.45); if((combo||0)>=5) bell(1760*up,.15,.07,.4); }
+    else if(kind==='bad'){ const o=AC.createOscillator(), g=AC.createGain(), t=AC.currentTime; o.type='triangle'; o.frequency.setValueAtTime(310,t); o.frequency.exponentialRampToValueAtTime(190,t+.22);
+      g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(.11,t+.01); g.gain.exponentialRampToValueAtTime(0.0001,t+.28); o.connect(g).connect(AC.destination); o.start(t); o.stop(t+.3); }
+    else if(kind==='done'){ [523,659,784,1047,1319].forEach((f,i)=>bell(f,i*.085,.11,.5)); }
   }catch(e){}
 }
+// iPhone only lets sound start from a tap, so warm the audio up on the first one.
+addEventListener('pointerdown', ()=>{ if(S.sound) try{ audio(); }catch(e){} }, {once:true});
 
 /* ================= chrome ================= */
 const TABS = [['learn','Learn','home'],['practice','Practice','dumbbell'],['insights','Insights','chart'],['map','Map','map'],['rules','Rules','book']];
@@ -566,7 +600,8 @@ function renderLearn(){
     const sec=C.sections.findIndex(s=>s.id===u.section)+1;
     const dark=shade(u.colour,.8), p=strength(u);
     h+=`<div class="unit-banner" style="background:${u.colour};box-shadow:0 4px 0 ${dark}">
-      <div class="meta"><div class="kicker">Section ${sec} · Unit ${ui+1}</div><div class="t">${esc(u.title)}</div><div class="s">${esc(u.subtitle||'')}</div></div>
+      <div class="meta"><div class="kicker">Section ${sec} · Unit ${ui+1}${unitFt(u)?`<span class="ftpill">${icon('bolt')}Fast-tracked</span>`:''}</div><div class="t">${esc(u.title)}</div><div class="s">${esc(u.subtitle||'')}</div>
+        <div class="prog2"><div class="bar2"><i style="width:${Math.round(p*100)}%"></i></div>${Math.round(p*100)}% mastered</div></div>
       <button class="guide" onclick="openUnit('${u.id}')">${icon('book')}Guide</button></div>`;
     const n=Math.max(2,Math.ceil(u.questions.length/5));
     h+=`<div class="path">`;
@@ -581,17 +616,20 @@ function renderLearn(){
       const bg = filled ? '#FFC800' : u.colour, sh = filled ? '#E5A500' : dark;
       const ic = filled ? (trophy?'trophy':'star') : trophy ? 'trophy' : (cur ? 'play' : (u.icon||'star'));
       const act = trophy ? `openUnit('${u.id}')` : `startLesson('unit','${u.id}')`;
-      h+=`<div class="node${trophy?' trophy':''}" style="transform:translateX(${side*wave[j%wave.length]}px)">
+      h+=`<div class="node${trophy?' trophy':''}${cur?' current':''}" style="transform:translateX(${side*wave[j%wave.length]}px)">
         ${!trophy && seg>0 && !filled ? ring(seg,u.colour) : ''}
         ${cur?`<div class="startbubble" style="color:${u.colour}">${p>0?'CONTINUE':'START'}</div>`:''}
-        <button style="background:${bg};box-shadow:0 7px 0 ${sh}${cur?`,0 0 0 6px ${u.colour}33`:''}" onclick="${act}" aria-label="${esc(u.title)}">${icon(ic)}</button></div>`;
+        <button class="${filled?'gold':''}" style="background:${bg};box-shadow:0 7px 0 ${sh}${cur?`,0 0 0 6px ${u.colour}33`:''}" onclick="${act}" aria-label="${esc(u.title)}">${icon(ic)}</button></div>`;
     }
     h+=`</div>`;
   });
   const soon=C.units.filter(u=>u.soon);
   h+=`<div class="coming"><h3>Coming next</h3>${soon.map(u=>`<div class="soon-row"><div class="lk">${icon('lock')}</div><div><b>${esc(u.title)}</b><span>${esc(u.subtitle)}</span></div></div>`).join('')}</div>`;
   $('tab-learn').innerHTML=h;
+  if(!LEARN_SCROLLED){ LEARN_SCROLLED=true; const c=document.querySelector('#tab-learn .node.current'); if(c) setTimeout(()=>c.scrollIntoView({block:'center'}),60); }
 }
+let LEARN_SCROLLED=false;
+function unitFt(u){ const n=u.questions.filter(q=>it(q.id).ft).length; return n>=u.questions.length/2; }
 
 let SKIP_POP=false;
 function openSheet(title, body, sub){
@@ -640,9 +678,10 @@ function renderPractice(){
   const started=built().filter(u=>uStats(u).started);
   const fix=allQs().filter(q=>needsFix(q.id)).length;
   const msg = fix ? `You have ${fix} question${fix>1?'s':''} to fix. Get each right on 3 separate reviews to clear it.` : started.length ? 'No outstanding mistakes. Mixed review keeps everything fresh.' : 'Start a unit on the Learn tab, then come back here to practise.';
-  let h=`<div class="hero">${mascot(fix?'think':'happy','m')}<div class="say">${esc(msg)}</div></div>`;
-  const mode=(ic,col,title,sub,count,act,dis)=>`<button class="mode${dis?' disabled':''}" onclick="${dis?`toast('${dis}')`:act}"><div class="ic" style="background:${col};box-shadow:0 4px 0 ${shade(col,.8)}">${icon(ic)}</div><div class="tx"><b>${title}</b><span>${sub}</span></div>${count!=null?`<div class="count" style="color:${col}">${count}</div>`:''}</button>`;
-  h+=mode('brain','#58CC02','Smart practice','Picks what you most need: weak skills, fading memory, recent slips, plus a few spot-checks.',null,"startLesson('smart')", started.length?'':'Start a unit first');
+  const ok=started.length;
+  let h=`<div class="hero-cta"><div class="row">${mascot(fix?'think':'cheer','m')}<div><h3>Smart practice</h3><p>${ok?`15 questions on your weak spots and fading memory.${fix?` ${fix} mistake${fix>1?'s':''} to fix.`:''}`:'Start a unit on the Learn tab first.'}</p></div></div>
+    <button class="btn" onclick="${ok?"startLesson('smart')":"toast('Start a unit first')"}">${icon('play')}Start</button></div>`;
+  const mode=(ic,col,title,sub,count,act,dis)=>`<button class="mode sm${dis?' disabled':''}" onclick="${dis?`toast('${dis}')`:act}"><div class="ic" style="background:${col};box-shadow:0 4px 0 ${shade(col,.8)}">${icon(ic)}</div><div class="tx"><b>${title}</b><span>${sub}</span></div>${count!=null?`<div class="count" style="color:${col}">${count}</div>`:''}</button>`;
   h+=mode('repeat','#1CB0F6','Review due','Spaced repetition: items scheduled for today.',due,"startLesson('due')", started.length?'':'Start a unit first');
   h+=mode('shuffle','#A560F0','Mixed review','Synoptic: interleaved questions from every unit you have started.',null,"startLesson('mixed')", started.length?'':'Start a unit first');
   h+=mode('target','#FF4B4B','Fix mistakes','Only questions you have got wrong, worst first.',fix,"startLesson('mistakes')", fix?'':'No mistakes to fix');
@@ -896,11 +935,33 @@ function hardPick(u, n){
   qs.forEach(q=>{ if(out.length<n && !out.includes(q)) out.push(q); });
   return out;
 }
-function fastTrack(u){
+// full: every unseen question credited, and questions you'd already met (and last got right)
+//   are promoted so they stop clogging today's reviews. Questions you last got wrong stay to fix.
+// partial (one slip): unseen questions on the other skills get lighter credit and an early check.
+function fastTrack(u, partial, missedSkill){
   let n=0;
-  unitQs(u).forEach((q,i)=>{ const x=S.items[q.id]; if(x&&x.seen) return;
-    S.items[q.id]={box:3, due:addDays(today(), 3+(i%10)), seen:1, right:1, wrong:0, lastWrong:null, ft:1}; n++; });
+  unitQs(u).forEach((q,i)=>{ const x=S.items[q.id];
+    if(partial){
+      if((x&&x.seen) || (missedSkill && skillsOf(q).includes(missedSkill))) return;
+      S.items[q.id]={box:2, due:addDays(today(), 1+(i%4)), seen:1, right:1, wrong:0, lastWrong:null, ft:1}; n++; return;
+    }
+    if(!x||!x.seen){ S.items[q.id]={box:3, due:addDays(today(), 3+(i%10)), seen:1, right:1, wrong:0, lastWrong:null, ft:1}; n++; }
+    else if(x.box>=1 && x.box<3){ x.box=3; x.due=addDays(today(), 3+(i%10)); n++; }
+  });
   MODEL=null; return n;
+}
+// Re-apply a placement taken before the improved fast-track existed (one-off, from the answer log).
+function placementFromLog(){
+  const Q={}; allQs().forEach(q=>Q[q.id]=q); const res={};
+  S.log.filter(e=>e.m==='place'&&!e.r&&Q[e.q]&&dayKey(e.t)===S.placed).forEach(e=>{ const q=Q[e.q], r=res[q.unit]||(res[q.unit]={n:0,ok:0,miss:null}); r.n++; if(e.ok) r.ok++; else r.miss=skillsOf(q)[0]; });
+  return res;
+}
+function applyPlacement(res, mode){
+  return Object.keys(res).map(uid=>{ const u=unitOf(uid), r=res[uid]; if(!u) return null;
+    const pass = mode==='testout' ? r.ok>=r.n-1 && r.ok/r.n>=0.85 : r.ok===r.n;
+    const part = !pass && mode==='place' && r.n>=3 && r.ok===r.n-1;
+    const n = pass ? fastTrack(u) : part ? fastTrack(u,true,r.miss) : 0;
+    return {u,r,pass,part,n}; }).filter(Boolean);
 }
 function followUp(q){
   if(!L || ['test','place','testout','mistakes'].includes(L.mode) || (L.probes||0)>=3) return;
@@ -1028,11 +1089,12 @@ $('checkBtn').onclick=()=>{
   }
   if(ok){ L.combo++; L.best=Math.max(L.best,L.combo); } else { L.combo=0; L.queue.push({q,retry:true}); }
   $('combo').innerHTML = L.combo>=3 ? icon('flame')+L.combo : '';
-  sfx(ok?'ok':'bad');
+  sfx(ok?'ok':'bad', L.combo);
+  const sp=document.querySelector('#qwrap .speaker svg'); if(sp){ sp.outerHTML=mascot(ok?'cheer':'sad','m react'); }
   if(!ok) $('qwrap').classList.add('shake'), setTimeout(()=>$('qwrap').classList.remove('shake'),400);
   $('lfoot').className='lfoot '+(ok?'right':'wrong');
   $('fbBadge').innerHTML=icon(ok?'check':'cross');
-  $('fbTitle').textContent= ok ? (L.combo>=5?`${L.combo} in a row!`:praise()) : 'Correct answer:';
+  $('fbTitle').innerHTML= ok ? esc(L.combo>=5?`${L.combo} in a row!`:praise())+(!retry?`<span class="plus">+1 XP</span>`:'') : 'Correct answer:';
   $('fbAns').textContent= ok ? (q.type==='error'?q.fix:'') : correctText(q);
   $('fbExp').textContent=q.explain||'';
   $('ruleBtn').innerHTML=icon('book')+'Rule'; $('ruleBtn').onclick=()=>openRule(q.unit);
@@ -1060,12 +1122,10 @@ function finish(){
   $('dStreak').innerHTML=icon('flame')+S.streak.n;
   $('recap').innerHTML = L.missed.length ? `<h3>Your mistakes this time</h3>`+L.missed.map(q=>`<div>${esc(qText(q))}<br><b>${esc(correctText(q))}</b></div>`).join('')+`<p style="font-size:13px;color:var(--dim);margin:6px 2px 0">These are now in Practice → Fix mistakes.</p>` : '';
   if(L.mode==='place'||L.mode==='testout'){
-    const rows=Object.keys(L.res||{}).map(uid=>{ const u=unitOf(uid), r=L.res[uid];
-      const pass = L.mode==='place' ? r.ok===r.n : r.ok>=r.n-1 && r.ok/r.n>=0.85;
-      const n = pass ? fastTrack(u) : 0; return {u,r,pass,n}; });
-    if(L.mode==='place') S.placed=today(); save(); driveSave(false);
-    const first=rows.find(x=>!x.pass);
-    $('recap').innerHTML = `<h3>${L.mode==='place'?'Placement results':'Test-out result'}</h3>`+rows.map(x=>`<div><b>${esc(x.u.title)}</b> ${x.r.ok}/${x.r.n} – ${x.pass?`<span style="color:var(--green-d,#46A302)">fast-tracked</span> (${x.n} questions credited, spot-checked over the next 2 weeks)`:'<span style="color:var(--red-d)">work through this unit</span>'}</div>`).join('')
+    const rows=applyPlacement(L.res||{}, L.mode);
+    if(L.mode==='place'){ S.placed=today(); S.placeV=2; } save(); driveSave(false);
+    const first=rows.find(x=>!x.pass&&!x.part)||rows.find(x=>!x.pass);
+    $('recap').innerHTML = `<h3>${L.mode==='place'?'Placement results':'Test-out result'}</h3>`+rows.map(x=>`<div><b>${esc(x.u.title)}</b> ${x.r.ok}/${x.r.n} – ${x.pass?`<span style="color:var(--green-d,#46A302)">fast-tracked</span> (${x.n} questions moved on)`:x.part?`<span style="color:var(--orange-d)">part fast-tracked</span> (${x.n} questions credited; drill the one you missed)`:'<span style="color:var(--red-d)">work through this unit</span>'}</div>`).join('')
       + (first?`<p style="font-size:14px;margin:12px 2px 0">Start with <b>${esc(first.u.title)}</b>. Wrong answers are in Practice → Fix mistakes.</p>`:'');
   }
   const focus=Object.values(model().K).filter(k=>k.verdict==='weak'||k.verdict==='shaky').sort((a,b)=>a.mastery-b.mastery)[0];
@@ -1168,7 +1228,8 @@ function openSettings(){
     : driveSetupHtml()}</div>
   <div class="setrow"><b>Flagged questions (${S.flags.length})</b><p>Copy these and paste them to Claude to fix.</p>
     ${S.flags.length?`<div class="flaglist">${esc(ft)}</div><button class="btn blue" onclick="copyFlags()">Copy flags</button><button class="btn ghost" onclick="clearFlags()">Clear flags</button>`:''}</div>
-  <div class="setrow"><b>Sound</b><button class="btn ghost" onclick="S.sound=!S.sound;save();openSettings()">${S.sound?'On: tap to mute':'Off: tap to unmute'}</button></div>
+  <div class="setrow"><b>Sound</b><button class="btn ghost" onclick="S.sound=!S.sound;save();openSettings();sfx('ok')">${S.sound?'On: tap to mute':'Off: tap to unmute'}</button></div>
+  <div class="setrow"><b>Play when iPhone is on silent</b><button class="btn ghost" onclick="S.loud=!S.loud;save();openSettings();sfx('ok')">${S.loud?'Yes: tap to respect silent':'No: tap to play anyway'}</button></div>
   <div class="setrow"><b>Backup file</b><p>Save your progress as a file, or restore one.</p>
     <button class="btn blue" onclick="exportData()">Export backup</button><button class="btn ghost" onclick="$('importFile').click()">Import backup</button></div>
   <div class="setrow"><b>Content</b><p>Version ${esc(C?C.version:'–')} · ${C?allQs().length:0} questions in ${C?built().length:0} units</p><a class="btn ghost" style="text-decoration:none" href="review.html">Open content review</a></div>
@@ -1200,7 +1261,7 @@ renderNav();
 driveDaily();
 function loadContent(){
   $('tab-learn').innerHTML='<p style="text-align:center;color:var(--dim);margin-top:40px">Loading…</p>';
-  timed('content.json',{cache:'no-cache'}).then(r=>{ if(!r.ok) throw 0; return r.json(); }).then(d=>{ if(!d||!Array.isArray(d.units)||!Array.isArray(d.sections)) throw 0; C=d; renderTab(); })
+  timed('content.json',{cache:'no-cache'}).then(r=>{ if(!r.ok) throw 0; return r.json(); }).then(d=>{ if(!d||!Array.isArray(d.units)||!Array.isArray(d.sections)) throw 0; C=d; if(S.placed && S.placeV<2){ const rows=applyPlacement(placementFromLog(),'place'); S.placeV=2; save(); const n=rows.reduce((a,x)=>a+x.n,0); if(n) setTimeout(()=>toast('Placement re-applied: '+n+' questions moved on'),600); } renderTab(); })
     .catch(()=>{ $('tab-learn').innerHTML='<p style="text-align:center;margin-top:40px">Could not load the questions.</p><button class="btn" onclick="loadContent()">Try again</button>'; });
 }
 loadContent();
