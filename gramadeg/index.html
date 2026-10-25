@@ -1063,11 +1063,11 @@ function next(){
   if(q.type==='mc' && L.cur.hard){
     const gap=q.prompt.includes('___');
     h+=`<div class="qtitle">${gap?'Type the missing word':'Type it in Welsh'}</div>${speaker((gap?blankify(q.prompt):esc(q.prompt))+(q.en&&gap?`<small>${esc(q.en)}</small>`:''),'think')}`;
-    h+=`<input class="typein" id="typein" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Type your answer (accents optional)">`;
+    h+=`<input class="typein" id="typein" enterkeyhint="go" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Type your answer (accents optional)">`;
     $('qwrap').innerHTML=h;
     const inp=$('typein');
     inp.oninput=()=>{ L.answer=inp.value; $('checkBtn').disabled=!inp.value.trim(); };
-    inp.onkeydown=e=>{ if(e.key==='Enter' && inp.value.trim()) $('checkBtn').click(); };
+    wireTypein(inp);
     setTimeout(()=>inp.focus(),60);
   }
   else if(q.type==='mc'){
@@ -1087,11 +1087,11 @@ function next(){
   else if(q.type==='type'){
     h+=`<div class="qtitle">Fill the gap</div>${speaker(blankify(q.text)+(q.en?`<small>${esc(q.en)}</small>`:''),'think')}`;
     if(q.hint) h+=`<div class="hint">Base word / clue: <b>${esc(q.hint)}</b></div>`;
-    h+=`<input class="typein" id="typein" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Type the missing word (accents optional)">`;
+    h+=`<input class="typein" id="typein" enterkeyhint="go" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Type the missing word (accents optional)">`;
     $('qwrap').innerHTML=h;
     const inp=$('typein');
     inp.oninput=()=>{ L.answer=inp.value; $('checkBtn').disabled=!inp.value.trim(); };
-    inp.onkeydown=e=>{ if(e.key==='Enter' && inp.value.trim()) $('checkBtn').click(); };
+    wireTypein(inp);
     setTimeout(()=>inp.focus(),60);
   }
   else if(q.type==='error'){
@@ -1112,13 +1112,20 @@ function drawTiles(){
 }
 
 /* ================= checking ================= */
+// Keyboard return/go checks the answer; a tap on Check while the keyboard is open
+// keeps focus so the first tap counts (otherwise it only closes the keyboard).
+function wireTypein(inp){
+  inp.onkeydown=e=>{ if((e.key==='Enter'||e.keyCode===13) && inp.value.trim()){ e.preventDefault(); $('checkBtn').click(); } };
+}
+$('checkBtn').addEventListener('pointerdown',e=>{ const a=document.activeElement; if(a&&a.id==='typein'&&L.state==='answer'){ e.preventDefault(); } });
+const wrongIdx = q => [q.wrong].concat(q.alsoWrong||[]);
 function correctText(q){ return q.type==='mc'?q.options[q.answer] : q.type==='tiles'?q.answer : q.type==='type'?q.text.replace('___',q.answer) : q.fix; }
 const ECHO=new Set(['i','e','fe','fo','hi','ni','chi','nhw']);
 function grade(q){
   if(q.type==='mc' && L.cur.hard){ const a=norm(L.answer||''), t=norm(q.options[q.answer]), w=t.split(' ');
     return a===t || (w.length>=3 && ECHO.has(w[w.length-1]) && a===w.slice(0,-1).join(' ')); }
   if(q.type==='mc') return L.answer===q.answer;
-  if(q.type==='error') return L.answer===q.wrong;
+  if(q.type==='error') return wrongIdx(q).includes(L.answer);
   const a=norm(L.answer||''); return [q.answer].concat(q.alts||[]).some(x=>norm(x)===a);
 }
 function givenText(q){ if(L.answer==null) return ''; if(q.type==='mc'&&L.cur.hard) return String(L.answer); if(q.type==='mc') return q.options[L.answer]; if(q.type==='error') return q.sentence.split(' ')[L.answer]; return String(L.answer); }
@@ -1128,7 +1135,7 @@ $('checkBtn').onclick=()=>{
   logAnswer(q, ok, ms, givenText(q), retry); if(retry) save();
   L.cur.ok=ok; L.state='feedback';
   if(q.type==='mc'&&!L.cur.hard) document.querySelectorAll('.opt').forEach(b=>{ const i=+b.dataset.i; b.classList.remove('sel'); if(i===q.answer) b.classList.add('right'); else if(i===L.answer) b.classList.add('wrongsel'); });
-  if(q.type==='error') document.querySelectorAll('.chip').forEach(b=>{ const i=+b.dataset.i; b.classList.remove('sel'); if(i===q.wrong) b.classList.add('right'); else if(i===L.answer) b.classList.add('wrongsel'); });
+  if(q.type==='error') document.querySelectorAll('.chip').forEach(b=>{ const i=+b.dataset.i; b.classList.remove('sel'); if(wrongIdx(q).includes(i)) b.classList.add('right'); else if(i===L.answer) b.classList.add('wrongsel'); });
   if(q.type==='type'||L.cur.hard){ const inp=$('typein'); inp.disabled=true; inp.classList.add(ok?'right':'wrong'); }
   if(!retry){
     const x=item(q.id), fresh=!x.seen; x.seen++; L.firstTotal++;

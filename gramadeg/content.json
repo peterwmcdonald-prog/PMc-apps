@@ -230,6 +230,9 @@
      "explain": "Noun subject takes mae, not maen. (Mae + y contracts to mae'r.)",
      "skills": [
       "bod-noun-mae"
+     ],
+     "alsoWrong": [
+      1
      ]
     },
     {
@@ -464,6 +467,9 @@
      "explain": "Does only goes with indefinite nouns (does dim plant = there are no children). For 'the children', use dyw.",
      "skills": [
       "neg-does-dim"
+     ],
+     "alsoWrong": [
+      1
      ]
     },
     {
@@ -1552,6 +1558,10 @@
      "skills": [
       "cyn-use",
       "i-person-sm"
+     ],
+     "alsoWrong": [
+      2,
+      3
      ]
     },
     {
@@ -4851,6 +4861,9 @@
      "explain": "ar + me → arna i.",
      "skills": [
       "prep-ar"
+     ],
+     "alsoWrong": [
+      2
      ]
     },
     {
@@ -5322,6 +5335,9 @@
      "explain": "Definite object: mo'r, not ddim y.",
      "skills": [
       "mo-def"
+     ],
+     "alsoWrong": [
+      4
      ]
     },
     {
