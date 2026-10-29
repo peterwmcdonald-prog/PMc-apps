@@ -1346,7 +1346,7 @@ function resetAll(){ if(confirm('Delete all progress? This cannot be undone.')){
 /* ================= Explain a screenshot ================= */
 // Tap camera → pick screenshot → explanation. Calls the Claude API straight from the phone with the
 // owner's own key. The key lives only in this phone's storage (not in progress backups).
-const AIKEY='gramadeg-ai', BUILD='29 Oct v3';
+const AIKEY='gramadeg-ai', BUILD='29 Oct v4';
 const aiKey = () => { try{ return localStorage.getItem(AIKEY)||''; }catch(e){ return ''; } };
 let SHOT=null; // {url, b64, idx}
 function shotStart(){ if(!aiKey()) return aiSetup(); $('shotFile').click(); }
@@ -1383,34 +1383,34 @@ $('shotFile').onchange=async e=>{ const f=e.target.files[0]; e.target.value=''; 
 };
 const AIHDR = () => ({'content-type':'application/json','x-api-key':aiKey(),'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'});
 const AIMODEL='gramadeg-ai-model';
-// Ask the account which models it can use (newest first) and pick the newest Sonnet. Cached on the phone.
-async function aiModel(refresh){
-  if(!refresh){ try{ const m=localStorage.getItem(AIMODEL); if(m) return m; }catch(e){} }
+// Ask the account which models it can use (newest first). Sonnet first, then the rest.
+async function aiModels(){
   let r; try{ r=await timed('https://api.anthropic.com/v1/models?limit=100',{headers:AIHDR()},20000); }catch(e){ throw new Error('No connection. Check your signal and try again.'); }
   const j=await r.json().catch(()=>({}));
   if(r.status===401) throw new Error('The API key was not accepted. Check the key in Settings.');
-  if(!r.ok) throw new Error((j.error&&j.error.message)||('Could not list models (error '+r.status+')'));
+  if(!r.ok) throw new Error('Could not list models: '+((j.error&&j.error.message)||('error '+r.status)));
   const ids=(j.data||[]).map(m=>m.id);
-  const pick=ids.find(id=>/sonnet/i.test(id))||ids.find(id=>/opus/i.test(id))||ids[0];
-  if(!pick) throw new Error('Your account has no models available yet. Check Billing in the console.');
-  try{ localStorage.setItem(AIMODEL,pick); }catch(e){}
-  return pick;
+  return ids.filter(id=>/sonnet/i.test(id)).concat(ids.filter(id=>/opus/i.test(id)), ids.filter(id=>!/sonnet|opus/i.test(id)));
 }
 async function aiCall(body){
-  for(let attempt=0; attempt<2; attempt++){
-    const model=await aiModel(attempt>0);
+  let cached=''; try{ cached=localStorage.getItem(AIMODEL)||''; }catch(e){}
+  let list=cached?[cached]:await aiModels(), tried=[], listed=!cached;
+  for(let n=0; n<8; n++){
+    const model=list.find(m=>!tried.includes(m));
+    if(!model){ if(!listed){ listed=true; list=await aiModels(); continue; } break; }
+    tried.push(model);
     let r; try{ r=await timed('https://api.anthropic.com/v1/messages',{method:'POST',headers:AIHDR(),body:JSON.stringify(Object.assign({model},body))},90000); }
     catch(e){ throw new Error('No connection, or it took too long. Try again.'); }
     const j=await r.json().catch(()=>({}));
-    if(r.ok) return j;
-    const m=(j.error&&j.error.message)||('Error '+r.status);
+    if(r.ok){ try{ localStorage.setItem(AIMODEL,model); }catch(e){} return j; }
+    const et=(j.error&&j.error.type)||'', m=(j.error&&j.error.message)||('error '+r.status);
     if(r.status===401) throw new Error('The API key was not accepted. Check the key in Settings.');
     if(/credit balance/i.test(m)) throw new Error('Your Anthropic account is out of credit. Add some under Billing in the console.');
-    if(r.status===404 || /model/i.test(m)) continue;   // stale model name: refresh the list and retry once
+    if(r.status===404 || et==='not_found_error'){ if(model===cached){ try{ localStorage.removeItem(AIMODEL); }catch(e){} } continue; }  // that model isn't available: try the next
     if(r.status===429 || r.status===529) throw new Error('Anthropic is busy right now. Try again in a minute.');
-    throw new Error('Anthropic error: '+m);
+    throw new Error(`Anthropic said (${r.status}, ${model}): ${m}`);
   }
-  throw new Error('No usable model found on your account. Check Billing in the console.');
+  throw new Error('None of these models worked: '+(tried.join(', ')||'none listed')+'. Check Billing in the console.');
 }
 const AI_SYSTEM = `You explain Welsh to Peter, an adult learner at Sylfaen (foundation) level on the South Wales Dysgu Cymraeg course, who also uses Duolingo. He likes grammar explained like maths: clear patterns, like equations. Use British English. Be accurate. If you're not sure of something, say so rather than guess. Keep it short and plain.
 He will send a screenshot from Duolingo (or similar). Work out the Welsh on screen, what the exercise wanted, and, if his answer is visible, whether it was right and why. Explain every word and the grammar behind the sentence: mutations (name the trigger), verb forms, word order, and prepositions. If Duolingo uses a northern or different form from his South Wales course, say what the course form is.
