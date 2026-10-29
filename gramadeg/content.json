@@ -4995,6 +4995,311 @@
    "termDef": "A preposition shows a relationship of place, direction or topic: on, to, about. Inflected (conjugated) prepositions take a personal ending before a pronoun: ar + i → arna i."
   },
   {
+   "id": "p18",
+   "section": "sentences",
+   "icon": "puzzle",
+   "title": "Verbs + prepositions",
+   "subtitle": "aros am, siarad â, dweud wrth",
+   "colour": "#0EA5E9",
+   "rule": "<p>Many verbs need a particular preposition, and it often isn't the one English uses. Learn the verb and its preposition as a pair, like a single word.</p>\n<table><tr><th>Preposition</th><th>Verbs</th><th>After it</th></tr>\n<tr><td><b>ar</b> (on, at)</td><td>edrych ar (look at), gwrando ar (listen to), gwenu ar (smile at), dibynnu ar (depend on), sylwi ar (notice), gweiddi ar (shout at)</td><td>soft mutation</td></tr>\n<tr><td><b>am</b> (for, about)</td><td>aros am (wait for), chwilio am (look for), gofyn am (ask for), talu am (pay for), meddwl am (think about), poeni am (worry about), siarad am (talk about), gofalu am (look after)</td><td>soft mutation</td></tr>\n<tr><td><b>â / ag</b> (with)</td><td>siarad â (speak to/with), cwrdd â (meet), ymweld â (visit), cytuno â (agree with), ymuno â (join), mynd â (take), dod â (bring), peidio â (stop, don't)</td><td>aspirate mutation: â Phedr, â chath, â thri. <i>ag</i> before a vowel: ag e</td></tr>\n<tr><td><b>i</b> (to)</td><td>gofyn i (ask someone), diolch i (thank someone), rhoi i (give to), perthyn i (belong to)</td><td>soft mutation</td></tr>\n<tr><td><b>wrth</b> (by, to)</td><td>dweud wrth (tell someone)</td><td>soft mutation</td></tr>\n<tr><td><b>at</b> (to, towards)</td><td>ysgrifennu at (write to), anfon at (send to)</td><td>soft mutation</td></tr></table>\n<p><b>Same verb, different preposition, different meaning:</b> <i>gofyn i Siân</i> = ask Siân; <i>gofyn am help</i> = ask for help. <i>diolch i ti</i> = thank you; <i>diolch am y te</i> = thanks for the tea.</p>\n<p><b>No preposition in Welsh</b> where English has one, or the other way round: <i>cyrraedd Caerdydd</i> (arrive <u>in</u> Cardiff), <i>ffonio Mam</i> (call Mum), <i>helpu Siôn</i> (help Siôn). But <i>gwrando <u>ar</u></i> (listen to) and <i>edrych <u>ar</u></i> (look at).</p>\n<p><b>With a pronoun</b>, the preposition takes a personal ending: <i>arna i, amdana i, wrtha i, i fi / iddo fe</i>. See <b>Inflected prepositions</b>. <i>â</i> doesn't change: <i>â fi, ag e, â hi, â nhw</i>.</p>\n<p><b>In speech:</b> the south often uses <i>gyda</i> and the north <i>efo</i> in place of <i>â</i> (<i>siarad gyda fi</i>, <i>cytuno efo chdi</i>). Both are fine in conversation. The tests here use <i>â</i>.</p>",
+   "term": "Prepositional verbs",
+   "termDef": "Verbs that need a set preposition before their object: gwrando ar (listen to), aros am (wait for). The preposition is part of the verb's meaning, so learn the pair together.",
+   "questions": [
+    {
+     "id": "p18-01",
+     "type": "mc",
+     "prompt": "I'm listening to the radio.",
+     "options": [
+      "Dw i'n gwrando ar y radio.",
+      "Dw i'n gwrando i'r radio.",
+      "Dw i'n gwrando at y radio.",
+      "Dw i'n gwrando'r radio.",
+      "Dw i'n gwrando â'r radio.",
+      "Dw i'n gwrando am y radio."
+     ],
+     "answer": 0,
+     "explain": "Listen to = gwrando ar.",
+     "skills": [
+      "vp-ar"
+     ]
+    },
+    {
+     "id": "p18-02",
+     "type": "type",
+     "text": "Dw i'n chwilio ___ fy allweddi.",
+     "hint": "look for",
+     "en": "I'm looking for my keys.",
+     "answer": "am",
+     "alts": [],
+     "explain": "Look for = chwilio am.",
+     "skills": [
+      "vp-am"
+     ]
+    },
+    {
+     "id": "p18-03",
+     "type": "mc",
+     "prompt": "I spoke to Pedr.",
+     "options": [
+      "Siaradais i â Phedr.",
+      "Siaradais i â Pedr.",
+      "Siaradais i i Bedr.",
+      "Siaradais i wrth Bedr.",
+      "Siaradais i at Bedr.",
+      "Siaradais i ar Bedr."
+     ],
+     "answer": 0,
+     "explain": "Speak to = siarad â, and â causes aspirate mutation: p → ph.",
+     "skills": [
+      "vp-a"
+     ],
+     "tense": "Simple past"
+    },
+    {
+     "id": "p18-04",
+     "type": "type",
+     "text": "Dwedais i ___ Mam.",
+     "hint": "tell (someone)",
+     "en": "I told Mum.",
+     "answer": "wrth",
+     "alts": [],
+     "explain": "Tell someone = dweud wrth.",
+     "skills": [
+      "vp-wrth"
+     ],
+     "tense": "Simple past"
+    },
+    {
+     "id": "p18-05",
+     "type": "mc",
+     "prompt": "We visited the castle.",
+     "options": [
+      "Ymwelon ni â'r castell.",
+      "Ymwelon ni'r castell.",
+      "Ymwelon ni i'r castell.",
+      "Ymwelon ni at y castell.",
+      "Ymwelon ni ar y castell.",
+      "Ymwelon ni am y castell."
+     ],
+     "answer": 0,
+     "explain": "Visit = ymweld â. â + y → â'r.",
+     "skills": [
+      "vp-a"
+     ],
+     "tense": "Simple past"
+    },
+    {
+     "id": "p18-06",
+     "type": "error",
+     "sentence": "Dw i'n aros i'r bws.",
+     "wrong": 3,
+     "fix": "Dw i'n aros am y bws.",
+     "explain": "Wait for = aros am, not i.",
+     "skills": [
+      "vp-am"
+     ]
+    },
+    {
+     "id": "p18-07",
+     "type": "mc",
+     "prompt": "I'm helping Siôn.",
+     "options": [
+      "Dw i'n helpu Siôn.",
+      "Dw i'n helpu i Siôn.",
+      "Dw i'n helpu â Siôn.",
+      "Dw i'n helpu ar Siôn.",
+      "Dw i'n helpu wrth Siôn.",
+      "Dw i'n helpu am Siôn."
+     ],
+     "answer": 0,
+     "explain": "helpu takes its object directly, with no preposition.",
+     "skills": [
+      "vp-none"
+     ]
+    },
+    {
+     "id": "p18-08",
+     "type": "type",
+     "text": "Diolch ___ ti am dy help.",
+     "hint": "thank (someone)",
+     "en": "Thanks for your help.",
+     "answer": "i",
+     "alts": [],
+     "explain": "Thank someone = diolch i; thank for something = diolch am.",
+     "skills": [
+      "vp-i"
+     ]
+    },
+    {
+     "id": "p18-09",
+     "type": "tiles",
+     "en": "She asked for help.",
+     "answer": "Gofynnodd hi am help",
+     "distractors": [
+      "i",
+      "wrth",
+      "at",
+      "ar",
+      "Gofyn",
+      "helpu"
+     ],
+     "explain": "Ask for something = gofyn am.",
+     "skills": [
+      "vp-am"
+     ],
+     "tense": "Simple past"
+    },
+    {
+     "id": "p18-10",
+     "type": "mc",
+     "prompt": "I asked Siân.",
+     "options": [
+      "Gofynnais i i Siân.",
+      "Gofynnais i am Siân.",
+      "Gofynnais i â Siân.",
+      "Gofynnais i wrth Siân.",
+      "Gofynnais i ar Siân.",
+      "Gofynnais i Siân."
+     ],
+     "answer": 0,
+     "explain": "Ask a person = gofyn i. (Gofyn am Siân = ask for/about Siân.)",
+     "skills": [
+      "vp-i"
+     ],
+     "tense": "Simple past"
+    },
+    {
+     "id": "p18-11",
+     "type": "error",
+     "sentence": "Dyn ni'n cyrraedd i Gaerdydd am chwech.",
+     "wrong": 3,
+     "fix": "Dyn ni'n cyrraedd Caerdydd am chwech.",
+     "explain": "cyrraedd takes the place directly: arrive in Cardiff = cyrraedd Caerdydd. No i, so no mutation either.",
+     "skills": [
+      "vp-none"
+     ],
+     "alsoWrong": [
+      4
+     ]
+    },
+    {
+     "id": "p18-12",
+     "type": "type",
+     "text": "Mae hi'n gwenu ___ y babi.",
+     "hint": "smile at",
+     "en": "She's smiling at the baby.",
+     "answer": "ar",
+     "alts": [],
+     "explain": "Smile at = gwenu ar.",
+     "skills": [
+      "vp-ar"
+     ]
+    },
+    {
+     "id": "p18-13",
+     "type": "mc",
+     "prompt": "Don't worry about it. (ti, it = fe)",
+     "options": [
+      "Paid â phoeni amdano fe.",
+      "Paid â poeni amdano fe.",
+      "Paid â phoeni am fe.",
+      "Paid â phoeni arno fe.",
+      "Paid â phoeni iddo fe.",
+      "Paid poeni amdano fe."
+     ],
+     "answer": 0,
+     "explain": "peidio â + aspirate mutation (poeni → phoeni); poeni am + fe → amdano fe.",
+     "skills": [
+      "vp-am",
+      "vp-a"
+     ]
+    },
+    {
+     "id": "p18-14",
+     "type": "tiles",
+     "en": "We meet friends every Friday.",
+     "answer": "Dyn ni'n cwrdd â ffrindiau bob dydd Gwener",
+     "distractors": [
+      "i",
+      "wrth",
+      "am",
+      "at",
+      "ar",
+      "ffrind"
+     ],
+     "explain": "Meet = cwrdd â.",
+     "skills": [
+      "vp-a"
+     ]
+    },
+    {
+     "id": "p18-15",
+     "type": "mc",
+     "prompt": "Tell them! (chi)",
+     "options": [
+      "Dwedwch wrthyn nhw!",
+      "Dwedwch wrth nhw!",
+      "Dwedwch iddyn nhw!",
+      "Dwedwch atyn nhw!",
+      "Dwedwch wrtho nhw!",
+      "Dwedwch nhw!"
+     ],
+     "answer": 0,
+     "explain": "dweud wrth; wrth + nhw → wrthyn nhw.",
+     "skills": [
+      "vp-wrth"
+     ]
+    },
+    {
+     "id": "p18-16",
+     "type": "type",
+     "text": "Dw i'n dibynnu ___ fy ffôn.",
+     "hint": "depend on",
+     "en": "I depend on my phone.",
+     "answer": "ar",
+     "alts": [],
+     "explain": "Depend on = dibynnu ar.",
+     "skills": [
+      "vp-ar"
+     ]
+    },
+    {
+     "id": "p18-17",
+     "type": "mc",
+     "prompt": "I'm phoning Mum.",
+     "options": [
+      "Dw i'n ffonio Mam.",
+      "Dw i'n ffonio i Mam.",
+      "Dw i'n ffonio â Mam.",
+      "Dw i'n ffonio at Mam.",
+      "Dw i'n ffonio ar Mam.",
+      "Dw i'n ffonio wrth Mam."
+     ],
+     "answer": 0,
+     "explain": "ffonio takes the person directly, with no preposition.",
+     "skills": [
+      "vp-none"
+     ]
+    },
+    {
+     "id": "p18-18",
+     "type": "type",
+     "text": "Dw i'n cytuno ___ ti.",
+     "hint": "agree with",
+     "en": "I agree with you.",
+     "answer": "â",
+     "alts": [
+      "gyda",
+      "efo"
+     ],
+     "explain": "Agree with = cytuno â. In speech you'll also hear cytuno gyda (S) / efo (N).",
+     "skills": [
+      "vp-a"
+     ]
+    }
+   ]
+  },
+  {
    "id": "p9",
    "section": "sentences",
    "icon": "quote",
@@ -6694,6 +6999,36 @@
    "group": "point",
    "title": "Dyma / dyna",
    "blurb": "Dyma'r car, dyna broblem"
+  },
+  "vp-ar": {
+   "group": "point",
+   "title": "Verbs with ar",
+   "blurb": "gwrando ar, edrych ar, dibynnu ar"
+  },
+  "vp-am": {
+   "group": "point",
+   "title": "Verbs with am",
+   "blurb": "aros am, chwilio am, gofyn am"
+  },
+  "vp-a": {
+   "group": "point",
+   "title": "Verbs with â",
+   "blurb": "siarad â, cwrdd â + aspirate mutation"
+  },
+  "vp-i": {
+   "group": "point",
+   "title": "Verbs with i",
+   "blurb": "gofyn i, diolch i"
+  },
+  "vp-wrth": {
+   "group": "point",
+   "title": "dweud wrth",
+   "blurb": "tell someone = dweud wrth"
+  },
+  "vp-none": {
+   "group": "point",
+   "title": "No preposition in Welsh",
+   "blurb": "cyrraedd, ffonio, helpu"
   }
  },
  "glossary": [
@@ -6832,6 +7167,10 @@
   {
    "term": "Equative / comparative / superlative",
    "def": "as big as / bigger / biggest: mor fawr â, mwy, mwya."
+  },
+  {
+   "term": "Prepositional verb",
+   "def": "A verb that needs a set preposition before its object: gwrando ar (listen to), aros am (wait for)."
   }
  ]
 }
