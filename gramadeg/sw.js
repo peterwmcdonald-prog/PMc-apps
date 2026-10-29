@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gramadeg-v15';
+const CACHE_NAME = 'gramadeg-v16';
 const APP_SHELL = [
   './',
   './index.html',
@@ -28,7 +28,7 @@ self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
   if (new URL(event.request.url).origin !== self.location.origin) return; // never touch Drive backup calls
   event.respondWith(
-    fetch(event.request).then(res => {
+    fetch(event.request, {cache: 'no-cache'}).then(res => {   // always ask GitHub for the newest copy
       if (res && res.status === 200) {
         const copy = res.clone();
         caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy));

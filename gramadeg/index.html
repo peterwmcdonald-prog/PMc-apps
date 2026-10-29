@@ -1320,7 +1320,7 @@ function openSettings(){
   <div class="setrow"><b>Play when iPhone is on silent</b><button class="btn ghost" onclick="S.loud=!S.loud;save();openSettings();sfx('ok')">${S.loud?'Yes: tap to respect silent':'No: tap to play anyway'}</button></div>
   <div class="setrow"><b>Backup file</b><p>Save your progress as a file, or restore one.</p>
     <button class="btn blue" onclick="exportData()">Export backup</button><button class="btn ghost" onclick="$('importFile').click()">Import backup</button></div>
-  <div class="setrow"><b>Content</b><p>Version ${esc(C?C.version:'–')} · ${C?allQs().length:0} questions in ${C?built().length:0} units</p><a class="btn ghost" style="text-decoration:none" href="review.html">Open content review</a></div>
+  <div class="setrow"><b>Content</b><p>App ${BUILD} · content version ${esc(C?C.version:'–')} · ${C?allQs().length:0} questions in ${C?built().length:0} units</p><a class="btn ghost" style="text-decoration:none" href="review.html">Open content review</a></div>
   <div class="setrow"><b>Reset</b><button class="btn red" onclick="resetAll()">Reset all progress</button></div>
   <button class="btn ghost" onclick="closeSheet()">Back</button>`);
 }
@@ -1346,7 +1346,7 @@ function resetAll(){ if(confirm('Delete all progress? This cannot be undone.')){
 /* ================= Explain a screenshot ================= */
 // Tap camera → pick screenshot → explanation. Calls the Claude API straight from the phone with the
 // owner's own key. The key lives only in this phone's storage (not in progress backups).
-const AIKEY='gramadeg-ai';
+const AIKEY='gramadeg-ai', BUILD='29 Oct v3';
 const aiKey = () => { try{ return localStorage.getItem(AIKEY)||''; }catch(e){ return ''; } };
 let SHOT=null; // {url, b64, idx}
 function shotStart(){ if(!aiKey()) return aiSetup(); $('shotFile').click(); }
@@ -1379,7 +1379,7 @@ $('shotFile').onchange=async e=>{ const f=e.target.files[0]; e.target.value=''; 
   try{ SHOT=await shrink(f); const r=await aiExplain(SHOT.b64);
     S.explains.push({at:new Date().toISOString(), r, fu:[]}); if(S.explains.length>EXPLAIN_MAX) S.explains.shift(); save();
     SHOT.idx=S.explains.length-1; openExplain(SHOT.idx, true);
-  }catch(err){ openSheet('Explanation', `<div class="xload">${mascot('sad','m')}<p>${esc(err.message||'Something went wrong')}</p></div><button class="btn blue" onclick="shotStart()">Try another screenshot</button>${/key/i.test(err.message||'')?'<button class="btn ghost" onclick="aiSetup()">Check the key</button>':''}<button class="btn ghost" onclick="closeSheet()">Close</button>`); }
+  }catch(err){ openSheet('Explanation', `<div class="xload">${mascot('sad','m')}<p>${esc(err.message||'Something went wrong')}</p><p style="font-size:12px">App version ${BUILD}</p></div><button class="btn blue" onclick="shotStart()">Try another screenshot</button>${/key/i.test(err.message||'')?'<button class="btn ghost" onclick="aiSetup()">Check the key</button>':''}<button class="btn ghost" onclick="closeSheet()">Close</button>`); }
 };
 const AIHDR = () => ({'content-type':'application/json','x-api-key':aiKey(),'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'});
 const AIMODEL='gramadeg-ai-model';
