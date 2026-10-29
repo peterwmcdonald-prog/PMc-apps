@@ -305,6 +305,23 @@ svg.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2.4;stro
 .steps code{background:var(--soft);border-radius:6px;padding:1px 5px;font-size:13px}
 .setrow textarea{width:100%;height:90px;font:12px/1.3 monospace;border:2px solid var(--line);border-radius:10px;padding:8px}
 .warn{color:var(--red-d)}
+.shotbtn{color:var(--blue,#1CB0F6)!important}.shotbtn svg.i{width:26px;height:26px}
+.xp-shot{display:block;max-width:100%;max-height:200px;margin:0 auto 12px;border-radius:12px;border:2px solid var(--line)}
+.xbox{border:2px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:12px}
+.xbox h4{margin:0 0 6px;font-size:12.5px;font-weight:900;color:var(--dim);text-transform:uppercase;letter-spacing:.7px}
+.xbox .cy{font-size:20px;font-weight:800;color:var(--ink)}.xbox .en{font-size:15px;color:var(--dim);margin-top:2px}
+.xbox p{margin:6px 0 0;font-size:15px;line-height:1.45}
+.xpat{display:block;margin:6px 0;padding:7px 10px;border-radius:10px;background:#EAF6FE;color:#0E6EA8;font-weight:800;font-size:14.5px}
+.xbox ul{margin:6px 0 0;padding-left:20px;font-size:14.5px}.xbox li{margin-bottom:3px}
+.xbox.tip{background:#FFF8DB;border-color:#F5E3A0}.xbox.dia{background:#F3EDFD;border-color:#DCCDF7}
+.xwords{width:100%;border-collapse:collapse;font-size:14.5px}.xwords td{padding:6px 6px;border-top:1px solid var(--line);vertical-align:top}
+.xwords tr:first-child td{border-top:0}.xwords td:first-child{font-weight:800;white-space:nowrap}.xwords small{display:block;color:var(--dim)}
+.xfu{display:flex;gap:8px;margin-top:6px}.xfu input{flex:1;min-width:0;font-size:16px;border:2px solid var(--line);border-radius:12px;padding:10px 12px}
+.xfu .btn{width:auto;margin:0;padding:10px 14px}
+.xqa{margin-top:10px;font-size:15px;line-height:1.45}.xqa b{display:block;color:var(--blue-d,#1899D6)}
+.xhist{display:block;width:100%;text-align:left;background:#fff;border:0;border-top:1px solid var(--line);padding:10px 2px;color:var(--ink)}
+.xhist:first-child{border-top:0}.xhist b{display:block;font-size:15.5px}.xhist span{font-size:13px;color:var(--dim)}
+.xload{text-align:center;padding:30px 0 10px;color:var(--dim)}.xload .m{width:90px;height:90px}
 .sheet .sub{color:var(--dim);margin-bottom:14px}
 .sheet .btn{margin-top:10px}
 .unit-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:6px 0 10px}
@@ -367,6 +384,7 @@ dl.gloss{margin:0} dl.gloss dt{font-weight:900;color:var(--ink2);margin-top:10px
       <div class="goal" id="goalRing" title="Daily goal"></div>
       <div class="stat-pill flame" id="streakPill"></div>
       <div class="stat-pill xp" id="xpPill"></div>
+      <button class="iconbtn shotbtn" id="shotBtn" aria-label="Explain a screenshot"></button>
       <button class="iconbtn" id="setBtn" aria-label="Settings"></button>
     </div>
   </div>
@@ -419,13 +437,14 @@ dl.gloss{margin:0} dl.gloss dt{font-weight:900;color:var(--ink2);margin-top:10px
 <div class="overlay" id="overlay"><div class="sheet" id="sheet"></div></div>
 <div class="toast" id="toast"></div>
 <input type="file" id="importFile" accept="application/json" hidden>
+<input type="file" id="shotFile" accept="image/*" hidden>
 
 <script>
 'use strict';
 const KEY = 'gramadeg-v1';
 const LESSON_LEN = 10, MIXED_LEN = 15, TEST_LEN = 20, MISTAKE_LEN = 12, DAILY_GOAL = 20;
 const INTERVALS = [0, 1, 3, 7, 14, 30, 60];
-const LOG_MAX = 20000, DAY_MS = 864e5;
+const LOG_MAX = 20000, DAY_MS = 864e5, EXPLAIN_MAX = 60;
 
 /* ================= icons ================= */
 const P = {
@@ -445,6 +464,7 @@ const P = {
   map:'<path d="M9 4.5 3.5 6.5v13L9 17.5l6 2 5.5-2v-13L15 6.5z"/><path d="M9 4.5v13M15 6.5v13"/>',
   flame:'<path d="M12.2 2.5c.9 3.6 5.8 5.6 5.8 10.6a6 6 0 0 1-12 0c0-2.6 1.4-4.6 2.6-6.1.4 1.8 1.3 3 2.6 3.3-.3-2.7.1-5.4 1-7.8z" fill="currentColor" stroke="none"/><path d="M12 21a3 3 0 0 1-3-3c0-1.6 1.2-2.6 2-3.8.3 1 .9 1.6 1.6 1.7.2-.8.6-1.6 1.2-2.2.4 1.2 1.2 2.4 1.2 4.3a3 3 0 0 1-3 3z" fill="#FFC800" stroke="none"/>',
   bolt:'<path d="M13.5 2 4.5 13.5h6.5L10 22l9-11.5h-6.5z" fill="currentColor" stroke="none"/>',
+  camera:'<path d="M4 8.5h3l1.6-2.5h6.8L17 8.5h3v10.5H4z"/><circle cx="12" cy="13.5" r="3.6"/>',
   gear:'<circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.6M12 18.6v2.6M2.8 12h2.6M18.6 12h2.6M5.5 5.5l1.8 1.8M16.7 16.7l1.8 1.8M5.5 18.5l1.8-1.8M16.7 7.3l1.8-1.8"/>',
   target:'<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/>',
   shuffle:'<path d="M3.5 7h3.2c2 0 3.2 1 4.3 2.7l2 3.6c1 1.7 2.3 2.7 4.3 2.7h3.2"/><path d="M3.5 17h3.2c1.4 0 2.4-.5 3.2-1.4M14 8.4c.8-.9 1.8-1.4 3.3-1.4h3.2"/><path d="m17.8 4.3 2.7 2.7-2.7 2.7M17.8 14.3l2.7 2.7-2.7 2.7"/>',
@@ -524,7 +544,7 @@ function mascot(mood='happy', cls='m'){
 
 /* ================= state ================= */
 let C = null, S = loadState(), L = null, TAB = 'learn';
-function blank(){ return {xp:0, streak:{n:0,last:null}, items:{}, flags:[], sound:true, loud:true, daily:{date:null,xp:0}, log:[], placed:null, placeV:0}; }
+function blank(){ return {xp:0, streak:{n:0,last:null}, items:{}, flags:[], sound:true, loud:true, daily:{date:null,xp:0}, log:[], placed:null, placeV:0, explains:[]}; }
 function clean(d){
   // Accept only well-formed data, so a damaged save or odd import can never break the app.
   const b=blank(); if(!d || typeof d!=='object' || Array.isArray(d)) return b;
@@ -540,6 +560,8 @@ function clean(d){
   if(Array.isArray(d.log)) b.log=d.log.filter(e=>e&&typeof e.q==='string'&&Number.isFinite(+e.t)).slice(-LOG_MAX)
     .map(e=>({t:+e.t, q:e.q, ok:e.ok?1:0, ms:num(e.ms), a:String(e.a==null?'':e.a).slice(0,80), m:String(e.m||''), r:e.r?1:0, ty:String(e.ty||''), v:String(e.v||''), h:e.h?1:0}));
   b.placed=day(d.placed); b.placeV=num(d.placeV);
+  if(Array.isArray(d.explains)) b.explains=d.explains.filter(e=>e&&typeof e==='object'&&e.r&&typeof e.r==='object').slice(-EXPLAIN_MAX)
+    .map(e=>({at:String(e.at||''), r:e.r, fu:Array.isArray(e.fu)?e.fu.filter(x=>x&&typeof x.q==='string').map(x=>({q:x.q, a:String(x.a||'')})):[]}));
   return b;
 }
 function loadState(){ try{ return clean(JSON.parse(localStorage.getItem(KEY))); }catch(e){ return blank(); } }
@@ -733,6 +755,9 @@ function renderPractice(){
     missed.forEach(q=>{ h+=`<div class="missed"><span class="n">✕${it(q.id).wrong}</span><div class="q">${esc(qText(q))}</div><div class="a">${esc(correctText(q))}</div></div>`; });
     h+=`</div>`;
   }
+  h+=`<div class="sec-h">Screenshot explanations</div>`;
+  h+=S.explains.length ? `<div class="card">${S.explains.slice().reverse().slice(0,15).map((e,k)=>`<button class="xhist" onclick="openExplain(${S.explains.length-1-k})"><b>${esc(e.r.welsh||'(screenshot)')}</b><span>${esc(e.r.english||'')} · ${esc(fmtWhen(e.at))}</span></button>`).join('')}</div>`
+    : mode('camera','#1CB0F6','Explain a screenshot','Stuck on Duolingo? Screenshot it, then tap the camera at the top.',null,'shotStart()');
   $('tab-practice').innerHTML=h;
 }
 function qText(q){ return q.type==='mc'?q.prompt : q.type==='tiles'?q.en : q.type==='type'?q.text.replace('___','…')+(q.hint?' ('+q.hint+')':'') : q.sentence; }
@@ -1289,6 +1314,8 @@ function openSettings(){
     : driveSetupHtml()}</div>
   <div class="setrow"><b>Flagged questions (${S.flags.length})</b><p>Copy these and paste them to Claude to fix.</p>
     ${S.flags.length?`<div class="flaglist">${esc(ft)}</div><button class="btn blue" onclick="copyFlags()">Copy flags</button><button class="btn ghost" onclick="clearFlags()">Clear flags</button>`:''}</div>
+  <div class="setrow"><b>${icon('camera','style="width:18px;height:18px;vertical-align:-3px"')} Screenshot explanations</b><p>${aiKey()?'On. Tap the camera at the top of the app, pick a screenshot, and get an explanation.':'Not set up yet.'}</p>
+    ${aiKey()?`<button class="btn ghost" onclick="aiSetup()">Change key</button><button class="btn ghost" onclick="aiForget()">Remove key</button>`:`<button class="btn blue" onclick="aiSetup()">Set up</button>`}</div>
   <div class="setrow"><b>Sound</b><button class="btn ghost" onclick="S.sound=!S.sound;save();openSettings();sfx('ok')">${S.sound?'On: tap to mute':'Off: tap to unmute'}</button></div>
   <div class="setrow"><b>Play when iPhone is on silent</b><button class="btn ghost" onclick="S.loud=!S.loud;save();openSettings();sfx('ok')">${S.loud?'Yes: tap to respect silent':'No: tap to play anyway'}</button></div>
   <div class="setrow"><b>Backup file</b><p>Save your progress as a file, or restore one.</p>
@@ -1315,6 +1342,109 @@ $('importFile').onchange=e=>{ const f=e.target.files[0]; e.target.value=''; if(!
     S=clean(d); save(); closeSheet(); renderTab(); toast('Backup restored'); driveSave(false);
   }).catch(()=>toast('Not a valid Gramadeg backup')); };
 function resetAll(){ if(confirm('Delete all progress? This cannot be undone.')){ S=blank(); save(); closeSheet(); renderTab(); } }
+
+/* ================= Explain a screenshot ================= */
+// Tap camera → pick screenshot → explanation. Calls the Claude API straight from the phone with the
+// owner's own key. The key lives only in this phone's storage (not in progress backups).
+const AIKEY='gramadeg-ai', AI_MODELS=['claude-sonnet-5-5','claude-sonnet-4-5'];
+const aiKey = () => { try{ return localStorage.getItem(AIKEY)||''; }catch(e){ return ''; } };
+let SHOT=null; // {url, b64, idx}
+function shotStart(){ if(!aiKey()) return aiSetup(); $('shotFile').click(); }
+$('shotBtn').innerHTML=icon('camera'); $('shotBtn').onclick=shotStart;
+function aiSetup(){
+  openSheet('Explain screenshots: set up', `<div class="setrow"><p>One-off setup, about 5 minutes. After that it's: <b>camera → Photo Library → tap the screenshot</b>.</p>
+  <ol class="steps"><li>Open <b>console.anthropic.com</b> (button below) and sign in with your email.</li>
+  <li>Go to <b>Billing</b> and add credit. £5 covers several hundred screenshots (about 1–2p each).</li>
+  <li>Go to <b>API keys</b> → <b>Create key</b> → call it <code>Gramadeg</code> → <b>Copy</b>.</li>
+  <li>Come back here, paste it in the box, and tap <b>Save</b>.</li></ol>
+  <a class="btn ghost" style="text-decoration:none" href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">Open Anthropic console</a>
+  <input class="typein" id="aiKeyIn" style="font-size:15px;margin-top:12px" placeholder="sk-ant-…" autocomplete="off" autocapitalize="off" spellcheck="false" value="">
+  <button class="btn blue" onclick="aiSave()">Save and pick a screenshot</button>
+  <p style="font-size:13px;color:var(--dim)">The key stays on this phone only. It isn't included in backups or sent anywhere except Anthropic.</p></div>`);
+}
+function aiSave(){
+  const k=($('aiKeyIn').value||'').trim();
+  if(!/^sk-ant-/.test(k)){ toast('That doesn\'t look like a key (starts sk-ant-)'); return; }
+  try{ localStorage.setItem(AIKEY,k); }catch(e){ toast('Could not save on this phone'); return; }
+  closeSheet(); $('shotFile').click();  // same tap, so iPhone allows the picker to open
+}
+function aiForget(){ if(confirm('Remove the key from this phone?')){ try{ localStorage.removeItem(AIKEY); }catch(e){} openSettings(); } }
+function shrink(file){ return new Promise((res,rej)=>{ const img=new Image(), url=URL.createObjectURL(file);
+  img.onload=()=>{ const m=1600, k=Math.min(1,m/Math.max(img.width,img.height)), c=document.createElement('canvas');
+    c.width=Math.round(img.width*k); c.height=Math.round(img.height*k); c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+    res({url, b64:c.toDataURL('image/jpeg',.85).split(',')[1]}); };
+  img.onerror=()=>rej(new Error('Could not read that image')); img.src=url; }); }
+$('shotFile').onchange=async e=>{ const f=e.target.files[0]; e.target.value=''; if(!f) return;
+  openSheet('Explanation', `<div class="xload">${mascot('think','m')}<p>Reading your screenshot…</p></div>`);
+  try{ SHOT=await shrink(f); const r=await aiExplain(SHOT.b64);
+    S.explains.push({at:new Date().toISOString(), r, fu:[]}); if(S.explains.length>EXPLAIN_MAX) S.explains.shift(); save();
+    SHOT.idx=S.explains.length-1; openExplain(SHOT.idx, true);
+  }catch(err){ openSheet('Explanation', `<div class="xload">${mascot('sad','m')}<p>${esc(err.message||'Something went wrong')}</p></div><button class="btn blue" onclick="shotStart()">Try another screenshot</button>${/key/i.test(err.message||'')?'<button class="btn ghost" onclick="aiSetup()">Check the key</button>':''}<button class="btn ghost" onclick="closeSheet()">Close</button>`); }
+};
+async function aiCall(body){
+  let lastErr;
+  for(const model of AI_MODELS){
+    let r; try{ r=await timed('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'content-type':'application/json','x-api-key':aiKey(),'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify(Object.assign({model},body))},60000); }
+    catch(e){ throw new Error('No connection. Check your signal and try again.'); }
+    const j=await r.json().catch(()=>({}));
+    if(r.ok) return j;
+    const m=(j.error&&j.error.message)||('Error '+r.status);
+    if(r.status===401) throw new Error('The API key was not accepted. Check the key in Settings.');
+    if(/credit balance/i.test(m)) throw new Error('Your Anthropic account is out of credit. Add some under Billing in the console.');
+    lastErr=new Error(m); if(r.status!==404 && !/model/i.test(m)) break;
+  }
+  throw lastErr;
+}
+const AI_SYSTEM = `You explain Welsh to Peter, an adult learner at Sylfaen (foundation) level on the South Wales Dysgu Cymraeg course, who also uses Duolingo. He likes grammar explained like maths: clear patterns, like equations. Use British English. Be accurate. If you're not sure of something, say so rather than guess. Keep it short and plain.
+He will send a screenshot from Duolingo (or similar). Work out the Welsh on screen, what the exercise wanted, and, if his answer is visible, whether it was right and why. Explain every word and the grammar behind the sentence: mutations (name the trigger), verb forms, word order, and prepositions. If Duolingo uses a northern or different form from his South Wales course, say what the course form is.
+Gramadeg units he can practise in (id: title, subtitle):
+`;
+async function aiExplain(b64){
+  const units=C?C.units.filter(u=>!u.soon).map(u=>`${u.id}: ${u.title} (${u.subtitle||''})`).join('\n'):'';
+  const tool={name:'explain',description:'Return the explanation for the screenshot.',input_schema:{type:'object',properties:{
+    welsh:{type:'string',description:'The main Welsh sentence or phrase on screen, exactly as shown (or the correct answer if that is the focus).'},
+    english:{type:'string',description:'Natural English translation.'},
+    what_happened:{type:'string',description:'1–2 sentences: what the exercise asked; if his answer is visible, was it right, and if not what was wrong. Empty string if nothing to say.'},
+    words:{type:'array',description:'Word by word, in order. Note mutations and the base form.',items:{type:'object',properties:{cy:{type:'string'},en:{type:'string'},note:{type:'string',description:'e.g. "soft mutation of cath after y (feminine)" or empty'}},required:['cy','en']}},
+    grammar:{type:'array',description:'1–3 grammar points at work in this sentence.',items:{type:'object',properties:{title:{type:'string'},pattern:{type:'string',description:'The rule as a short equation, e.g. "Mae + subject + yn + adjective (soft mutation)".'},explain:{type:'string',description:'2–4 plain sentences.'},examples:{type:'array',items:{type:'string'},description:'1–2 extra Welsh examples with English in brackets.'}},required:['title','explain']}},
+    dialect:{type:'string',description:'If a form differs from South Wales course usage, the course form and a one-line note. Else empty.'},
+    tip:{type:'string',description:'One memorable tip. Optional.'},
+    units:{type:'array',items:{type:'string'},description:'0–3 unit ids from the list that practise this.'}
+  },required:['welsh','english','words','grammar','units']}};
+  const j=await aiCall({max_tokens:2000,system:AI_SYSTEM+units,tools:[tool],tool_choice:{type:'tool',name:'explain'},
+    messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:'image/jpeg',data:b64}},{type:'text',text:'Explain this screenshot.'}]}]});
+  const t=(j.content||[]).find(c=>c.type==='tool_use'); if(!t||!t.input) throw new Error('No explanation came back. Try again.');
+  return t.input;
+}
+function openExplain(i, fresh){
+  const e=S.explains[i]; if(!e) return; const r=e.r;
+  const valid=(r.units||[]).map(id=>unitOf(id)).filter(Boolean);
+  let h='';
+  if(fresh && SHOT && SHOT.idx===i) h+=`<img class="xp-shot" src="${SHOT.url}" alt="Your screenshot">`;
+  h+=`<div class="xbox"><h4>What it says</h4><div class="cy">${esc(r.welsh||'')}</div><div class="en">${esc(r.english||'')}</div>${r.what_happened?`<p>${esc(r.what_happened)}</p>`:''}</div>`;
+  if((r.words||[]).length) h+=`<div class="xbox"><h4>Word by word</h4><table class="xwords">${r.words.map(w=>`<tr><td>${esc(w.cy)}</td><td>${esc(w.en)}${w.note?`<small>${esc(w.note)}</small>`:''}</td></tr>`).join('')}</table></div>`;
+  (r.grammar||[]).forEach(g=>{ h+=`<div class="xbox"><h4>Grammar</h4><b>${esc(g.title)}</b>${g.pattern?`<span class="xpat">${esc(g.pattern)}</span>`:''}<p>${esc(g.explain)}</p>${(g.examples||[]).length?`<ul>${g.examples.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}</div>`; });
+  if(r.dialect) h+=`<div class="xbox dia"><h4>Your course says</h4><p style="margin:0">${esc(r.dialect)}</p></div>`;
+  if(r.tip) h+=`<div class="xbox tip"><h4>Tip</h4><p style="margin:0">${esc(r.tip)}</p></div>`;
+  h+=`<div class="xbox"><h4>Still unsure? Ask</h4>${e.fu.map(x=>`<div class="xqa"><b>${esc(x.q)}</b>${esc(x.a).replace(/\n/g,'<br>')}</div>`).join('')}
+    <div class="xfu"><input id="xfuIn" placeholder="e.g. why is it 'fy nghar'?" enterkeyhint="send" onkeydown="if(event.key==='Enter')askFollow(${i})"><button class="btn blue" id="xfuBtn" onclick="askFollow(${i})">Ask</button></div></div>`;
+  valid.forEach(u=>{ h+=`<button class="btn" onclick="startLesson('unit','${u.id}')">${icon('play')}Practise: ${esc(u.title)}</button>`; });
+  h+=`<button class="btn blue" onclick="shotStart()">${icon('camera')}Explain another</button><button class="btn ghost" onclick="closeSheet()">Close</button>`;
+  openSheet('Explanation', h); $('sheet').scrollTop=0;
+}
+async function askFollow(i){
+  const e=S.explains[i], q=($('xfuIn').value||'').trim(); if(!e||!q) return;
+  $('xfuBtn').disabled=true; $('xfuBtn').textContent='…';
+  try{
+    const ctx=`Earlier you explained a screenshot. Your explanation (JSON): ${JSON.stringify(e.r)}\n${e.fu.map(x=>`Q: ${x.q}\nA: ${x.a}`).join('\n')}\nPeter's follow-up question: ${q}\nAnswer in plain text, short (under 150 words), no markdown.`;
+    const content=[{type:'text',text:ctx}];
+    if(SHOT && SHOT.idx===i) content.unshift({type:'image',source:{type:'base64',media_type:'image/jpeg',data:SHOT.b64}});
+    const j=await aiCall({max_tokens:700,system:AI_SYSTEM,messages:[{role:'user',content}]});
+    const a=(j.content||[]).filter(c=>c.type==='text').map(c=>c.text).join('\n').trim()||'(no answer)';
+    e.fu.push({q,a}); save(); openExplain(i, true);
+    setTimeout(()=>{ const qa=document.querySelectorAll('.xqa'); if(qa.length) qa[qa.length-1].scrollIntoView({block:'center'}); },50);
+  }catch(err){ toast(err.message||'Failed'); $('xfuBtn').disabled=false; $('xfuBtn').textContent='Ask'; }
+}
 
 /* ================= boot ================= */
 $('brandMascot').innerHTML=mascot('happy','mini');
