@@ -1346,7 +1346,7 @@ function resetAll(){ if(confirm('Delete all progress? This cannot be undone.')){
 /* ================= Explain a screenshot ================= */
 // Tap camera → pick screenshot → explanation. Calls the Claude API straight from the phone with the
 // owner's own key. The key lives only in this phone's storage (not in progress backups).
-const AIKEY='gramadeg-ai', BUILD='29 Oct v4';
+const AIKEY='gramadeg-ai', BUILD='29 Oct v5';
 const aiKey = () => { try{ return localStorage.getItem(AIKEY)||''; }catch(e){ return ''; } };
 let SHOT=null; // {url, b64, idx}
 function shotStart(){ if(!aiKey()) return aiSetup(); $('shotFile').click(); }
@@ -1428,10 +1428,14 @@ async function aiExplain(b64){
     tip:{type:'string',description:'One memorable tip. Optional.'},
     units:{type:'array',items:{type:'string'},description:'0–3 unit ids from the list that practise this.'}
   },required:['welsh','english','words','grammar','units']}};
-  const j=await aiCall({max_tokens:2000,system:AI_SYSTEM+units,tools:[tool],tool_choice:{type:'tool',name:'explain'},
-    messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:'image/jpeg',data:b64}},{type:'text',text:'Explain this screenshot.'}]}]});
-  const t=(j.content||[]).find(c=>c.type==='tool_use'); if(!t||!t.input) throw new Error('No explanation came back. Try again.');
-  return t.input;
+  const j=await aiCall({max_tokens:3000,system:AI_SYSTEM+units+'\n\nAlways reply by calling the explain tool exactly once. Do not write any other text.',tools:[tool],tool_choice:{type:'auto'},
+    messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:'image/jpeg',data:b64}},{type:'text',text:'Explain this screenshot using the explain tool.'}]}]});
+  const t=(j.content||[]).find(c=>c.type==='tool_use'); if(t&&t.input) return t.input;
+  // Fallback: the model answered in text instead. Use JSON if it gave some, otherwise show the text.
+  const txt=(j.content||[]).filter(c=>c.type==='text').map(c=>c.text).join('\n').trim();
+  if(!txt) throw new Error('No explanation came back. Try again.');
+  const mj=txt.match(/\{[\s\S]*\}/); if(mj){ try{ const o=JSON.parse(mj[0]); if(o&&o.welsh) return Object.assign({words:[],grammar:[],units:[]},o); }catch(e){} }
+  return {welsh:'', english:'', words:[], units:[], grammar:[{title:'Explanation', explain:txt}]};
 }
 function openExplain(i, fresh){
   const e=S.explains[i]; if(!e) return; const r=e.r;
