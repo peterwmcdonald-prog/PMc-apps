@@ -1,4 +1,4 @@
-const CACHE_NAME = 'streaks-v10';
+const CACHE_NAME = 'streaks-v11';
 const APP_SHELL = [
   './',
   './index.html',

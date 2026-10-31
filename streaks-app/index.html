@@ -167,11 +167,10 @@
   .bool-toggle:not(.on):active{ box-shadow:0 0 0 var(--card-border); }
   .level-toggle{ width:auto; padding:0 10px; font-size:13px; color:var(--ink-dim); }
   .level-toggle.on{ color:#fff; }
-  .level-toggle.partial.on{ background:var(--accent); opacity:0.6; }
+  .period-row{ display:flex; gap:6px; }
+  .period-toggle{ width:auto; min-width:44px; padding:0 8px; font-size:13px; color:var(--ink-dim); }
+  .period-toggle.on{ color:#fff; }
   .cal-cell.partial{ opacity:0.55; }
-  .danger-zone{ margin-top:4px; font-size:12px; font-weight:700; color:#fff; background:#d93025; border-radius:8px; padding:3px 8px; display:inline-block; animation:dangerPulse 1.6s ease-in-out infinite; }
-  @keyframes dangerPulse{ 0%,100%{opacity:1} 50%{opacity:0.6} }
-  .habit-card.danger{ box-shadow:0 0 0 3px #d93025; }
 
   .num-control{ display:flex; align-items:center; gap:4px; }
   .num-btn{
@@ -410,6 +409,8 @@
 
 <script>
 const STORAGE_KEY = 'streaksAppData';
+const PERIODS = ['m','a','e'];
+const PERIOD_LABELS = { m:'Morn', a:'Aft', e:'Eve' };
 const todayStr = () => fmtDate(new Date());
 function fmtDate(d){ const y=d.getFullYear(); const m=String(d.getMonth()+1).padStart(2,'0'); const day=String(d.getDate()).padStart(2,'0'); return `${y}-${m}-${day}`; }
 function addDays(dateStr, n){ const d = new Date(dateStr+'T00:00:00'); d.setDate(d.getDate()+n); return fmtDate(d); }
@@ -419,7 +420,7 @@ function isYesterday(dateStr){ return dateStr === addDays(todayStr(), -1); }
 const DEFAULT_HABITS = [
   { id:'h1', name:'Welsh', color:'var(--h1)', dark:'var(--h1-dark)', hasNumber:true, unit:'min' },
   { id:'h2', name:'CSHP', color:'var(--h2)', dark:'var(--h2-dark)', hasNumber:true, unit:'min' },
-  { id:'h3', name:'OD', color:'var(--h3)', dark:'var(--h3-dark)', hasNumber:false, unit:'', levels:true },
+  { id:'h3', name:'OD', color:'var(--h3)', dark:'var(--h3-dark)', hasNumber:false, unit:'', periods:true },
   { id:'h4', name:'Press ups', color:'var(--h4)', dark:'var(--h4-dark)', hasNumber:true, unit:'' },
 ];
 
@@ -475,7 +476,17 @@ function sanitizeLoaded(loaded){
         const cleanEntry = {};
         if(e.done === true) cleanEntry.done = true;
         else if(e.done === false) cleanEntry.done = false;
-        if(e.level === 'partial') cleanEntry.level = 'partial'; // no level = full (all older entries)
+        const habitDef = safe.habits.find(h=>h.id===habitId);
+        if(habitDef && habitDef.periods){
+          // OD is logged in three periods a day. Old whole-day entries migrate:
+          // Full (no level) = all three periods; Partial = morning only.
+          let ps;
+          if(Array.isArray(e.periods)) ps = PERIODS.filter(k => e.periods.includes(k));
+          else if(e.done === true) ps = e.level === 'partial' ? ['m'] : PERIODS.slice();
+          else ps = [];
+          delete cleanEntry.done;
+          if(ps.length){ cleanEntry.periods = ps; cleanEntry.done = ps.length === PERIODS.length; }
+        }
         if(e.amount !== undefined){
           const n = Number(e.amount);
           if(Number.isFinite(n)) cleanEntry.amount = Math.max(0, n);
@@ -576,21 +587,19 @@ function setDone(dateStr, habitId, done){
   state.entries[dateStr][habitId] = { ...cur, done };
   saveState();
 }
-function isPartial(dateStr, habitId){ const e = getEntry(dateStr, habitId); return e.done === true && e.level === 'partial'; }
-function setLevel(dateStr, habitId, level){
+// OD: each day splits into three periods. done = all three logged.
+function getPeriods(dateStr, habitId){ const p = getEntry(dateStr, habitId).periods; return Array.isArray(p) ? p : []; }
+function hasPeriod(dateStr, habitId, k){ return getPeriods(dateStr, habitId).includes(k); }
+function togglePeriod(dateStr, habitId, k){
   if(!state.entries[dateStr]) state.entries[dateStr] = {};
   const cur = { ...(state.entries[dateStr][habitId] || {}) };
-  if(level === 'partial') cur.level = 'partial'; else delete cur.level;
+  const set = new Set(Array.isArray(cur.periods) ? cur.periods : []);
+  set.has(k) ? set.delete(k) : set.add(k);
+  const ps = PERIODS.filter(x => set.has(x));
+  if(ps.length){ cur.periods = ps; cur.done = ps.length === PERIODS.length; }
+  else { delete cur.periods; delete cur.done; }
   state.entries[dateStr][habitId] = cur;
   saveState();
-}
-function computeFullStreak(habitId){
-  const full = d => isDone(d, habitId) && !isPartial(d, habitId);
-  let cursor = todayStr();
-  if(!full(cursor)) cursor = addDays(cursor, -1);
-  let n = 0, guard = 0;
-  while(full(cursor)){ n++; cursor = addDays(cursor, -1); if(++guard > 20000) break; }
-  return n;
 }
 function setAmount(dateStr, habitId, amount){
   if(!state.entries[dateStr]) state.entries[dateStr] = {};
@@ -599,32 +608,34 @@ function setAmount(dateStr, habitId, amount){
   saveState();
 }
 
-// Partial days put the streak on hold: they keep it alive but don't add to the count.
-// Three partials in a row break it — nothing before that run counts.
-const MAX_PARTIAL_RUN = 2;
-function streakInfo(habitId){
+// Period streak: counts consecutive logged periods (morning, afternoon, evening).
+// Any missed period breaks it. Today's periods after the last one logged are still
+// open, so they never break the streak until the day ends.
+function periodStreak(habitId){
+  let cursor = todayStr();
+  let idx = PERIODS.length - 1;
+  const today = getPeriods(cursor, habitId);
+  if(today.length){ idx = Math.max(...today.map(k => PERIODS.indexOf(k))); }
+  else { cursor = addDays(cursor, -1); }
+  let n = 0, guard = 0;
+  while(hasPeriod(cursor, habitId, PERIODS[idx])){
+    n++;
+    if(--idx < 0){ idx = PERIODS.length - 1; cursor = addDays(cursor, -1); }
+    if(++guard > 60000) break;
+  }
+  return n;
+}
+function dayStreak(habitId){
   let cursor = todayStr();
   if(!isDone(cursor, habitId)) cursor = addDays(cursor, -1);
-  let streak = 0, partials = 0, run = 0, guard = 0, currentRun = null;
-  while(isDone(cursor, habitId)){
-    if(isPartial(cursor, habitId)){
-      run++;
-      if(run > MAX_PARTIAL_RUN){ partials -= (run - 1); break; } // run of 3 = break; drop that run
-      partials++;
-    } else {
-      if(currentRun === null) currentRun = run; // partials in a row at the latest end
-      run = 0;
-      streak++;
-    }
-    cursor = addDays(cursor, -1);
-    if(++guard > 20000) break; // safety valve against any unforeseen data loop
-  }
-  if(currentRun === null) currentRun = Math.min(run, MAX_PARTIAL_RUN + 1);
-  if(currentRun > MAX_PARTIAL_RUN) currentRun = 0; // already broken
-  return { streak, partials, currentRun };
+  let streak = 0, guard = 0;
+  while(isDone(cursor, habitId)){ streak++; cursor = addDays(cursor, -1); if(++guard > 20000) break; }
+  return streak;
 }
-function computeStreak(habitId){ return streakInfo(habitId).streak; }
-function computeStreakPartials(habitId){ return streakInfo(habitId).partials; }
+function computeStreak(habitId){
+  const h = state.habits.find(x=>x.id===habitId);
+  return h && h.periods ? periodStreak(habitId) : dayStreak(habitId);
+}
 function allDoneOn(dateStr){
   const day = state.entries[dateStr];
   if(!day) return false;
@@ -660,7 +671,9 @@ function popStreakGain(habitId, streakLen){
   const rect = badge.getBoundingClientRect();
   const pop = document.createElement('div');
   pop.className = 'streak-pop';
-  pop.textContent = streakLen === 1 ? '🔥 1 day streak!' : `🔥 ${streakLen}-day streak!`;
+  const h = state.habits.find(x=>x.id===habitId);
+  const unit = h && h.periods ? 'period' : 'day';
+  pop.textContent = streakLen === 1 ? `🔥 1 ${unit} streak!` : `🔥 ${streakLen}-${unit} streak!`;
   pop.style.left = (rect.left + rect.width/2) + 'px';
   pop.style.top = rect.top + 'px';
   document.body.appendChild(pop);
@@ -702,13 +715,15 @@ function renderHabits(){
     const done = entry.done === true;
     const streak = computeStreak(habit.id);
     const card = document.createElement('div');
-    card.className = 'habit-card' + (done ? ' done':'') + (habit.levels && streakInfo(habit.id).currentRun === MAX_PARTIAL_RUN ? ' danger':'');
+    card.className = 'habit-card' + (done ? ' done':'');
     card.style.setProperty('--accent', habit.color);
     card.style.setProperty('--accent-dark', habit.dark);
     card.style.animationDelay = (idx*0.05)+'s';
 
-    const progress = Math.round(((streak % 7) / 7) * 100) || (streak>0 ? 100 : 0);
-    const onFire = streak >= 3;
+    const cycle = habit.periods ? 21 : 7; // ring fills over a week either way
+    const progress = Math.round(((streak % cycle) / cycle) * 100) || (streak>0 ? 100 : 0);
+    const onFire = streak >= (habit.periods ? 9 : 3);
+    const todayCount = habit.periods ? getPeriods(selectedDate, habit.id).length : 0;
     const amt = entry.amount;
 
     card.innerHTML = `
@@ -720,8 +735,9 @@ function renderHabits(){
       </div>
       <div class="habit-main">
         <input class="habit-name" data-id="${habit.id}" value="${escapeHtml(habit.name)}" maxlength="20" />
-        <div class="habit-sub">${(()=>{ const info = habit.levels ? streakInfo(habit.id) : {partials:0, currentRun:0}; const p = info.partials; const alive = streak>0 || p>0; return alive ? `<b>${streak}</b> day streak${p>0 ? ` · ${p} partial` : ''}` : 'no streak yet'; })()}</div>
-        ${habit.levels && streakInfo(habit.id).currentRun === MAX_PARTIAL_RUN ? '<div class="danger-zone">⚠️ 2 partials in a row — next must be Full or streak breaks</div>' : ''}
+        <div class="habit-sub">${habit.periods
+          ? (streak>0 ? `<b>${streak}</b> period streak · ${todayCount}/3 ${isToday(selectedDate)?'today':'this day'}` : `no streak yet · ${todayCount}/3 ${isToday(selectedDate)?'today':'this day'}`)
+          : (streak>0 ? `<b>${streak}</b> day streak` : 'no streak yet')}</div>
       </div>
       <div class="habit-control">
         ${habit.hasNumber ? `
@@ -730,9 +746,8 @@ function renderHabits(){
           <input class="num-val" data-id="${habit.id}" type="number" inputmode="numeric" placeholder="–" value="${amt ?? ''}" />
           <button class="num-btn btn3d" data-id="${habit.id}" data-dir="1">+</button>
         </div>` : ''}
-        ${habit.levels ? `
-        <button class="bool-toggle level-toggle partial btn3d ${done && entry.level==='partial'?'on':''}" data-id="${habit.id}" data-level="partial">Partial</button>
-        <button class="bool-toggle level-toggle btn3d ${done && entry.level!=='partial'?'on':''}" data-id="${habit.id}" data-level="full">Full</button>`
+        ${habit.periods ? `
+        <div class="period-row">${PERIODS.map(k => `<button class="bool-toggle period-toggle btn3d ${hasPeriod(selectedDate, habit.id, k)?'on':''}" data-id="${habit.id}" data-period="${k}">${PERIOD_LABELS[k]}</button>`).join('')}</div>`
         : `<button class="bool-toggle btn3d ${done?'on':''}" data-id="${habit.id}">✓</button>`}
       </div>
     `;
@@ -751,25 +766,22 @@ function renderHabits(){
     el.addEventListener('click', e=>{
       const id = e.target.dataset.id;
       const wasDone = isDone(selectedDate, id);
-      const level = e.target.dataset.level;
-      if(level){
-        // Tapping the active level clears it; tapping the other level switches to it.
-        const curLevel = isPartial(selectedDate, id) ? 'partial' : 'full';
-        if(wasDone && curLevel === level){ setDone(selectedDate, id, false); setLevel(selectedDate, id, 'full'); }
-        else {
-          setLevel(selectedDate, id, level);
-          setDone(selectedDate, id, true);
-          if(wasDone){ render(); return; } // just switching level — no streak pop
-        }
+      const period = e.target.dataset.period;
+      let gained = !wasDone;
+      if(period){
+        gained = !hasPeriod(selectedDate, id, period);
+        const before = computeStreak(id);
+        togglePeriod(selectedDate, id, period);
+        if(gained && computeStreak(id) <= before) gained = false; // logged, but didn't extend the run
       } else {
         setDone(selectedDate, id, !wasDone);
       }
       const wasAllDone = allDoneOn(selectedDate);
-      if(!wasDone){ justToggledId = id; }
+      if(gained){ justToggledId = id; }
       render();
-      if(!wasDone && !isPartial(selectedDate, id)) popStreakGain(id, computeStreak(id));
+      if(gained) popStreakGain(id, computeStreak(id));
       justToggledId = null;
-      if(wasAllDone && isToday(selectedDate)) fireConfetti();
+      if(wasAllDone && !wasDone && isToday(selectedDate)) fireConfetti();
     });
   });
   list.querySelectorAll('.num-btn').forEach(el=>{
@@ -895,7 +907,10 @@ function renderCalendar(){
       if(isDone(dateStr, habit.id)){
         el.style.background = habit.color;
         el.style.color = '#fff';
-        if(habit.levels && isPartial(dateStr, habit.id)) cls += ' partial';
+      } else if(habit.periods && getPeriods(dateStr, habit.id).length){
+        el.style.background = habit.color;
+        el.style.color = '#fff';
+        cls += ' partial';
       }
     } else {
       const count = doneCountOn(dateStr);
@@ -925,8 +940,8 @@ function renderCalendar(){
   }
 
   legend.innerHTML = habit
-    ? (habit.levels
-        ? `<span><i style="background:${habit.color}"></i>full</span><span><i style="background:${habit.color};opacity:0.55"></i>partial</span>`
+    ? (habit.periods
+        ? `<span><i style="background:${habit.color}"></i>all 3 periods</span><span><i style="background:${habit.color};opacity:0.55"></i>1–2 periods</span>`
         : `<span><i style="background:${habit.color}"></i>${habit.name} done</span>`) + `<span><i style="background:var(--track)"></i>not logged</span>`
     : `<span><i style="background:#FFEBC7"></i>1</span><span><i style="background:#FFCF80"></i>2</span><span><i style="background:#FFAE3D"></i>3</span><span><i style="background:var(--orange)"></i>all ${state.habits.length}</span><span>habits done (number in corner)</span>`;
 }
@@ -1335,7 +1350,7 @@ function exportCSV(){
   state.habits.forEach(h=>{
     header.push(h.name + ' done');
     if(h.hasNumber) header.push(h.name + (h.unit ? ` (${h.unit})` : ' amount'));
-    if(h.levels) header.push(h.name + ' level');
+    if(h.periods) header.push(h.name + ' periods');
   });
   header.push('weight (kg)');
   const rows = [header];
@@ -1345,7 +1360,7 @@ function exportCSV(){
       const e = getEntry(dateStr, h.id);
       row.push(e.done === true ? 'yes' : 'no');
       if(h.hasNumber) row.push(e.amount !== undefined ? e.amount : '');
-      if(h.levels) row.push(e.done === true ? (e.level === 'partial' ? 'partial' : 'full') : '');
+      if(h.periods) row.push(getPeriods(dateStr, h.id).map(k=>PERIOD_LABELS[k]).join(' '));
     });
     row.push(state.weight.entries[dateStr] ?? '');
     rows.push(row);
