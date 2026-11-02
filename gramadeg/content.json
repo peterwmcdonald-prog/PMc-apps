@@ -1,5 +1,5 @@
 {
- "version": "2026-10-24",
+ "version": "2026-11-02",
  "sources": [
   {
    "name": "Wikipedia: Colloquial Welsh morphology (CC BY-SA)",
@@ -224,9 +224,9 @@
     {
      "id": "u1-10",
      "type": "error",
-     "sentence": "Maen y plant yn cysgu.",
+     "sentence": "Maen y plant yn cysgu lan llofft nawr, ond mae'r ci yn yr ardd.",
      "wrong": 0,
-     "fix": "Mae'r plant yn cysgu.",
+     "fix": "Mae'r plant yn cysgu lan llofft nawr, ond mae'r ci yn yr ardd.",
      "explain": "Noun subject takes mae, not maen. (Mae + y contracts to mae'r.)",
      "skills": [
       "bod-noun-mae"
@@ -238,9 +238,9 @@
     {
      "id": "u1-11",
      "type": "error",
-     "sentence": "Ydw ti'n hapus?",
+     "sentence": "Ydw ti'n hapus gyda'r tŷ newydd yn y dre?",
      "wrong": 0,
-     "fix": "Wyt ti'n hapus?",
+     "fix": "Wyt ti'n hapus gyda'r tŷ newydd yn y dre?",
      "explain": "The question form for ti is Wyt ti?",
      "skills": [
       "bod-question"
@@ -401,9 +401,9 @@
     {
      "id": "u2-05",
      "type": "error",
-     "sentence": "Dw i dim yn hoffi te.",
+     "sentence": "Dw i dim yn hoffi te, ond dw i'n hoffi coffi yn y bore.",
      "wrong": 2,
-     "fix": "Dw i ddim yn hoffi te.",
+     "fix": "Dw i ddim yn hoffi te, ond dw i'n hoffi coffi yn y bore.",
      "explain": "After the subject it is ddim (mutated), not dim.",
      "skills": [
       "neg-ddim"
@@ -461,9 +461,9 @@
     {
      "id": "u2-09",
      "type": "error",
-     "sentence": "Does y plant ddim yma.",
+     "sentence": "Does y plant ddim yma heddiw achos maen nhw yn yr ysgol.",
      "wrong": 0,
-     "fix": "Dyw'r plant ddim yma.",
+     "fix": "Dyw'r plant ddim yma heddiw achos maen nhw yn yr ysgol.",
      "explain": "Does only goes with indefinite nouns (does dim plant = there are no children). For 'the children', use dyw.",
      "skills": [
       "neg-does-dim"
@@ -745,9 +745,9 @@
     {
      "id": "u3-14",
      "type": "error",
-     "sentence": "Mae hi'n mynd i Caerdydd.",
+     "sentence": "Mae hi'n mynd i Caerdydd ar y trên bob dydd Llun i weithio.",
      "wrong": 4,
-     "fix": "Mae hi'n mynd i Gaerdydd.",
+     "fix": "Mae hi'n mynd i Gaerdydd ar y trên bob dydd Llun i weithio.",
      "explain": "i causes soft mutation.",
      "skills": [
       "sm-prep",
@@ -757,9 +757,9 @@
     {
      "id": "u3-15",
      "type": "error",
-     "sentence": "Mae'r ddyn yn dal.",
+     "sentence": "Mae'r ddyn yn dal ond mae ei fab yn fach iawn.",
      "wrong": 1,
-     "fix": "Mae'r dyn yn dal.",
+     "fix": "Mae'r dyn yn dal ond mae ei fab yn fach iawn.",
      "explain": "Dyn is masculine: no mutation after y / 'r.",
      "skills": [
       "sm-gender",
@@ -1053,9 +1053,9 @@
     {
      "id": "u4-14",
      "type": "error",
-     "sentence": "Mae fy car i yn y garej.",
+     "sentence": "Mae fy car i yn y garej achos mae problem gyda'r injan.",
      "wrong": 2,
-     "fix": "Mae fy nghar i yn y garej.",
+     "fix": "Mae fy nghar i yn y garej achos mae problem gyda'r injan.",
      "explain": "fy + nasal mutation: car → nghar.",
      "skills": [
       "poss-fy",
@@ -1236,9 +1236,9 @@
     {
      "id": "u5-06",
      "type": "error",
-     "sentence": "Gwelaist ti'r gêm?",
+     "sentence": "Gwelaist ti'r gêm ar y teledu neithiwr gyda dy ffrindiau?",
      "wrong": 0,
-     "fix": "Welaist ti'r gêm?",
+     "fix": "Welaist ti'r gêm ar y teledu neithiwr gyda dy ffrindiau?",
      "explain": "Past-tense questions soft-mutate the verb: g drops.",
      "skills": [
       "past-question",
@@ -1319,9 +1319,9 @@
     {
      "id": "u5-11",
      "type": "error",
-     "sentence": "Prynon i fara.",
+     "sentence": "Prynon i fara a llaeth yn y siop fach ar y ffordd adre ddoe.",
      "wrong": 0,
-     "fix": "Prynais i fara.",
+     "fix": "Prynais i fara a llaeth yn y siop fach ar y ffordd adre ddoe.",
      "explain": "I ending: -ais. -on is we / they.",
      "skills": [
       "past-endings"
@@ -1539,9 +1539,9 @@
     {
      "id": "u6-07",
      "type": "error",
-     "sentence": "Ar ôl i ni bwyta, aethon ni allan.",
+     "sentence": "Ar ôl i ni bwyta swper yn y gegin, aethon ni allan am dro.",
      "wrong": 4,
-     "fix": "Ar ôl i ni fwyta, aethon ni allan.",
+     "fix": "Ar ôl i ni fwyta swper yn y gegin, aethon ni allan am dro.",
      "explain": "The verbnoun after i + person soft-mutates: bwyta → fwyta.",
      "skills": [
       "i-person-sm",
@@ -1551,9 +1551,9 @@
     {
      "id": "u6-08",
      "type": "error",
-     "sentence": "Cyn dw i'n mynd adre, rhaid i fi siopa.",
+     "sentence": "Cyn dw i'n mynd adre o'r gwaith heno, rhaid i fi siopa yn y dre.",
      "wrong": 1,
-     "fix": "Cyn i fi fynd adre, rhaid i fi siopa.",
+     "fix": "Cyn i fi fynd adre o'r gwaith heno, rhaid i fi siopa yn y dre.",
      "explain": "No normal tense after cyn. Use i + person + mutated verbnoun.",
      "skills": [
       "cyn-use",
@@ -1889,9 +1889,9 @@
     {
      "id": "u7-13",
      "type": "error",
-     "sentence": "Mae dau blant yn yr ardd.",
+     "sentence": "Mae dau blant yn yr ardd yn chwarae pêl-droed gyda'r ci.",
      "wrong": 2,
-     "fix": "Mae dau blentyn yn yr ardd.",
+     "fix": "Mae dau blentyn yn yr ardd yn chwarae pêl-droed gyda'r ci.",
      "explain": "After a number the noun is singular: plentyn, not plant.",
      "skills": [
       "num-singular"
@@ -1900,9 +1900,9 @@
     {
      "id": "u7-14",
      "type": "error",
-     "sentence": "Mae pedwar merch yn y dosbarth.",
+     "sentence": "Mae pedwar merch yn y dosbarth Cymraeg ond dim ond dau fachgen.",
      "wrong": 1,
-     "fix": "Mae pedair merch yn y dosbarth.",
+     "fix": "Mae pedair merch yn y dosbarth Cymraeg ond dim ond dau fachgen.",
      "explain": "Merch is feminine, so pedair.",
      "skills": [
       "num-gender"
@@ -2192,9 +2192,9 @@
     {
      "id": "u8-12",
      "type": "error",
-     "sentence": "Mae'r car yn mwy na'r bws.",
-     "wrong": 3,
-     "fix": "Mae'r car yn fwy na'r bws.",
+     "sentence": "Mae'r car newydd yn mwy na'r hen gar ond dyw e ddim mor gyflym.",
+     "wrong": 4,
+     "fix": "Mae'r car newydd yn fwy na'r hen gar ond dyw e ddim mor gyflym.",
      "explain": "Comparatives soft-mutate after yn like any adjective: yn fwy.",
      "skills": [
       "cmp-yn-sm",
@@ -2204,9 +2204,9 @@
     {
      "id": "u8-13",
      "type": "error",
-     "sentence": "Mae hi'n gyflymach nag fi.",
+     "sentence": "Mae hi'n gyflymach nag fi ond dw i'n gallu rhedeg yn bellach.",
      "wrong": 3,
-     "fix": "Mae hi'n gyflymach na fi.",
+     "fix": "Mae hi'n gyflymach na fi ond dw i'n gallu rhedeg yn bellach.",
      "explain": "Fi starts with a consonant, so na, not nag.",
      "skills": [
       "cmp-na"
@@ -2215,9 +2215,9 @@
     {
      "id": "u8-14",
      "type": "error",
-     "sentence": "Dw i mor dal na Siôn.",
+     "sentence": "Dw i mor dal na Siôn ond mae e'n llawer cryfach na fi.",
      "wrong": 4,
-     "fix": "Dw i mor dal â Siôn.",
+     "fix": "Dw i mor dal â Siôn ond mae e'n llawer cryfach na fi.",
      "explain": "Mor … pairs with â (as). Na (than) goes with comparatives.",
      "skills": [
       "cmp-equative",
@@ -2489,9 +2489,9 @@
     {
      "id": "p1-08",
      "type": "error",
-     "sentence": "Ro'n y plant yn chwarae yn yr ardd.",
+     "sentence": "Ro'n y plant yn chwarae yn yr ardd pan ddechreuodd hi fwrw glaw.",
      "wrong": 0,
-     "fix": "Roedd y plant yn chwarae yn yr ardd.",
+     "fix": "Roedd y plant yn chwarae yn yr ardd pan ddechreuodd hi fwrw glaw.",
      "explain": "With a noun subject the verb stays singular: Roedd, even for plural nouns.",
      "skills": [
       "imp-noun"
@@ -2552,9 +2552,9 @@
     {
      "id": "p1-12",
      "type": "error",
-     "sentence": "Ro'n e'n chwarae rygbi bob wythnos.",
+     "sentence": "Ro'n e'n chwarae rygbi bob wythnos yng Nghaerdydd cyn symud i Lundain.",
      "wrong": 0,
-     "fix": "Roedd e'n chwarae rygbi bob wythnos.",
+     "fix": "Roedd e'n chwarae rygbi bob wythnos yng Nghaerdydd cyn symud i Lundain.",
      "explain": "He / she: Roedd. Ro'n is for i, ni and nhw.",
      "skills": [
       "imp-statement"
@@ -2651,9 +2651,9 @@
     {
      "id": "p3-03",
      "type": "error",
-     "sentence": "Mae e wedi fwyta'r gacen.",
+     "sentence": "Mae e wedi fwyta'r gacen i gyd cyn i'r plant ddod adre.",
      "wrong": 3,
-     "fix": "Mae e wedi bwyta'r gacen.",
+     "fix": "Mae e wedi bwyta'r gacen i gyd cyn i'r plant ddod adre.",
      "explain": "No mutation after wedi.",
      "skills": [
       "perf-wedi"
@@ -2777,9 +2777,9 @@
     {
      "id": "p3-11",
      "type": "error",
-     "sentence": "Dw i ddim wedi'n gweld e.",
+     "sentence": "Dw i ddim wedi'n gweld e yn y gwaith ers wythnos.",
      "wrong": 3,
-     "fix": "Dw i ddim wedi gweld e.",
+     "fix": "Dw i ddim wedi gweld e yn y gwaith ers wythnos.",
      "explain": "Wedi replaces yn. Never wedi'n.",
      "skills": [
       "perf-wedi"
@@ -2954,9 +2954,9 @@
     {
      "id": "p2-07",
      "type": "error",
-     "sentence": "Byddan y bobl yn hapus.",
+     "sentence": "Byddan y bobl yn hapus pan fydd y tywydd yn well yr wythnos nesa.",
      "wrong": 0,
-     "fix": "Bydd y bobl yn hapus.",
+     "fix": "Bydd y bobl yn hapus pan fydd y tywydd yn well yr wythnos nesa.",
      "explain": "Noun subject: singular Bydd.",
      "skills": [
       "fut-statement"
@@ -3033,9 +3033,9 @@
     {
      "id": "p2-12",
      "type": "error",
-     "sentence": "Bydda i ddim yn gweithio fory.",
+     "sentence": "Bydda i ddim yn gweithio fory achos dw i'n mynd i weld y meddyg.",
      "wrong": 0,
-     "fix": "Fydda i ddim yn gweithio fory.",
+     "fix": "Fydda i ddim yn gweithio fory achos dw i'n mynd i weld y meddyg.",
      "explain": "Negatives soft-mutate: B → F.",
      "skills": [
       "fut-negative"
@@ -3257,9 +3257,9 @@
     {
      "id": "p16-11",
      "type": "error",
-     "sentence": "Gwelith hi'r ffilm heno?",
+     "sentence": "Gwelith hi'r ffilm heno gyda'i ffrindiau yn y sinema?",
      "wrong": 0,
-     "fix": "Welith hi'r ffilm heno?",
+     "fix": "Welith hi'r ffilm heno gyda'i ffrindiau yn y sinema?",
      "explain": "Questions soft-mutate the verb: G drops.",
      "skills": [
       "sf-qneg"
@@ -3456,9 +3456,9 @@
     {
      "id": "p5-08",
      "type": "error",
-     "sentence": "Basai nhw'n hapus yno.",
+     "sentence": "Basai nhw'n hapus yno gyda digon o arian a thŷ mawr ger y môr.",
      "wrong": 0,
-     "fix": "Basen nhw'n hapus yno.",
+     "fix": "Basen nhw'n hapus yno gyda digon o arian a thŷ mawr ger y môr.",
      "explain": "They: Basen nhw. Basai is he / she.",
      "skills": [
       "cond-bod"
@@ -3535,9 +3535,9 @@
     {
      "id": "p5-13",
      "type": "error",
-     "sentence": "Gallwn i ddim dod heno.",
+     "sentence": "Gallwn i ddim dod heno achos mae'r car yn y garej.",
      "wrong": 0,
-     "fix": "Allwn i ddim dod heno.",
+     "fix": "Allwn i ddim dod heno achos mae'r car yn y garej.",
      "explain": "Negative soft-mutates: G drops → Allwn i ddim.",
      "skills": [
       "cond-qneg",
@@ -3667,9 +3667,9 @@
     {
      "id": "p4-06",
      "type": "error",
-     "sentence": "Ydy car gyda nhw?",
+     "sentence": "Ydy car gyda nhw, neu ydyn nhw'n dal y bws i'r gwaith bob dydd?",
      "wrong": 0,
-     "fix": "Oes car gyda nhw?",
+     "fix": "Oes car gyda nhw, neu ydyn nhw'n dal y bws i'r gwaith bob dydd?",
      "explain": "An indefinite thing (a car): the question is Oes.",
      "skills": [
       "have-oes"
@@ -3742,9 +3742,9 @@
     {
      "id": "p4-11",
      "type": "error",
-     "sentence": "Does ddim bara gyda ni.",
+     "sentence": "Does ddim bara gyda ni, felly rhaid i fi fynd i'r siop.",
      "wrong": 1,
-     "fix": "Does dim bara gyda ni.",
+     "fix": "Does dim bara gyda ni, felly rhaid i fi fynd i'r siop.",
      "explain": "Does dim = there isn't any. Not ddim.",
      "skills": [
       "have-neg"
@@ -3950,9 +3950,9 @@
     {
      "id": "p15-09",
      "type": "error",
-     "sentence": "Mae'r gath fawr a'r ci fach yn chwarae.",
+     "sentence": "Mae'r gath fawr a'r ci fach yn chwarae gyda'i gilydd yn yr ardd y tu ôl i'r tŷ.",
      "wrong": 5,
-     "fix": "Mae'r gath fawr a'r ci bach yn chwarae.",
+     "fix": "Mae'r gath fawr a'r ci bach yn chwarae gyda'i gilydd yn yr ardd y tu ôl i'r tŷ.",
      "explain": "Ci is masculine: the adjective doesn't mutate.",
      "skills": [
       "gender-mut"
@@ -4011,9 +4011,9 @@
     {
      "id": "p15-13",
      "type": "error",
-     "sentence": "Dyma'r ferched.",
+     "sentence": "Dyma'r ferched o'r ysgol sy'n canu yn y cyngerdd heno.",
      "wrong": 1,
-     "fix": "Dyma'r merched.",
+     "fix": "Dyma'r merched o'r ysgol sy'n canu yn y cyngerdd heno.",
      "explain": "Plurals don't mutate after y / 'r.",
      "skills": [
       "gender-mut"
@@ -4210,9 +4210,9 @@
     {
      "id": "p17-10",
      "type": "error",
-     "sentence": "Dw i'n hoffi'r gath hwn.",
+     "sentence": "Dw i'n hoffi'r gath hwn achos mae hi'n chwarae gyda'r plant bob dydd.",
      "wrong": 4,
-     "fix": "Dw i'n hoffi'r gath hon.",
+     "fix": "Dw i'n hoffi'r gath hon achos mae hi'n chwarae gyda'r plant bob dydd.",
      "explain": "Cath is feminine: hon, not hwn.",
      "skills": [
       "dem-adj"
@@ -4406,9 +4406,9 @@
     {
      "id": "p6-07",
      "type": "error",
-     "sentence": "Ro'n i'n byw yn Dinbych.",
+     "sentence": "Ro'n i'n byw yn Dinbych pan o'n i'n blentyn.",
      "wrong": 4,
-     "fix": "Ro'n i'n byw yn Ninbych.",
+     "fix": "Ro'n i'n byw yn Ninbych pan o'n i'n blentyn.",
      "explain": "d → n after yn (in).",
      "skills": [
       "nas-yn"
@@ -4468,9 +4468,9 @@
     {
      "id": "p6-11",
      "type": "error",
-     "sentence": "Mae'r swyddfa yng Caerdydd.",
+     "sentence": "Mae'r swyddfa yng Caerdydd, ond dw i'n gweithio o adre ddwywaith yr wythnos.",
      "wrong": 3,
-     "fix": "Mae'r swyddfa yng Nghaerdydd.",
+     "fix": "Mae'r swyddfa yng Nghaerdydd, ond dw i'n gweithio o adre ddwywaith yr wythnos.",
      "explain": "c → ngh after yn (in).",
      "skills": [
       "nas-yn"
@@ -4674,9 +4674,9 @@
     {
      "id": "p7-09",
      "type": "error",
-     "sentence": "Dw i'n hoffi te a coffi.",
+     "sentence": "Dw i'n hoffi te a coffi yn y bore, ond dw i'n yfed dŵr yn y gwaith.",
      "wrong": 5,
-     "fix": "Dw i'n hoffi te a choffi.",
+     "fix": "Dw i'n hoffi te a choffi yn y bore, ond dw i'n yfed dŵr yn y gwaith.",
      "explain": "a (and) + aspirate: c → ch.",
      "skills": [
       "asp-a"
@@ -4717,9 +4717,9 @@
     {
      "id": "p7-12",
      "type": "error",
-     "sentence": "Mae tri cath yn yr ardd.",
+     "sentence": "Mae tri cath yn yr ardd y tu ôl i'r tŷ drws nesa.",
      "wrong": 1,
-     "fix": "Mae tair cath yn yr ardd.",
+     "fix": "Mae tair cath yn yr ardd y tu ôl i'r tŷ drws nesa.",
      "explain": "Cath is feminine: tair, which causes no mutation.",
      "skills": [
       "asp-num",
@@ -4855,9 +4855,9 @@
     {
      "id": "p8-06",
      "type": "error",
-     "sentence": "Gwrandewch ar fi!",
+     "sentence": "Gwrandewch ar fi, plant, achos dw i ddim eisiau dweud hyn eto!",
      "wrong": 1,
-     "fix": "Gwrandewch arna i!",
+     "fix": "Gwrandewch arna i, plant, achos dw i ddim eisiau dweud hyn eto!",
      "explain": "ar + me → arna i.",
      "skills": [
       "prep-ar"
@@ -4933,9 +4933,9 @@
     {
      "id": "p8-11",
      "type": "error",
-     "sentence": "Mae hiraeth arnyn fe.",
+     "sentence": "Mae hiraeth arnyn fe ers iddo fe symud i Awstralia y llynedd.",
      "wrong": 2,
-     "fix": "Mae hiraeth arno fe.",
+     "fix": "Mae hiraeth arno fe ers iddo fe symud i Awstralia y llynedd.",
      "explain": "Match the person: arno fe (him), arnyn nhw (them).",
      "skills": [
       "prep-ar"
@@ -5091,9 +5091,9 @@
     {
      "id": "p18-06",
      "type": "error",
-     "sentence": "Dw i'n aros i'r bws.",
+     "sentence": "Dw i'n aros i'r bws wrth yr orsaf ers hanner awr yn y glaw.",
      "wrong": 3,
-     "fix": "Dw i'n aros am y bws.",
+     "fix": "Dw i'n aros am y bws wrth yr orsaf ers hanner awr yn y glaw.",
      "explain": "Wait for = aros am, not i.",
      "skills": [
       "vp-am"
@@ -5171,9 +5171,9 @@
     {
      "id": "p18-11",
      "type": "error",
-     "sentence": "Dyn ni'n cyrraedd i Gaerdydd am chwech.",
+     "sentence": "Dyn ni'n cyrraedd i Gaerdydd am chwech ac wedyn dyn ni'n mynd yn syth i'r gwesty.",
      "wrong": 3,
-     "fix": "Dyn ni'n cyrraedd Caerdydd am chwech.",
+     "fix": "Dyn ni'n cyrraedd Caerdydd am chwech ac wedyn dyn ni'n mynd yn syth i'r gwesty.",
      "explain": "cyrraedd takes the place directly: arrive in Cardiff = cyrraedd Caerdydd. No i, so no mutation either.",
      "skills": [
       "vp-none"
@@ -5431,9 +5431,9 @@
     {
      "id": "p9-08",
      "type": "error",
-     "sentence": "Dw i'n meddwl mae'r siop ar gau.",
+     "sentence": "Dw i'n meddwl mae'r siop ar gau heddiw achos mae hi'n ddydd Sul.",
      "wrong": 3,
-     "fix": "Dw i'n meddwl bod y siop ar gau.",
+     "fix": "Dw i'n meddwl bod y siop ar gau heddiw achos mae hi'n ddydd Sul.",
      "explain": "After meddwl / credu / gwybod, mae becomes bod.",
      "skills": [
       "that-bod"
@@ -5493,9 +5493,9 @@
     {
      "id": "p9-12",
      "type": "error",
-     "sentence": "Mae e'n dweud ei bod e'n sâl.",
+     "sentence": "Mae e'n dweud ei bod e'n sâl, felly dyw e ddim yn dod i'r gwaith heddiw.",
      "wrong": 4,
-     "fix": "Mae e'n dweud ei fod e'n sâl.",
+     "fix": "Mae e'n dweud ei fod e'n sâl, felly dyw e ddim yn dod i'r gwaith heddiw.",
      "explain": "He: ei fod e. Ei bod is for hi.",
      "skills": [
       "that-pron"
@@ -5634,15 +5634,15 @@
     {
      "id": "p10-06",
      "type": "error",
-     "sentence": "Welodd hi ddim y gêm.",
+     "sentence": "Welodd hi ddim y gêm neithiwr achos roedd hi'n gweithio'n hwyr.",
      "wrong": 2,
-     "fix": "Welodd hi mo'r gêm.",
+     "fix": "Welodd hi mo'r gêm neithiwr achos roedd hi'n gweithio'n hwyr.",
      "explain": "Definite object: mo'r, not ddim y.",
      "skills": [
       "mo-def"
      ],
      "alsoWrong": [
-      4
+      3
      ]
     },
     {
@@ -5715,9 +5715,9 @@
     {
      "id": "p10-11",
      "type": "error",
-     "sentence": "Brynodd e mo bara.",
+     "sentence": "Brynodd e mo bara yn y siop, felly does dim byd i frecwast.",
      "wrong": 2,
-     "fix": "Brynodd e ddim bara.",
+     "fix": "Brynodd e ddim bara yn y siop, felly does dim byd i frecwast.",
      "explain": "Indefinite (any bread): ddim, not mo.",
      "skills": [
       "mo-vs-ddim"
@@ -5906,9 +5906,9 @@
     {
      "id": "p11-08",
      "type": "error",
-     "sentence": "Peidiwch â talu nawr.",
+     "sentence": "Peidiwch â talu nawr, achos bydd y bil yn dod yr wythnos nesa.",
      "wrong": 2,
-     "fix": "Peidiwch â thalu nawr.",
+     "fix": "Peidiwch â thalu nawr, achos bydd y bil yn dod yr wythnos nesa.",
      "explain": "â + aspirate: t → th.",
      "skills": [
       "cmd-neg",
@@ -6000,9 +6000,9 @@
     {
      "id": "p11-14",
      "type": "error",
-     "sentence": "Edrycha, Mr Jones!",
+     "sentence": "Edrycha, Mr Jones, mae'r trên yn dod i'r orsaf yn gynnar heddiw!",
      "wrong": 0,
-     "fix": "Edrychwch, Mr Jones!",
+     "fix": "Edrychwch, Mr Jones, mae'r trên yn dod i'r orsaf yn gynnar heddiw!",
      "explain": "Someone you'd call chi: -wch.",
      "skills": [
       "cmd-chi"
@@ -6112,9 +6112,9 @@
     {
      "id": "p13-06",
      "type": "error",
-     "sentence": "Fi mae'n coginio heno.",
+     "sentence": "Fi mae'n coginio heno achos mae Siân yn gweithio'n hwyr.",
      "wrong": 1,
-     "fix": "Fi sy'n coginio heno.",
+     "fix": "Fi sy'n coginio heno achos mae Siân yn gweithio'n hwyr.",
      "explain": "Fronted subject: sy, not mae.",
      "skills": [
       "emph-sy"
@@ -6203,9 +6203,9 @@
     {
      "id": "p13-12",
      "type": "error",
-     "sentence": "Pwy mae'n byw yma?",
+     "sentence": "Pwy mae'n byw yma yn y tŷ mawr wrth ymyl yr eglwys?",
      "wrong": 1,
-     "fix": "Pwy sy'n byw yma?",
+     "fix": "Pwy sy'n byw yma yn y tŷ mawr wrth ymyl yr eglwys?",
      "explain": "Who as subject: Pwy sy…, never Pwy mae.",
      "skills": [
       "emph-sy"
@@ -6330,9 +6330,9 @@
     {
      "id": "p14-05",
      "type": "error",
-     "sentence": "Dyna'r dyn pwy sy'n gyrru.",
+     "sentence": "Dyna'r dyn pwy sy'n gyrru'r bws i'r ysgol bob bore.",
      "wrong": 2,
-     "fix": "Dyna'r dyn sy'n gyrru.",
+     "fix": "Dyna'r dyn sy'n gyrru'r bws i'r ysgol bob bore.",
      "explain": "Pwy is only for questions.",
      "skills": [
       "rel-sy"
@@ -6405,9 +6405,9 @@
     {
      "id": "p14-10",
      "type": "error",
-     "sentence": "y car a prynodd e",
+     "sentence": "Dyma'r car a prynodd e yng Nghaerdydd y llynedd.",
      "wrong": 3,
-     "fix": "y car a brynodd e",
+     "fix": "Dyma'r car a brynodd e yng Nghaerdydd y llynedd.",
      "explain": "a + soft mutation: p → b.",
      "skills": [
       "rel-a"

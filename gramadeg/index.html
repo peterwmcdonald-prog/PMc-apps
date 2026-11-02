@@ -1120,9 +1120,13 @@ function next(){
     setTimeout(()=>inp.focus(),60);
   }
   else if(q.type==='error'){
-    h+=`<div class="qtitle">Tap the word that's wrong</div><div class="chips">${q.sentence.split(' ').map((t,i)=>`<button class="chip" data-i="${i}">${esc(t)}</button>`).join('')}</div>`;
+    const need=wrongIdx(q).length; L.answer=[];
+    h+=`<div class="qtitle">${need===1?'Tap the wrong word':`Tap the ${need} wrong words`}</div><div class="chips">${q.sentence.split(' ').map((t,i)=>`<button class="chip" data-i="${i}">${esc(t)}</button>`).join('')}</div>`;
     $('qwrap').innerHTML=h;
-    document.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{ if(L.state!=='answer')return; document.querySelectorAll('.chip').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); L.answer=+b.dataset.i; $('checkBtn').disabled=false; });
+    document.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{ if(L.state!=='answer')return; const i=+b.dataset.i, a=L.answer, at=a.indexOf(i);
+      if(at>=0) a.splice(at,1); else { if(a.length===need) a.shift(); a.push(i); }  // at the limit, the oldest pick gives way
+      document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('sel',a.includes(+x.dataset.i)));
+      $('checkBtn').disabled=a.length!==need; });
   }
   $('qwrap').scrollTop=0;
 }
@@ -1150,17 +1154,17 @@ function grade(q){
   if(q.type==='mc' && L.cur.hard){ const a=norm(L.answer||''), t=norm(q.options[q.answer]), w=t.split(' ');
     return a===t || (w.length>=3 && ECHO.has(w[w.length-1]) && a===w.slice(0,-1).join(' ')); }
   if(q.type==='mc') return L.answer===q.answer;
-  if(q.type==='error') return wrongIdx(q).includes(L.answer);
+  if(q.type==='error'){ const w=wrongIdx(q); return L.answer.length===w.length && w.every(i=>L.answer.includes(i)); }
   const a=norm(L.answer||''); return [q.answer].concat(q.alts||[]).some(x=>norm(x)===a);
 }
-function givenText(q){ if(L.answer==null) return ''; if(q.type==='mc'&&L.cur.hard) return String(L.answer); if(q.type==='mc') return q.options[L.answer]; if(q.type==='error') return q.sentence.split(' ')[L.answer]; return String(L.answer); }
+function givenText(q){ if(L.answer==null) return ''; if(q.type==='mc'&&L.cur.hard) return String(L.answer); if(q.type==='mc') return q.options[L.answer]; if(q.type==='error'){ const t=q.sentence.split(' '); return [...L.answer].sort((a,b)=>a-b).map(i=>t[i]).join(' '); } return String(L.answer); }
 $('checkBtn').onclick=()=>{
   if(L.state==='feedback'){ if(L.cur.ok) L.done++; next(); return; }
   const {q,retry}=L.cur, ok=grade(q), ms=Math.round(performance.now()-L.t0);
   logAnswer(q, ok, ms, givenText(q), retry); if(retry) save();
   L.cur.ok=ok; L.state='feedback';
   if(q.type==='mc'&&!L.cur.hard) document.querySelectorAll('.opt').forEach(b=>{ const i=+b.dataset.i; b.classList.remove('sel'); if(i===q.answer) b.classList.add('right'); else if(i===L.answer) b.classList.add('wrongsel'); });
-  if(q.type==='error') document.querySelectorAll('.chip').forEach(b=>{ const i=+b.dataset.i; b.classList.remove('sel'); if(wrongIdx(q).includes(i)) b.classList.add('right'); else if(i===L.answer) b.classList.add('wrongsel'); });
+  if(q.type==='error') document.querySelectorAll('.chip').forEach(b=>{ const i=+b.dataset.i; b.classList.remove('sel'); if(wrongIdx(q).includes(i)) b.classList.add('right'); else if(L.answer.includes(i)) b.classList.add('wrongsel'); });
   if(q.type==='type'||L.cur.hard){ const inp=$('typein'); inp.disabled=true; inp.classList.add(ok?'right':'wrong'); }
   if(!retry){
     const x=item(q.id), fresh=!x.seen; x.seen++; L.firstTotal++;
