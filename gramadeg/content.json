@@ -1,5 +1,5 @@
 {
- "version": "2026-11-02",
+ "version": "2026-11-02b",
  "sources": [
   {
    "name": "Wikipedia: Colloquial Welsh morphology (CC BY-SA)",
@@ -1427,7 +1427,7 @@
    "title": "Cyn i, ar ôl i, rhaid i",
    "subtitle": "cyn i fi golli'r bws",
    "colour": "#2DD4BF",
-   "rule": "<p><b>Equation:</b> cyn / ar ôl / wrth / nes / er mwyn + <b>i + person + soft-mutated verbnoun</b>.</p><p><i>cyn i fi golli'r bws</i> = before I miss the bus.</p><table><tr><td>i fi</td><td>i ni</td></tr><tr><td>i ti</td><td>i chi</td></tr><tr><td>iddo fe / iddi hi</td><td>iddyn nhw</td></tr><tr><td colspan=\"2\">with a noun: i'r bws, i Siân</td></tr></table><p><b>No tense of its own.</b> The main clause sets the time: <i>Gadawais i cyn iddo fe gyrraedd</i> (before he arrived). <i>Bydda i'n gadael cyn iddo fe gyrraedd</i> (before he arrives).</p><table><tr><td>cyn i</td><td>before</td></tr><tr><td>ar ôl i</td><td>after</td></tr><tr><td>wrth i</td><td>as / while</td></tr><tr><td>nes i</td><td>until</td></tr><tr><td>er mwyn i</td><td>so that</td></tr></table><p><b>Rhaid i</b> (must) works the same: <i>Rhaid i fi fynd.</i></p><p><b>Shortcuts:</b> same subject in both halves → drop i + person: <i>Bwytais i cyn mynd.</i> Before a plain noun → no i: <i>cyn y cyfarfod, ar ôl cinio.</i></p>",
+   "rule": "<p><b>Equation:</b> cyn / ar ôl / wrth / nes / er mwyn + <b>i + person + soft-mutated verbnoun</b>.</p><p><i>cyn i fi golli'r bws</i> = before I miss the bus.</p><table><tr><td>i fi</td><td>i ni</td></tr><tr><td>i ti</td><td>i chi</td></tr><tr><td>iddo fe / iddi hi</td><td>iddyn nhw</td></tr><tr><td colspan=\"2\">with a noun: i'r bws, i Siân</td></tr></table><p><b>No tense of its own.</b> The main clause sets the time: <i>Gadawais i cyn iddo fe gyrraedd</i> (before he arrived). <i>Bydda i'n gadael cyn iddo fe gyrraedd</i> (before he arrives).</p><table><tr><td>cyn i</td><td>before</td></tr><tr><td>ar ôl i</td><td>after</td></tr><tr><td>wrth i</td><td>as / while</td></tr><tr><td>nes i</td><td>until</td></tr><tr><td>er mwyn i</td><td>so that</td></tr></table><p><b>Rhaid i</b> (must) works the same: <i>Rhaid i fi fynd.</i></p><p><b>Two separate triggers.</b> Each one hits only the word straight after it.</p><table><tr><td>i</td><td>mutates the next word</td><td>i <b>b</b>lant (plant)</td></tr><tr><td>the subject</td><td>mutates the verbnoun</td><td>i blant <b>f</b>ynd (mynd)</td></tr></table><table><tr><td>i blant fynd</td><td>both fire</td></tr><tr><td>i fi fynd</td><td>fi has nothing to mutate, so you only see fynd</td></tr><tr><td>i'r plant fynd</td><td>'r blocks i, and a plural stays put</td></tr><tr><td>i'r ferch fynd</td><td>ferch comes from 'r (feminine singular), not i</td></tr><tr><td>i Gareth fynd</td><td>personal names don't normally mutate, but still trigger</td></tr></table><p>The object of a verbnoun doesn't mutate: <i>rhaid i fi brynu bara</i>. Compare the inflected verb: <i>prynais i fara</i>.</p><p><b>Shortcuts:</b> same subject in both halves → drop i + person: <i>Bwytais i cyn mynd.</i> Before a plain noun → no i: <i>cyn y cyfarfod, ar ôl cinio.</i></p>",
    "questions": [
     {
      "id": "u6-01",
@@ -1667,6 +1667,270 @@
       "i-person",
       "mut-none"
      ]
+    },
+    {
+     "id": "u6-15",
+     "type": "mc",
+     "prompt": "Children must go.",
+     "options": [
+      "Rhaid i blant fynd.",
+      "Rhaid i plant fynd.",
+      "Rhaid i blant mynd.",
+      "Rhaid i plant mynd.",
+      "Rhaid i'r blant fynd.",
+      "Rhaid i'r plant mynd."
+     ],
+     "answer": 0,
+     "explain": "Two triggers: i mutates plant → blant; the subject mutates mynd → fynd.",
+     "skills": [
+      "rhaid",
+      "i-two-triggers",
+      "mut-soft"
+     ]
+    },
+    {
+     "id": "u6-16",
+     "type": "mc",
+     "prompt": "The children must go.",
+     "options": [
+      "Rhaid i'r plant fynd.",
+      "Rhaid i'r blant fynd.",
+      "Rhaid i'r plant mynd.",
+      "Rhaid i blant fynd.",
+      "Rhaid i'r blant mynd.",
+      "Rhaid i plant fynd."
+     ],
+     "answer": 0,
+     "explain": "'r stands between i and plant, so plant stays. The subject still mutates mynd → fynd.",
+     "skills": [
+      "rhaid",
+      "i-two-triggers",
+      "mut-soft"
+     ]
+    },
+    {
+     "id": "u6-17",
+     "type": "mc",
+     "prompt": "The girl must pay.",
+     "options": [
+      "Rhaid i'r ferch dalu.",
+      "Rhaid i'r merch dalu.",
+      "Rhaid i'r ferch talu.",
+      "Rhaid i ferch dalu.",
+      "Rhaid i'r merch talu.",
+      "Rhaid i ferch talu."
+     ],
+     "answer": 0,
+     "explain": "Ferch mutates because of 'r before a feminine singular noun, not because of i. The subject mutates talu → dalu.",
+     "skills": [
+      "rhaid",
+      "i-two-triggers",
+      "mut-soft"
+     ]
+    },
+    {
+     "id": "u6-18",
+     "type": "mc",
+     "prompt": "Gareth must pay.",
+     "options": [
+      "Rhaid i Gareth dalu.",
+      "Rhaid i Areth dalu.",
+      "Rhaid i Gareth talu.",
+      "Rhaid i Areth talu.",
+      "Rhaid iddo Gareth dalu.",
+      "Rhaid i'r Gareth dalu."
+     ],
+     "answer": 0,
+     "explain": "Personal names don't normally mutate after i, but a name is still the subject, so talu → dalu.",
+     "skills": [
+      "rhaid",
+      "i-two-triggers",
+      "mut-soft"
+     ]
+    },
+    {
+     "id": "u6-19",
+     "type": "type",
+     "text": "Cyn i ___ ddechrau, rhaid i ni agor y drws.",
+     "hint": "gweithwyr",
+     "en": "Before workers start, we must open the door.",
+     "answer": "weithwyr",
+     "alts": [],
+     "explain": "No 'r here, so i mutates the noun: gweithwyr → weithwyr.",
+     "skills": [
+      "i-two-triggers",
+      "mut-soft"
+     ]
+    },
+    {
+     "id": "u6-20",
+     "type": "type",
+     "text": "Ar ôl i'r ___ gyrraedd, aethon ni i mewn.",
+     "hint": "gweithwyr",
+     "en": "After the workers arrived, we went in.",
+     "answer": "gweithwyr",
+     "alts": [],
+     "explain": "'r stands between i and the noun, and a plural doesn't mutate after 'r.",
+     "skills": [
+      "i-two-triggers",
+      "mut-soft"
+     ]
+    },
+    {
+     "id": "u6-21",
+     "type": "type",
+     "text": "Rhaid i'r plant fwyta ___ iach bob dydd.",
+     "hint": "bwyd",
+     "en": "The children must eat healthy food every day.",
+     "answer": "bwyd",
+     "alts": [],
+     "explain": "The object of a verbnoun doesn't mutate. Only the verbnoun after the subject does.",
+     "skills": [
+      "rhaid",
+      "i-two-triggers",
+      "mut-soft"
+     ]
+    },
+    {
+     "id": "u6-22",
+     "type": "type",
+     "text": "Rhaid i blant ___ yn yr ardd bob dydd.",
+     "hint": "chwarae",
+     "en": "Children must play in the garden every day.",
+     "answer": "chwarae",
+     "alts": [],
+     "explain": "The trigger fires, but ch has no soft mutation.",
+     "skills": [
+      "rhaid",
+      "i-two-triggers",
+      "mut-none"
+     ]
+    },
+    {
+     "id": "u6-23",
+     "type": "error",
+     "sentence": "Rhaid i plant mynd i'r ysgol erbyn naw o'r gloch bob bore.",
+     "wrong": 2,
+     "fix": "Rhaid i blant fynd i'r ysgol erbyn naw o'r gloch bob bore.",
+     "explain": "Both triggers are missed: i mutates plant → blant, and the subject mutates mynd → fynd.",
+     "skills": [
+      "rhaid",
+      "i-two-triggers",
+      "mut-soft"
+     ],
+     "alsoWrong": [
+      3
+     ]
+    },
+    {
+     "id": "u6-24",
+     "type": "error",
+     "sentence": "Rhaid i'r blant fynd i'r gwely cyn i'r gêm orffen heno.",
+     "wrong": 2,
+     "fix": "Rhaid i'r plant fynd i'r gwely cyn i'r gêm orffen heno.",
+     "explain": "'r blocks the mutation from i, and a plural doesn't mutate after 'r.",
+     "skills": [
+      "rhaid",
+      "i-two-triggers",
+      "mut-soft"
+     ]
+    },
+    {
+     "id": "u6-25",
+     "type": "error",
+     "sentence": "Cyn i Fethan ddod adre, rhaid i ni brynu bara yn y siop.",
+     "wrong": 2,
+     "fix": "Cyn i Bethan ddod adre, rhaid i ni brynu bara yn y siop.",
+     "explain": "Personal names don't normally mutate. Ddod is right: Bethan is the subject.",
+     "skills": [
+      "i-two-triggers",
+      "mut-soft"
+     ]
+    },
+    {
+     "id": "u6-26",
+     "type": "error",
+     "sentence": "Wrth i'r athrawon cerdded i'r ysgol, dechreuodd hi fwrw eira.",
+     "wrong": 3,
+     "fix": "Wrth i'r athrawon gerdded i'r ysgol, dechreuodd hi fwrw eira.",
+     "explain": "A plural noun with 'r doesn't change, but it is still the subject: cerdded → gerdded.",
+     "skills": [
+      "i-two-triggers",
+      "mut-soft"
+     ]
+    },
+    {
+     "id": "u6-27",
+     "type": "error",
+     "sentence": "Rhaid i fi brynu fara a gwin cyn i'r siop gau heno.",
+     "wrong": 4,
+     "fix": "Rhaid i fi brynu bara a gwin cyn i'r siop gau heno.",
+     "explain": "The object of a verbnoun doesn't mutate. Compare the inflected verb: prynais i fara.",
+     "skills": [
+      "rhaid",
+      "i-two-triggers",
+      "mut-soft"
+     ]
+    },
+    {
+     "id": "u6-28",
+     "type": "tiles",
+     "en": "Workers must pay the bill before the shop closes.",
+     "answer": "Rhaid i weithwyr dalu'r bil cyn i'r siop gau",
+     "distractors": [
+      "gweithwyr",
+      "talu'r",
+      "cau",
+      "iddo",
+      "siopa",
+      "gyda"
+     ],
+     "explain": "i mutates gweithwyr → weithwyr, and the subject mutates talu → dalu. Later, siop is the subject, so cau → gau.",
+     "skills": [
+      "rhaid",
+      "i-two-triggers",
+      "mut-soft"
+     ]
+    },
+    {
+     "id": "u6-29",
+     "type": "mc",
+     "prompt": "In 'Rhaid i blant fynd', what makes mynd mutate?",
+     "options": [
+      "It comes straight after the subject, plant",
+      "It comes straight after i",
+      "It comes after rhaid",
+      "Plant is plural",
+      "Plant has mutated",
+      "Verbnouns always mutate"
+     ],
+     "answer": 0,
+     "explain": "The subject triggers the verbnoun. I only reaches the next word, plant.",
+     "skills": [
+      "i-two-triggers",
+      "mut-soft"
+     ],
+     "noType": true
+    },
+    {
+     "id": "u6-30",
+     "type": "mc",
+     "prompt": "In 'Rhaid i'r ferch fynd', what makes merch mutate?",
+     "options": [
+      "'r before a feminine singular noun",
+      "i before a noun",
+      "The subject",
+      "Rhaid",
+      "The verbnoun after it",
+      "Nothing: ferch is the base form"
+     ],
+     "answer": 0,
+     "explain": "Y / 'r mutates feminine singular nouns. I can't reach merch because 'r stands in between.",
+     "skills": [
+      "i-two-triggers",
+      "mut-soft"
+     ],
+     "noType": true
     }
    ],
    "term": "Subordinate clauses: i + verbnoun",
@@ -7029,6 +7293,11 @@
    "group": "point",
    "title": "No preposition in Welsh",
    "blurb": "cyrraedd, ffonio, helpu"
+  },
+  "i-two-triggers": {
+   "group": "point",
+   "title": "Two triggers after i",
+   "blurb": "i blant fynd: i mutates the noun, the subject mutates the verbnoun"
   }
  },
  "glossary": [
