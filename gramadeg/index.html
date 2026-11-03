@@ -558,7 +558,7 @@ function clean(d){
   b.sound=d.sound!==false; b.loud=d.loud!==false;
   if(d.daily&&typeof d.daily==='object') b.daily={date:day(d.daily.date), xp:num(d.daily.xp)};
   if(Array.isArray(d.log)) b.log=d.log.filter(e=>e&&typeof e.q==='string'&&Number.isFinite(+e.t)).slice(-LOG_MAX)
-    .map(e=>({t:+e.t, q:e.q, ok:e.ok?1:0, ms:num(e.ms), a:String(e.a==null?'':e.a).slice(0,80), m:String(e.m||''), r:e.r?1:0, ty:String(e.ty||''), v:String(e.v||''), h:e.h?1:0}));
+    .map(e=>({t:+e.t, q:e.q, ok:e.ok?1:0, ms:num(e.ms), a:String(e.a==null?'':e.a).slice(0,80), m:String(e.m||''), r:e.r?1:0, ty:String(e.ty||''), v:String(e.v||''), h:e.h?1:0, n:String(e.n||'')}));
   b.placed=day(d.placed); b.placeV=num(d.placeV);
   if(Array.isArray(d.explains)) b.explains=d.explains.filter(e=>e&&typeof e==='object'&&e.r&&typeof e.r==='object').slice(-EXPLAIN_MAX)
     .map(e=>({at:String(e.at||''), r:e.r, fu:Array.isArray(e.fu)?e.fu.filter(x=>x&&typeof x.q==='string').map(x=>({q:x.q, a:String(x.a||'')})):[]}));
@@ -887,7 +887,7 @@ const dayKey = t => { const d=new Date(t); return d.getFullYear()+'-'+String(d.g
 const skillsOf = q => (q.skills&&q.skills.length)?q.skills:[q.unit];
 function skillInfo(id){ const s=C.skills&&C.skills[id]; if(s) return s; const u=unitOf(id); return {group:'point', title:u?u.title:id, blurb:''}; }
 function logAnswer(q, ok, ms, given, retry){
-  S.log.push({t:Date.now(), q:q.id, ok:ok?1:0, ms:Math.min(ms,180000), a:String(given||'').slice(0,80), m:L.mode, r:retry?1:0, ty:L.cur&&L.cur.hard?'type':q.type, v:C.version||'', h:L.cur&&L.cur.hard?1:0});
+  S.log.push({t:Date.now(), q:q.id, ok:ok?1:0, ms:Math.min(ms,180000), a:String(given||'').slice(0,80), m:L.mode, r:retry?1:0, ty:L.cur&&L.cur.hard?'type':q.type, v:C.version||'', h:L.cur&&L.cur.hard?1:0, n:L.cur&&L.cur.how||''});
   if(S.log.length>LOG_MAX) S.log.splice(0, S.log.length-LOG_MAX);
   MODEL=null;
 }
@@ -1149,13 +1149,88 @@ function wireTypein(inp){
 $('checkBtn').addEventListener('pointerdown',e=>{ const a=document.activeElement; if(a&&a.id==='typein'&&L.state==='answer'){ e.preventDefault(); } });
 const wrongIdx = q => [q.wrong].concat(q.alsoWrong||[]);
 function correctText(q){ return q.type==='mc'?q.options[q.answer] : q.type==='tiles'?q.answer : q.type==='type'?q.text.replace('___',q.answer) : q.fix; }
+/* Marking typed and tile answers.
+   canon: treats everyday spelling variants as the same thing.
+   closeWord: forgives one slip in a word, but never at the start (mutations live there), never in
+   the last two letters (endings carry person and tense), and never if the typed word is a real
+   form used elsewhere in the course (that's a wrong answer, not a typo). Words under 5 letters
+   must be exact.
+   One mutation slip is forgiven in answers of 3+ words. Shorter answers are only the mutation. */
+function canon(s){
+  let t=' '+norm(s).replace(/-/g,' ')+' ';
+  if(t.trim().includes(' ')) t=t.replace(/^ (fe|mi) /,' ');
+  t=t.replace(/ dwi(?='n | )/g,' dw i').replace(/ rydw i(?='n | )/g,' dw i').replace(/ (rwy|wi)'n /g," dw i'n ")
+   .replace(/ (iddo) (fe|e|fo)(?= )/g,' $1').replace(/ iddi hi(?= )/g,' iddi').replace(/ iddyn nhw(?= )/g,' iddyn')
+   .replace(/ f[eo](?= )/g,' e').replace(/ ydi(?= )/g,' ydy').replace(/(\S) yw('r)?(?= )/g,'$1 ydy$2')
+   .replace(/ sydd(?= )/g,' sy').replace(/ sy yn /g," sy'n ")
+   .replace(/ adref(?= )/g,' adre').replace(/ gartref(?= )/g,' gartre').replace(/ dref(?= )/g,' dre').replace(/ rwan(?= )/g,' nawr')
+   .replace(/^ mae('n)? (?=rhaid )/,' ').replace(/ i mi(?= )/g,' i fi').replace(/ gyda mi(?= )/g,' gyda fi')
+   .replace(/ efo(?= )/g,' gyda').replace(/ 'da(?= )/g,' gyda').replace(/ da(?= (fi|i|ti|e|hi|ni|chi|nhw) )/g,' gyda')
+   .replace(/ nag (?=(yd|o'|oe|wyt))/g,' nac ');
+  return t.trim();
+}
+let KNOWN=null;
+function known(w){
+  if(!KNOWN){ KNOWN=new Set(); allQs().forEach(q=>{ [q.answer,q.prompt,q.text,q.sentence,q.fix,q.hint].concat(q.options||[],q.alts||[],q.distractors||[]).forEach(x=>{ if(typeof x==='string') canon(x).split(' ').forEach(k=>KNOWN.add(k)); }); }); }
+  return KNOWN.has(w);
+}
+function oneEdit(a,b){
+  if(a===b||Math.abs(a.length-b.length)>1) return false;
+  let i=0; while(i<a.length&&i<b.length&&a[i]===b[i]) i++;
+  if(a.length===b.length) return a.slice(i+1)===b.slice(i+1) || (a[i]===b[i+1]&&a[i+1]===b[i]&&a.slice(i+2)===b.slice(i+2));
+  return a.length>b.length ? a.slice(i+1)===b.slice(i) : a.slice(i)===b.slice(i+1);
+}
+function closeWord(g,t){
+  if(g.includes("'")===false && t.includes("'") && g===t.replace(/'/g,'')) return g!=='maen';
+  if(t.length<5 || known(g)) return false;
+  const n=t.startsWith('ng')?3:2;
+  if(g.slice(0,n)!==t.slice(0,n)) return false;
+  if(g.slice(-2)!==t.slice(-2) && !(/(dd|ll)$/.test(t) && g===t.slice(0,-1))) return false;
+  return oneEdit(g,t);
+}
+const NOMUT=new Set(['i','ti','di','fi','mi','fe','e','hi','ni','chi','nhw','y','yr','a','ac','ag','ar','am','at','o','na','nac','yn','mae','maen','dw','dyn','dych','dyw','does','oes','fy','dy','ei','eu','ein','eich','mor','sy','wedi','aeth','es']);
+function roots(w){
+  const r=new Set([w]), add=(m,x)=>{ if(w.startsWith(m)) r.add(x+w.slice(m.length)); };
+  [['ngh','c'],['mh','p'],['nh','t'],['ng','g'],['ch','c'],['ph','p'],['th','t'],['dd','d'],['g','c'],['b','p'],['d','t'],['f','b'],['f','m'],['l','ll'],['r','rh'],['m','b'],['n','d']].forEach(([m,x])=>add(m,x));
+  if(/^[aeiouwy]/.test(w)) r.add('g'+w);
+  if(/^h[aeiouwy]/.test(w)) r.add(w.slice(1));
+  return r;
+}
+function mutationOff(a,b){
+  const x=a.split("'")[0], y=b.split("'")[0];
+  if(x.length<3||y.length<3||NOMUT.has(x)||NOMUT.has(y)) return false;
+  const ra=roots(a); return [...roots(b)].some(k=>ra.has(k));
+}
+// How does this attempt match? 'exact', 'alt', 'typo', 'mut', or null if wrong.
+function attempt(given, targets, opts={}){
+  const G=canon(given), g=G.split(' ');
+  if(!G) return null;
+  const forms=[]; targets.forEach((t,i)=>{ const T=canon(t), w=T.split(' '); forms.push([w,i]);
+    if(opts.echo && w.length>=3 && ECHO.has(w[w.length-1])) forms.push([w.slice(0,-1),i]); });
+  for(const [w,i] of forms) if(w.join(' ')===G) return i===0?'exact':'alt';
+  let best=null;
+  for(const [w] of forms){
+    if(w.length!==g.length) continue;
+    let typos=0, muts=0, bad=false;
+    w.forEach((t,k)=>{ const x=g[k]; if(x===t) return;
+      if(!opts.noTypo && closeWord(x,t)) typos++;
+      else if(mutationOff(x,t)) muts++;
+      else bad=true; });
+    if(bad || muts>1 || (muts && w.length<3) || typos>(w.length>=4?2:1)) continue;
+    if(muts) best='mut'; else if(!best) best='typo';
+  }
+  if(best==='typo' && opts.reject && opts.reject.some(x=>canon(x)===G)) return null;
+  return best;
+}
 const ECHO=new Set(['i','e','fe','fo','hi','ni','chi','nhw']);
 function grade(q){
-  if(q.type==='mc' && L.cur.hard){ const a=norm(L.answer||''), t=norm(q.options[q.answer]), w=t.split(' ');
-    return a===t || (w.length>=3 && ECHO.has(w[w.length-1]) && a===w.slice(0,-1).join(' ')); }
-  if(q.type==='mc') return L.answer===q.answer;
-  if(q.type==='error'){ const w=wrongIdx(q); return L.answer.length===w.length && w.every(i=>L.answer.includes(i)); }
-  const a=norm(L.answer||''); return [q.answer].concat(q.alts||[]).some(x=>norm(x)===a);
+  L.cur.how=null;
+  if(q.type==='mc' && !L.cur.hard) return L.answer===q.answer;
+  if(q.type==='error'){ const sets=[wrongIdx(q)].concat(q.altWrong||[]); const i=sets.findIndex(w=>L.answer.length===w.length && w.every(x=>L.answer.includes(x))); if(i>0) L.cur.how='alt'; return i>=0; }
+  const hardMc=q.type==='mc', targets=hardMc?[q.options[q.answer]].concat(q.alts||[]):[q.answer].concat(q.alts||[]);
+  const how=attempt(L.answer||'', targets, {echo:hardMc||q.type==='tiles', noTypo:q.type==='tiles', reject:hardMc?q.options.filter((o,i)=>i!==q.answer):null});
+  L.cur.how=how==='exact'?null:how;
+  return !!how;
 }
 function givenText(q){ if(L.answer==null) return ''; if(q.type==='mc'&&L.cur.hard) return String(L.answer); if(q.type==='mc') return q.options[L.answer]; if(q.type==='error'){ const t=q.sentence.split(' '); return [...L.answer].sort((a,b)=>a-b).map(i=>t[i]).join(' '); } return String(L.answer); }
 $('checkBtn').onclick=()=>{
@@ -1164,7 +1239,7 @@ $('checkBtn').onclick=()=>{
   logAnswer(q, ok, ms, givenText(q), retry); if(retry) save();
   L.cur.ok=ok; L.state='feedback';
   if(q.type==='mc'&&!L.cur.hard) document.querySelectorAll('.opt').forEach(b=>{ const i=+b.dataset.i; b.classList.remove('sel'); if(i===q.answer) b.classList.add('right'); else if(i===L.answer) b.classList.add('wrongsel'); });
-  if(q.type==='error') document.querySelectorAll('.chip').forEach(b=>{ const i=+b.dataset.i; b.classList.remove('sel'); if(wrongIdx(q).includes(i)) b.classList.add('right'); else if(L.answer.includes(i)) b.classList.add('wrongsel'); });
+  if(q.type==='error') document.querySelectorAll('.chip').forEach(b=>{ const i=+b.dataset.i; b.classList.remove('sel'); if((ok?L.answer:wrongIdx(q)).includes(i)) b.classList.add('right'); else if(L.answer.includes(i)) b.classList.add('wrongsel'); });
   if(q.type==='type'||L.cur.hard){ const inp=$('typein'); inp.disabled=true; inp.classList.add(ok?'right':'wrong'); }
   if(!retry){
     const x=item(q.id), fresh=!x.seen; x.seen++; L.firstTotal++;
@@ -1172,7 +1247,7 @@ $('checkBtn').onclick=()=>{
     const med=model().typeMed[L.cur.hard?'type':q.type], quick=!med||ms<med*1.1, solid=(skillMastery(q)||0)>=0.8;
     L.cleanRun = ok ? L.cleanRun+1 : 0;
     // Quick, correct answers on a skill you're solid on move further ahead, so they come round less often.
-    if(ok){ x.right=(x.right||0)+1; x.box=Math.min(fresh?((L.cur.hard||q.type==='type'||quick)?3:2):x.box+((L.cur.hard||(quick&&solid))?2:1),INTERVALS.length-1); if(L.mode==='place'||L.mode==='testout') x.box=Math.max(x.box,3); x.due=addDays(today(),INTERVALS[x.box]); L.firstRight++; addXp(1); L.xp++; }
+    if(ok){ x.right=(x.right||0)+1; x.box=Math.min(fresh?((L.cur.hard||q.type==='type'||quick)?3:2):x.box+((L.cur.hard||(quick&&solid))?2:1),INTERVALS.length-1); if(L.mode==='place'||L.mode==='testout') x.box=Math.max(x.box,3); x.due=addDays(today(),L.cur.how==='mut'?1:INTERVALS[x.box]); L.firstRight++; addXp(1); L.xp++; }
     else { x.wrong=(x.wrong||0)+1; x.ft=0; x.box=0; x.due=today(); x.lastWrong=today(); L.missed.push(q); followUp(q); }
     save();
   }
@@ -1183,8 +1258,9 @@ $('checkBtn').onclick=()=>{
   if(!ok) $('qwrap').classList.add('shake'), setTimeout(()=>$('qwrap').classList.remove('shake'),400);
   $('lfoot').className='lfoot '+(ok?'right':'wrong');
   $('fbBadge').innerHTML=icon(ok?'check':'cross');
-  $('fbTitle').innerHTML= ok ? esc(L.combo>=5?`${L.combo} in a row!`:praise())+(!retry?`<span class="plus">+1 XP</span>`:'') : 'Correct answer:';
-  $('fbAns').textContent= ok ? (q.type==='error'?q.fix:'') : correctText(q);
+  const how=L.cur.how;
+  $('fbTitle').innerHTML= ok && how==='mut' ? 'Right, but watch the mutation'+(!retry?`<span class="plus">+1 XP</span>`:'') : ok ? esc(L.combo>=5?`${L.combo} in a row!`:praise())+(!retry?`<span class="plus">+1 XP</span>`:'') : 'Correct answer:';
+  $('fbAns').textContent= ok ? (how==='typo'?'Spelling: '+correctText(q) : how==='mut'?correctText(q) : how==='alt'?'Course answer: '+correctText(q) : q.type==='error'?q.fix:'') : correctText(q);
   $('fbExp').textContent=q.explain||'';
   $('ruleBtn').innerHTML=icon('book')+'Rule'; $('ruleBtn').onclick=()=>openRule(q.unit);
   $('flagBtn').innerHTML=icon('flag')+'Flag';
@@ -1350,7 +1426,7 @@ function resetAll(){ if(confirm('Delete all progress? This cannot be undone.')){
 /* ================= Explain a screenshot ================= */
 // Tap camera → pick screenshot → explanation. Calls the Claude API straight from the phone with the
 // owner's own key. The key lives only in this phone's storage (not in progress backups).
-const AIKEY='gramadeg-ai', BUILD='29 Oct v5';
+const AIKEY='gramadeg-ai', BUILD='3 Nov v1';
 const aiKey = () => { try{ return localStorage.getItem(AIKEY)||''; }catch(e){ return ''; } };
 let SHOT=null; // {url, b64, idx}
 function shotStart(){ if(!aiKey()) return aiSetup(); $('shotFile').click(); }

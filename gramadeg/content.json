@@ -1,5 +1,5 @@
 {
- "version": "2026-11-02b",
+ "version": "2026-11-03a",
  "sources": [
   {
    "name": "Wikipedia: Colloquial Welsh morphology (CC BY-SA)",
@@ -68,6 +68,10 @@
      "explain": "First person statement: Dw i. Ydw i is the question form; Dydw i needs ddim.",
      "skills": [
       "bod-statement"
+     ],
+     "alts": [
+      "Rydw",
+      "Rwy"
      ]
     },
     {
@@ -87,6 +91,9 @@
      "explain": "Statement with nhw: Maen nhw. Ydyn nhw is the question.",
      "skills": [
       "bod-statement"
+     ],
+     "alts": [
+      "Maent"
      ]
     },
     {
@@ -163,6 +170,9 @@
      "explain": "No = Nac + the verb for the person answering: Nac ydw. Naddo is only for past-tense questions.",
      "skills": [
       "bod-answer"
+     ],
+     "alts": [
+      "Nag ydw"
      ]
     },
     {
@@ -244,6 +254,11 @@
      "explain": "The question form for ti is Wyt ti?",
      "skills": [
       "bod-question"
+     ],
+     "altWrong": [
+      [
+       1
+      ]
      ]
     },
     {
@@ -378,6 +393,9 @@
      "explain": "Definite noun subject (y bws): dyw. Does dim is only for indefinite nouns.",
      "skills": [
       "neg-does-dim"
+     ],
+     "alts": [
+      "Dydy"
      ]
     },
     {
@@ -396,6 +414,10 @@
      "explain": "Indefinite 'there isn't': Does dim + noun. Dim stays unmutated, and so does the noun.",
      "skills": [
       "neg-does-dim"
+     ],
+     "alts": [
+      "Does dim llefrith.",
+      "Nid oes llaeth."
      ]
     },
     {
@@ -1079,6 +1101,9 @@
      "skills": [
       "poss-fy",
       "mut-nasal"
+     ],
+     "alts": [
+      "nhad i"
      ]
     },
     {
@@ -1190,7 +1215,9 @@
      "hint": "prynu, he",
      "en": "He bought a new book.",
      "answer": "Prynodd",
-     "alts": [],
+     "alts": [
+      "Brynodd"
+     ],
      "explain": "He / she ending: -odd.",
      "skills": [
       "past-endings"
@@ -1212,6 +1239,9 @@
      "explain": "We ending: -on. Bwyta → bwyt- → bwyton ni.",
      "skills": [
       "past-endings"
+     ],
+     "alts": [
+      "Fwyton ni pizza neithiwr"
      ]
     },
     {
@@ -1231,6 +1261,12 @@
      "skills": [
       "past-negative",
       "mut-soft"
+     ],
+     "alts": [
+      "Phrynais i ddim byd.",
+      "Brynes i ddim byd.",
+      "Phrynes i ddim byd.",
+      "Wnes i ddim prynu dim byd."
      ]
     },
     {
@@ -1253,7 +1289,10 @@
      "en": "Did you have a good time?",
      "answer": "Gest",
      "alts": [
-      "Cest"
+      "Cest",
+      "Gest",
+      "Gefaist",
+      "Cefaist"
      ],
      "explain": "Cest ti → question soft-mutates: Gest ti?",
      "skills": [
@@ -1289,7 +1328,10 @@
      "en": "They came home at nine.",
      "answer": "Daethon",
      "alts": [
-      "Ddaethon"
+      "Ddaethon",
+      "Daethon",
+      "Dethon",
+      "Ddethon"
      ],
      "explain": "Dod is irregular: Daethon nhw.",
      "skills": [
@@ -1314,6 +1356,9 @@
       "past-irregular",
       "poss-fy",
       "mut-nasal"
+     ],
+     "alts": [
+      "Wnes i fy ngwaith cartref"
      ]
     },
     {
@@ -1325,6 +1370,11 @@
      "explain": "I ending: -ais. -on is we / they.",
      "skills": [
       "past-endings"
+     ],
+     "altWrong": [
+      [
+       1
+      ]
      ]
     },
     {
@@ -1334,7 +1384,11 @@
      "hint": "darllen, I",
      "en": "I read the book yesterday.",
      "answer": "Darllenais",
-     "alts": [],
+     "alts": [
+      "Ddarllenais",
+      "Darllenes",
+      "Ddarllenes"
+     ],
      "explain": "Darllen → darllen- + ais.",
      "skills": [
       "past-endings"
@@ -1358,6 +1412,10 @@
       "past-negative",
       "past-irregular",
       "mut-aspirate"
+     ],
+     "alts": [
+      "Ges i ddim llythyr.",
+      "Chefais i ddim llythyr."
      ]
     },
     {
@@ -1396,6 +1454,10 @@
       "past-irregular",
       "past-question",
       "mut-soft"
+     ],
+     "alts": [
+      "Ddethon nhw?",
+      "Wnaethon nhw ddod?"
      ]
     },
     {
@@ -1427,7 +1489,7 @@
    "title": "Cyn i, ar ôl i, rhaid i",
    "subtitle": "cyn i fi golli'r bws",
    "colour": "#2DD4BF",
-   "rule": "<p><b>Equation:</b> cyn / ar ôl / wrth / nes / er mwyn + <b>i + person + soft-mutated verbnoun</b>.</p><p><i>cyn i fi golli'r bws</i> = before I miss the bus.</p><table><tr><td>i fi</td><td>i ni</td></tr><tr><td>i ti</td><td>i chi</td></tr><tr><td>iddo fe / iddi hi</td><td>iddyn nhw</td></tr><tr><td colspan=\"2\">with a noun: i'r bws, i Siân</td></tr></table><p><b>No tense of its own.</b> The main clause sets the time: <i>Gadawais i cyn iddo fe gyrraedd</i> (before he arrived). <i>Bydda i'n gadael cyn iddo fe gyrraedd</i> (before he arrives).</p><table><tr><td>cyn i</td><td>before</td></tr><tr><td>ar ôl i</td><td>after</td></tr><tr><td>wrth i</td><td>as / while</td></tr><tr><td>nes i</td><td>until</td></tr><tr><td>er mwyn i</td><td>so that</td></tr></table><p><b>Rhaid i</b> (must) works the same: <i>Rhaid i fi fynd.</i></p><p><b>Two separate triggers.</b> Each one hits only the word straight after it.</p><table><tr><td>i</td><td>mutates the next word</td><td>i <b>b</b>lant (plant)</td></tr><tr><td>the subject</td><td>mutates the verbnoun</td><td>i blant <b>f</b>ynd (mynd)</td></tr></table><table><tr><td>i blant fynd</td><td>both fire</td></tr><tr><td>i fi fynd</td><td>fi has nothing to mutate, so you only see fynd</td></tr><tr><td>i'r plant fynd</td><td>'r blocks i, and a plural stays put</td></tr><tr><td>i'r ferch fynd</td><td>ferch comes from 'r (feminine singular), not i</td></tr><tr><td>i Gareth fynd</td><td>personal names don't normally mutate, but still trigger</td></tr></table><p>The object of a verbnoun doesn't mutate: <i>rhaid i fi brynu bara</i>. Compare the inflected verb: <i>prynais i fara</i>.</p><p><b>Shortcuts:</b> same subject in both halves → drop i + person: <i>Bwytais i cyn mynd.</i> Before a plain noun → no i: <i>cyn y cyfarfod, ar ôl cinio.</i></p>",
+   "rule": "<p><b>Equation:</b> cyn / ar ôl / wrth / nes / er mwyn + <b>i + person + soft-mutated verbnoun</b>.</p><p><i>cyn i fi golli'r bws</i> = before I miss the bus.</p><table><tr><td>i fi</td><td>i ni</td></tr><tr><td>i ti</td><td>i chi</td></tr><tr><td>iddo fe / iddi hi</td><td>iddyn nhw</td></tr><tr><td colspan=\"2\">with a noun: i'r bws, i Siân</td></tr></table><p><b>No tense of its own.</b> The main clause sets the time: <i>Gadawais i cyn iddo fe gyrraedd</i> (before he arrived). <i>Bydda i'n gadael cyn iddo fe gyrraedd</i> (before he arrives).</p><table><tr><td>cyn i</td><td>before</td></tr><tr><td>ar ôl i</td><td>after</td></tr><tr><td>wrth i</td><td>as / while</td></tr><tr><td>nes i / tan i</td><td>until</td></tr><tr><td>er mwyn i</td><td>so that</td></tr></table><p><b>Rhaid i</b> (must) works the same: <i>Rhaid i fi fynd.</i></p><p><b>Two separate triggers.</b> Each one hits only the word straight after it.</p><table><tr><td>i</td><td>mutates the next word</td><td>i <b>b</b>lant (plant)</td></tr><tr><td>the subject</td><td>mutates the verbnoun</td><td>i blant <b>f</b>ynd (mynd)</td></tr></table><table><tr><td>i blant fynd</td><td>both fire</td></tr><tr><td>i fi fynd</td><td>fi has nothing to mutate, so you only see fynd</td></tr><tr><td>i'r plant fynd</td><td>'r blocks i, and a plural stays put</td></tr><tr><td>i'r ferch fynd</td><td>ferch comes from 'r (feminine singular), not i</td></tr><tr><td>i Gareth fynd</td><td>personal names don't normally mutate, but still trigger</td></tr></table><p>The object of a verbnoun doesn't mutate: <i>rhaid i fi brynu bara</i>. Compare the inflected verb: <i>prynais i fara</i>.</p><p><b>Shortcuts:</b> same subject in both halves → drop i + person: <i>Bwytais i cyn mynd.</i> Before a plain noun → no i: <i>cyn y cyfarfod, ar ôl cinio.</i></p>",
    "questions": [
     {
      "id": "u6-01",
@@ -1632,6 +1694,12 @@
      "explain": "Same subject in both halves: cyn + verbnoun, with no i and no mutation.",
      "skills": [
       "cyn-use"
+     ],
+     "alts": [
+      "Bwytes i cyn mynd.",
+      "Fwytais i cyn mynd.",
+      "Fwytes i cyn mynd.",
+      "Bwytais i cyn i fi fynd."
      ]
     },
     {
@@ -1662,10 +1730,14 @@
       "nes iddi hi'n ffonio"
      ],
      "answer": 0,
-     "explain": "Iddi hi. Ff never mutates.",
+     "explain": "Nes or tan both work here. Iddi hi. Ff never mutates.",
      "skills": [
       "i-person",
       "mut-none"
+     ],
+     "alts": [
+      "tan iddi hi ffonio",
+      "hyd nes iddi hi ffonio"
      ]
     },
     {
@@ -1820,6 +1892,12 @@
      ],
      "alsoWrong": [
       3
+     ],
+     "altWrong": [
+      [
+       1,
+       3
+      ]
      ]
     },
     {
@@ -1833,6 +1911,11 @@
       "rhaid",
       "i-two-triggers",
       "mut-soft"
+     ],
+     "altWrong": [
+      [
+       1
+      ]
      ]
     },
     {
@@ -2021,6 +2104,9 @@
      "skills": [
       "quantity-o",
       "mut-soft"
+     ],
+     "alts": [
+      "lot o blant"
      ]
     },
     {
@@ -2393,7 +2479,9 @@
      "en": "She's younger than him.",
      "answer": "iau",
      "alts": [
-      "ifancach"
+      "ifancach",
+      "ieuengach",
+      "fwy ifanc"
      ],
      "explain": "Ifanc → iau (ifancach is also heard). Nag before the vowel in e.",
      "skills": [
@@ -2407,7 +2495,9 @@
      "hint": "best",
      "en": "This is the best café in Penarth.",
      "answer": "gorau",
-     "alts": [],
+     "alts": [
+      "gore"
+     ],
      "explain": "Superlative follows the noun: y caffi gorau.",
      "skills": [
       "cmp-superlative",
@@ -2526,6 +2616,9 @@
      "skills": [
       "cmp-superlative",
       "cmp-irregular"
+     ],
+     "alts": [
+      "hynaf"
      ]
     },
     {
@@ -2593,6 +2686,9 @@
      "skills": [
       "cmp-superlative",
       "cmp-ach"
+     ],
+     "alts": [
+      "rhataf"
      ]
     },
     {
@@ -2602,7 +2698,7 @@
      "en": "She's as good as her brother.",
      "options": [
       "cystal",
-      "mor dda",
+      "mor da",
       "mor ddaf",
       "cyn dda",
       "gwell",
@@ -2613,6 +2709,9 @@
      "skills": [
       "cmp-equative",
       "cmp-irregular"
+     ],
+     "alts": [
+      "mor dda"
      ]
     }
    ],
@@ -2636,16 +2735,20 @@
       "Ro'n",
       "Roedd",
       "Ro't",
-      "O'n",
+      "Rydyn",
       "Do'n",
       "Rydw"
      ],
      "answer": 0,
-     "explain": "Statement for I: Ro'n i. O'n i is the question form; Roedd is for he, she and nouns.",
+     "explain": "Statement for I: Ro'n i (often o'n i in speech). Roedd is for he, she and nouns.",
      "skills": [
       "imp-statement"
      ],
-     "en": "I was living in Swansea."
+     "en": "I was living in Swansea.",
+     "alts": [
+      "O'n",
+      "Roeddwn"
+     ]
     },
     {
      "id": "p1-02",
@@ -2655,7 +2758,8 @@
      "en": "It was raining all day.",
      "answer": "Roedd",
      "alts": [
-      "Ro'dd"
+      "Ro'dd",
+      "O'dd"
      ],
      "explain": "He / she / it: Roedd.",
      "skills": [
@@ -2679,7 +2783,10 @@
      "skills": [
       "imp-question"
      ],
-     "en": "Were they happy?"
+     "en": "Were they happy?",
+     "alts": [
+      "Oedden"
+     ]
     },
     {
      "id": "p1-04",
@@ -2715,6 +2822,9 @@
      "explain": "Answer for yourself: O'n (I was).",
      "skills": [
       "imp-answer"
+     ],
+     "alts": [
+      "Oeddwn"
      ]
     },
     {
@@ -2778,6 +2888,10 @@
      "skills": [
       "imp-negative",
       "imp-noun"
+     ],
+     "alts": [
+      "Do'dd dim bara.",
+      "Nid oedd bara."
      ]
     },
     {
@@ -2822,6 +2936,11 @@
      "explain": "He / she: Roedd. Ro'n is for i, ni and nhw.",
      "skills": [
       "imp-statement"
+     ],
+     "altWrong": [
+      [
+       1
+      ]
      ]
     },
     {
@@ -2859,6 +2978,9 @@
      "explain": "Answering for we: (Nac) o'n.",
      "skills": [
       "imp-answer"
+     ],
+     "alts": [
+      "Nac oedden"
      ]
     }
    ],
@@ -2980,7 +3102,8 @@
      "en": "I had left before nine.",
      "answer": "Ro'n",
      "alts": [
-      "Roeddwn"
+      "Roeddwn",
+      "O'n"
      ],
      "explain": "Had done: Ro'n i wedi…",
      "skills": [
@@ -3100,7 +3223,11 @@
       "perf-newydd",
       "perf-plu"
      ],
-     "tense": "Pluperfect"
+     "tense": "Pluperfect",
+     "alts": [
+      "Roedden ni newydd fwyta.",
+      "O'n ni newydd fwyta."
+     ]
     }
    ],
    "term": "Perfect and pluperfect",
@@ -3124,16 +3251,20 @@
       "Bydda",
       "Bydd",
       "Byddi",
-      "Fydda",
+      "Byddan",
       "Byddwn",
       "Dw"
      ],
      "answer": 0,
-     "explain": "I will: Bydda i. Fydda is for questions and negatives.",
+     "explain": "I will: Bydda i. In speech you'll also hear Fydda i, mutated.",
      "skills": [
       "fut-statement"
      ],
-     "en": "I'll be going to work tomorrow."
+     "en": "I'll be going to work tomorrow.",
+     "alts": [
+      "Byddaf",
+      "Fydda"
+     ]
     },
     {
      "id": "p2-02",
@@ -3142,7 +3273,9 @@
      "hint": "it will be",
      "en": "It will be fine tomorrow.",
      "answer": "Bydd",
-     "alts": [],
+     "alts": [
+      "Fydd"
+     ],
      "explain": "He / she / it: Bydd.",
      "skills": [
       "fut-statement"
@@ -3164,6 +3297,9 @@
      "explain": "Answer for I: Bydda (no mutation in a yes).",
      "skills": [
       "fut-answer"
+     ],
+     "alts": [
+      "Byddaf"
      ]
     },
     {
@@ -3173,7 +3309,9 @@
      "hint": "they won't",
      "en": "They won't be coming.",
      "answer": "Fyddan",
-     "alts": [],
+     "alts": [
+      "Fyddant"
+     ],
      "explain": "Negative: soft mutation B → F, plus ddim.",
      "skills": [
       "fut-negative"
@@ -3195,6 +3333,9 @@
      "explain": "We will: Byddwn ni.",
      "skills": [
       "fut-statement"
+     ],
+     "alts": [
+      "Fyddwn ni'n hwyr"
      ]
     },
     {
@@ -3313,7 +3454,7 @@
       "Bydd hi'n bwrw glaw.",
       "Bydda i'n bwrw glaw.",
       "Mae hi'n bwrw glaw.",
-      "Fydd hi'n bwrw glaw.",
+      "Byddi di'n bwrw glaw.",
       "Bydd hi bwrw glaw.",
       "Byddan nhw'n bwrw glaw."
      ],
@@ -3321,6 +3462,9 @@
      "explain": "Weather: Bydd hi'n…",
      "skills": [
       "fut-statement"
+     ],
+     "alts": [
+      "Fydd hi'n bwrw glaw."
      ]
     },
     {
@@ -3330,7 +3474,9 @@
      "hint": "we will",
      "en": "We'll see you tomorrow!",
      "answer": "Byddwn",
-     "alts": [],
+     "alts": [
+      "Fyddwn"
+     ],
      "explain": "We will: Byddwn ni.",
      "skills": [
       "fut-statement"
@@ -3359,7 +3505,7 @@
       "Gweli",
       "Gwelith",
       "Gwelais",
-      "Wela",
+      "Gweles",
       "Gwelwn"
      ],
      "answer": 0,
@@ -3367,7 +3513,12 @@
      "skills": [
       "sf-endings"
      ],
-     "en": "I'll see you tomorrow."
+     "en": "I'll see you tomorrow.",
+     "alts": [
+      "Wela",
+      "Gwelaf",
+      "Welaf"
+     ]
     },
     {
      "id": "p16-02",
@@ -3376,7 +3527,11 @@
      "hint": "gweld (they)",
      "en": "They'll see the game tonight.",
      "answer": "Gwelan",
-     "alts": [],
+     "alts": [
+      "Welan",
+      "Gwelant",
+      "Welant"
+     ],
      "explain": "They: stem + -an.",
      "skills": [
       "sf-endings"
@@ -3398,6 +3553,11 @@
      "explain": "Mynd is irregular: a i (I'll go). Es i = I went.",
      "skills": [
       "sf-irregular"
+     ],
+     "alts": [
+      "A' i i'r dre.",
+      "Af i i'r dre.",
+      "Bydda i'n mynd i'r dre."
      ]
     },
     {
@@ -3407,7 +3567,11 @@
      "hint": "gwneud (I)",
      "en": "I'll do it now.",
      "answer": "Gwna",
-     "alts": [],
+     "alts": [
+      "Wna",
+      "Gwnaf",
+      "Wnaf"
+     ],
      "explain": "Gwneud: gwna i.",
      "skills": [
       "sf-irregular"
@@ -3440,7 +3604,9 @@
      "hint": "gweld (I won't)",
      "en": "I won't see anything.",
      "answer": "Wela",
-     "alts": [],
+     "alts": [
+      "Welaf"
+     ],
      "explain": "Negative: soft mutation, G drops.",
      "skills": [
       "sf-qneg"
@@ -3452,17 +3618,22 @@
      "prompt": "I won't get a chance.",
      "options": [
       "Cha i ddim cyfle.",
-      "Ga i ddim cyfle.",
+      "Cha i ddim gyfle.",
       "Ca i ddim cyfle.",
       "Ches i ddim cyfle.",
       "Cha i dim cyfle.",
-      "Chaf i ddim cyfle."
+      "Cha i ddim chyfle."
      ],
      "answer": 0,
-     "explain": "Negatives of c, p, t verbs take aspirate: c → ch. (Ches i ddim = I didn't get.)",
+     "explain": "Negatives of c, p, t verbs take aspirate: c → ch. Speech often uses soft instead: Ga i ddim.",
      "skills": [
       "sf-qneg",
       "mut-aspirate"
+     ],
+     "alts": [
+      "Ga i ddim cyfle.",
+      "Chaf i ddim cyfle.",
+      "Gaf i ddim cyfle."
      ]
     },
     {
@@ -3492,7 +3663,10 @@
      "en": "He'll come late, probably.",
      "answer": "Daw",
      "alts": [
-      "Dith"
+      "Dith",
+      "Ddaw",
+      "Ddith",
+      "Deith"
      ],
      "explain": "Dod, he: daw e (or dith e in the south).",
      "skills": [
@@ -3516,6 +3690,10 @@
      "skills": [
       "sf-endings",
       "mut-soft"
+     ],
+     "alts": [
+      "Brynwn ni gar.",
+      "Byddwn ni'n prynu car."
      ]
     },
     {
@@ -3545,6 +3723,11 @@
      "explain": "Gwneud, they: gwnân nhw. (Gwnaethon nhw = they did.)",
      "skills": [
       "sf-irregular"
+     ],
+     "alts": [
+      "Wnân nhw'r gwaith.",
+      "Gwnant nhw'r gwaith.",
+      "Byddan nhw'n gwneud y gwaith."
      ]
     },
     {
@@ -3554,7 +3737,9 @@
      "hint": "mynd (we)",
      "en": "We'll go to Cardiff on Saturday.",
      "answer": "Awn",
-     "alts": [],
+     "alts": [
+      "Ewn"
+     ],
      "explain": "Mynd, we: awn ni.",
      "skills": [
       "sf-irregular"
@@ -3566,17 +3751,22 @@
      "prompt": "I won't pay.",
      "options": [
       "Thala i ddim.",
-      "Dala i ddim.",
+      "Thalodd i ddim.",
       "Tala i ddim.",
       "Thalais i ddim.",
       "Tala i dim.",
       "Nhala i ddim."
      ],
      "answer": 0,
-     "explain": "Negative of a t verb: aspirate t → th. (Thalais i ddim = I didn't pay.)",
+     "explain": "Negative of a t verb: aspirate t → th. Speech often uses soft instead: Dala i ddim.",
      "skills": [
       "sf-qneg",
       "mut-aspirate"
+     ],
+     "alts": [
+      "Dala i ddim.",
+      "Thalaf i ddim.",
+      "Fydda i ddim yn talu."
      ]
     }
    ],
@@ -3602,15 +3792,22 @@
       "Basai",
       "Baset",
       "Bydda",
-      "Faswn",
+      "Basan",
       "Basen"
      ],
      "answer": 0,
-     "explain": "I would: Baswn i (south also Byddwn i).",
+     "explain": "I would: Baswn i (south also Byddwn i). In speech you'll also hear Faswn i, mutated.",
      "skills": [
       "cond-bod"
      ],
-     "en": "I would like to go."
+     "en": "I would like to go.",
+     "alts": [
+      "Faswn",
+      "Byddwn",
+      "Fyddwn",
+      "Buaswn",
+      "Fuaswn"
+     ]
     },
     {
      "id": "p5-02",
@@ -3642,6 +3839,11 @@
      "skills": [
       "cond-modal",
       "mut-soft"
+     ],
+     "alts": [
+      "Hoffet ti gael diod?",
+      "Faset ti'n hoffi diod?",
+      "Fyddet ti'n hoffi diod?"
      ]
     },
     {
@@ -3652,7 +3854,8 @@
      "en": "I wouldn't do that.",
      "answer": "Faswn",
      "alts": [
-      "Fyddwn"
+      "Fyddwn",
+      "Fuaswn"
      ],
      "explain": "Negative: soft mutation B → F.",
      "skills": [
@@ -3675,6 +3878,10 @@
      "explain": "Answer for I: Baswn.",
      "skills": [
       "cond-qneg"
+     ],
+     "alts": [
+      "Byddwn",
+      "Buaswn"
      ]
     },
     {
@@ -3695,7 +3902,8 @@
       "cond-modal"
      ],
      "alts": [
-      "Gallwn i helpu ti"
+      "Gallwn i helpu ti",
+      "Gallwn i dy helpu"
      ]
     },
     {
@@ -3707,7 +3915,7 @@
       "Dylech chi gorffwys.",
       "Dylwn chi orffwys.",
       "Dylai chi orffwys.",
-      "Ddylech chi orffwys.",
+      "Dylech chi'n gorffwys.",
       "Dylet chi orffwys."
      ],
      "answer": 0,
@@ -3715,6 +3923,10 @@
      "skills": [
       "cond-modal",
       "mut-soft"
+     ],
+     "alts": [
+      "Ddylech chi orffwys.",
+      "Dylsech chi orffwys."
      ]
     },
     {
@@ -3726,6 +3938,11 @@
      "explain": "They: Basen nhw. Basai is he / she.",
      "skills": [
       "cond-bod"
+     ],
+     "altWrong": [
+      [
+       1
+      ]
      ]
     },
     {
@@ -3789,7 +4006,11 @@
      "alts": [
       "Base",
       "Byddai",
-      "Bydde"
+      "Bydde",
+      "Buasai",
+      "Fasai",
+      "Fyddai",
+      "Fase"
      ],
      "explain": "He / she: Basai (also Base, Byddai).",
      "skills": [
@@ -3859,6 +4080,11 @@
      "explain": "Mae + thing + gyda + person.",
      "skills": [
       "have-gyda"
+     ],
+     "alts": [
+      "Mae gen i gar.",
+      "Mae car gen i.",
+      "Mae gyda fi gar."
      ]
     },
     {
@@ -3868,7 +4094,10 @@
      "hint": "with",
      "en": "We have two children.",
      "answer": "gyda",
-     "alts": [],
+     "alts": [
+      "efo",
+      "'da"
+     ],
      "explain": "Having: gyda + person.",
      "skills": [
       "have-gyda"
@@ -3908,6 +4137,11 @@
      "explain": "Does dim + thing + gyda + person.",
      "skills": [
       "have-neg"
+     ],
+     "alts": [
+      "Does dim arian gen i",
+      "Does gen i ddim arian",
+      "Does gyda fi ddim arian"
      ]
     },
     {
@@ -3926,6 +4160,12 @@
      "explain": "Question: Oes + thing + gyda + person.",
      "skills": [
       "have-oes"
+     ],
+     "alts": [
+      "Oes pen gyda ti?",
+      "Oes beiro gen ti?",
+      "Oes gen ti feiro?",
+      "Oes gyda ti feiro?"
      ]
     },
     {
@@ -3969,6 +4209,10 @@
      "skills": [
       "have-gen",
       "mut-soft"
+     ],
+     "alts": [
+      "Mae ci gen i.",
+      "Mae gynna i gi."
      ]
     },
     {
@@ -3978,7 +4222,10 @@
      "hint": "with",
      "en": "They had a big house.",
      "answer": "gyda",
-     "alts": [],
+     "alts": [
+      "efo",
+      "'da"
+     ],
      "explain": "Past: Roedd + thing + gyda.",
      "skills": [
       "have-gyda"
@@ -3995,12 +4242,17 @@
       "Mae hi chwaer gyda.",
       "Mae'r chwaer gyda hi.",
       "Mae hi'n chwaer gyda.",
-      "Mae gyda hi chwaer."
+      "Mae chwaer gyda nhw."
      ],
      "answer": 0,
      "explain": "Mae + thing + gyda hi.",
      "skills": [
       "have-gyda"
+     ],
+     "alts": [
+      "Mae gyda hi chwaer.",
+      "Mae ganddi hi chwaer.",
+      "Mae chwaer ganddi hi."
      ]
     },
     {
@@ -4031,7 +4283,12 @@
      "skills": [
       "have-gyda"
      ],
-     "tense": "Imperfect"
+     "tense": "Imperfect",
+     "alts": [
+      "Roedd ci gen ni",
+      "Roedd gen ni gi",
+      "Roedd gyda ni gi"
+     ]
     },
     {
      "id": "p4-13",
@@ -4205,7 +4462,9 @@
      "hint": "ffenest, plural",
      "en": "The windows are open.",
      "answer": "ffenestri",
-     "alts": [],
+     "alts": [
+      "ffenestrau"
+     ],
      "explain": "ffenest + -ri.",
      "skills": [
       "pl-endings"
@@ -4238,6 +4497,9 @@
      "explain": "athro → athrawon.",
      "skills": [
       "pl-endings"
+     ],
+     "alts": [
+      "athrawesau"
      ]
     },
     {
@@ -4281,6 +4543,11 @@
      "explain": "Plurals don't mutate after y / 'r.",
      "skills": [
       "gender-mut"
+     ],
+     "altWrong": [
+      [
+       0
+      ]
      ]
     },
     {
@@ -4330,6 +4597,10 @@
      "explain": "Llyfr is masculine: hwn. Keep y in front.",
      "skills": [
       "dem-adj"
+     ],
+     "alts": [
+      "y llyfr 'ma",
+      "y llyfr yma"
      ]
     },
     {
@@ -4349,6 +4620,10 @@
      "skills": [
       "dem-adj",
       "gender-mut"
+     ],
+     "alts": [
+      "y gath 'ma",
+      "y gath yma"
      ]
     },
     {
@@ -4360,7 +4635,8 @@
      "answer": "hyn",
      "alts": [
       "'ma",
-      "ma"
+      "ma",
+      "yma"
      ],
      "explain": "Plural: hyn (in speech, 'ma).",
      "skills": [
@@ -4376,7 +4652,8 @@
      "answer": "'na",
      "alts": [
       "na",
-      "hwnnw"
+      "hwnnw",
+      "yna"
      ],
      "explain": "In speech: 'na for 'that' with any noun (carefully: hwnnw).",
      "skills": [
@@ -4399,6 +4676,10 @@
      "explain": "Plural 'those': hynny (in speech, y tai 'na).",
      "skills": [
       "dem-adj"
+     ],
+     "alts": [
+      "y tai 'na",
+      "y tai yna"
      ]
     },
     {
@@ -4437,6 +4718,10 @@
      "explain": "That (thing): hwnna. Hwn = this.",
      "skills": [
       "dem-pron"
+     ],
+     "alts": [
+      "Beth ydy hynna?",
+      "Beth ydy honna?"
      ]
     },
     {
@@ -4469,6 +4754,9 @@
      "explain": "Dyna = that is / there is. Problem is feminine: y broblem.",
      "skills": [
       "dem-dyma"
+     ],
+     "alts": [
+      "Hwnna ydy'r broblem."
      ]
     },
     {
@@ -4498,6 +4786,9 @@
      "explain": "Hyn = this (as an idea): ar hyn o bryd.",
      "skills": [
       "dem-pron"
+     ],
+     "alts": [
+      "ar y funud"
      ]
     },
     {
@@ -4508,7 +4799,8 @@
      "en": "I don't know anything about that.",
      "answer": "hynny",
      "alts": [
-      "hwnna"
+      "hwnna",
+      "hynna"
      ],
      "explain": "An idea or situation: hynny (in speech also hwnna).",
      "skills": [
@@ -5041,7 +5333,9 @@
      "hint": "ar",
      "en": "I've got a cold.",
      "answer": "arna",
-     "alts": [],
+     "alts": [
+      "arnaf"
+     ],
      "explain": "ar + i → arna i.",
      "skills": [
       "prep-ar",
@@ -5095,6 +5389,9 @@
      "explain": "Feelings: Oes + feeling + ar + person.",
      "skills": [
       "prep-feel"
+     ],
+     "alts": [
+      "Ydy hi'n ofni?"
      ]
     },
     {
@@ -5137,7 +5434,9 @@
      "hint": "ar",
      "en": "We're thirsty.",
      "answer": "arnon",
-     "alts": [],
+     "alts": [
+      "arnom"
+     ],
      "explain": "ar + ni → arnon ni.",
      "skills": [
       "prep-ar",
@@ -5203,6 +5502,11 @@
      "explain": "Match the person: arno fe (him), arnyn nhw (them).",
      "skills": [
       "prep-ar"
+     ],
+     "altWrong": [
+      [
+       3
+      ]
      ]
     },
     {
@@ -5317,7 +5621,13 @@
      "skills": [
       "vp-a"
      ],
-     "tense": "Simple past"
+     "tense": "Simple past",
+     "alts": [
+      "Siarades i â Phedr.",
+      "Siaradais i gyda Phedr.",
+      "Siarades i gyda Phedr.",
+      "Siaradais i efo Pedr."
+     ]
     },
     {
      "id": "p18-04",
@@ -5430,7 +5740,12 @@
      "skills": [
       "vp-i"
      ],
-     "tense": "Simple past"
+     "tense": "Simple past",
+     "alts": [
+      "Gofynnes i i Siân.",
+      "Ofynnais i i Siân.",
+      "Ofynnes i i Siân."
+     ]
     },
     {
      "id": "p18-11",
@@ -5469,7 +5784,7 @@
       "Paid â phoeni am fe.",
       "Paid â phoeni arno fe.",
       "Paid â phoeni iddo fe.",
-      "Paid poeni amdano fe."
+      "Paid â boeni amdano fe."
      ],
      "answer": 0,
      "explain": "peidio â + aspirate mutation (poeni → phoeni); poeni am + fe → amdano fe.",
@@ -5512,6 +5827,10 @@
      "explain": "dweud wrth; wrth + nhw → wrthyn nhw.",
      "skills": [
       "vp-wrth"
+     ],
+     "alts": [
+      "Dywedwch wrthyn nhw!",
+      "Gwedwch wrthyn nhw!"
      ]
     },
     {
@@ -5598,7 +5917,8 @@
      "en": "Siân says she's busy.",
      "answer": "bod",
      "alts": [
-      "fod"
+      "fod",
+      "ei bod"
      ],
      "explain": "that (is) = bod.",
      "skills": [
@@ -5831,6 +6151,11 @@
      "explain": "Definite object after a short-form verb: mo'r (= ddim + o'r).",
      "skills": [
       "mo-def"
+     ],
+     "alts": [
+      "Weles i mo'r ffilm.",
+      "Welais i ddim o'r ffilm.",
+      "Wnes i ddim gweld y ffilm."
      ]
     },
     {
@@ -5840,7 +6165,9 @@
      "hint": "not … the",
      "en": "I didn't hear the news.",
      "answer": "mo'r",
-     "alts": [],
+     "alts": [
+      "ddim o'r"
+     ],
      "explain": "Definite: mo'r.",
      "skills": [
       "mo-def"
@@ -5855,13 +6182,18 @@
       "Welais i ddim fe.",
       "Welais i mo fe.",
       "Welais i mohoni fe.",
-      "Welais i ddim ohono fe.",
+      "Welais i mohono hi.",
       "Welais i mohonon fe."
      ],
      "answer": 0,
      "explain": "Pronoun: mo + ending: mohono fe.",
      "skills": [
       "mo-pron"
+     ],
+     "alts": [
+      "Weles i mohono fe.",
+      "Welais i ddim ohono fe.",
+      "Wnes i ddim ei weld e."
      ]
     },
     {
@@ -5880,6 +6212,11 @@
      "explain": "Indefinite object (a car): ddim, no mutation of car.",
      "skills": [
       "mo-vs-ddim"
+     ],
+     "alts": [
+      "Phrynais i ddim car.",
+      "Brynes i ddim car.",
+      "Wnes i ddim prynu car."
      ]
     },
     {
@@ -5889,7 +6226,9 @@
      "hint": "not … the",
      "en": "They didn't read the book.",
      "answer": "mo'r",
-     "alts": [],
+     "alts": [
+      "ddim o'r"
+     ],
      "explain": "Definite: mo'r.",
      "skills": [
       "mo-def"
@@ -5956,6 +6295,11 @@
      "explain": "Definite plural: still mo'r. (Ff never mutates.)",
      "skills": [
       "mo-def"
+     ],
+     "alts": [
+      "Ffindion nhw mo'r allweddi.",
+      "Ffeindion nhw ddim o'r allweddi.",
+      "Wnaethon nhw ddim ffeindio'r allweddi."
      ]
     },
     {
@@ -5974,6 +6318,9 @@
      "explain": "Them: mohonyn nhw.",
      "skills": [
       "mo-pron"
+     ],
+     "alts": [
+      "Weles i mohonyn nhw."
      ]
     },
     {
@@ -6114,6 +6461,10 @@
      "skills": [
       "cmd-neg",
       "mut-aspirate"
+     ],
+     "alts": [
+      "Peidiwch poeni!",
+      "Peidiwch â phryderu!"
      ]
     },
     {
@@ -6146,7 +6497,10 @@
      "skills": [
       "cmd-chi"
      ],
-     "tense": "Imperative"
+     "tense": "Imperative",
+     "alts": [
+      "Eisteddwch plîs"
+     ]
     },
     {
      "id": "p11-07",
@@ -6165,6 +6519,9 @@
      "skills": [
       "cmd-irr",
       "cmd-ti"
+     ],
+     "alts": [
+      "Dere yma!"
      ]
     },
     {
@@ -6186,7 +6543,9 @@
      "hint": "rhoi (ti)",
      "en": "Give me that!",
      "answer": "Rho",
-     "alts": [],
+     "alts": [
+      "Dyro"
+     ],
      "explain": "Rhoi, ti: Rho (chi: Rhowch).",
      "skills": [
       "cmd-irr",
@@ -6259,6 +6618,9 @@
      "explain": "Paid â + bod (b doesn't aspirate).",
      "skills": [
       "cmd-neg"
+     ],
+     "alts": [
+      "Paid bod yn hwyr"
      ]
     },
     {
@@ -6371,6 +6733,10 @@
      "explain": "Past emphatic: subject + 3rd-person past verb.",
      "skills": [
       "emph-sy"
+     ],
+     "alts": [
+      "Tom a enillodd.",
+      "Tom wnaeth ennill."
      ]
     },
     {
@@ -6391,7 +6757,10 @@
      "hint": "gwneud, past",
      "en": "Who did it?",
      "answer": "wnaeth",
-     "alts": [],
+     "alts": [
+      "a wnaeth",
+      "wnath"
+     ],
      "explain": "Pwy + 3rd-person past: wnaeth.",
      "skills": [
       "emph-sy"
@@ -6404,7 +6773,9 @@
      "hint": "me",
      "en": "It's not me who's to blame.",
      "answer": "fi",
-     "alts": [],
+     "alts": [
+      "mi"
+     ],
      "explain": "Nid + fronted subject + sy.",
      "skills": [
       "emph-sy"
@@ -6482,7 +6853,9 @@
      "hint": "is",
      "en": "It's in the kitchen that she is.",
      "answer": "mae",
-     "alts": [],
+     "alts": [
+      "y mae"
+     ],
      "explain": "Fronting a place keeps mae. Sy only replaces a fronted subject.",
      "skills": [
       "emph-other"
@@ -6609,7 +6982,9 @@
      "hint": "who will be",
      "en": "the people who'll be coming tomorrow",
      "answer": "fydd",
-     "alts": [],
+     "alts": [
+      "a fydd"
+     ],
      "explain": "Who will be: fydd (soft-mutated bydd).",
      "skills": [
       "rel-tense"
@@ -6664,6 +7039,11 @@
      "skills": [
       "rel-a",
       "mut-none"
+     ],
+     "alts": [
+      "y dyn ffoniodd",
+      "y dyn wnaeth ffonio",
+      "y dyn a wnaeth ffonio"
      ]
     },
     {
