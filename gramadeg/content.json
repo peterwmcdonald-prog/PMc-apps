@@ -52,7 +52,7 @@
    "icon": "speech",
    "title": "Bod: present",
    "subtitle": "Dw i, mae e, maen nhw",
-   "colour": "#58CC02",
+   "colour": "#00A63D",
    "rule": "<p><b>Present = bod + yn ('n) + verbnoun.</b> <i>Dw i'n dysgu.</i> I learn / I'm learning. Use <b>'n</b> after a vowel, <b>yn</b> after a consonant: <i>Mae Siân yn dysgu.</i></p><table><tr><th></th><th>Statement</th><th>Question</th></tr><tr><td>I</td><td>Dw i</td><td>Ydw i?</td></tr><tr><td>you</td><td>Rwyt ti / Ti'n</td><td>Wyt ti?</td></tr><tr><td>he / she</td><td>Mae e / Mae hi</td><td>Ydy e? / Ydy hi?</td></tr><tr><td>noun</td><td>Mae Siân / Mae'r plant</td><td>Ydy Siân? / Ydy'r plant?</td></tr><tr><td>we</td><td>Dyn ni</td><td>Ydyn ni?</td></tr><tr><td>you (pl / polite)</td><td>Dych chi</td><td>Ydych chi? / Dych chi?</td></tr><tr><td>they</td><td>Maen nhw</td><td>Ydyn nhw?</td></tr></table><p><b>Rule:</b> a noun subject always takes <b>mae</b> / <b>ydy</b>, even if plural. <i>Mae'r plant yn chwarae.</i> Maen and ydyn only go with nhw (and ni).</p><p><b>Yes / no:</b> no single word. Answer with the verb, for the person answering: <i>Wyt ti...?</i> → Ydw / Nac ydw. <i>Ydy e...?</i> → Ydy / Nac ydy. <i>Ydyn nhw...?</i> → Ydyn / Nac ydyn.</p>",
    "questions": [
     {
