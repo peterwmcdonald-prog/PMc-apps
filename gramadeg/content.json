@@ -1,5 +1,5 @@
 {
- "version": "2026-11-04a",
+ "version": "2026-11-04b",
  "sources": [
   {
    "name": "Wikipedia: Colloquial Welsh morphology (CC BY-SA)",
@@ -16,6 +16,10 @@
   {
    "name": "Dysgu Cymraeg Mynediad / Sylfaen (South) forms",
    "url": "https://learnwelsh.cymru"
+  },
+  {
+   "name": "Wikipedia: Colloquial Welsh prepositions (CC BY-SA)",
+   "url": "https://en.wikipedia.org/wiki/Colloquial_Welsh_prepositions"
   }
  ],
  "sections": [
@@ -5571,7 +5575,7 @@
    "colour": "#16A34A",
    "term": "Inflected prepositions",
    "termDef": "Most inflected prepositions are one stem plus the same seven endings: ohon + -a i → ohona i.",
-   "rule": "<p><b>The equation:</b> stem + ending. The endings are the same ones you know from <i>ar</i>, <i>at</i> and <i>am</i>:</p><table><tr><th>i</th><th>ti</th><th>fe</th><th>hi</th><th>ni</th><th>chi</th><th>nhw</th></tr><tr><td>-a</td><td>-at</td><td>-o</td><td>-i</td><td>-on</td><td>-och</td><td>-yn</td></tr></table><p>So you only need each preposition's stem:</p><table><tr><th>Preposition</th><th>Stem</th><th>Example</th></tr><tr><td>o (of, from)</td><td>ohon-</td><td>ohona i, ohonyn nhw</td></tr><tr><td>wrth (by, to)</td><td>wrth-</td><td>wrtha i, wrthi hi</td></tr><tr><td>dan (under)</td><td>dan-</td><td>dana i, dano fe</td></tr><tr><td>dros (over, for)</td><td>drost-</td><td>drosta i, droston ni</td></tr><tr><td>drwy (through)</td><td>drwydd-</td><td>drwydda i, drwyddo fe</td></tr><tr><td>heb (without)</td><td>hebdd-</td><td>hebdda i, hebddi hi</td></tr></table><p><b>Oddities.</b> Only some persons change:</p><table><tr><th>Preposition</th><th>Forms</th></tr><tr><td>i (to, for)</td><td>i fi, i ti, <b>iddo fe, iddi hi</b>, i ni, i chi, <b>iddyn nhw</b></td></tr><tr><td>yn (in)</td><td><b>ynddo fe, ynddi hi, ynddyn nhw</b>; the others are rare</td></tr><tr><td>rhwng (between)</td><td>rhyngo i, rhyngot ti, <b>rhyngddo fe, rhyngddi hi</b>, rhyngon ni, rhyngoch chi, <b>rhyngddyn nhw</b></td></tr><tr><td>gan (with, by)</td><td>gen i, gen ti, ganddo fe, ganddi hi, gynnon ni, gynnoch chi, ganddyn nhw</td></tr><tr><td>rhag (from, lest)</td><td>rare and formal: rhagddo fe, rhagddi hi, rhagddyn nhw</td></tr></table><p><b>No change:</b> <i>gyda</i> and <i>â</i> stay plain: <i>gyda fi</i>, <i>â nhw</i>.</p>",
+   "rule": "<p><b>The equation:</b> stem + ending. The endings are the same ones you know from <i>ar</i>, <i>at</i> and <i>am</i>:</p><table><tr><th>i</th><th>ti</th><th>fe</th><th>hi</th><th>ni</th><th>chi</th><th>nhw</th></tr><tr><td>-a</td><td>-at</td><td>-o</td><td>-i</td><td>-on</td><td>-och</td><td>-yn</td></tr></table><p>So you only need each preposition's stem:</p><table><tr><th>Preposition</th><th>Stem</th><th>Example</th></tr><tr><td>o (of, from)</td><td>ohon-</td><td>ohona i, ohonyn nhw</td></tr><tr><td>wrth (by, to)</td><td>wrth-</td><td>wrtha i, wrthi hi</td></tr><tr><td>dan (under)</td><td>dan-</td><td>dana i, dano fe</td></tr><tr><td>dros (over, for)</td><td>drost-</td><td>drosta i, droston ni</td></tr><tr><td>drwy (through)</td><td>drwydd-</td><td>drwydda i, drwyddo fe</td></tr><tr><td>heb (without)</td><td>hebdd-</td><td>hebdda i, hebddi hi</td></tr><tr><td>rhwng (between)</td><td>rhyngdd-</td><td>rhyngdda i, rhyngddyn nhw</td></tr><tr><td>yn (in)</td><td>yndd-</td><td>yndda i, ynddo fe</td></tr></table><p>Also heard: <i>rhyngo i, rhyngot ti, rhyngon ni</i> and <i>yna i, ynon ni</i>.</p><p><b>Oddities:</b></p><table><tr><th>Preposition</th><th>Forms</th></tr><tr><td>i (to, for)</td><td>i fi, i ti, <b>iddo fe, iddi hi</b>, i ni, i chi, <b>iddyn nhw</b></td></tr><tr><td>gan (with, by)</td><td>gen i, gen ti, ganddo fe, ganddi hi, gynnon ni, gynnoch chi, ganddyn nhw</td></tr><tr><td>rhag (from, lest)</td><td>rare and formal: rhagddo fe, rhagddi hi, rhagddyn nhw</td></tr></table><p><b>No change:</b> <i>gyda</i> and <i>â</i> stay plain: <i>gyda fi</i>, <i>â nhw</i>.</p>",
    "questions": [
     {
      "type": "mc",
@@ -5793,7 +5797,7 @@
      "en": "What's in it?",
      "answer": "ynddo",
      "alts": [],
-     "explain": "yn + fe → ynddo fe.",
+     "explain": "Stem yndd- + -o fe.",
      "skills": [
       "prep-odd"
      ],
@@ -5806,12 +5810,12 @@
       "rhyngddyn nhw",
       "rhwng nhw",
       "rhwngddyn nhw",
-      "rhyngyn nhw",
+      "rhyngddo nhw",
       "rhyngoch nhw",
       "rhyngddon nhw"
      ],
      "answer": 0,
-     "explain": "rhwng adds -dd- for fe, hi and nhw: rhyngddyn nhw.",
+     "explain": "Stem rhyngdd- + -yn nhw.",
      "skills": [
       "prep-odd"
      ],
@@ -5819,21 +5823,22 @@
     },
     {
      "type": "mc",
-     "prompt": "He has a car. (with gan)",
+     "prompt": "I got a letter from him.",
      "options": [
-      "Mae car ganddo fe.",
-      "Mae car gan fe.",
-      "Mae car ganddi fe.",
-      "Mae car ganddon fe.",
-      "Mae car gen fe.",
-      "Mae car ganddoch fe."
+      "Ces i lythyr ganddo fe.",
+      "Ces i lythyr gan fe.",
+      "Ces i lythyr ganddi fe.",
+      "Ces i lythyr ganddon fe.",
+      "Ces i lythyr gen fe.",
+      "Ces i lythyr ganddoch fe."
      ],
      "answer": 0,
-     "explain": "gan + fe → ganddo fe.",
+     "explain": "gan (from) + fe → ganddo fe.",
      "skills": [
       "prep-odd"
      ],
-     "id": "p19-16"
+     "id": "p19-16",
+     "tense": "Simple past"
     },
     {
      "type": "mc",
