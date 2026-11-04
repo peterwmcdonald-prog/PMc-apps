@@ -1,5 +1,5 @@
 {
- "version": "2026-11-03a",
+ "version": "2026-11-04a",
  "sources": [
   {
    "name": "Wikipedia: Colloquial Welsh morphology (CC BY-SA)",
@@ -5563,6 +5563,299 @@
    "termDef": "A preposition shows a relationship of place, direction or topic: on, to, about. Inflected (conjugated) prepositions take a personal ending before a pronoun: ar + i → arna i."
   },
   {
+   "id": "p19",
+   "section": "sentences",
+   "icon": "at",
+   "title": "More prepositions",
+   "subtitle": "o, wrth, dros, drwy, heb, rhwng, yn, dan",
+   "colour": "#16A34A",
+   "term": "Inflected prepositions",
+   "termDef": "Most inflected prepositions are one stem plus the same seven endings: ohon + -a i → ohona i.",
+   "rule": "<p><b>The equation:</b> stem + ending. The endings are the same ones you know from <i>ar</i>, <i>at</i> and <i>am</i>:</p><table><tr><th>i</th><th>ti</th><th>fe</th><th>hi</th><th>ni</th><th>chi</th><th>nhw</th></tr><tr><td>-a</td><td>-at</td><td>-o</td><td>-i</td><td>-on</td><td>-och</td><td>-yn</td></tr></table><p>So you only need each preposition's stem:</p><table><tr><th>Preposition</th><th>Stem</th><th>Example</th></tr><tr><td>o (of, from)</td><td>ohon-</td><td>ohona i, ohonyn nhw</td></tr><tr><td>wrth (by, to)</td><td>wrth-</td><td>wrtha i, wrthi hi</td></tr><tr><td>dan (under)</td><td>dan-</td><td>dana i, dano fe</td></tr><tr><td>dros (over, for)</td><td>drost-</td><td>drosta i, droston ni</td></tr><tr><td>drwy (through)</td><td>drwydd-</td><td>drwydda i, drwyddo fe</td></tr><tr><td>heb (without)</td><td>hebdd-</td><td>hebdda i, hebddi hi</td></tr></table><p><b>Oddities.</b> Only some persons change:</p><table><tr><th>Preposition</th><th>Forms</th></tr><tr><td>i (to, for)</td><td>i fi, i ti, <b>iddo fe, iddi hi</b>, i ni, i chi, <b>iddyn nhw</b></td></tr><tr><td>yn (in)</td><td><b>ynddo fe, ynddi hi, ynddyn nhw</b>; the others are rare</td></tr><tr><td>rhwng (between)</td><td>rhyngo i, rhyngot ti, <b>rhyngddo fe, rhyngddi hi</b>, rhyngon ni, rhyngoch chi, <b>rhyngddyn nhw</b></td></tr><tr><td>gan (with, by)</td><td>gen i, gen ti, ganddo fe, ganddi hi, gynnon ni, gynnoch chi, ganddyn nhw</td></tr><tr><td>rhag (from, lest)</td><td>rare and formal: rhagddo fe, rhagddi hi, rhagddyn nhw</td></tr></table><p><b>No change:</b> <i>gyda</i> and <i>â</i> stay plain: <i>gyda fi</i>, <i>â nhw</i>.</p>",
+   "questions": [
+    {
+     "type": "mc",
+     "prompt": "wrth + nhw",
+     "options": [
+      "wrthyn nhw",
+      "wrth nhw",
+      "wrtho nhw",
+      "wrthon nhw",
+      "wrthi nhw",
+      "wrthoch nhw"
+     ],
+     "answer": 0,
+     "explain": "Stem wrth- + -yn nhw.",
+     "skills": [
+      "prep-pattern",
+      "prep-wrth"
+     ],
+     "id": "p19-01"
+    },
+    {
+     "type": "type",
+     "text": "Dywedais i ___ hi.",
+     "hint": "wrth",
+     "en": "I told her.",
+     "answer": "wrthi",
+     "alts": [],
+     "explain": "dweud wrth; wrth + hi → wrthi hi.",
+     "skills": [
+      "prep-wrth"
+     ],
+     "tense": "Simple past",
+     "id": "p19-02"
+    },
+    {
+     "type": "tiles",
+     "en": "I told them.",
+     "answer": "Dywedais i wrthyn nhw",
+     "distractors": [
+      "wrth",
+      "wrtho",
+      "atyn",
+      "iddyn",
+      "nhw'n",
+      "Dweud"
+     ],
+     "explain": "dweud wrth; wrth + nhw → wrthyn nhw.",
+     "skills": [
+      "prep-wrth"
+     ],
+     "tense": "Simple past",
+     "id": "p19-03"
+    },
+    {
+     "type": "type",
+     "text": "Mae llawer ___ nhw yma.",
+     "hint": "o",
+     "en": "There are a lot of them here.",
+     "answer": "ohonyn",
+     "alts": [],
+     "explain": "Stem ohon- + -yn nhw.",
+     "skills": [
+      "prep-o"
+     ],
+     "id": "p19-04"
+    },
+    {
+     "type": "mc",
+     "prompt": "one of us",
+     "options": [
+      "un ohonon ni",
+      "un o ni",
+      "un ohono ni",
+      "un ohonyn ni",
+      "un ohonoch ni",
+      "un ohoni ni"
+     ],
+     "answer": 0,
+     "explain": "o + ni → ohonon ni.",
+     "skills": [
+      "prep-o"
+     ],
+     "id": "p19-05"
+    },
+    {
+     "type": "error",
+     "sentence": "Roedd tri o ni yn y tŷ pan ddaeth y newyddion.",
+     "wrong": 2,
+     "alsoWrong": [
+      3
+     ],
+     "fix": "Roedd tri ohonon ni yn y tŷ pan ddaeth y newyddion.",
+     "explain": "o + ni → ohonon ni.",
+     "skills": [
+      "prep-o"
+     ],
+     "id": "p19-06"
+    },
+    {
+     "type": "type",
+     "text": "Aethon nhw ___ i.",
+     "hint": "heb",
+     "en": "They went without me.",
+     "answer": "hebdda",
+     "alts": [
+      "hebddo",
+      "hebof"
+     ],
+     "explain": "Stem hebdd- + -a i.",
+     "skills": [
+      "prep-heb"
+     ],
+     "tense": "Simple past",
+     "id": "p19-07"
+    },
+    {
+     "type": "mc",
+     "prompt": "I'm going without him.",
+     "options": [
+      "Dw i'n mynd hebddo fe.",
+      "Dw i'n mynd heb fe.",
+      "Dw i'n mynd hebddi fe.",
+      "Dw i'n mynd hebo fe.",
+      "Dw i'n mynd hebddyn fe.",
+      "Dw i'n mynd hebdda fe."
+     ],
+     "answer": 0,
+     "explain": "heb + fe → hebddo fe.",
+     "skills": [
+      "prep-heb"
+     ],
+     "id": "p19-08"
+    },
+    {
+     "type": "type",
+     "text": "Diolch am wneud hyn ___ ni.",
+     "hint": "dros",
+     "en": "Thanks for doing this for us.",
+     "answer": "droston",
+     "alts": [
+      "drosom"
+     ],
+     "explain": "Stem drost- + -on ni.",
+     "skills": [
+      "prep-dros"
+     ],
+     "id": "p19-09"
+    },
+    {
+     "type": "mc",
+     "prompt": "He paid for her.",
+     "options": [
+      "Talodd e drosti hi.",
+      "Talodd e dros hi.",
+      "Talodd e drosto hi.",
+      "Talodd e droston hi.",
+      "Talodd e drostat hi.",
+      "Talodd e drwyddi hi."
+     ],
+     "answer": 0,
+     "explain": "dros + hi → drosti hi.",
+     "skills": [
+      "prep-dros"
+     ],
+     "tense": "Simple past",
+     "id": "p19-10"
+    },
+    {
+     "type": "type",
+     "text": "Aeth y trên ___ fe.",
+     "hint": "drwy",
+     "en": "The train went through it.",
+     "answer": "drwyddo",
+     "alts": [
+      "trwyddo"
+     ],
+     "explain": "Stem drwydd- + -o fe.",
+     "skills": [
+      "prep-drwy"
+     ],
+     "tense": "Simple past",
+     "id": "p19-11"
+    },
+    {
+     "type": "type",
+     "text": "Mae'r gath ___ fe.",
+     "hint": "dan",
+     "en": "The cat is under it.",
+     "answer": "dano",
+     "alts": [
+      "tano",
+      "odano"
+     ],
+     "explain": "Stem dan- + -o fe.",
+     "skills": [
+      "prep-dan"
+     ],
+     "id": "p19-12"
+    },
+    {
+     "type": "error",
+     "sentence": "Rhoddodd hi'r llyfr i fe ddoe ar ôl yr ysgol.",
+     "wrong": 3,
+     "alsoWrong": [
+      4
+     ],
+     "fix": "Rhoddodd hi'r llyfr iddo fe ddoe ar ôl yr ysgol.",
+     "explain": "i changes only for fe, hi and nhw: iddo fe.",
+     "skills": [
+      "prep-odd"
+     ],
+     "tense": "Simple past",
+     "id": "p19-13"
+    },
+    {
+     "type": "type",
+     "text": "Beth sy ___ fe?",
+     "hint": "yn",
+     "en": "What's in it?",
+     "answer": "ynddo",
+     "alts": [],
+     "explain": "yn + fe → ynddo fe.",
+     "skills": [
+      "prep-odd"
+     ],
+     "id": "p19-14"
+    },
+    {
+     "type": "mc",
+     "prompt": "between them",
+     "options": [
+      "rhyngddyn nhw",
+      "rhwng nhw",
+      "rhwngddyn nhw",
+      "rhyngyn nhw",
+      "rhyngoch nhw",
+      "rhyngddon nhw"
+     ],
+     "answer": 0,
+     "explain": "rhwng adds -dd- for fe, hi and nhw: rhyngddyn nhw.",
+     "skills": [
+      "prep-odd"
+     ],
+     "id": "p19-15"
+    },
+    {
+     "type": "mc",
+     "prompt": "He has a car. (with gan)",
+     "options": [
+      "Mae car ganddo fe.",
+      "Mae car gan fe.",
+      "Mae car ganddi fe.",
+      "Mae car ganddon fe.",
+      "Mae car gen fe.",
+      "Mae car ganddoch fe."
+     ],
+     "answer": 0,
+     "explain": "gan + fe → ganddo fe.",
+     "skills": [
+      "prep-odd"
+     ],
+     "id": "p19-16"
+    },
+    {
+     "type": "mc",
+     "prompt": "Come with me.",
+     "options": [
+      "Dere gyda fi.",
+      "Dere gydaf i.",
+      "Dere gyda i.",
+      "Dere gydana i.",
+      "Dere gydata i.",
+      "Dere gydarna i."
+     ],
+     "answer": 0,
+     "explain": "gyda does not inflect in the South: gyda fi.",
+     "skills": [
+      "prep-pattern"
+     ],
+     "id": "p19-17"
+    }
+   ]
+  },
+  {
    "id": "p18",
    "section": "sentences",
    "icon": "puzzle",
@@ -7678,6 +7971,46 @@
    "group": "point",
    "title": "Two triggers after i",
    "blurb": "i blant fynd: i mutates the noun, the subject mutates the verbnoun"
+  },
+  "prep-pattern": {
+   "group": "point",
+   "title": "Preposition pattern",
+   "blurb": "stem + -a, -at, -o, -i, -on, -och, -yn"
+  },
+  "prep-o": {
+   "group": "point",
+   "title": "o → ohona i",
+   "blurb": "un ohonon ni, llawer ohonyn nhw"
+  },
+  "prep-wrth": {
+   "group": "point",
+   "title": "wrth → wrtha i",
+   "blurb": "dweud wrthi hi"
+  },
+  "prep-heb": {
+   "group": "point",
+   "title": "heb → hebdda i",
+   "blurb": "hebddo fe"
+  },
+  "prep-dros": {
+   "group": "point",
+   "title": "dros → drosta i",
+   "blurb": "droston ni"
+  },
+  "prep-drwy": {
+   "group": "point",
+   "title": "drwy → drwydda i",
+   "blurb": "drwyddo fe"
+  },
+  "prep-dan": {
+   "group": "point",
+   "title": "dan → dana i",
+   "blurb": "dano fe"
+  },
+  "prep-odd": {
+   "group": "point",
+   "title": "Odd prepositions",
+   "blurb": "iddo fe, ynddo fe, rhyngddyn nhw, ganddo fe"
   }
  },
  "glossary": [
