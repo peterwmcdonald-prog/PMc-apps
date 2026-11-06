@@ -682,10 +682,18 @@ function uStats(u){ let seen=0,right=0,wrong=0,fix=0,started=0; u.questions.forE
 function status(u){ const s=uStats(u); if(!s.started) return ['new','New']; if(s.strength>=.75) return ['strong','Strong']; return ['learn', Math.round(s.strength*100)+'%']; }
 
 /* ================= sound ================= */
-let AC=null;
+let AC=null, AC_BAD=false, AWAY=false, HEAR=0;
+function dropAudio(){
+  try{ if(AC&&AC.state!=='closed'){ const p=AC.close(); if(p&&p.catch) p.catch(()=>{}); } }catch(e){}
+  AC=null; BUS=ROOM=NOISE=null; AC_BAD=false;
+}
 function audio(){
-  try{ if(navigator.audioSession) navigator.audioSession.type = S.loud ? 'playback' : 'ambient'; }catch(e){}
-  AC = AC || new (window.AudioContext||window.webkitAudioContext)(); if(AC.state==='suspended') AC.resume(); if(!BUS) buildBus(); return AC;
+  try{ const a=navigator.audioSession, want=S.loud?'playback':'ambient'; if(a&&a.type!==want) a.type=want; }catch(e){}
+  if(AC&&(AC_BAD||AC.state==='closed')) dropAudio();
+  if(!AC){ AC=new (window.AudioContext||window.webkitAudioContext)(); buildBus(); }
+  // Anything but 'running' needs waking. iPhone also uses 'interrupted', after a lock, app switch or call.
+  if(AC.state!=='running'){ try{ const p=AC.resume(); if(p&&p.catch) p.catch(()=>{}); }catch(e){} }
+  return AC;
 }
 // Sound palette: a Welsh harp. Each note is a plucked string, synthesised rather than sampled
 // (Karplus-Strong), in D major pentatonic so any run of notes sounds right together.
@@ -729,23 +737,47 @@ function air(at, vol, from, to, len, q){
   src.connect(f); f.connect(g); g.connect(BUS); src.start(t,Math.random()*.2); src.stop(t+len+.02);
 }
 const HARP = i => 293.66*Math.pow(2, Math.floor(i/5)+[0,2,4,7,9][i%5]/12);   // D major pentatonic from D4
-function warmHarp(i=0){ if(i>13||!AC) return; pluckBuf(HARP(i)); setTimeout(()=>warmHarp(i+1),30); }
+const WRONG=[293.66,220];   // falling D4 to A3: high enough for a phone speaker to carry
+let WARM=false;
+function warmHarp(i=0){ if(!AC) return; if(i>15) return; pluckBuf(i>13?WRONG[i-14]:HARP(i)); setTimeout(()=>warmHarp(i+1),30); }
 function sfx(kind, n){
   if(!S.sound) return;
   try{
-    audio();
+    const ac=audio(); playSfx(kind,n);
+    if(kind==='ok'||kind==='bad'||kind==='done') checkHeard(ac,kind,n,1);
+  }catch(e){}
+}
+// If the audio clock isn't moving, the sound went nowhere: swap in a new audio engine and play it again.
+function checkHeard(ac, kind, n, tries){
+  const t0=ac.currentTime, me=++HEAR;
+  setTimeout(()=>{
+    if(me!==HEAR||ac!==AC||document.hidden) return;
+    if(ac.state==='running'&&ac.currentTime>t0) return;
+    AC_BAD=true; if(!tries) return;   // leave it for the next tap to rebuild, which iPhone always allows
+    try{ const fresh=audio(); playSfx(kind,n); checkHeard(fresh,kind,n,0); }catch(e){}
+  },350);
+}
+function playSfx(kind, n){
     if(kind==='tap') air(0,.12,2300+Math.random()*300,1700,.018,1.1);
     else if(kind==='turn') air(0,.02,520,1500,.16,.8);
     else if(kind==='ok'){ const c=Math.min(Math.max((n||1)-1,0),6);      // a run climbs the scale
-      pluck(HARP(c+2),0,.17,{pan:-.12}); pluck(HARP(c+4),.075,.2,{pan:.12}); if(c>=4) pluck(HARP(c+6),.15,.1,{pan:.2,room:.45}); }
-    else if(kind==='bad'){ pluck(146.83,0,.26,{tone:750,room:.16}); pluck(110,.09,.2,{tone:600,room:.16}); }
+      pluck(HARP(c+2),0,.24,{pan:-.12}); pluck(HARP(c+4),.075,.28,{pan:.12}); if(c>=4) pluck(HARP(c+6),.15,.14,{pan:.2,room:.45}); }
+    else if(kind==='bad'){ pluck(WRONG[0],0,.27,{tone:2400,room:.16}); pluck(WRONG[1],.11,.25,{tone:2000,room:.16}); }
     else if(kind==='done'){ const acc=n==null?100:n, run=acc>=100?[0,1,2,3,4,5,6,7,8,9,10]:acc>=80?[0,2,3,5,7,8]:[2,3,5];
       run.forEach((d,i)=>pluck(HARP(d),i*.055,.13,{pan:-.35+.7*i/run.length,room:.42}));
       const t=run.length*.055+.09; [5,7,10].filter(d=>d<=run[run.length-1]).forEach((d,i)=>pluck(HARP(d),t+i*.012,.13,{room:.5})); }
+}
+// iPhone only lets sound start from a tap, so check the audio on every tap, not just the first.
+function wake(){
+  if(!S.sound) return;
+  try{
+    if(AC){ const st=AC.state; if(st==='interrupted'||st==='closed'||(AWAY&&st!=='running')) AC_BAD=true; }
+    AWAY=false; audio(); if(!WARM){ WARM=true; warmHarp(); }
   }catch(e){}
 }
-// iPhone only lets sound start from a tap, so warm the audio up on the first one.
-addEventListener('pointerdown', ()=>{ if(S.sound) try{ audio(); warmHarp(); }catch(e){} }, {once:true});
+['pointerdown','touchend','click','keydown'].forEach(t=>addEventListener(t,wake,{capture:true,passive:true}));
+document.addEventListener('visibilitychange',()=>{ if(document.hidden) AWAY=true; });
+addEventListener('pageshow',e=>{ if(e.persisted) AWAY=true; });
 // One quiet tick for every selectable thing, so individual handlers stay simple.
 addEventListener('click', e=>{ const b=e.target.closest&&e.target.closest('.opt,.chip,.tile,.nav button,.mode,.node button,.acc summary'); if(b&&!b.disabled&&(!L||!document.getElementById('lesson').classList.contains('on')||L.state==='answer')) sfx('tap'); }, true);
 
