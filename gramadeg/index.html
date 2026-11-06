@@ -267,6 +267,8 @@ svg.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2.4;stro
 .lfoot.wrong .fb-title,.lfoot.wrong .fb-ans{color:var(--red-d)}
 .fb-ans{font-weight:900;font-size:16.5px;margin-top:3px}
 .fb-exp{font-size:14.5px;margin-top:5px;color:var(--ink2);font-weight:700;line-height:1.35}
+.fb-gender{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}.fb-gender:empty{display:none}
+.fb-gender span{background:#fff;border-radius:9px;padding:3px 9px;font-size:13.5px;font-weight:700;color:var(--ink2)}.fb-gender b{font-weight:900}
 .fb-tools{display:flex;gap:14px;margin-top:8px}
 .fb-tools button{background:none;border:0;padding:0;font-size:12px;font-weight:900;display:flex;gap:4px;align-items:center}
 .fb-tools svg.i{width:15px;height:15px}
@@ -495,6 +497,7 @@ dl.gloss{margin:0} dl.gloss dt{font-weight:900;color:var(--ink2);margin-top:10px
         <div class="fb-title" id="fbTitle"></div>
         <div class="fb-ans" id="fbAns"></div>
         <div class="fb-exp" id="fbExp"></div>
+        <div class="fb-gender" id="fbGender"></div>
         <div class="fb-tools"><button id="ruleBtn"></button><button id="flagBtn"></button></div>
       </div>
     </div>
@@ -1447,6 +1450,8 @@ $('checkBtn').onclick=()=>{
   $('fbTitle').innerHTML= ok && how==='mut' ? 'Right, but watch the mutation'+(!retry?`<span class="plus">+1 XP</span>`:'') : ok ? esc(L.combo>=5?`${L.combo} in a row!`:praise())+(!retry?`<span class="plus">+1 XP</span>`:'') : 'Correct answer:';
   $('fbAns').textContent= ok ? (how==='typo'?'Spelling: '+correctText(q) : how==='mut'?correctText(q) : how==='alt'?'Course answer: '+correctText(q) : q.type==='error'?q.fix:'') : correctText(q);
   $('fbExp').textContent=q.explain||'';
+  // Say the noun's gender whenever getting it wrong could be why the answer slipped.
+  $('fbGender').innerHTML=(!ok||how==='mut')&&q.gender ? q.gender.map(n=>`<span><b>${esc(n.w)}</b> is ${n.g==='f'?'feminine (f)':'masculine (m)'}</span>`).join('') : '';
   $('ruleBtn').innerHTML=icon('book')+'Rule'; $('ruleBtn').onclick=()=>openRule(q.unit);
   $('flagBtn').innerHTML=icon('flag')+'Flag';
   const cb=$('checkBtn'); cb.textContent='Continue'; cb.className='btn'+(ok?'':' red');
@@ -1613,7 +1618,7 @@ function resetAll(){ if(confirm('Delete all progress? This cannot be undone.')){
 /* ================= Explain a screenshot ================= */
 // Tap camera → pick screenshot → explanation. Calls the Claude API straight from the phone with the
 // owner's own key. The key lives only in this phone's storage (not in progress backups).
-const AIKEY='gramadeg-ai', BUILD='3 Nov v1';
+const AIKEY='gramadeg-ai', BUILD='6 Nov v1';
 const aiKey = () => { try{ return localStorage.getItem(AIKEY)||''; }catch(e){ return ''; } };
 let SHOT=null; // {url, b64, idx}
 function shotStart(){ if(!aiKey()) return aiSetup(); $('shotFile').click(); }

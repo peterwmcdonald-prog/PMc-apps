@@ -1,5 +1,5 @@
 {
- "version": "2026-11-04b",
+ "version": "2026-11-06",
  "sources": [
   {
    "name": "Wikipedia: Colloquial Welsh morphology (CC BY-SA)",
@@ -619,6 +619,12 @@
      "skills": [
       "sm-fem-noun",
       "mut-soft"
+     ],
+     "gender": [
+      {
+       "w": "cath",
+       "g": "f"
+      }
      ]
     },
     {
@@ -633,6 +639,12 @@
      "skills": [
       "sm-fem-adj",
       "mut-soft"
+     ],
+     "gender": [
+      {
+       "w": "cath",
+       "g": "f"
+      }
      ]
     },
     {
@@ -647,6 +659,12 @@
      "skills": [
       "sm-gender",
       "mut-none"
+     ],
+     "gender": [
+      {
+       "w": "ci",
+       "g": "m"
+      }
      ]
     },
     {
@@ -766,6 +784,16 @@
      "skills": [
       "sm-fem-noun",
       "sm-gender"
+     ],
+     "gender": [
+      {
+       "w": "merch",
+       "g": "f"
+      },
+      {
+       "w": "bachgen",
+       "g": "m"
+      }
      ]
     },
     {
@@ -790,6 +818,12 @@
      "skills": [
       "sm-gender",
       "mut-none"
+     ],
+     "gender": [
+      {
+       "w": "dyn",
+       "g": "m"
+      }
      ]
     },
     {
@@ -828,6 +862,12 @@
      "skills": [
       "sm-gender",
       "mut-none"
+     ],
+     "gender": [
+      {
+       "w": "tŷ",
+       "g": "m"
+      }
      ]
     },
     {
@@ -1802,6 +1842,12 @@
       "rhaid",
       "i-two-triggers",
       "mut-soft"
+     ],
+     "gender": [
+      {
+       "w": "merch",
+       "g": "f"
+      }
      ]
     },
     {
@@ -2050,6 +2096,12 @@
       "num-mutation",
       "num-singular",
       "mut-aspirate"
+     ],
+     "gender": [
+      {
+       "w": "ci",
+       "g": "m"
+      }
      ]
     },
     {
@@ -2070,6 +2122,12 @@
       "num-gender",
       "num-mutation",
       "mut-soft"
+     ],
+     "gender": [
+      {
+       "w": "cath",
+       "g": "f"
+      }
      ]
     },
     {
@@ -2089,6 +2147,12 @@
      "skills": [
       "num-gender",
       "num-singular"
+     ],
+     "gender": [
+      {
+       "w": "merch",
+       "g": "f"
+      }
      ]
     },
     {
@@ -2150,6 +2214,12 @@
       "blynedd",
       "num-gender",
       "mut-soft"
+     ],
+     "gender": [
+      {
+       "w": "blynedd",
+       "g": "f"
+      }
      ]
     },
     {
@@ -2180,6 +2250,12 @@
       "num-mutation",
       "num-gender",
       "mut-soft"
+     ],
+     "gender": [
+      {
+       "w": "cath",
+       "g": "f"
+      }
      ]
     },
     {
@@ -2194,6 +2270,12 @@
      "skills": [
       "num-mutation",
       "mut-none"
+     ],
+     "gender": [
+      {
+       "w": "ci",
+       "g": "m"
+      }
      ]
     },
     {
@@ -2260,6 +2342,12 @@
      "explain": "Merch is feminine, so pedair.",
      "skills": [
       "num-gender"
+     ],
+     "gender": [
+      {
+       "w": "merch",
+       "g": "f"
+      }
      ]
     },
     {
@@ -2280,6 +2368,12 @@
       "num-mutation",
       "num-singular",
       "mut-aspirate"
+     ],
+     "gender": [
+      {
+       "w": "plentyn",
+       "g": "m"
+      }
      ]
     },
     {
@@ -2337,6 +2431,12 @@
       "blynedd",
       "num-gender",
       "mut-none"
+     ],
+     "gender": [
+      {
+       "w": "blynedd",
+       "g": "f"
+      }
      ]
     }
    ],
@@ -4483,6 +4583,16 @@
      "explain": "Ci is masculine: the adjective doesn't mutate.",
      "skills": [
       "gender-mut"
+     ],
+     "gender": [
+      {
+       "w": "ci",
+       "g": "m"
+      },
+      {
+       "w": "cath",
+       "g": "f"
+      }
      ]
     },
     {
@@ -4605,6 +4715,12 @@
      "alts": [
       "y llyfr 'ma",
       "y llyfr yma"
+     ],
+     "gender": [
+      {
+       "w": "llyfr",
+       "g": "m"
+      }
      ]
     },
     {
@@ -4628,6 +4744,12 @@
      "alts": [
       "y gath 'ma",
       "y gath yma"
+     ],
+     "gender": [
+      {
+       "w": "cath",
+       "g": "f"
+      }
      ]
     },
     {
@@ -4761,6 +4883,12 @@
      ],
      "alts": [
       "Hwnna ydy'r broblem."
+     ],
+     "gender": [
+      {
+       "w": "problem",
+       "g": "f"
+      }
      ]
     },
     {
@@ -4772,6 +4900,12 @@
      "explain": "Cath is feminine: hon, not hwn.",
      "skills": [
       "dem-adj"
+     ],
+     "gender": [
+      {
+       "w": "cath",
+       "g": "f"
+      }
      ]
     },
     {
@@ -5272,6 +5406,12 @@
      "explain": "Car is masculine: tri + singular + aspirate.",
      "skills": [
       "asp-num"
+     ],
+     "gender": [
+      {
+       "w": "car",
+       "g": "m"
+      }
      ]
     },
     {
@@ -5284,6 +5424,12 @@
      "skills": [
       "asp-num",
       "num-gender"
+     ],
+     "gender": [
+      {
+       "w": "cath",
+       "g": "f"
+      }
      ]
     },
     {
