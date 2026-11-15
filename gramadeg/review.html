@@ -46,6 +46,10 @@ fetch('content.json',{cache:'no-cache'}).then(r=>r.json()).then(C=>{
       h+=`<div class="q"><span class="id">${q.id}</span><span class="ty">${q.type}</span><div class="p">${p}</div><div class="a">✓ ${esc(a)}</div><div class="x">${esc(q.explain||'')}</div><div class="x" style="font-size:12px">Skills: ${esc((q.skills||[]).map(k=>(C.skills&&C.skills[k]?C.skills[k].title:k)).join(', '))}</div></div>`;
     });
   });
+  if((C.drills||[]).length){
+    h+=`<h2 style="background:#00A63D">Drill bank (${C.drills.length} generated questions)</h2><p class="note">Made from the rule tables and everyday vocabulary by tools/gramadeg_build.py. Each one is a fill-the-gap question.</p>`;
+    C.drills.forEach(q=>{ h+=`<div class="q"><span class="id">${q.id}</span><span class="ty">drill</span><div class="p">${esc(q.text)} <span class="x">[${esc(q.hint||'')}]</span> <span class="x">(${esc(q.en||'')})</span></div><div class="a">✓ ${esc(q.answer)}${(q.alts||[]).length?' (also: '+esc(q.alts.join(', '))+')':''}</div><div class="x">${esc(q.explain||'')}</div></div>`; });
+  }
   const soon=C.units.filter(u=>u.soon);
   h+=`<h2 style="background:#AFAFAF">Planned units</h2><p>${soon.map(u=>esc(u.title)+' <span class="x">('+esc(u.subtitle)+')</span>').join('<br>')}</p>`;
   document.getElementById('out').innerHTML=h;
