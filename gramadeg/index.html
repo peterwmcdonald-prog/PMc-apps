@@ -215,7 +215,7 @@ svg.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2.4;stro
 .prog i::after{content:'';position:absolute;left:8px;right:8px;top:4px;height:4px;border-radius:99px;background:rgba(255,255,255,.35)}
 @media (max-width:430px){.brand{font-size:19px;gap:5px}.brand .mini{width:28px;height:28px}.stats-row{gap:6px}.stat-pill{font-size:15px}.top{padding-left:10px;padding-right:8px}}
 .timer{font-family:var(--fd);font-weight:800;font-size:16px;color:var(--ink2);font-variant-numeric:tabular-nums;white-space:nowrap}
-.timer:empty{display:none} .timer.end{color:var(--orange)}
+.timer:empty{display:none} .timer.end{color:var(--orange)} .timer.paused{color:var(--red-d);font-size:13px}
 .daily{border-radius:20px;background:linear-gradient(160deg,#16B553,#00A63D 55%,#009636);box-shadow:0 4px 0 #007F2F;color:#fff;padding:16px;margin-bottom:14px}
 .daily .dtop{display:flex;gap:14px;align-items:center}
 .daily .dring{position:relative;width:76px;height:76px;flex:none}
@@ -1335,15 +1335,20 @@ const mmss = n => Math.floor(n/60)+':'+String(n%60).padStart(2,'0');
 function drawTimer(){
   const t=$('timer'); if(!t) return;
   if(!L || L.mode!=='daily'){ t.textContent=''; return; }
-  const left=Math.max(0,L.goal-L.secs); t.textContent = left ? mmss(left) : 'Last one';
-  t.classList.toggle('end', !left);
+  const left=Math.max(0,L.goal-L.secs), paused=left && L.phaseAt && !counting(); t.textContent = !left ? 'Last one' : paused ? 'Paused '+mmss(left) : mmss(left);
+  t.classList.toggle('end', !left); t.classList.toggle('paused', !!paused);
   $('progFill').style.width=Math.min(100,L.secs/L.goal*100)+'%';
 }
-// Time on task: counted only while a lesson is on screen and you've touched the phone in the last 45 seconds.
+// Time on task: only time spent working counts. Each question earns at most 40 seconds of thinking
+// and 12 seconds of reading the feedback (a new rule: 60). After that the clock stops until you answer,
+// so an open app can't run the timer down. The daily 10 also needs an answer at least every minute or so.
+const PHASE_CAP = () => L.cur&&L.cur.intro ? 60 : L.state==='answer' ? 40 : 12;
+const counting = () => L && L.phaseAt && Date.now()-L.phaseAt <= PHASE_CAP()*1000 && Date.now()-LAST_ACT<=45000;
 let LAST_ACT=Date.now(), TICKS=0;
 ['pointerdown','keydown','input'].forEach(t=>addEventListener(t,()=>{ LAST_ACT=Date.now(); },{capture:true,passive:true}));
 setInterval(()=>{
-  if(!L || document.hidden || !document.querySelector('#lesson.on') || Date.now()-LAST_ACT>45000) return;
+  if(!L || document.hidden || !document.querySelector('#lesson.on')) return;
+  if(!counting()){ drawTimer(); return; }
   const d=today(); S.secs[d]=(S.secs[d]||0)+1; L.secs++; drawTimer();
   if(++TICKS%20===0) save();
 },1000);
@@ -1366,7 +1371,7 @@ function next(){
     // Skipped questions you've never met get light credit and an early spot-check, so the unit moves on.
     L.queue.forEach((x,i)=>{ const o=S.items[x.q.id]; if(!o||!o.seen) S.items[x.q.id]={box:2, due:addDays(today(), 1+(i%4)), seen:1, right:1, wrong:0, lastWrong:null, ft:1}; });
     MODEL=null; L.skipped=L.queue.length; L.queue=[]; return finish(); }
-  L.cur=L.queue.shift(); L.state='answer'; L.answer=null; L.t0=performance.now();
+  L.cur=L.queue.shift(); L.state='answer'; L.answer=null; L.t0=performance.now(); L.phaseAt=Date.now();
   if(L.cur.intro){ const u=L.cur.intro; L.state='feedback'; L.cur.ok=false; $('lfoot').className='lfoot'; $('combo').innerHTML='';
     qw.innerHTML=`<div class="qkicker" style="color:${u.colour}">${icon(u.icon)} New today</div><div class="qtitle">${esc(u.title)}</div>${termBox(u)}<div class="rule">${u.rule}</div>`;
     qw.scrollTop=0; const b=$('checkBtn'); b.textContent='Got it. Test me'; b.className='btn'; b.disabled=false; drawTimer(); return; }
@@ -1535,7 +1540,7 @@ $('checkBtn').onclick=()=>{
     sfx('turn'); L.state='leaving'; const me=L; $('qwrap').classList.add('leave'); setTimeout(()=>{ if(L===me&&L.state==='leaving') next(); },110); return; }
   const {q,retry}=L.cur, ok=grade(q), ms=Math.round(performance.now()-L.t0);
   logAnswer(q, ok, ms, givenText(q), retry); if(retry) save();
-  L.cur.ok=ok; L.state='feedback';
+  L.cur.ok=ok; L.state='feedback'; L.phaseAt=Date.now();
   if(q.type==='mc'&&!L.cur.hard) document.querySelectorAll('.opt').forEach(b=>{ const i=+b.dataset.i; b.classList.remove('sel'); if(i===q.answer) b.classList.add('right'); else if(i===L.answer) b.classList.add('wrongsel'); });
   if(q.type==='error') document.querySelectorAll('.chip').forEach(b=>{ const i=+b.dataset.i; b.classList.remove('sel'); if((ok?L.answer:wrongIdx(q)).includes(i)) b.classList.add('right'); else if(L.answer.includes(i)) b.classList.add('wrongsel'); });
   if(q.type==='type'||L.cur.hard){ const inp=$('typein'); inp.disabled=true; inp.classList.add(ok?'right':'wrong'); }
