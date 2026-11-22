@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gramadeg-v29';
+const CACHE_NAME = 'gramadeg-v30';
 const APP_SHELL = [
   './',
   './index.html',

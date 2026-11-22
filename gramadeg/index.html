@@ -227,6 +227,13 @@ svg.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2.4;stro
 .daily p{margin:4px 0 0;font-size:13.5px;line-height:1.3;opacity:.96}
 .daily .btn{margin-top:12px;background:#fff;color:var(--green-d);box-shadow:0 4px 0 rgba(0,0,0,.15)}
 .daily .week{display:flex;gap:6px;margin-top:14px}
+.daily .course{margin-top:14px;background:rgba(0,0,0,.12);border-radius:14px;padding:10px 12px}
+.daily .course .ch{display:flex;justify-content:space-between;align-items:baseline;font-size:13px}
+.daily .course .ch b{font-family:var(--fd);font-weight:800;font-size:16px}
+.daily .course .cbar{position:relative;height:10px;border-radius:99px;background:rgba(255,255,255,.25);margin:7px 0 6px;overflow:hidden}
+.daily .course .cbar i{position:absolute;left:0;top:0;bottom:0;background:rgba(255,255,255,.6);border-radius:99px}
+.daily .course .cbar s{position:absolute;left:0;top:0;bottom:0;background:#FFC800;border-radius:99px}
+.daily .course small{display:block;font-size:12.5px;opacity:.95;line-height:1.3}
 .daily .week div{flex:1;text-align:center;font-size:11px;font-weight:800;opacity:.95}
 .daily .week i{display:block;height:30px;border-radius:6px;background:rgba(255,255,255,.22);position:relative;overflow:hidden;margin-bottom:3px}
 .daily .week u{position:absolute;left:0;right:0;bottom:0;background:#fff}
@@ -832,13 +839,17 @@ function renderTab(){ renderTop(); if(!C) return; ({learn:renderLearn, practice:
 /* ================= daily card and exam countdown ================= */
 function dailyCard(){
   const t=today(), sec=secsOn(t), done=sec>=DAILY_SECS, m=Math.floor(sec/60);
-  const due=allQs().filter(q=>isDue(q.id)).length, fix=allQs().filter(q=>needsFix(q.id)).length, nn=nextNew();
-  const bits=[]; if(fix) bits.push(fix+' to fix'); if(due) bits.push(due+' due'); if(nn) bits.push((nn.fresh?'new: ':'more: ')+nn.u.title);
+  const due=allQs().filter(q=>isDue(q.id)).length, fix=allQs().filter(q=>needsFix(q.id)).length, pc=pace(), nn=nextNew(pc), at=courseAt();
+  const bits=[]; if(fix) bits.push(fix+' to fix'); if(due) bits.push(due+' due'); bits.push(pc.label);
+  const strong=built().filter(u=>status(u)[0]==='strong').length;
   let wk=0; const days=[]; for(let i=6;i>=0;i--){ const d=addDays(t,-i), s=secsOn(d); wk+=s; days.push({d,s}); }
   const dl='SMTWTFS';
   let h=`<div class="daily"><div class="dtop"><div class="dring">${ring(sec/DAILY_SECS,'#fff',76,8,'rgba(255,255,255,.28)')}<b>${done?icon('check'):`<span>${m}<small>of 10 min</small></span>`}</b></div>
     <div><h3>${done?'Daily 10 done':sec?'Keep going':'Your daily 10'}</h3><p>${done?`${m} minutes today. ${Math.round(wk/60)} this week.`:esc(bits.join(' · ')||'Ten minutes, chosen for you.')}</p></div></div>
     <button class="btn" onclick="startLesson('daily')">${icon('play')}${done?'Do 5 more minutes':sec?`Continue: ${Math.ceil((DAILY_SECS-sec)/60)} min left`:'Start 10 minutes'}</button>
+    <div class="course"><div class="ch"><b>${at.u?`Unit ${at.i+1} of ${at.n}`:`All ${at.n} units covered`}</b><span>${strong} strong</span></div>
+      <div class="cbar"><i style="width:${Math.round(at.i/at.n*100)}%"></i><s style="width:${Math.round(strong/at.n*100)}%"></s></div>
+      <small>${at.u?`Now learning: ${esc(at.u.title)}${nn&&nn.u!==at.u?` · next: ${esc(nn.u.title)}`:''}`:'Keep up the reviews: the Daily 10 now keeps it all fresh.'}</small></div>
     <div class="week">${days.map(x=>`<div class="${x.s>=DAILY_SECS?'hit':''}"><i><u style="height:${Math.min(100,Math.round(x.s/DAILY_SECS*100))}%"></u></i>${x.d===t?'<b>Today</b>':dl[new Date(x.d+'T12:00:00').getDay()]}</div>`).join('')}</div></div>`;
   const G=C.goal;
   if(G && G.date){
@@ -1306,13 +1317,36 @@ function startLesson(mode, uid, kind){
    A timed session that picks for you: mistakes to fix, reviews that are due, weak spots,
    fresh drills, and the next few questions of new material (with its rule shown first).
    It tops itself up until the time is done, then stops after the question in hand. */
-function nextNew(){
+// The Daily 10 is the course. How much new grammar it brings in is set by recent form:
+// the last 40 first-try answers and the pile of mistakes still to fix. No fixed timetable.
+function pace(){
+  const rec=S.log.filter(e=>!e.r && e.m!=='place' && e.m!=='testout').slice(-40);
+  const acc=rec.length>=8 ? rec.reduce((a,e)=>a+e.ok,0)/rec.length : 0.8;
+  const fix=allQs().filter(q=>needsFix(q.id)).length;
+  if(fix>=12 || acc<0.65) return {n:0, open:3, cap:0, acc, fix, key:'fix', label:'Review day: clearing mistakes first'};
+  if(acc<0.8)  return {n:3, open:2, cap:4,  acc, fix, key:'steady', label:'Steady: a little new grammar'};
+  if(acc<0.9)  return {n:4, open:3, cap:8,  acc, fix, key:'good', label:'Good pace: new grammar today'};
+  return              {n:6, open:4, cap:14, acc, fix, key:'fast', label:'Moving fast: extra new grammar'};
+}
+// Questions met for the first time today, from the answer log.
+function newToday(){
+  const t=today(), before=new Set(), out=new Set();
+  S.log.forEach(e=>{ if(dayKey(e.t)<t) before.add(e.q); else if(!before.has(e.q)) out.add(e.q); });
+  return out.size;
+}
+// Where you are in the course: the unit the Daily 10 is teaching now.
+function courseAt(){
+  const us=built(), i=us.findIndex(u=>unitQs(u).some(q=>!it(q.id).seen));
+  return i<0 ? {i:us.length, n:us.length, u:null} : {i, n:us.length, u:us[i]};
+}
+function nextNew(p=pace()){
   // Unseen questions from the first unit that still has some; a brand-new unit starts with its rule.
-  const open=built().filter(u=>{ const s=status(u)[0]; return s==='learn'; }).length;
+  if(!p.n || newToday()>=p.cap) return null;
+  const open=built().filter(u=>status(u)[0]==='learn').length;
   for(const u of built()){ const un=unitQs(u).filter(q=>!it(q.id).seen); if(!un.length) continue;
     const fresh=un.length===u.questions.length;
-    if(fresh && open>=3) return null;            // don't open a fourth front
-    return {u, fresh, qs:un.sort((a,b)=>hardness(a)-hardness(b)).slice(0, fresh?4:3)}; }
+    if(fresh && open>=p.open) return null;       // finish the units already open before starting another
+    return {u, fresh, qs:un.sort((a,b)=>hardness(a)-hardness(b)).slice(0, fresh?Math.max(3,p.n-1):p.n)}; }
   return null;
 }
 function dailyQueue(skip){
@@ -1324,8 +1358,11 @@ function dailyQueue(skip){
   if(pool.length) pickMix(pool,5,0).forEach(add);
   // always some never-seen drills, so no two sessions feel the same
   shuffle(started.flatMap(u=>drillQs(u.id)).filter(q=>ok(q)&&!it(q.id).seen)).slice(0,3).forEach(add);
-  const mix=shuffle(out), nn=nextNew();
-  if(nn && mix.filter(x=>needsFix(x.q.id)).length<3){ const qs=nn.qs.filter(ok); if(qs.length){ if(nn.fresh && !L_INTRO.has(nn.u.id)){ mix.push({intro:nn.u}); L_INTRO.add(nn.u.id); } qs.forEach(q=>mix.push({q,retry:false})); } }
+  // Order: mistakes and due reviews first, then today's new grammar, then mixed practice.
+  const head=out.filter(x=>needsFix(x.q.id)||isDue(x.q.id)), tail=shuffle(out.filter(x=>!head.includes(x)));
+  const mix=shuffle(head), nn=nextNew();
+  if(nn){ const qs=nn.qs.filter(ok); if(qs.length){ if(nn.fresh && !L_INTRO.has(nn.u.id)){ mix.push({intro:nn.u}); L_INTRO.add(nn.u.id); } qs.forEach(q=>mix.push({q,retry:false})); } }
+  tail.forEach(x=>mix.push(x));
   if(!mix.length) bestOf(allQs().filter(ok),8).forEach(q=>mix.push({q,retry:false}));
   return mix;
 }
