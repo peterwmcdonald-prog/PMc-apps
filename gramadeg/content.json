@@ -1,5 +1,5 @@
 {
- "version": "2026-11-15",
+ "version": "2026-11-24",
  "sources": [
   {
    "name": "Wikipedia: Colloquial Welsh morphology (CC BY-SA)",
@@ -1334,7 +1334,6 @@
      "answer": "Gest",
      "alts": [
       "Cest",
-      "Gest",
       "Gefaist",
       "Cefaist"
      ],
@@ -1373,7 +1372,6 @@
      "answer": "Daethon",
      "alts": [
       "Ddaethon",
-      "Daethon",
       "Dethon",
       "Ddethon"
      ],
@@ -3430,7 +3428,7 @@
       "Bydd",
       "Fyddwn",
       "Dyn",
-      "hwyr",
+      "hwyrach",
       "ni",
       "Byddan"
      ],
@@ -4141,7 +4139,7 @@
      "distractors": [
       "Basen",
       "Fasai",
-      "helpu",
+      "help",
       "Faset",
       "yn",
       "Basai"
@@ -5089,7 +5087,7 @@
       "ym",
       "chwaer'n",
       "Ngwynedd'n",
-      "yn"
+      "mewn"
      ],
      "explain": "g → ng, and yn → yng.",
      "skills": [
@@ -8472,7 +8470,7 @@
     {
      "id": "c2-02",
      "type": "type",
-     "text": "Cafodd y bont ei ___ yn 1900. (codi)",
+     "text": "Cafodd y bont ei ___ yn 1900.",
      "hint": "codi",
      "en": "The bridge was built in 1900.",
      "answer": "chodi",
@@ -8485,7 +8483,7 @@
     {
      "id": "c2-03",
      "type": "type",
-     "text": "Cafodd e ei ___ yn Abertawe. (geni)",
+     "text": "Cafodd e ei ___ yn Abertawe.",
      "hint": "geni",
      "en": "He was born in Swansea.",
      "answer": "eni",
@@ -8498,7 +8496,7 @@
     {
      "id": "c2-04",
      "type": "type",
-     "text": "Cafodd hi ei ___ yn Abertawe. (geni)",
+     "text": "Cafodd hi ei ___ yn Abertawe.",
      "hint": "geni",
      "en": "She was born in Swansea.",
      "answer": "geni",
@@ -8511,7 +8509,7 @@
     {
      "id": "c2-05",
      "type": "type",
-     "text": "Cafodd y llythyr ei ___ ddoe. (postio)",
+     "text": "Cafodd y llythyr ei ___ ddoe.",
      "hint": "postio",
      "en": "The letter was posted yesterday.",
      "answer": "bostio",
@@ -8563,7 +8561,7 @@
     {
      "id": "c2-08",
      "type": "type",
-     "text": "Ces i fy ___ i'r parti. (gwahodd)",
+     "text": "Ces i fy ___ i'r parti.",
      "hint": "gwahodd",
      "en": "I was invited to the party.",
      "answer": "ngwahodd",
@@ -8576,7 +8574,7 @@
     {
      "id": "c2-09",
      "type": "type",
-     "text": "Cawson ni ein ___ gan y plant. (helpu)",
+     "text": "Cawson ni ein ___ gan y plant.",
      "hint": "helpu",
      "en": "We were helped by the children.",
      "answer": "helpu",
@@ -8671,7 +8669,7 @@
     {
      "id": "c3-02",
      "type": "type",
-     "text": "Os ___ ti'n barod, awn ni. (bod, present)",
+     "text": "Os ___ ti'n barod, awn ni.",
      "hint": "bod, present",
      "en": "If you're ready, we'll go.",
      "answer": "wyt",
@@ -8709,7 +8707,7 @@
     {
      "id": "c3-04",
      "type": "type",
-     "text": "___ hi'n gwybod, basai hi'n dweud. (if she, unreal)",
+     "text": "___ hi'n gwybod, basai hi'n dweud.",
      "hint": "if she, unreal",
      "en": "If she knew, she'd say.",
      "answer": "Tasai",
@@ -8750,7 +8748,7 @@
     {
      "id": "c3-06",
      "type": "type",
-     "text": "Os ___ fydd hi'n bwrw glaw, awn ni am dro. (not)",
+     "text": "Os ___ fydd hi'n bwrw glaw, awn ni am dro.",
      "hint": "not",
      "en": "If it doesn't rain, we'll go for a walk.",
      "answer": "na",
@@ -8775,9 +8773,7 @@
      "skills": [
       "if-pe"
      ],
-     "alts": [
-      "Tasai arian gyda fi baswn i'n mynd"
-     ]
+     "alts": []
     },
     {
      "id": "c3-08",
@@ -8869,7 +8865,7 @@
     {
      "id": "c4-02",
      "type": "type",
-     "text": "Mae hi'n dweud ___ bydd hi'n hwyr. (that)",
+     "text": "Mae hi'n dweud ___ bydd hi'n hwyr.",
      "hint": "that",
      "en": "She says that she'll be late.",
      "answer": "y",
@@ -8904,7 +8900,7 @@
     {
      "id": "c4-04",
      "type": "type",
-     "text": "Dw i'n siŵr ___ Siân sy'n iawn. (that: emphatic)",
+     "text": "Dw i'n siŵr ___ Siân sy'n iawn.",
      "hint": "that: emphatic",
      "en": "I'm sure that it's Siân who's right.",
      "answer": "mai",
@@ -8961,7 +8957,7 @@
     {
      "id": "c4-07",
      "type": "type",
-     "text": "Gobeithio ___ fydd hi'n bwrw glaw. (that … not)",
+     "text": "Gobeithio ___ fydd hi'n bwrw glaw.",
      "hint": "that … not",
      "en": "I hope it won't rain.",
      "answer": "na",
@@ -9115,7 +9111,7 @@
     {
      "id": "c5-05",
      "type": "type",
-     "text": "Dw i'n mynd i ___. (the children's school)",
+     "text": "Dw i'n mynd i ___.",
      "hint": "the children's school",
      "en": "I'm going to the children's school.",
      "answer": "ysgol y plant",
@@ -9196,7 +9192,7 @@
     {
      "id": "c5-10",
      "type": "type",
-     "text": "Beth yw ___? (the name of the dog)",
+     "text": "Beth yw ___?",
      "hint": "the name of the dog",
      "en": "What is the dog's name?",
      "answer": "enw'r ci",
@@ -9315,7 +9311,7 @@
     {
      "id": "c6-04",
      "type": "type",
-     "text": "___ lyfr wyt ti'n ddarllen? (which)",
+     "text": "___ lyfr wyt ti'n ddarllen?",
      "hint": "which",
      "en": "Which book are you reading?",
      "answer": "Pa",
@@ -9328,7 +9324,7 @@
     {
      "id": "c6-05",
      "type": "type",
-     "text": "Pa ___ wyt ti eisiau? (lliw)",
+     "text": "Pa ___ wyt ti eisiau?",
      "hint": "lliw",
      "en": "Which colour do you want?",
      "answer": "liw",
@@ -9388,7 +9384,7 @@
     {
      "id": "c6-08",
      "type": "type",
-     "text": "Beth ___ ti ddoe? (gwneud, past)",
+     "text": "Beth ___ ti ddoe?",
      "hint": "gwneud, past",
      "en": "What did you do yesterday?",
      "answer": "wnest",
@@ -9535,7 +9531,7 @@
     {
      "id": "c7-03",
      "type": "type",
-     "text": "chwarter i ___ (tri)",
+     "text": "chwarter i ___",
      "hint": "tri",
      "en": "quarter to three",
      "answer": "dri",
@@ -9608,7 +9604,7 @@
     {
      "id": "c7-07",
      "type": "type",
-     "text": "nos ___ (Gwener)",
+     "text": "nos ___",
      "hint": "Gwener",
      "en": "Friday night",
      "answer": "Wener",
@@ -9662,7 +9658,7 @@
     {
      "id": "c7-10",
      "type": "type",
-     "text": "y ___ flwyddyn (third, feminine)",
+     "text": "y ___ flwyddyn",
      "hint": "third, feminine",
      "en": "the third year",
      "answer": "drydedd",
@@ -9734,7 +9730,7 @@
     {
      "id": "c8-01",
      "type": "type",
-     "text": "Mae hi'n siarad yn ___. (cyflym)",
+     "text": "Mae hi'n siarad yn ___.",
      "hint": "cyflym",
      "en": "She speaks quickly.",
      "answer": "gyflym",
@@ -9785,7 +9781,7 @@
     {
      "id": "c8-04",
      "type": "type",
-     "text": "Mae'r ffilm yn rhy ___. (hir)",
+     "text": "Mae'r ffilm yn rhy ___.",
      "hint": "hir",
      "en": "The film is too long.",
      "answer": "hir",
@@ -9798,7 +9794,7 @@
     {
      "id": "c8-05",
      "type": "type",
-     "text": "hen ___ (tŷ)",
+     "text": "hen ___",
      "hint": "tŷ",
      "en": "an old house",
      "answer": "dŷ",
@@ -9854,7 +9850,7 @@
     {
      "id": "c8-08",
      "type": "type",
-     "text": "Roedd y bwyd mor ___! (da)",
+     "text": "Roedd y bwyd mor ___!",
      "hint": "da",
      "en": "The food was so good!",
      "answer": "dda",
@@ -9920,7 +9916,7 @@
     {
      "id": "c8-12",
      "type": "type",
-     "text": "y ___ reswm (main)",
+     "text": "y ___ reswm",
      "hint": "main",
      "en": "the main reason",
      "answer": "prif",
@@ -10006,7 +10002,7 @@
     {
      "id": "c9-04",
      "type": "type",
-     "text": "___ hi yng Nghaerdydd yn 1970. (geni: was born, formal)",
+     "text": "___ hi yng Nghaerdydd yn 1970.",
      "hint": "geni: was born, formal",
      "en": "She was born in Cardiff in 1970.",
      "answer": "Ganwyd",
@@ -10136,7 +10132,7 @@
     {
      "id": "c10-02",
      "type": "type",
-     "text": "Efallai ___ nhw'n hwyr. (that … are)",
+     "text": "Efallai ___ nhw'n hwyr.",
      "hint": "that … are",
      "en": "Perhaps they're late.",
      "answer": "bod",
@@ -10176,7 +10172,7 @@
     {
      "id": "c10-04",
      "type": "type",
-     "text": "Pan ___ e adre, roedd pawb yn cysgu. (dod: he came)",
+     "text": "Pan ___ e adre, roedd pawb yn cysgu.",
      "hint": "dod: he came",
      "en": "When he came home, everyone was asleep.",
      "answer": "ddaeth",
@@ -10234,7 +10230,7 @@
     {
      "id": "c10-07",
      "type": "type",
-     "text": "te neu ___ (coffi)",
+     "text": "te neu ___",
      "hint": "coffi",
      "en": "tea or coffee",
      "answer": "goffi",
@@ -10297,7 +10293,7 @@
     {
      "id": "c10-11",
      "type": "type",
-     "text": "Wyt ti eisiau cerdded neu ___? (gyrru)",
+     "text": "Wyt ti eisiau cerdded neu ___?",
      "hint": "gyrru",
      "en": "Do you want to walk or drive?",
      "answer": "yrru",
@@ -19510,6 +19506,104 @@
    ]
   },
   {
+   "id": "d-p1-7c39c83",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ i'n coginio swper.",
+   "hint": "I was",
+   "en": "I was cooking supper.",
+   "answer": "Ro'n",
+   "alts": [
+    "Roeddwn",
+    "O'n"
+   ],
+   "explain": "Statement, I: Ro'n i.",
+   "skills": [
+    "imp-statement"
+   ]
+  },
+  {
+   "id": "d-p1-eae1d10",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ i'n coginio swper?",
+   "hint": "was I…?",
+   "en": "Was I cooking supper?",
+   "answer": "O'n",
+   "alts": [
+    "Oeddwn"
+   ],
+   "explain": "Question, I: O'n i?",
+   "skills": [
+    "imp-question"
+   ]
+  },
+  {
+   "id": "d-p1-f83aba0",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ i ddim yn coginio swper.",
+   "hint": "I wasn't",
+   "en": "I wasn't cooking supper.",
+   "answer": "Do'n",
+   "alts": [
+    "Doeddwn"
+   ],
+   "explain": "Negative, I: Do'n i ddim.",
+   "skills": [
+    "imp-negative"
+   ]
+  },
+  {
+   "id": "d-p1-323d0b5",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ i'n darllen y papur.",
+   "hint": "I was",
+   "en": "I was reading the paper.",
+   "answer": "Ro'n",
+   "alts": [
+    "Roeddwn",
+    "O'n"
+   ],
+   "explain": "Statement, I: Ro'n i.",
+   "skills": [
+    "imp-statement"
+   ]
+  },
+  {
+   "id": "d-p1-16413fa",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ i'n darllen y papur?",
+   "hint": "was I…?",
+   "en": "Was I reading the paper?",
+   "answer": "O'n",
+   "alts": [
+    "Oeddwn"
+   ],
+   "explain": "Question, I: O'n i?",
+   "skills": [
+    "imp-question"
+   ]
+  },
+  {
+   "id": "d-p1-3933eea",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ i ddim yn darllen y papur.",
+   "hint": "I wasn't",
+   "en": "I wasn't reading the paper.",
+   "answer": "Do'n",
+   "alts": [
+    "Doeddwn"
+   ],
+   "explain": "Negative, I: Do'n i ddim.",
+   "skills": [
+    "imp-negative"
+   ]
+  },
+  {
    "id": "d-p1-983c91f",
    "type": "type",
    "unit": "p1",
@@ -19549,6 +19643,104 @@
    "text": "___ ti ddim yn byw yno.",
    "hint": "you weren't",
    "en": "You weren't living there.",
+   "answer": "Do't",
+   "alts": [
+    "Doeddet"
+   ],
+   "explain": "Negative, you: Do't ti ddim.",
+   "skills": [
+    "imp-negative"
+   ]
+  },
+  {
+   "id": "d-p1-306725c",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ ti'n aros am y bws.",
+   "hint": "you were",
+   "en": "You were waiting for the bus.",
+   "answer": "Ro't",
+   "alts": [
+    "Roeddet",
+    "O't"
+   ],
+   "explain": "Statement, you: Ro't ti.",
+   "skills": [
+    "imp-statement"
+   ]
+  },
+  {
+   "id": "d-p1-bc6adca",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ ti'n aros am y bws?",
+   "hint": "were you…?",
+   "en": "Were you waiting for the bus?",
+   "answer": "O't",
+   "alts": [
+    "Oeddet"
+   ],
+   "explain": "Question, you: O't ti?",
+   "skills": [
+    "imp-question"
+   ]
+  },
+  {
+   "id": "d-p1-795b668",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ ti ddim yn aros am y bws.",
+   "hint": "you weren't",
+   "en": "You weren't waiting for the bus.",
+   "answer": "Do't",
+   "alts": [
+    "Doeddet"
+   ],
+   "explain": "Negative, you: Do't ti ddim.",
+   "skills": [
+    "imp-negative"
+   ]
+  },
+  {
+   "id": "d-p1-f9b964e",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ ti'n cerdded i'r gwaith.",
+   "hint": "you were",
+   "en": "You were walking to work.",
+   "answer": "Ro't",
+   "alts": [
+    "Roeddet",
+    "O't"
+   ],
+   "explain": "Statement, you: Ro't ti.",
+   "skills": [
+    "imp-statement"
+   ]
+  },
+  {
+   "id": "d-p1-1055dd3",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ ti'n cerdded i'r gwaith?",
+   "hint": "were you…?",
+   "en": "Were you walking to work?",
+   "answer": "O't",
+   "alts": [
+    "Oeddet"
+   ],
+   "explain": "Question, you: O't ti?",
+   "skills": [
+    "imp-question"
+   ]
+  },
+  {
+   "id": "d-p1-0577e05",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ ti ddim yn cerdded i'r gwaith.",
+   "hint": "you weren't",
+   "en": "You weren't walking to work.",
    "answer": "Do't",
    "alts": [
     "Doeddet"
@@ -19608,6 +19800,104 @@
    ]
   },
   {
+   "id": "d-p1-671fb46",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ hi'n chwarae yn yr ardd.",
+   "hint": "she was",
+   "en": "She was playing in the garden.",
+   "answer": "Roedd",
+   "alts": [
+    "Ro'dd",
+    "O'dd"
+   ],
+   "explain": "Statement, she: Roedd hi.",
+   "skills": [
+    "imp-statement"
+   ]
+  },
+  {
+   "id": "d-p1-69b4bdb",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ hi'n chwarae yn yr ardd?",
+   "hint": "was she…?",
+   "en": "Was she playing in the garden?",
+   "answer": "Oedd",
+   "alts": [
+    "O'dd"
+   ],
+   "explain": "Question, she: Oedd hi?",
+   "skills": [
+    "imp-question"
+   ]
+  },
+  {
+   "id": "d-p1-d38b1d7",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ hi ddim yn chwarae yn yr ardd.",
+   "hint": "she wasn't",
+   "en": "She wasn't playing in the garden.",
+   "answer": "Doedd",
+   "alts": [
+    "Do'dd"
+   ],
+   "explain": "Negative, she: Doedd hi ddim.",
+   "skills": [
+    "imp-negative"
+   ]
+  },
+  {
+   "id": "d-p1-3259f8d",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ hi'n siopa yng Nghaerdydd.",
+   "hint": "she was",
+   "en": "She was shopping in Cardiff.",
+   "answer": "Roedd",
+   "alts": [
+    "Ro'dd",
+    "O'dd"
+   ],
+   "explain": "Statement, she: Roedd hi.",
+   "skills": [
+    "imp-statement"
+   ]
+  },
+  {
+   "id": "d-p1-f204e10",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ hi'n siopa yng Nghaerdydd?",
+   "hint": "was she…?",
+   "en": "Was she shopping in Cardiff?",
+   "answer": "Oedd",
+   "alts": [
+    "O'dd"
+   ],
+   "explain": "Question, she: Oedd hi?",
+   "skills": [
+    "imp-question"
+   ]
+  },
+  {
+   "id": "d-p1-3a976c5",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ hi ddim yn siopa yng Nghaerdydd.",
+   "hint": "she wasn't",
+   "en": "She wasn't shopping in Cardiff.",
+   "answer": "Doedd",
+   "alts": [
+    "Do'dd"
+   ],
+   "explain": "Negative, she: Doedd hi ddim.",
+   "skills": [
+    "imp-negative"
+   ]
+  },
+  {
    "id": "d-p1-ea8ad54",
    "type": "type",
    "unit": "p1",
@@ -19657,6 +19947,104 @@
    ]
   },
   {
+   "id": "d-p1-a7bcd5a",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ ni'n canu yn y côr.",
+   "hint": "we were",
+   "en": "We were singing in the choir.",
+   "answer": "Ro'n",
+   "alts": [
+    "Roedden",
+    "O'n"
+   ],
+   "explain": "Statement, we: Ro'n ni.",
+   "skills": [
+    "imp-statement"
+   ]
+  },
+  {
+   "id": "d-p1-b950179",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ ni'n canu yn y côr?",
+   "hint": "were we…?",
+   "en": "Were we singing in the choir?",
+   "answer": "O'n",
+   "alts": [
+    "Oedden"
+   ],
+   "explain": "Question, we: O'n ni?",
+   "skills": [
+    "imp-question"
+   ]
+  },
+  {
+   "id": "d-p1-e6291de",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ ni ddim yn canu yn y côr.",
+   "hint": "we weren't",
+   "en": "We weren't singing in the choir.",
+   "answer": "Do'n",
+   "alts": [
+    "Doedden"
+   ],
+   "explain": "Negative, we: Do'n ni ddim.",
+   "skills": [
+    "imp-negative"
+   ]
+  },
+  {
+   "id": "d-p1-35025e3",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ ni'n gyrru i Fangor.",
+   "hint": "we were",
+   "en": "We were driving to Bangor.",
+   "answer": "Ro'n",
+   "alts": [
+    "Roedden",
+    "O'n"
+   ],
+   "explain": "Statement, we: Ro'n ni.",
+   "skills": [
+    "imp-statement"
+   ]
+  },
+  {
+   "id": "d-p1-850e658",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ ni'n gyrru i Fangor?",
+   "hint": "were we…?",
+   "en": "Were we driving to Bangor?",
+   "answer": "O'n",
+   "alts": [
+    "Oedden"
+   ],
+   "explain": "Question, we: O'n ni?",
+   "skills": [
+    "imp-question"
+   ]
+  },
+  {
+   "id": "d-p1-9719d71",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ ni ddim yn gyrru i Fangor.",
+   "hint": "we weren't",
+   "en": "We weren't driving to Bangor.",
+   "answer": "Do'n",
+   "alts": [
+    "Doedden"
+   ],
+   "explain": "Negative, we: Do'n ni ddim.",
+   "skills": [
+    "imp-negative"
+   ]
+  },
+  {
    "id": "d-p1-957176e",
    "type": "type",
    "unit": "p1",
@@ -19696,6 +20084,104 @@
    "text": "___ chi ddim yn byw yno.",
    "hint": "you (chi) weren't",
    "en": "You (chi) weren't living there.",
+   "answer": "Do'ch",
+   "alts": [
+    "Doeddech"
+   ],
+   "explain": "Negative, you (chi): Do'ch chi ddim.",
+   "skills": [
+    "imp-negative"
+   ]
+  },
+  {
+   "id": "d-p1-3d50316",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ chi'n gwrando ar y radio.",
+   "hint": "you (chi) were",
+   "en": "You (chi) were listening to the radio.",
+   "answer": "Ro'ch",
+   "alts": [
+    "Roeddech",
+    "O'ch"
+   ],
+   "explain": "Statement, you (chi): Ro'ch chi.",
+   "skills": [
+    "imp-statement"
+   ]
+  },
+  {
+   "id": "d-p1-70fb736",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ chi'n gwrando ar y radio?",
+   "hint": "were you (chi)…?",
+   "en": "Were you (chi) listening to the radio?",
+   "answer": "O'ch",
+   "alts": [
+    "Oeddech"
+   ],
+   "explain": "Question, you (chi): O'ch chi?",
+   "skills": [
+    "imp-question"
+   ]
+  },
+  {
+   "id": "d-p1-64daa4d",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ chi ddim yn gwrando ar y radio.",
+   "hint": "you (chi) weren't",
+   "en": "You (chi) weren't listening to the radio.",
+   "answer": "Do'ch",
+   "alts": [
+    "Doeddech"
+   ],
+   "explain": "Negative, you (chi): Do'ch chi ddim.",
+   "skills": [
+    "imp-negative"
+   ]
+  },
+  {
+   "id": "d-p1-fe6fb55",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ chi'n cysgu lan llofft.",
+   "hint": "you (chi) were",
+   "en": "You (chi) were sleeping upstairs.",
+   "answer": "Ro'ch",
+   "alts": [
+    "Roeddech",
+    "O'ch"
+   ],
+   "explain": "Statement, you (chi): Ro'ch chi.",
+   "skills": [
+    "imp-statement"
+   ]
+  },
+  {
+   "id": "d-p1-7725b38",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ chi'n cysgu lan llofft?",
+   "hint": "were you (chi)…?",
+   "en": "Were you (chi) sleeping upstairs?",
+   "answer": "O'ch",
+   "alts": [
+    "Oeddech"
+   ],
+   "explain": "Question, you (chi): O'ch chi?",
+   "skills": [
+    "imp-question"
+   ]
+  },
+  {
+   "id": "d-p1-ebf4f98",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ chi ddim yn cysgu lan llofft.",
+   "hint": "you (chi) weren't",
+   "en": "You (chi) weren't sleeping upstairs.",
    "answer": "Do'ch",
    "alts": [
     "Doeddech"
@@ -19756,6 +20242,106 @@
    ]
   },
   {
+   "id": "d-p1-d82e99a",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ nhw'n gweithio yn y dre.",
+   "hint": "they were",
+   "en": "They were working in town.",
+   "answer": "Ro'n",
+   "alts": [
+    "Roedden",
+    "O'n",
+    "Roeddent"
+   ],
+   "explain": "Statement, they: Ro'n nhw.",
+   "skills": [
+    "imp-statement"
+   ]
+  },
+  {
+   "id": "d-p1-456d499",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ nhw'n gweithio yn y dre?",
+   "hint": "were they…?",
+   "en": "Were they working in town?",
+   "answer": "O'n",
+   "alts": [
+    "Oedden"
+   ],
+   "explain": "Question, they: O'n nhw?",
+   "skills": [
+    "imp-question"
+   ]
+  },
+  {
+   "id": "d-p1-9d55b9d",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ nhw ddim yn gweithio yn y dre.",
+   "hint": "they weren't",
+   "en": "They weren't working in town.",
+   "answer": "Do'n",
+   "alts": [
+    "Doedden"
+   ],
+   "explain": "Negative, they: Do'n nhw ddim.",
+   "skills": [
+    "imp-negative"
+   ]
+  },
+  {
+   "id": "d-p1-3402bc4",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ nhw'n dysgu Cymraeg.",
+   "hint": "they were",
+   "en": "They were learning Welsh.",
+   "answer": "Ro'n",
+   "alts": [
+    "Roedden",
+    "O'n",
+    "Roeddent"
+   ],
+   "explain": "Statement, they: Ro'n nhw.",
+   "skills": [
+    "imp-statement"
+   ]
+  },
+  {
+   "id": "d-p1-0315e51",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ nhw'n dysgu Cymraeg?",
+   "hint": "were they…?",
+   "en": "Were they learning Welsh?",
+   "answer": "O'n",
+   "alts": [
+    "Oedden"
+   ],
+   "explain": "Question, they: O'n nhw?",
+   "skills": [
+    "imp-question"
+   ]
+  },
+  {
+   "id": "d-p1-6c962cd",
+   "type": "type",
+   "unit": "p1",
+   "text": "___ nhw ddim yn dysgu Cymraeg.",
+   "hint": "they weren't",
+   "en": "They weren't learning Welsh.",
+   "answer": "Do'n",
+   "alts": [
+    "Doedden"
+   ],
+   "explain": "Negative, they: Do'n nhw ddim.",
+   "skills": [
+    "imp-negative"
+   ]
+  },
+  {
    "id": "d-p2-ef886d1",
    "type": "type",
    "unit": "p2",
@@ -19795,6 +20381,104 @@
    "text": "___ i ddim yn barod yfory.",
    "hint": "I won't be",
    "en": "I won't be ready tomorrow.",
+   "answer": "Fydda",
+   "alts": [
+    "Fyddaf"
+   ],
+   "explain": "Negative, I: Fydda i ddim.",
+   "skills": [
+    "fut-negative"
+   ]
+  },
+  {
+   "id": "d-p2-d628355",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ i'n coginio swper.",
+   "hint": "I will be",
+   "en": "I will be cooking supper.",
+   "answer": "Bydda",
+   "alts": [
+    "Byddaf",
+    "Fydda"
+   ],
+   "explain": "Statement, I: Bydda i.",
+   "skills": [
+    "fut-statement"
+   ]
+  },
+  {
+   "id": "d-p2-dca7544",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ i'n coginio swper?",
+   "hint": "will I…?",
+   "en": "Will I be cooking supper?",
+   "answer": "Fydda",
+   "alts": [
+    "Fyddaf"
+   ],
+   "explain": "Question, I: Fydda i?",
+   "skills": [
+    "fut-question"
+   ]
+  },
+  {
+   "id": "d-p2-51a1b7c",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ i ddim yn coginio swper.",
+   "hint": "I won't be",
+   "en": "I won't be cooking supper.",
+   "answer": "Fydda",
+   "alts": [
+    "Fyddaf"
+   ],
+   "explain": "Negative, I: Fydda i ddim.",
+   "skills": [
+    "fut-negative"
+   ]
+  },
+  {
+   "id": "d-p2-cbcf588",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ i'n darllen y papur.",
+   "hint": "I will be",
+   "en": "I will be reading the paper.",
+   "answer": "Bydda",
+   "alts": [
+    "Byddaf",
+    "Fydda"
+   ],
+   "explain": "Statement, I: Bydda i.",
+   "skills": [
+    "fut-statement"
+   ]
+  },
+  {
+   "id": "d-p2-de792ea",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ i'n darllen y papur?",
+   "hint": "will I…?",
+   "en": "Will I be reading the paper?",
+   "answer": "Fydda",
+   "alts": [
+    "Fyddaf"
+   ],
+   "explain": "Question, I: Fydda i?",
+   "skills": [
+    "fut-question"
+   ]
+  },
+  {
+   "id": "d-p2-8a47287",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ i ddim yn darllen y papur.",
+   "hint": "I won't be",
+   "en": "I won't be reading the paper.",
    "answer": "Fydda",
    "alts": [
     "Fyddaf"
@@ -19849,6 +20533,94 @@
    ]
   },
   {
+   "id": "d-p2-ce650a1",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ ti'n aros am y bws.",
+   "hint": "you will be",
+   "en": "You will be waiting for the bus.",
+   "answer": "Byddi",
+   "alts": [
+    "Fyddi"
+   ],
+   "explain": "Statement, you: Byddi ti.",
+   "skills": [
+    "fut-statement"
+   ]
+  },
+  {
+   "id": "d-p2-1aecc0f",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ ti'n aros am y bws?",
+   "hint": "will you…?",
+   "en": "Will you be waiting for the bus?",
+   "answer": "Fyddi",
+   "alts": [],
+   "explain": "Question, you: Fyddi ti?",
+   "skills": [
+    "fut-question"
+   ]
+  },
+  {
+   "id": "d-p2-47b10a3",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ ti ddim yn aros am y bws.",
+   "hint": "you won't be",
+   "en": "You won't be waiting for the bus.",
+   "answer": "Fyddi",
+   "alts": [],
+   "explain": "Negative, you: Fyddi ti ddim.",
+   "skills": [
+    "fut-negative"
+   ]
+  },
+  {
+   "id": "d-p2-33e237c",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ ti'n cerdded i'r gwaith.",
+   "hint": "you will be",
+   "en": "You will be walking to work.",
+   "answer": "Byddi",
+   "alts": [
+    "Fyddi"
+   ],
+   "explain": "Statement, you: Byddi ti.",
+   "skills": [
+    "fut-statement"
+   ]
+  },
+  {
+   "id": "d-p2-ff3eb36",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ ti'n cerdded i'r gwaith?",
+   "hint": "will you…?",
+   "en": "Will you be walking to work?",
+   "answer": "Fyddi",
+   "alts": [],
+   "explain": "Question, you: Fyddi ti?",
+   "skills": [
+    "fut-question"
+   ]
+  },
+  {
+   "id": "d-p2-efc2336",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ ti ddim yn cerdded i'r gwaith.",
+   "hint": "you won't be",
+   "en": "You won't be walking to work.",
+   "answer": "Fyddi",
+   "alts": [],
+   "explain": "Negative, you: Fyddi ti ddim.",
+   "skills": [
+    "fut-negative"
+   ]
+  },
+  {
    "id": "d-p2-985fc31",
    "type": "type",
    "unit": "p2",
@@ -19885,6 +20657,94 @@
    "text": "___ hi ddim yn barod yfory.",
    "hint": "she won't be",
    "en": "She won't be ready tomorrow.",
+   "answer": "Fydd",
+   "alts": [],
+   "explain": "Negative, she: Fydd hi ddim.",
+   "skills": [
+    "fut-negative"
+   ]
+  },
+  {
+   "id": "d-p2-03934ca",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ hi'n chwarae yn yr ardd.",
+   "hint": "she will be",
+   "en": "She will be playing in the garden.",
+   "answer": "Bydd",
+   "alts": [
+    "Fydd"
+   ],
+   "explain": "Statement, she: Bydd hi.",
+   "skills": [
+    "fut-statement"
+   ]
+  },
+  {
+   "id": "d-p2-9a5e1ea",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ hi'n chwarae yn yr ardd?",
+   "hint": "will she…?",
+   "en": "Will she be playing in the garden?",
+   "answer": "Fydd",
+   "alts": [],
+   "explain": "Question, she: Fydd hi?",
+   "skills": [
+    "fut-question"
+   ]
+  },
+  {
+   "id": "d-p2-998f5a4",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ hi ddim yn chwarae yn yr ardd.",
+   "hint": "she won't be",
+   "en": "She won't be playing in the garden.",
+   "answer": "Fydd",
+   "alts": [],
+   "explain": "Negative, she: Fydd hi ddim.",
+   "skills": [
+    "fut-negative"
+   ]
+  },
+  {
+   "id": "d-p2-5ebb760",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ hi'n siopa yng Nghaerdydd.",
+   "hint": "she will be",
+   "en": "She will be shopping in Cardiff.",
+   "answer": "Bydd",
+   "alts": [
+    "Fydd"
+   ],
+   "explain": "Statement, she: Bydd hi.",
+   "skills": [
+    "fut-statement"
+   ]
+  },
+  {
+   "id": "d-p2-a956984",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ hi'n siopa yng Nghaerdydd?",
+   "hint": "will she…?",
+   "en": "Will she be shopping in Cardiff?",
+   "answer": "Fydd",
+   "alts": [],
+   "explain": "Question, she: Fydd hi?",
+   "skills": [
+    "fut-question"
+   ]
+  },
+  {
+   "id": "d-p2-bbdb1a4",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ hi ddim yn siopa yng Nghaerdydd.",
+   "hint": "she won't be",
+   "en": "She won't be shopping in Cardiff.",
    "answer": "Fydd",
    "alts": [],
    "explain": "Negative, she: Fydd hi ddim.",
@@ -19937,6 +20797,94 @@
    ]
   },
   {
+   "id": "d-p2-72bcc5d",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ ni'n canu yn y côr.",
+   "hint": "we will be",
+   "en": "We will be singing in the choir.",
+   "answer": "Byddwn",
+   "alts": [
+    "Fyddwn"
+   ],
+   "explain": "Statement, we: Byddwn ni.",
+   "skills": [
+    "fut-statement"
+   ]
+  },
+  {
+   "id": "d-p2-94b7ab2",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ ni'n canu yn y côr?",
+   "hint": "will we…?",
+   "en": "Will we be singing in the choir?",
+   "answer": "Fyddwn",
+   "alts": [],
+   "explain": "Question, we: Fyddwn ni?",
+   "skills": [
+    "fut-question"
+   ]
+  },
+  {
+   "id": "d-p2-c1e63a7",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ ni ddim yn canu yn y côr.",
+   "hint": "we won't be",
+   "en": "We won't be singing in the choir.",
+   "answer": "Fyddwn",
+   "alts": [],
+   "explain": "Negative, we: Fyddwn ni ddim.",
+   "skills": [
+    "fut-negative"
+   ]
+  },
+  {
+   "id": "d-p2-d217a9d",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ ni'n gyrru i Fangor.",
+   "hint": "we will be",
+   "en": "We will be driving to Bangor.",
+   "answer": "Byddwn",
+   "alts": [
+    "Fyddwn"
+   ],
+   "explain": "Statement, we: Byddwn ni.",
+   "skills": [
+    "fut-statement"
+   ]
+  },
+  {
+   "id": "d-p2-2f8ff95",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ ni'n gyrru i Fangor?",
+   "hint": "will we…?",
+   "en": "Will we be driving to Bangor?",
+   "answer": "Fyddwn",
+   "alts": [],
+   "explain": "Question, we: Fyddwn ni?",
+   "skills": [
+    "fut-question"
+   ]
+  },
+  {
+   "id": "d-p2-d1f0820",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ ni ddim yn gyrru i Fangor.",
+   "hint": "we won't be",
+   "en": "We won't be driving to Bangor.",
+   "answer": "Fyddwn",
+   "alts": [],
+   "explain": "Negative, we: Fyddwn ni ddim.",
+   "skills": [
+    "fut-negative"
+   ]
+  },
+  {
    "id": "d-p2-d3fd388",
    "type": "type",
    "unit": "p2",
@@ -19973,6 +20921,94 @@
    "text": "___ chi ddim yn barod yfory.",
    "hint": "you (chi) won't be",
    "en": "You (chi) won't be ready tomorrow.",
+   "answer": "Fyddwch",
+   "alts": [],
+   "explain": "Negative, you (chi): Fyddwch chi ddim.",
+   "skills": [
+    "fut-negative"
+   ]
+  },
+  {
+   "id": "d-p2-b090364",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ chi'n gwrando ar y radio.",
+   "hint": "you (chi) will be",
+   "en": "You (chi) will be listening to the radio.",
+   "answer": "Byddwch",
+   "alts": [
+    "Fyddwch"
+   ],
+   "explain": "Statement, you (chi): Byddwch chi.",
+   "skills": [
+    "fut-statement"
+   ]
+  },
+  {
+   "id": "d-p2-c6cdfee",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ chi'n gwrando ar y radio?",
+   "hint": "will you (chi)…?",
+   "en": "Will you (chi) be listening to the radio?",
+   "answer": "Fyddwch",
+   "alts": [],
+   "explain": "Question, you (chi): Fyddwch chi?",
+   "skills": [
+    "fut-question"
+   ]
+  },
+  {
+   "id": "d-p2-ee07ecc",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ chi ddim yn gwrando ar y radio.",
+   "hint": "you (chi) won't be",
+   "en": "You (chi) won't be listening to the radio.",
+   "answer": "Fyddwch",
+   "alts": [],
+   "explain": "Negative, you (chi): Fyddwch chi ddim.",
+   "skills": [
+    "fut-negative"
+   ]
+  },
+  {
+   "id": "d-p2-1c2ac03",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ chi'n cysgu lan llofft.",
+   "hint": "you (chi) will be",
+   "en": "You (chi) will be sleeping upstairs.",
+   "answer": "Byddwch",
+   "alts": [
+    "Fyddwch"
+   ],
+   "explain": "Statement, you (chi): Byddwch chi.",
+   "skills": [
+    "fut-statement"
+   ]
+  },
+  {
+   "id": "d-p2-28b7b07",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ chi'n cysgu lan llofft?",
+   "hint": "will you (chi)…?",
+   "en": "Will you (chi) be sleeping upstairs?",
+   "answer": "Fyddwch",
+   "alts": [],
+   "explain": "Question, you (chi): Fyddwch chi?",
+   "skills": [
+    "fut-question"
+   ]
+  },
+  {
+   "id": "d-p2-27ebb72",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ chi ddim yn cysgu lan llofft.",
+   "hint": "you (chi) won't be",
+   "en": "You (chi) won't be sleeping upstairs.",
    "answer": "Fyddwch",
    "alts": [],
    "explain": "Negative, you (chi): Fyddwch chi ddim.",
@@ -20020,6 +21056,104 @@
    "text": "___ nhw ddim yn barod yfory.",
    "hint": "they won't be",
    "en": "They won't be ready tomorrow.",
+   "answer": "Fyddan",
+   "alts": [
+    "Fyddant"
+   ],
+   "explain": "Negative, they: Fyddan nhw ddim.",
+   "skills": [
+    "fut-negative"
+   ]
+  },
+  {
+   "id": "d-p2-9cfd1c7",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ nhw'n gweithio yn y dre.",
+   "hint": "they will be",
+   "en": "They will be working in town.",
+   "answer": "Byddan",
+   "alts": [
+    "Byddant",
+    "Fyddan"
+   ],
+   "explain": "Statement, they: Byddan nhw.",
+   "skills": [
+    "fut-statement"
+   ]
+  },
+  {
+   "id": "d-p2-57a1488",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ nhw'n gweithio yn y dre?",
+   "hint": "will they…?",
+   "en": "Will they be working in town?",
+   "answer": "Fyddan",
+   "alts": [
+    "Fyddant"
+   ],
+   "explain": "Question, they: Fyddan nhw?",
+   "skills": [
+    "fut-question"
+   ]
+  },
+  {
+   "id": "d-p2-0649c8e",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ nhw ddim yn gweithio yn y dre.",
+   "hint": "they won't be",
+   "en": "They won't be working in town.",
+   "answer": "Fyddan",
+   "alts": [
+    "Fyddant"
+   ],
+   "explain": "Negative, they: Fyddan nhw ddim.",
+   "skills": [
+    "fut-negative"
+   ]
+  },
+  {
+   "id": "d-p2-0aa0a58",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ nhw'n dysgu Cymraeg.",
+   "hint": "they will be",
+   "en": "They will be learning Welsh.",
+   "answer": "Byddan",
+   "alts": [
+    "Byddant",
+    "Fyddan"
+   ],
+   "explain": "Statement, they: Byddan nhw.",
+   "skills": [
+    "fut-statement"
+   ]
+  },
+  {
+   "id": "d-p2-a748673",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ nhw'n dysgu Cymraeg?",
+   "hint": "will they…?",
+   "en": "Will they be learning Welsh?",
+   "answer": "Fyddan",
+   "alts": [
+    "Fyddant"
+   ],
+   "explain": "Question, they: Fyddan nhw?",
+   "skills": [
+    "fut-question"
+   ]
+  },
+  {
+   "id": "d-p2-f5dea7a",
+   "type": "type",
+   "unit": "p2",
+   "text": "___ nhw ddim yn dysgu Cymraeg.",
+   "hint": "they won't be",
+   "en": "They won't be learning Welsh.",
    "answer": "Fyddan",
    "alts": [
     "Fyddant"
@@ -20081,6 +21215,108 @@
    ]
   },
   {
+   "id": "d-p5-5bc6b42",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ i'n darllen y papur.",
+   "hint": "I would be",
+   "en": "I would be reading the paper.",
+   "answer": "Baswn",
+   "alts": [
+    "Byddwn",
+    "Buaswn"
+   ],
+   "explain": "Statement, I: Baswn i.",
+   "skills": [
+    "cond-bod"
+   ]
+  },
+  {
+   "id": "d-p5-0e39bf0",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ i'n darllen y papur?",
+   "hint": "would I…?",
+   "en": "Would I be reading the paper?",
+   "answer": "Faswn",
+   "alts": [
+    "Fyddwn",
+    "Fuaswn"
+   ],
+   "explain": "Question, I: Faswn i?",
+   "skills": [
+    "cond-qneg"
+   ]
+  },
+  {
+   "id": "d-p5-efac9b7",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ i ddim yn darllen y papur.",
+   "hint": "I wouldn't be",
+   "en": "I wouldn't be reading the paper.",
+   "answer": "Faswn",
+   "alts": [
+    "Fyddwn",
+    "Fuaswn"
+   ],
+   "explain": "Negative, I: Faswn i ddim.",
+   "skills": [
+    "cond-qneg"
+   ]
+  },
+  {
+   "id": "d-p5-8160cbb",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ i'n aros am y bws.",
+   "hint": "I would be",
+   "en": "I would be waiting for the bus.",
+   "answer": "Baswn",
+   "alts": [
+    "Byddwn",
+    "Buaswn"
+   ],
+   "explain": "Statement, I: Baswn i.",
+   "skills": [
+    "cond-bod"
+   ]
+  },
+  {
+   "id": "d-p5-4097db1",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ i'n aros am y bws?",
+   "hint": "would I…?",
+   "en": "Would I be waiting for the bus?",
+   "answer": "Faswn",
+   "alts": [
+    "Fyddwn",
+    "Fuaswn"
+   ],
+   "explain": "Question, I: Faswn i?",
+   "skills": [
+    "cond-qneg"
+   ]
+  },
+  {
+   "id": "d-p5-8e8f0ee",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ i ddim yn aros am y bws.",
+   "hint": "I wouldn't be",
+   "en": "I wouldn't be waiting for the bus.",
+   "answer": "Faswn",
+   "alts": [
+    "Fyddwn",
+    "Fuaswn"
+   ],
+   "explain": "Negative, I: Faswn i ddim.",
+   "skills": [
+    "cond-qneg"
+   ]
+  },
+  {
    "id": "d-p5-90fda3b",
    "type": "type",
    "unit": "p5",
@@ -20121,6 +21357,108 @@
    "text": "___ ti ddim yn hapus yno.",
    "hint": "you wouldn't be",
    "en": "You wouldn't be happy there.",
+   "answer": "Faset",
+   "alts": [
+    "Fyddet",
+    "Fasat"
+   ],
+   "explain": "Negative, you: Faset ti ddim.",
+   "skills": [
+    "cond-qneg"
+   ]
+  },
+  {
+   "id": "d-p5-e6b3800",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ ti'n cerdded i'r gwaith.",
+   "hint": "you would be",
+   "en": "You would be walking to work.",
+   "answer": "Baset",
+   "alts": [
+    "Byddet",
+    "Basat"
+   ],
+   "explain": "Statement, you: Baset ti.",
+   "skills": [
+    "cond-bod"
+   ]
+  },
+  {
+   "id": "d-p5-41421da",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ ti'n cerdded i'r gwaith?",
+   "hint": "would you…?",
+   "en": "Would you be walking to work?",
+   "answer": "Faset",
+   "alts": [
+    "Fyddet",
+    "Fasat"
+   ],
+   "explain": "Question, you: Faset ti?",
+   "skills": [
+    "cond-qneg"
+   ]
+  },
+  {
+   "id": "d-p5-ad6de4f",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ ti ddim yn cerdded i'r gwaith.",
+   "hint": "you wouldn't be",
+   "en": "You wouldn't be walking to work.",
+   "answer": "Faset",
+   "alts": [
+    "Fyddet",
+    "Fasat"
+   ],
+   "explain": "Negative, you: Faset ti ddim.",
+   "skills": [
+    "cond-qneg"
+   ]
+  },
+  {
+   "id": "d-p5-cc64f97",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ ti'n chwarae yn yr ardd.",
+   "hint": "you would be",
+   "en": "You would be playing in the garden.",
+   "answer": "Baset",
+   "alts": [
+    "Byddet",
+    "Basat"
+   ],
+   "explain": "Statement, you: Baset ti.",
+   "skills": [
+    "cond-bod"
+   ]
+  },
+  {
+   "id": "d-p5-b7443ac",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ ti'n chwarae yn yr ardd?",
+   "hint": "would you…?",
+   "en": "Would you be playing in the garden?",
+   "answer": "Faset",
+   "alts": [
+    "Fyddet",
+    "Fasat"
+   ],
+   "explain": "Question, you: Faset ti?",
+   "skills": [
+    "cond-qneg"
+   ]
+  },
+  {
+   "id": "d-p5-913bf3f",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ ti ddim yn chwarae yn yr ardd.",
+   "hint": "you wouldn't be",
+   "en": "You wouldn't be playing in the garden.",
    "answer": "Faset",
    "alts": [
     "Fyddet",
@@ -20186,6 +21524,114 @@
    ]
   },
   {
+   "id": "d-p5-e73d4f8",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ hi'n siopa yng Nghaerdydd.",
+   "hint": "she would be",
+   "en": "She would be shopping in Cardiff.",
+   "answer": "Basai",
+   "alts": [
+    "Base",
+    "Byddai",
+    "Bydde"
+   ],
+   "explain": "Statement, she: Basai hi.",
+   "skills": [
+    "cond-bod"
+   ]
+  },
+  {
+   "id": "d-p5-302eaca",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ hi'n siopa yng Nghaerdydd?",
+   "hint": "would she…?",
+   "en": "Would she be shopping in Cardiff?",
+   "answer": "Fasai",
+   "alts": [
+    "Fase",
+    "Fyddai",
+    "Fydde"
+   ],
+   "explain": "Question, she: Fasai hi?",
+   "skills": [
+    "cond-qneg"
+   ]
+  },
+  {
+   "id": "d-p5-5ae771b",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ hi ddim yn siopa yng Nghaerdydd.",
+   "hint": "she wouldn't be",
+   "en": "She wouldn't be shopping in Cardiff.",
+   "answer": "Fasai",
+   "alts": [
+    "Fase",
+    "Fyddai",
+    "Fydde"
+   ],
+   "explain": "Negative, she: Fasai hi ddim.",
+   "skills": [
+    "cond-qneg"
+   ]
+  },
+  {
+   "id": "d-p5-f342dbd",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ hi'n canu yn y côr.",
+   "hint": "she would be",
+   "en": "She would be singing in the choir.",
+   "answer": "Basai",
+   "alts": [
+    "Base",
+    "Byddai",
+    "Bydde"
+   ],
+   "explain": "Statement, she: Basai hi.",
+   "skills": [
+    "cond-bod"
+   ]
+  },
+  {
+   "id": "d-p5-6d11561",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ hi'n canu yn y côr?",
+   "hint": "would she…?",
+   "en": "Would she be singing in the choir?",
+   "answer": "Fasai",
+   "alts": [
+    "Fase",
+    "Fyddai",
+    "Fydde"
+   ],
+   "explain": "Question, she: Fasai hi?",
+   "skills": [
+    "cond-qneg"
+   ]
+  },
+  {
+   "id": "d-p5-3651d03",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ hi ddim yn canu yn y côr.",
+   "hint": "she wouldn't be",
+   "en": "She wouldn't be singing in the choir.",
+   "answer": "Fasai",
+   "alts": [
+    "Fase",
+    "Fyddai",
+    "Fydde"
+   ],
+   "explain": "Negative, she: Fasai hi ddim.",
+   "skills": [
+    "cond-qneg"
+   ]
+  },
+  {
    "id": "d-p5-346daa5",
    "type": "type",
    "unit": "p5",
@@ -20224,6 +21670,102 @@
    "text": "___ ni ddim yn hapus yno.",
    "hint": "we wouldn't be",
    "en": "We wouldn't be happy there.",
+   "answer": "Fasen",
+   "alts": [
+    "Fydden"
+   ],
+   "explain": "Negative, we: Fasen ni ddim.",
+   "skills": [
+    "cond-qneg"
+   ]
+  },
+  {
+   "id": "d-p5-9234892",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ ni'n gyrru i Fangor.",
+   "hint": "we would be",
+   "en": "We would be driving to Bangor.",
+   "answer": "Basen",
+   "alts": [
+    "Bydden"
+   ],
+   "explain": "Statement, we: Basen ni.",
+   "skills": [
+    "cond-bod"
+   ]
+  },
+  {
+   "id": "d-p5-d71aaf6",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ ni'n gyrru i Fangor?",
+   "hint": "would we…?",
+   "en": "Would we be driving to Bangor?",
+   "answer": "Fasen",
+   "alts": [
+    "Fydden"
+   ],
+   "explain": "Question, we: Fasen ni?",
+   "skills": [
+    "cond-qneg"
+   ]
+  },
+  {
+   "id": "d-p5-dad341d",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ ni ddim yn gyrru i Fangor.",
+   "hint": "we wouldn't be",
+   "en": "We wouldn't be driving to Bangor.",
+   "answer": "Fasen",
+   "alts": [
+    "Fydden"
+   ],
+   "explain": "Negative, we: Fasen ni ddim.",
+   "skills": [
+    "cond-qneg"
+   ]
+  },
+  {
+   "id": "d-p5-26cac66",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ ni'n gwrando ar y radio.",
+   "hint": "we would be",
+   "en": "We would be listening to the radio.",
+   "answer": "Basen",
+   "alts": [
+    "Bydden"
+   ],
+   "explain": "Statement, we: Basen ni.",
+   "skills": [
+    "cond-bod"
+   ]
+  },
+  {
+   "id": "d-p5-ab7c13e",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ ni'n gwrando ar y radio?",
+   "hint": "would we…?",
+   "en": "Would we be listening to the radio?",
+   "answer": "Fasen",
+   "alts": [
+    "Fydden"
+   ],
+   "explain": "Question, we: Fasen ni?",
+   "skills": [
+    "cond-qneg"
+   ]
+  },
+  {
+   "id": "d-p5-925bf4b",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ ni ddim yn gwrando ar y radio.",
+   "hint": "we wouldn't be",
+   "en": "We wouldn't be listening to the radio.",
    "answer": "Fasen",
    "alts": [
     "Fydden"
@@ -20282,6 +21824,102 @@
    ]
   },
   {
+   "id": "d-p5-302ca3c",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ chi'n cysgu lan llofft.",
+   "hint": "you (chi) would be",
+   "en": "You (chi) would be sleeping upstairs.",
+   "answer": "Basech",
+   "alts": [
+    "Byddech"
+   ],
+   "explain": "Statement, you (chi): Basech chi.",
+   "skills": [
+    "cond-bod"
+   ]
+  },
+  {
+   "id": "d-p5-8e110cc",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ chi'n cysgu lan llofft?",
+   "hint": "would you (chi)…?",
+   "en": "Would you (chi) be sleeping upstairs?",
+   "answer": "Fasech",
+   "alts": [
+    "Fyddech"
+   ],
+   "explain": "Question, you (chi): Fasech chi?",
+   "skills": [
+    "cond-qneg"
+   ]
+  },
+  {
+   "id": "d-p5-54d586f",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ chi ddim yn cysgu lan llofft.",
+   "hint": "you (chi) wouldn't be",
+   "en": "You (chi) wouldn't be sleeping upstairs.",
+   "answer": "Fasech",
+   "alts": [
+    "Fyddech"
+   ],
+   "explain": "Negative, you (chi): Fasech chi ddim.",
+   "skills": [
+    "cond-qneg"
+   ]
+  },
+  {
+   "id": "d-p5-e3e7a01",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ chi'n gweithio yn y dre.",
+   "hint": "you (chi) would be",
+   "en": "You (chi) would be working in town.",
+   "answer": "Basech",
+   "alts": [
+    "Byddech"
+   ],
+   "explain": "Statement, you (chi): Basech chi.",
+   "skills": [
+    "cond-bod"
+   ]
+  },
+  {
+   "id": "d-p5-ad1b612",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ chi'n gweithio yn y dre?",
+   "hint": "would you (chi)…?",
+   "en": "Would you (chi) be working in town?",
+   "answer": "Fasech",
+   "alts": [
+    "Fyddech"
+   ],
+   "explain": "Question, you (chi): Fasech chi?",
+   "skills": [
+    "cond-qneg"
+   ]
+  },
+  {
+   "id": "d-p5-3acd95a",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ chi ddim yn gweithio yn y dre.",
+   "hint": "you (chi) wouldn't be",
+   "en": "You (chi) wouldn't be working in town.",
+   "answer": "Fasech",
+   "alts": [
+    "Fyddech"
+   ],
+   "explain": "Negative, you (chi): Fasech chi ddim.",
+   "skills": [
+    "cond-qneg"
+   ]
+  },
+  {
    "id": "d-p5-7553995",
    "type": "type",
    "unit": "p5",
@@ -20327,6 +21965,886 @@
    "explain": "Negative, they: Fasen nhw ddim.",
    "skills": [
     "cond-qneg"
+   ]
+  },
+  {
+   "id": "d-p5-64a6320",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ nhw'n dysgu Cymraeg.",
+   "hint": "they would be",
+   "en": "They would be learning Welsh.",
+   "answer": "Basen",
+   "alts": [
+    "Bydden"
+   ],
+   "explain": "Statement, they: Basen nhw.",
+   "skills": [
+    "cond-bod"
+   ]
+  },
+  {
+   "id": "d-p5-bdb3bde",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ nhw'n dysgu Cymraeg?",
+   "hint": "would they…?",
+   "en": "Would they be learning Welsh?",
+   "answer": "Fasen",
+   "alts": [
+    "Fydden"
+   ],
+   "explain": "Question, they: Fasen nhw?",
+   "skills": [
+    "cond-qneg"
+   ]
+  },
+  {
+   "id": "d-p5-a51156c",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ nhw ddim yn dysgu Cymraeg.",
+   "hint": "they wouldn't be",
+   "en": "They wouldn't be learning Welsh.",
+   "answer": "Fasen",
+   "alts": [
+    "Fydden"
+   ],
+   "explain": "Negative, they: Fasen nhw ddim.",
+   "skills": [
+    "cond-qneg"
+   ]
+  },
+  {
+   "id": "d-p5-489a0b8",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ nhw'n byw yn Abertawe.",
+   "hint": "they would be",
+   "en": "They would be living in Swansea.",
+   "answer": "Basen",
+   "alts": [
+    "Bydden"
+   ],
+   "explain": "Statement, they: Basen nhw.",
+   "skills": [
+    "cond-bod"
+   ]
+  },
+  {
+   "id": "d-p5-34d51f1",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ nhw'n byw yn Abertawe?",
+   "hint": "would they…?",
+   "en": "Would they be living in Swansea?",
+   "answer": "Fasen",
+   "alts": [
+    "Fydden"
+   ],
+   "explain": "Question, they: Fasen nhw?",
+   "skills": [
+    "cond-qneg"
+   ]
+  },
+  {
+   "id": "d-p5-107d05d",
+   "type": "type",
+   "unit": "p5",
+   "text": "___ nhw ddim yn byw yn Abertawe.",
+   "hint": "they wouldn't be",
+   "en": "They wouldn't be living in Swansea.",
+   "answer": "Fasen",
+   "alts": [
+    "Fydden"
+   ],
+   "explain": "Negative, they: Fasen nhw ddim.",
+   "skills": [
+    "cond-qneg"
+   ]
+  },
+  {
+   "id": "d-u1-c5b2cf4",
+   "type": "type",
+   "unit": "u1",
+   "text": "___ i'n gweithio yn y dre.",
+   "hint": "bod, I",
+   "en": "I'm working in town.",
+   "answer": "Dw",
+   "alts": [
+    "Rydw",
+    "Rwy",
+    "Wi"
+   ],
+   "explain": "Present statement, I: Dw i.",
+   "skills": [
+    "bod-statement"
+   ]
+  },
+  {
+   "id": "d-u1-146c8a4",
+   "type": "type",
+   "unit": "u1",
+   "text": "___ i'n dysgu Cymraeg?",
+   "hint": "bod question, I",
+   "en": "Am I learning Welsh?",
+   "answer": "Ydw",
+   "alts": [],
+   "explain": "Present question, I: Ydw i…?",
+   "skills": [
+    "bod-question"
+   ]
+  },
+  {
+   "id": "d-u2-b784089",
+   "type": "type",
+   "unit": "u2",
+   "text": "___ i ddim yn byw yn Abertawe.",
+   "hint": "bod negative, I",
+   "en": "I'm not living in Swansea.",
+   "answer": "Dw",
+   "alts": [
+    "Dydw"
+   ],
+   "explain": "Present negative, I: Dw i ddim yn… (no 'n straight after the subject).",
+   "skills": [
+    "neg-ddim"
+   ]
+  },
+  {
+   "id": "d-u1-1e81e6f",
+   "type": "type",
+   "unit": "u1",
+   "text": "___ ti'n gwylio'r gêm.",
+   "hint": "bod, you",
+   "en": "You are watching the match.",
+   "answer": "Rwyt",
+   "alts": [
+    "Wyt"
+   ],
+   "explain": "Present statement, you: Rwyt ti.",
+   "skills": [
+    "bod-statement"
+   ]
+  },
+  {
+   "id": "d-u1-aac27af",
+   "type": "type",
+   "unit": "u1",
+   "text": "___ ti'n coginio swper?",
+   "hint": "bod question, you",
+   "en": "Are you cooking supper?",
+   "answer": "Wyt",
+   "alts": [],
+   "explain": "Present question, you: Wyt ti…?",
+   "skills": [
+    "bod-question"
+   ]
+  },
+  {
+   "id": "d-u2-809543f",
+   "type": "type",
+   "unit": "u2",
+   "text": "___ ti ddim yn darllen y papur.",
+   "hint": "bod negative, you",
+   "en": "You aren't reading the paper.",
+   "answer": "Dwyt",
+   "alts": [],
+   "explain": "Present negative, you: Dwyt ti ddim yn… (no 'n straight after the subject).",
+   "skills": [
+    "neg-ddim"
+   ]
+  },
+  {
+   "id": "d-u1-ce9f5bf",
+   "type": "type",
+   "unit": "u1",
+   "text": "___ hi'n aros am y bws.",
+   "hint": "bod, she",
+   "en": "She is waiting for the bus.",
+   "answer": "Mae",
+   "alts": [],
+   "explain": "Present statement, she: Mae hi.",
+   "skills": [
+    "bod-statement"
+   ]
+  },
+  {
+   "id": "d-u1-0b24ee3",
+   "type": "type",
+   "unit": "u1",
+   "text": "___ hi'n cerdded i'r gwaith?",
+   "hint": "bod question, she",
+   "en": "Is she walking to work?",
+   "answer": "Ydy",
+   "alts": [
+    "Ydi",
+    "Yw"
+   ],
+   "explain": "Present question, she: Ydy hi…?",
+   "skills": [
+    "bod-question"
+   ]
+  },
+  {
+   "id": "d-u2-2033bc7",
+   "type": "type",
+   "unit": "u2",
+   "text": "___ hi ddim yn chwarae yn yr ardd.",
+   "hint": "bod negative, she",
+   "en": "She isn't playing in the garden.",
+   "answer": "Dyw",
+   "alts": [
+    "Dydy",
+    "Dydi"
+   ],
+   "explain": "Present negative, she: Dyw hi ddim yn… (no 'n straight after the subject).",
+   "skills": [
+    "neg-ddim"
+   ]
+  },
+  {
+   "id": "d-u1-d6783e2",
+   "type": "type",
+   "unit": "u1",
+   "text": "___ e'n siopa yng Nghaerdydd.",
+   "hint": "bod, he",
+   "en": "He is shopping in Cardiff.",
+   "answer": "Mae",
+   "alts": [],
+   "explain": "Present statement, he: Mae e.",
+   "skills": [
+    "bod-statement"
+   ]
+  },
+  {
+   "id": "d-u1-8cafea9",
+   "type": "type",
+   "unit": "u1",
+   "text": "___ e'n canu yn y côr?",
+   "hint": "bod question, he",
+   "en": "Is he singing in the choir?",
+   "answer": "Ydy",
+   "alts": [
+    "Ydi",
+    "Yw"
+   ],
+   "explain": "Present question, he: Ydy e…?",
+   "skills": [
+    "bod-question"
+   ]
+  },
+  {
+   "id": "d-u2-0a0d6e6",
+   "type": "type",
+   "unit": "u2",
+   "text": "___ e ddim yn gyrru i Fangor.",
+   "hint": "bod negative, he",
+   "en": "He isn't driving to Bangor.",
+   "answer": "Dyw",
+   "alts": [
+    "Dydy",
+    "Dydi"
+   ],
+   "explain": "Present negative, he: Dyw e ddim yn… (no 'n straight after the subject).",
+   "skills": [
+    "neg-ddim"
+   ]
+  },
+  {
+   "id": "d-u1-c15bde8",
+   "type": "type",
+   "unit": "u1",
+   "text": "___ ni'n gwrando ar y radio.",
+   "hint": "bod, we",
+   "en": "We are listening to the radio.",
+   "answer": "Dyn",
+   "alts": [
+    "Rydyn",
+    "Ry'n",
+    "Dan"
+   ],
+   "explain": "Present statement, we: Dyn ni.",
+   "skills": [
+    "bod-statement"
+   ]
+  },
+  {
+   "id": "d-u1-6d9e22e",
+   "type": "type",
+   "unit": "u1",
+   "text": "___ ni'n cysgu lan llofft?",
+   "hint": "bod question, we",
+   "en": "Are we sleeping upstairs?",
+   "answer": "Ydyn",
+   "alts": [
+    "Y'n"
+   ],
+   "explain": "Present question, we: Ydyn ni…?",
+   "skills": [
+    "bod-question"
+   ]
+  },
+  {
+   "id": "d-u2-06246e7",
+   "type": "type",
+   "unit": "u2",
+   "text": "___ ni ddim yn gweithio yn y dre.",
+   "hint": "bod negative, we",
+   "en": "We aren't working in town.",
+   "answer": "Dyn",
+   "alts": [
+    "Dydyn",
+    "Dan"
+   ],
+   "explain": "Present negative, we: Dyn ni ddim yn… (no 'n straight after the subject).",
+   "skills": [
+    "neg-ddim"
+   ]
+  },
+  {
+   "id": "d-u1-cb5309a",
+   "type": "type",
+   "unit": "u1",
+   "text": "___ chi'n dysgu Cymraeg.",
+   "hint": "bod, you (chi)",
+   "en": "You are learning Welsh.",
+   "answer": "Dych",
+   "alts": [
+    "Rydych",
+    "Ry'ch",
+    "Dach"
+   ],
+   "explain": "Present statement, you (chi): Dych chi.",
+   "skills": [
+    "bod-statement"
+   ]
+  },
+  {
+   "id": "d-u1-bc18bd0",
+   "type": "type",
+   "unit": "u1",
+   "text": "___ chi'n byw yn Abertawe?",
+   "hint": "bod question, you (chi)",
+   "en": "Are you living in Swansea?",
+   "answer": "Dych",
+   "alts": [
+    "Ydych",
+    "Y'ch",
+    "Dach"
+   ],
+   "explain": "Present question, you (chi): Dych chi…?",
+   "skills": [
+    "bod-question"
+   ]
+  },
+  {
+   "id": "d-u2-da04ec8",
+   "type": "type",
+   "unit": "u2",
+   "text": "___ chi ddim yn gwylio'r gêm.",
+   "hint": "bod negative, you (chi)",
+   "en": "You aren't watching the match.",
+   "answer": "Dych",
+   "alts": [
+    "Dydych",
+    "Dach"
+   ],
+   "explain": "Present negative, you (chi): Dych chi ddim yn… (no 'n straight after the subject).",
+   "skills": [
+    "neg-ddim"
+   ]
+  },
+  {
+   "id": "d-u1-e1917e5",
+   "type": "type",
+   "unit": "u1",
+   "text": "___ nhw'n coginio swper.",
+   "hint": "bod, they",
+   "en": "They are cooking supper.",
+   "answer": "Maen",
+   "alts": [
+    "Maent"
+   ],
+   "explain": "Present statement, they: Maen nhw.",
+   "skills": [
+    "bod-statement"
+   ]
+  },
+  {
+   "id": "d-u1-3513641",
+   "type": "type",
+   "unit": "u1",
+   "text": "___ nhw'n darllen y papur?",
+   "hint": "bod question, they",
+   "en": "Are they reading the paper?",
+   "answer": "Ydyn",
+   "alts": [
+    "Y'n"
+   ],
+   "explain": "Present question, they: Ydyn nhw…?",
+   "skills": [
+    "bod-question"
+   ]
+  },
+  {
+   "id": "d-u2-3840623",
+   "type": "type",
+   "unit": "u2",
+   "text": "___ nhw ddim yn aros am y bws.",
+   "hint": "bod negative, they",
+   "en": "They aren't waiting for the bus.",
+   "answer": "Dyn",
+   "alts": [
+    "Dydyn"
+   ],
+   "explain": "Present negative, they: Dyn nhw ddim yn… (no 'n straight after the subject).",
+   "skills": [
+    "neg-ddim"
+   ]
+  },
+  {
+   "id": "d-p16-91cab58",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ i'r tocynnau.",
+   "hint": "prynu, I",
+   "en": "I will buy the tickets.",
+   "answer": "Pryna",
+   "alts": [],
+   "explain": "Short-form future: stem pryn- + -a for I: pryna i.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-46f2086",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ di'r tocynnau.",
+   "hint": "prynu, you",
+   "en": "You will buy the tickets.",
+   "answer": "Pryni",
+   "alts": [],
+   "explain": "Short-form future: stem pryn- + -i for you: pryni di.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-c6444a0",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ e'r tocynnau.",
+   "hint": "prynu, he",
+   "en": "He will buy the tickets.",
+   "answer": "Prynith",
+   "alts": [
+    "Pryniff"
+   ],
+   "explain": "Short-form future: stem pryn- + -ith for he: prynith e.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-cc5078f",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ hi'r ffilm.",
+   "hint": "gweld, she",
+   "en": "She will see the film.",
+   "answer": "Gwelith",
+   "alts": [
+    "Gweliff"
+   ],
+   "explain": "Short-form future: stem gwel- + -ith for she: gwelith hi.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-fe2a4fc",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ ni'r ffilm.",
+   "hint": "gweld, we",
+   "en": "We will see the film.",
+   "answer": "Gwelwn",
+   "alts": [],
+   "explain": "Short-form future: stem gwel- + -wn for we: gwelwn ni.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-ee9ef44",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ chi'r ffilm.",
+   "hint": "gweld, you (chi)",
+   "en": "You will see the film.",
+   "answer": "Gwelwch",
+   "alts": [],
+   "explain": "Short-form future: stem gwel- + -wch for you (chi): gwelwch chi.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-4e616a3",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ nhw'r bil.",
+   "hint": "talu, they",
+   "en": "They will pay the bill.",
+   "answer": "Talan",
+   "alts": [
+    "Talant"
+   ],
+   "explain": "Short-form future: stem tal- + -an for they: talan nhw.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-1df2874",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ i'r bil.",
+   "hint": "talu, I",
+   "en": "I will pay the bill.",
+   "answer": "Tala",
+   "alts": [],
+   "explain": "Short-form future: stem tal- + -a for I: tala i.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-d08099e",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ di'r bil.",
+   "hint": "talu, you",
+   "en": "You will pay the bill.",
+   "answer": "Tali",
+   "alts": [],
+   "explain": "Short-form future: stem tal- + -i for you: tali di.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-c610a46",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ e'r llyfr.",
+   "hint": "darllen, he",
+   "en": "He will read the book.",
+   "answer": "Darllenith",
+   "alts": [
+    "Darlleniff"
+   ],
+   "explain": "Short-form future: stem darllen- + -ith for he: darllenith e.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-c169357",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ hi'r llyfr.",
+   "hint": "darllen, she",
+   "en": "She will read the book.",
+   "answer": "Darllenith",
+   "alts": [
+    "Darlleniff"
+   ],
+   "explain": "Short-form future: stem darllen- + -ith for she: darllenith hi.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-91d5660",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ ni'r llyfr.",
+   "hint": "darllen, we",
+   "en": "We will read the book.",
+   "answer": "Darllenwn",
+   "alts": [],
+   "explain": "Short-form future: stem darllen- + -wn for we: darllenwn ni.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-5f556ca",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ chi'r te.",
+   "hint": "yfed, you (chi)",
+   "en": "You will drink the tea.",
+   "answer": "Yfwch",
+   "alts": [],
+   "explain": "Short-form future: stem yf- + -wch for you (chi): yfwch chi.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-9d2b4e2",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ nhw'r te.",
+   "hint": "yfed, they",
+   "en": "They will drink the tea.",
+   "answer": "Yfan",
+   "alts": [
+    "Yfant"
+   ],
+   "explain": "Short-form future: stem yf- + -an for they: yfan nhw.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-ea87bb4",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ i'r te.",
+   "hint": "yfed, I",
+   "en": "I will drink the tea.",
+   "answer": "Yfa",
+   "alts": [],
+   "explain": "Short-form future: stem yf- + -a for I: yfa i.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-5596662",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ di'r gacen.",
+   "hint": "bwyta, you",
+   "en": "You will eat the cake.",
+   "answer": "Bwyti",
+   "alts": [],
+   "explain": "Short-form future: stem bwyt- + -i for you: bwyti di.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-d0db04b",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ e'r gacen.",
+   "hint": "bwyta, he",
+   "en": "He will eat the cake.",
+   "answer": "Bwytith",
+   "alts": [
+    "Bwytiff"
+   ],
+   "explain": "Short-form future: stem bwyt- + -ith for he: bwytith e.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-cc3f0ab",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ hi'r gacen.",
+   "hint": "bwyta, she",
+   "en": "She will eat the cake.",
+   "answer": "Bwytith",
+   "alts": [
+    "Bwytiff"
+   ],
+   "explain": "Short-form future: stem bwyt- + -ith for she: bwytith hi.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-169cd19",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ ni'r gwaith.",
+   "hint": "gorffen, we",
+   "en": "We will finish the work.",
+   "answer": "Gorffennwn",
+   "alts": [],
+   "explain": "Short-form future: stem gorffenn- + -wn for we: gorffennwn ni.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-dfc0d3a",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ chi'r gwaith.",
+   "hint": "gorffen, you (chi)",
+   "en": "You will finish the work.",
+   "answer": "Gorffennwch",
+   "alts": [],
+   "explain": "Short-form future: stem gorffenn- + -wch for you (chi): gorffennwch chi.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-12819a2",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ nhw'r gwaith.",
+   "hint": "gorffen, they",
+   "en": "They will finish the work.",
+   "answer": "Gorffennan",
+   "alts": [
+    "Gorffennant"
+   ],
+   "explain": "Short-form future: stem gorffenn- + -an for they: gorffennan nhw.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-c5d77c4",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ i'r gân.",
+   "hint": "dysgu, I",
+   "en": "I will learn the song.",
+   "answer": "Dysga",
+   "alts": [],
+   "explain": "Short-form future: stem dysg- + -a for I: dysga i.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-e4a29c8",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ di'r gân.",
+   "hint": "dysgu, you",
+   "en": "You will learn the song.",
+   "answer": "Dysgi",
+   "alts": [],
+   "explain": "Short-form future: stem dysg- + -i for you: dysgi di.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-5d20763",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ e'r gân.",
+   "hint": "dysgu, he",
+   "en": "He will learn the song.",
+   "answer": "Dysgith",
+   "alts": [
+    "Dysgiff"
+   ],
+   "explain": "Short-form future: stem dysg- + -ith for he: dysgith e.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-58621c0",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ hi'r car.",
+   "hint": "gwerthu, she",
+   "en": "She will sell the car.",
+   "answer": "Gwerthith",
+   "alts": [
+    "Gwerthiff"
+   ],
+   "explain": "Short-form future: stem gwerth- + -ith for she: gwerthith hi.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-e4f5e66",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ ni'r car.",
+   "hint": "gwerthu, we",
+   "en": "We will sell the car.",
+   "answer": "Gwerthwn",
+   "alts": [],
+   "explain": "Short-form future: stem gwerth- + -wn for we: gwerthwn ni.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-852a382",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ chi'r car.",
+   "hint": "gwerthu, you (chi)",
+   "en": "You will sell the car.",
+   "answer": "Gwerthwch",
+   "alts": [],
+   "explain": "Short-form future: stem gwerth- + -wch for you (chi): gwerthwch chi.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-8ed2da2",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ nhw'r anthem.",
+   "hint": "canu, they",
+   "en": "They will sing the anthem.",
+   "answer": "Canan",
+   "alts": [
+    "Canant"
+   ],
+   "explain": "Short-form future: stem can- + -an for they: canan nhw.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-83fb498",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ i'r anthem.",
+   "hint": "canu, I",
+   "en": "I will sing the anthem.",
+   "answer": "Cana",
+   "alts": [],
+   "explain": "Short-form future: stem can- + -a for I: cana i.",
+   "skills": [
+    "sf-endings"
+   ]
+  },
+  {
+   "id": "d-p16-cffd9f5",
+   "type": "type",
+   "unit": "p16",
+   "text": "___ di'r anthem.",
+   "hint": "canu, you",
+   "en": "You will sing the anthem.",
+   "answer": "Cani",
+   "alts": [],
+   "explain": "Short-form future: stem can- + -i for you: cani di.",
+   "skills": [
+    "sf-endings"
    ]
   },
   {

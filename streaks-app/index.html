@@ -333,6 +333,10 @@
   .wt-row span{ flex:1; color:var(--ink-dim); }
   .wt-row em{ font-style:normal; font-size:11px; width:48px; text-align:right; color:var(--ink-dim); }
   .wt-row button{ background:none; border:none; color:var(--ink-dimmer); font-size:16px; font-weight:900; padding:2px 6px; cursor:pointer; }
+.gram-paste{display:block;margin:6px auto 0;background:none;border:0;color:var(--muted,#777);font:inherit;font-size:14px;font-weight:700;padding:10px 14px;border-radius:12px;cursor:pointer}
+.gram-paste:active{background:rgba(0,0,0,.06)}
+.gram-msg{text-align:center;font-size:13.5px;font-weight:700;color:#2e7d32;min-height:0;max-height:0;overflow:hidden;transition:max-height .25s}
+.gram-msg.on{max-height:60px;padding:4px 12px 8px}
 </style>
 </head>
 <body>
@@ -360,6 +364,8 @@
   </div>
 
   <div class="habit-list" id="habitList"></div>
+  <button class="gram-paste" id="gramPaste">📋 Add Welsh minutes from Gramadeg</button>
+  <div class="gram-msg" id="gramMsg"></div>
 
   <div class="cal-card">
     <div class="cal-tabs" id="calTabs"></div>
@@ -487,6 +493,7 @@ function sanitizeLoaded(loaded){
           delete cleanEntry.done;
           if(ps.length){ cleanEntry.periods = ps; cleanEntry.done = ps.length === PERIODS.length; }
         }
+        if(e.gm !== undefined){ const g = Number(e.gm); if(Number.isFinite(g)) cleanEntry.gm = Math.max(0, Math.min(1440, g)); }
         if(e.amount !== undefined){
           const n = Number(e.amount);
           if(Number.isFinite(n)) cleanEntry.amount = Math.max(0, n);
@@ -1315,6 +1322,26 @@ function showView(name){
 document.getElementById('tabHabits').addEventListener('click', ()=>showView('habits'));
 document.getElementById('tabPushups').addEventListener('click', ()=>showView('pushups'));
 document.getElementById('tabWeight').addEventListener('click', ()=>showView('weight'));
+
+// Gramadeg hands its minutes over on the clipboard ("PMC-GRAMADEG 2026-11-24 12"), because
+// home-screen apps on an iPhone can't read each other's storage. Only the difference since the
+// last paste is added, so pasting again later in the day never double-counts.
+function gramMsg(t){ const m = document.getElementById('gramMsg'); m.textContent = t; m.classList.add('on'); clearTimeout(m._h); m._h = setTimeout(()=>m.classList.remove('on'), 4000); }
+document.getElementById('gramPaste').addEventListener('click', async ()=>{
+  let txt = '';
+  try{ txt = await navigator.clipboard.readText(); }catch(e){ gramMsg('Could not read the clipboard. Tap “Log in Streaks” in Gramadeg first.'); return; }
+  const m = /PMC-GRAMADEG (\d{4}-\d{2}-\d{2}) (\d{1,4})/.exec(txt || '');
+  if(!m || !isValidDateKey(m[1])){ gramMsg('Nothing from Gramadeg on the clipboard. Tap “Log in Streaks” there first.'); return; }
+  const date = m[1], mins = Math.min(1440, parseInt(m[2], 10)), id = 'h1';
+  if(!state.entries[date]) state.entries[date] = {};
+  const cur = { ...(state.entries[date][id] || {}) };
+  const add = Math.max(0, mins - (cur.gm || 0));
+  cur.amount = (Number(cur.amount) || 0) + add; cur.gm = Math.max(cur.gm || 0, mins);
+  const was = cur.done === true; cur.done = true;
+  state.entries[date][id] = cur; saveState();
+  selectedDate = date; justToggledId = was ? null : id; render(); justToggledId = null;
+  gramMsg(add ? `Added ${add} min of grammar to Welsh${date === todayStr() ? '' : ' on ' + date}.` : 'Already added. Nothing new since last time.');
+});
 
 function render(){
   renderPushups();

@@ -315,6 +315,18 @@ svg.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2.4;stro
 .t3 .v{font-size:22px;font-weight:900;padding:12px 4px;display:flex;align-items:center;justify-content:center;gap:4px}
 .t3 .v svg{width:22px;height:22px}
 .recap{width:100%;max-width:380px;text-align:left;margin-bottom:20px}
+.sessmix{width:100%;max-width:380px;text-align:left}
+.sm-card{border:2px solid var(--line);border-radius:16px;padding:12px 14px;margin-bottom:10px}
+.sm-card h3{font-size:13px;color:var(--dim);margin:0 0 8px;text-transform:uppercase;letter-spacing:.04em}
+.sm-card p{margin:8px 0 0;font-size:14.5px;line-height:1.35} .sm-card p.dimp{color:var(--dim);font-size:13px}
+.sm-card .gain{color:var(--green-d);font-weight:800}
+.mixbar{display:flex;height:14px;border-radius:99px;overflow:hidden;background:var(--line)}
+.mixbar i{display:block;height:100%} .mn{background:#00A63D} .mf{background:#FF9600} .mv{background:#1CB0F6}
+.mixkey{display:flex;gap:14px;margin-top:7px;font-size:12.5px;color:var(--dim);flex-wrap:wrap}
+.mixkey b{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:5px;vertical-align:0}
+.mixkey strong{color:var(--ink);margin-left:3px}
+.daily .course .today{display:flex;gap:8px;align-items:baseline;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.25);font-size:12.5px;line-height:1.3}
+.daily .course .today b{display:inline-block;background:#fff;color:var(--green-d);border-radius:6px;padding:0 6px;flex:none;font-size:11px;text-transform:uppercase;letter-spacing:.04em}
 .recap h3{font-size:13px;color:var(--dim);margin:0 0 6px}
 .recap div{border:2px solid var(--line);border-radius:12px;padding:8px 12px;margin-bottom:6px;font-size:14.5px}
 .recap div b{color:var(--green-d)}
@@ -546,7 +558,9 @@ dl.gloss{margin:0} dl.gloss dt{font-weight:900;color:var(--ink2);margin-top:10px
       <div class="t3" style="border-color:var(--green)"><div class="h" style="background:var(--green)">Accuracy</div><div class="v" id="dAcc" style="color:var(--green-d)"></div></div>
       <div class="t3" style="border-color:var(--orange)"><div class="h" style="background:var(--orange)">Streak</div><div class="v" id="dStreak" style="color:var(--orange)"></div></div>
     </div>
+    <div class="sessmix" id="sessMix"></div>
     <div class="recap" id="recap"></div>
+    <button class="btn ghost" id="streaksBtn" style="display:none;margin-bottom:10px"></button>
     <button class="btn" id="doneBtn">Continue</button>
   </div>
 </section>
@@ -662,7 +676,7 @@ function mascot(mood='happy', cls='m'){
 
 /* ================= state ================= */
 let C = null, S = loadState(), L = null, TAB = 'learn';
-function blank(){ return {xp:0, streak:{n:0,last:null}, items:{}, flags:[], sound:true, loud:true, daily:{date:null,xp:0}, log:[], placed:null, placeV:0, explains:[], secs:{}}; }
+function blank(){ return {xp:0, streak:{n:0,last:null}, items:{}, flags:[], sound:true, loud:true, daily:{date:null,xp:0}, log:[], placed:null, placeV:0, explains:[], secs:{}, snap:{date:null,solid:[]}, sess:{}}; }
 function clean(d){
   // Accept only well-formed data, so a damaged save or odd import can never break the app.
   const b=blank(); if(!d || typeof d!=='object' || Array.isArray(d)) return b;
@@ -676,8 +690,10 @@ function clean(d){
   b.sound=d.sound!==false; b.loud=d.loud!==false;
   if(d.daily&&typeof d.daily==='object') b.daily={date:day(d.daily.date), xp:num(d.daily.xp)};
   if(Array.isArray(d.log)) b.log=d.log.filter(e=>e&&typeof e.q==='string'&&Number.isFinite(+e.t)).slice(-LOG_MAX)
-    .map(e=>({t:+e.t, q:e.q, ok:e.ok?1:0, ms:num(e.ms), a:String(e.a==null?'':e.a).slice(0,80), m:String(e.m||''), r:e.r?1:0, ty:String(e.ty||''), v:String(e.v||''), h:e.h?1:0, n:String(e.n||'')}));
+    .map(e=>({t:+e.t, q:e.q, ok:e.ok?1:0, ms:num(e.ms), a:String(e.a==null?'':e.a).slice(0,80), m:String(e.m||''), r:e.r?1:0, ty:String(e.ty||''), v:String(e.v||''), h:e.h?1:0, n:String(e.n||''), k:['n','f','v'].includes(e.k)?e.k:''}));
   b.placed=day(d.placed); b.placeV=num(d.placeV);
+  if(d.snap&&typeof d.snap==='object'&&day(d.snap.date)&&Array.isArray(d.snap.solid)) b.snap={date:d.snap.date, solid:d.snap.solid.filter(x=>typeof x==='string')};
+  if(d.sess&&typeof d.sess==='object') Object.keys(d.sess).sort().slice(-400).forEach(k=>{ if(day(k)) b.sess[k]=Math.min(num(d.sess[k]),50); });
   if(d.secs&&typeof d.secs==='object') Object.keys(d.secs).sort().slice(-400).forEach(k=>{ if(day(k)) b.secs[k]=Math.min(num(d.secs[k]),86400); });
   if(Array.isArray(d.explains)) b.explains=d.explains.filter(e=>e&&typeof e==='object'&&e.r&&typeof e.r==='object').slice(-EXPLAIN_MAX)
     .map(e=>({at:String(e.at||''), r:e.r, fu:Array.isArray(e.fu)?e.fu.filter(x=>x&&typeof x.q==='string').map(x=>({q:x.q, a:String(x.a||'')})):[]}));
@@ -834,7 +850,7 @@ function renderTop(){
   const g=Math.min(1,secsOn(today())/DAILY_SECS);
   $('goalRing').innerHTML = ring(g, g>=1?'#FFC800':'#00A63D', 30, 4)+`<b>${g>=1?'✓':Math.floor(secsOn(today())/60)+'m'}</b>`;
 }
-function renderTab(){ renderTop(); if(!C) return; ({learn:renderLearn, practice:renderPractice, insights:renderInsights, map:renderMap, rules:renderRules})[TAB](); }
+function renderTab(){ renderTop(); if(!C) return; ensureSnap(); ({learn:renderLearn, practice:renderPractice, insights:renderInsights, map:renderMap, rules:renderRules})[TAB](); }
 
 /* ================= daily card and exam countdown ================= */
 function dailyCard(){
@@ -849,7 +865,8 @@ function dailyCard(){
     <button class="btn" onclick="startLesson('daily')">${icon('play')}${done?'Do 5 more minutes':sec?`Continue: ${Math.ceil((DAILY_SECS-sec)/60)} min left`:'Start 10 minutes'}</button>
     <div class="course"><div class="ch"><b>${at.u?`Unit ${at.i+1} of ${at.n}`:`All ${at.n} units covered`}</b><span>${strong} strong</span></div>
       <div class="cbar"><i style="width:${Math.round(at.i/at.n*100)}%"></i><s style="width:${Math.round(strong/at.n*100)}%"></s></div>
-      <small>${at.u?`Now learning: ${esc(at.u.title)}${nn&&nn.u!==at.u?` · next: ${esc(nn.u.title)}`:''}`:'Keep up the reviews: the Daily 10 now keeps it all fresh.'}</small></div>
+      <small>${at.u?`Now learning: ${esc(at.u.title)}${nn&&nn.u!==at.u?` · next: ${esc(nn.u.title)}`:''}`:'Keep up the reviews: the Daily 10 now keeps it all fresh.'}</small>
+      <div class="today"><b>Today</b><span>${esc(todayLine(dayStats()))}</span></div></div>
     <div class="week">${days.map(x=>`<div class="${x.s>=DAILY_SECS?'hit':''}"><i><u style="height:${Math.min(100,Math.round(x.s/DAILY_SECS*100))}%"></u></i>${x.d===t?'<b>Today</b>':dl[new Date(x.d+'T12:00:00').getDay()]}</div>`).join('')}</div></div>`;
   const G=C.goal;
   if(G && G.date){
@@ -1117,7 +1134,10 @@ const dayKey = t => { const d=new Date(t); return d.getFullYear()+'-'+String(d.g
 const skillsOf = q => (q.skills&&q.skills.length)?q.skills:[q.unit];
 function skillInfo(id){ const s=C.skills&&C.skills[id]; if(s) return s; const u=unitOf(id); return {group:'point', title:u?u.title:id, blurb:''}; }
 function logAnswer(q, ok, ms, given, retry){
-  S.log.push({t:Date.now(), q:q.id, ok:ok?1:0, ms:Math.min(ms,180000), a:String(given||'').slice(0,80), m:L.mode, r:retry?1:0, ty:L.cur&&L.cur.hard?'type':q.type, v:C.version||'', h:L.cur&&L.cur.hard?1:0, n:L.cur&&L.cur.how||''});
+  // What kind of work this answer was: n = new material, f = fixing a mistake, v = revising something known.
+  const x=S.items[q.id], k = retry || needsFix(q.id) ? 'f' : (!x || !x.seen) ? 'n' : 'v';
+  if(L.tally){ L.tally[k][0]++; if(ok) L.tally[k][1]++; }
+  S.log.push({k, t:Date.now(), q:q.id, ok:ok?1:0, ms:Math.min(ms,180000), a:String(given||'').slice(0,80), m:L.mode, r:retry?1:0, ty:L.cur&&L.cur.hard?'type':q.type, v:C.version||'', h:L.cur&&L.cur.hard?1:0, n:L.cur&&L.cur.how||''});
   if(S.log.length>LOG_MAX) S.log.splice(0, S.log.length-LOG_MAX);
   MODEL=null;
 }
@@ -1310,7 +1330,7 @@ function startLesson(mode, uid, kind){
   if(mode!=='place' && mode!=='daily') qs=shuffle(qs);
   const queue = mode==='daily' ? qs : qs.map(q=>({q,retry:false}));
   const left = DAILY_SECS-secsOn(today());
-  L={secs:0, goal: mode==='daily' ? (left>=90 ? left : 300) : 0, asked:[], probes:0, cleanRun:0, okSk:{}, badSk:{}, kind, mode, uid, label, queue, total:queue.filter(x=>x.q).length, done:0, firstRight:0, firstTotal:0, combo:0, best:0, missed:[], xp:0};
+  ensureSnap(); L={tally:{n:[0,0],f:[0,0],v:[0,0]}, pace:pace(), secs:0, goal: mode==='daily' ? (left>=90 ? left : 300) : 0, asked:[], probes:0, cleanRun:0, okSk:{}, badSk:{}, kind, mode, uid, label, queue, total:queue.filter(x=>x.q).length, done:0, firstRight:0, firstTotal:0, combo:0, best:0, missed:[], xp:0};
   show('lesson'); next();
 }
 /* ================= the daily 10 minutes =================
@@ -1327,6 +1347,34 @@ function pace(){
   if(acc<0.8)  return {n:3, open:2, cap:4,  acc, fix, key:'steady', label:'Steady: a little new grammar'};
   if(acc<0.9)  return {n:4, open:3, cap:8,  acc, fix, key:'good', label:'Good pace: new grammar today'};
   return              {n:6, open:4, cap:14, acc, fix, key:'fast', label:'Moving fast: extra new grammar'};
+}
+// Daily progress. At the start of each day the app notes which grammar points are secure,
+// so it can show what today added. Every answer is tagged new / fixing / revising.
+const solidIds = () => Object.values(model().K).filter(k=>k.info.group==='point'&&k.verdict==='solid').map(k=>k.id);
+function ensureSnap(){ if(C && S.snap.date!==today()){ S.snap={date:today(), solid:solidIds()}; save(); } }
+function dayStats(d=today()){
+  const st={n:[0,0], f:[0,0], v:[0,0], sess:(S.sess&&S.sess[d])||0, mins:Math.floor(secsOn(d)/60), gained:[]};
+  S.log.forEach(e=>{ if(e.r || dayKey(e.t)!==d) return; const k=st[e.k]?e.k:'v'; st[k][0]++; if(e.ok) st[k][1]++; });
+  if(d===today() && S.snap.date===d){ const before=new Set(S.snap.solid); st.gained=solidIds().filter(id=>!before.has(id)); }
+  return st;
+}
+function mixBar(t){
+  const tot=t.n[0]+t.f[0]+t.v[0]||1, w=x=>Math.round(x/tot*100);
+  return `<div class="mixbar"><i class="mn" style="width:${w(t.n[0])}%"></i><i class="mf" style="width:${w(t.f[0])}%"></i><i class="mv" style="width:${w(t.v[0])}%"></i></div>
+    <div class="mixkey"><span><b class="mn"></b>New <strong>${t.n[0]}</strong></span><span><b class="mf"></b>Fixing <strong>${t.f[0]}</strong></span><span><b class="mv"></b>Revising <strong>${t.v[0]}</strong></span></div>`;
+}
+function sessionVerdict(t, p){
+  const learned=t.n[1], fixed=t.f[1];
+  if(!t.n[0] && p && p.key==='fix') return `<b>Consolidation.</b> New grammar was held back until the mistakes are down (${p.fix} waiting). Putting them right is progress too.`;
+  if(learned && fixed) return `<b>Moving forward.</b> ${learned} new question${learned>1?'s':''} learned and ${fixed} mistake${fixed>1?'s':''} put right.`;
+  if(learned) return `<b>Moving forward.</b> ${learned} new question${learned>1?'s':''} learned, the rest kept fresh.`;
+  if(fixed) return `<b>Repair work.</b> ${fixed} mistake${fixed>1?'s':''} put right${t.n[0]?'':', no new grammar this time'}.`;
+  return `<b>Revision.</b> Keeping what you know fresh. No new grammar in this session.`;
+}
+function todayLine(st){
+  const bits=[]; if(st.n[1]) bits.push(st.n[1]+' new learned'); if(st.f[1]) bits.push(st.f[1]+' fixed'); if(st.v[0]) bits.push(st.v[0]+' revised');
+  if(st.gained.length) bits.push(`+${st.gained.length} point${st.gained.length>1?'s':''} secure`);
+  return bits.length ? bits.join(' · ') : 'Nothing yet today';
 }
 // Questions met for the first time today, from the answer log.
 function newToday(){
@@ -1424,7 +1472,7 @@ function next(){
   if(q.type==='mc' && L.cur.hard){
     const gap=q.prompt.includes('___');
     h+=`<div class="qtitle">${gap?'Type the missing word':'Type it in Welsh'}</div>${speaker((gap?blankify(q.prompt):esc(q.prompt))+(q.en&&gap?`<small>${esc(q.en)}</small>`:''),'think')}`;
-    h+=`<input class="typein" id="typein" enterkeyhint="go" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Type your answer (accents optional)">`;
+    h+=`<input class="typein" id="typein" enterkeyhint="go" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Type your answer">`;
     $('qwrap').innerHTML=h;
     const inp=$('typein');
     inp.oninput=()=>{ L.answer=inp.value; $('checkBtn').disabled=!inp.value.trim(); };
@@ -1448,7 +1496,7 @@ function next(){
   else if(q.type==='type'){
     h+=`<div class="qtitle">Fill the gap</div>${speaker(blankify(q.text)+(q.en?`<small>${esc(q.en)}</small>`:''),'think')}`;
     if(q.hint) h+=`<div class="hint">Base word / clue: <b>${esc(q.hint)}</b></div>`;
-    h+=`<input class="typein" id="typein" enterkeyhint="go" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Type the missing word (accents optional)">`;
+    h+=`<input class="typein" id="typein" enterkeyhint="go" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Type the missing word">`;
     $('qwrap').innerHTML=h;
     const inp=$('typein');
     inp.oninput=()=>{ L.answer=inp.value; $('checkBtn').disabled=!inp.value.trim(); };
@@ -1626,7 +1674,13 @@ function finish(){
   const skipNote = L.skipped ? `<p style="font-size:14px;margin:0 2px 10px"><b>Finished early.</b> Clean run, and the ${L.skipped} question${L.skipped>1?'s':''} left covered things you've shown you know, so they were skipped.</p>` : L.mode==='check' ? `<p style="font-size:14px;margin:0 2px 10px">You've mastered this unit, so it's a 5-question quick check rather than a full lesson.</p>` : '';
   $('doneMascot').innerHTML=mascot('cheer','m');
   $('doneTitle').textContent= acc===100?'Perffaith!': acc>=80?'Da iawn!':'Lesson complete!';
-  const dm=Math.floor(secsOn(t)/60), dayNote=`<p style="font-size:14px;margin:0 2px 10px"><b>${dm} minute${dm===1?'':'s'} today.</b> ${secsOn(t)>=DAILY_SECS?'Daily 10 done.':(Math.ceil((DAILY_SECS-secsOn(t))/60))+' to go for your daily 10.'} ${L.firstTotal} question${L.firstTotal===1?'':'s'} answered.</p>`;
+  if(L.mode==='daily'){ S.sess[t]=(S.sess[t]||0)+1; save(); }
+  const dm=Math.floor(secsOn(t)/60), dayNote=L.mode==='daily'?'':`<p style="font-size:14px;margin:0 2px 10px"><b>${dm} minute${dm===1?'':'s'} today.</b> ${secsOn(t)>=DAILY_SECS?'Daily 10 done.':(Math.ceil((DAILY_SECS-secsOn(t))/60))+' to go for your daily 10.'}</p>`;
+  const st=dayStats(t), tl=L.tally;
+  $('sessMix').innerHTML = (L.mode==='place'||L.mode==='testout') ? '' : `<div class="sm-card"><h3>This session</h3>${mixBar(tl)}<p>${sessionVerdict(tl, L.pace)}</p></div>
+    <div class="sm-card"><h3>Today${st.sess>1?` · ${st.sess} sessions`:''} · ${st.mins} min</h3><p>${esc(todayLine(st))}${st.gained.length?`<br><span class="gain">Now secure: ${st.gained.slice(0,4).map(id=>esc(skillInfo(id).title)).join(', ')}${st.gained.length>4?` and ${st.gained.length-4} more`:''}</span>`:''}</p>
+    ${(()=>{ const at=courseAt(); return at.u?`<p class="dimp">Course: unit ${at.i+1} of ${at.n}, ${esc(at.u.title)}.</p>`:''; })()}</div>`;
+  const sb=$('streaksBtn'); sb.style.display = dm ? '' : 'none'; sb.innerHTML=icon('flame')+`Log ${dm} min in Streaks`; sb.onclick=()=>logToStreaks(dm);
   countUp($('dXp'), L.xp, icon('bolt'));
   countUp($('dAcc'), acc, '', '%');
   $('dStreak').innerHTML=icon('flame')+S.streak.n;
@@ -1652,6 +1706,15 @@ function confetti(){ cancelAnimationFrame(CONF);
   const cols=['#00A63D','#FFC800','#E5484D','#1CB0F6'];
   const ps=Array.from({length:48},()=>({x:innerWidth/2+(Math.random()-.5)*60,y:innerHeight*.3,vx:(Math.random()-.5)*8,vy:-Math.random()*9-3,r:Math.random()*4+3,c:cols[Math.random()*cols.length|0],a:Math.random()*6,va:(Math.random()-.5)*.3}));
   let f=0; (function tick(){ cx.clearRect(0,0,innerWidth,innerHeight); ps.forEach(p=>{p.vy+=.2;p.vx*=.985;p.x+=p.vx;p.y+=p.vy;p.a+=p.va; cx.save();cx.translate(p.x,p.y);cx.rotate(p.a);cx.globalAlpha=Math.max(0,1-(performance.now()-t0)/2000);cx.fillStyle=p.c;cx.fillRect(-p.r/2,-p.r/4,p.r,p.r/2);cx.restore();}); if(performance.now()-t0<2200 && ++f<400) CONF=requestAnimationFrame(tick); else cx.clearRect(0,0,innerWidth,innerHeight); })();
+}
+
+/* ================= Streaks handoff =================
+   Home-screen apps on an iPhone can't see each other's storage, so the minutes go across on the clipboard:
+   copy here, then tap 'Add from Gramadeg' in Streaks. Streaks only ever adds the difference, so pasting twice is safe. */
+async function logToStreaks(mins){
+  const txt=`PMC-GRAMADEG ${today()} ${mins}`;
+  try{ await navigator.clipboard.writeText(txt); toast(`Copied ${mins} min. In Streaks, tap “Add Welsh minutes from Gramadeg”.`); }
+  catch(e){ toast('Could not copy. Type '+mins+' min into Welsh in Streaks.'); }
 }
 
 /* ================= Google Drive backup ================= */

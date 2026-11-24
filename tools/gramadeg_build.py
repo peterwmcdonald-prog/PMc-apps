@@ -14,7 +14,7 @@ import json, hashlib, os, sys
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'gramadeg')
 PATH = os.path.join(ROOT, 'content.json')
-VERSION = '2026-11-15'
+VERSION = '2026-11-24'
 
 # ---------------------------------------------------------------- mutations
 DIGRAPHS = ('ch', 'dd', 'ff', 'ng', 'll', 'ph', 'rh', 'th')
@@ -95,6 +95,15 @@ G = {'m': 'masculine', 'f': 'feminine'}
 PLACES = ['Caerdydd','Bangor','Pontypridd','Tregaron','Dolgellau','Gwent','Machynlleth','Llanelli','Rhuthun','Penarth',
           'Caerfyrddin','Talybont','Bryste','Dinbych','Merthyr','Porthcawl','Trefynwy','Glynebwy','Manceinion','Llundain',
           'Caeredin','Dulyn','Abertawe','Aberystwyth','Wrecsam','Hwlffordd']
+
+# Everyday activities for varied sentences: (Welsh after 'n / yn, English -ing, English base)
+ACTS = [("gweithio yn y dre", 'working in town', 'work in town'), ('dysgu Cymraeg', 'learning Welsh', 'learn Welsh'),
+        ('byw yn Abertawe', 'living in Swansea', 'live in Swansea'), ("gwylio'r gêm", 'watching the match', 'watch the match'),
+        ('coginio swper', 'cooking supper', 'cook supper'), ("darllen y papur", 'reading the paper', 'read the paper'),
+        ('aros am y bws', 'waiting for the bus', 'wait for the bus'), ("cerdded i'r gwaith", 'walking to work', 'walk to work'),
+        ('chwarae yn yr ardd', 'playing in the garden', 'play in the garden'), ('siopa yng Nghaerdydd', 'shopping in Cardiff', 'shop in Cardiff'),
+        ('canu yn y côr', 'singing in the choir', 'sing in the choir'), ('gyrru i Fangor', 'driving to Bangor', 'drive to Bangor'),
+        ('gwrando ar y radio', 'listening to the radio', 'listen to the radio'), ('cysgu lan llofft', 'sleeping upstairs', 'sleep upstairs')]
 
 # ---------------------------------------------------------------- drills
 def build_drills():
@@ -324,8 +333,15 @@ def build_drills():
     }
     SK = {'imp': ('imp-statement', 'imp-question', 'imp-negative'), 'fut': ('fut-statement', 'fut-question', 'fut-negative'),
           'cond': ('cond-bod', 'cond-qneg', 'cond-qneg')}
-    for key, (unit, _, frame, be, rest, st, qu, ng) in T.items():
+    for key, (unit, _, frame0, be, rest0, st, qu, ng) in T.items():
+        # The original frame plus two everyday activities per person, so the same form turns up in fresh sentences.
         for i, (pro, pen) in enumerate(PP):
+          for k in range(3):
+            if k == 0:
+                frame, rest = frame0, rest0
+            else:
+                cy, ing, _base = ACTS[(i * 2 + k + len(key)) % len(ACTS)]
+                frame, rest = "{} {}'n " + cy + '.', ing
             body = frame.format('___', pro)
             drill(unit, [SK[key][0]], body, f'{pen} {be[i]}', f'{pen.capitalize()} {be[i]} {rest}.', st[0][i], alts=st[1][i],
                   explain=f'Statement, {pen}: {st[0][i]} {pro}.')
@@ -336,6 +352,48 @@ def build_drills():
             ne = (w[0] + "n't" if w[0] != 'will' else "won't") + (' ' + w[1] if len(w) > 1 else '')
             drill(unit, [SK[key][2]], neg, f'{pen} {ne}', f'{pen.capitalize()} {ne} {rest}.', ng[0][i], alts=ng[1][i],
                   explain=f'Negative, {pen}: {ng[0][i]} {pro} ddim.')
+
+    # 14. present of bod: statements, questions, negatives, in varied everyday sentences
+    PRES = [  # pronoun, English subject, statement, alts, question, alts, negative, alts, English be / do
+     ('i', 'I', 'Dw', ['Rydw', 'Rwy', 'Wi'], 'Ydw', [], 'Dw', ['Dydw'], ('am', 'Am', "'m not")),
+     ('ti', 'you', 'Rwyt', ['Wyt'], 'Wyt', [], 'Dwyt', ['Dwyt'], ('are', 'Are', "aren't")),
+     ('hi', 'she', 'Mae', [], 'Ydy', ['Ydi', 'Yw'], 'Dyw', ['Dydy', 'Dydi'], ('is', 'Is', "isn't")),
+     ('e', 'he', 'Mae', [], 'Ydy', ['Ydi', 'Yw'], 'Dyw', ['Dydy', 'Dydi'], ('is', 'Is', "isn't")),
+     ('ni', 'we', 'Dyn', ['Rydyn', "Ry'n", 'Dan'], 'Ydyn', ["Y'n"], 'Dyn', ['Dydyn', 'Dan'], ('are', 'Are', "aren't")),
+     ('chi', 'you (chi)', 'Dych', ['Rydych', "Ry'ch", 'Dach'], 'Dych', ['Ydych', "Y'ch", 'Dach'], 'Dych', ['Dydych', 'Dach'], ('are', 'Are', "aren't")),
+     ('nhw', 'they', 'Maen', ['Maent'], 'Ydyn', ["Y'n"], 'Dyn', ['Dydyn'], ('are', 'Are', "aren't")),
+    ]
+    for i, (pro, pen, stv, sta, qv, qa, nv, na, (be, Be, nt)) in enumerate(PRES):
+        for k in range(3):
+            cy, ing, _base = ACTS[(i * 3 + k) % len(ACTS)]
+            subj = pen.replace(' (chi)', '')
+            cap = subj[0].upper() + subj[1:]
+            st_en = f"{cap} {be} {ing}." if pro != 'i' else f"I'm {ing}."
+            if k == 0:
+                drill('u1', ['bod-statement'], f"___ {pro}'n {cy}.", f'bod, {pen}', st_en, stv, alts=sta,
+                      explain=f'Present statement, {pen}: {stv} {pro}.')
+            elif k == 1:
+                drill('u1', ['bod-question'], f"___ {pro}'n {cy}?", f'bod question, {pen}', f"{Be} {subj} {ing}?", qv, alts=qa,
+                      explain=f'Present question, {pen}: {qv} {pro}…?')
+            else:
+                drill('u2', ['neg-ddim'], f"___ {pro} ddim yn {cy}.", f'bod negative, {pen}', (f"I'm not {ing}." if pro == 'i' else f"{cap} {nt} {ing}."),
+                      nv, alts=[a for a in na if a != nv], explain=f'Present negative, {pen}: {nv} {pro} ddim yn… (no \'n straight after the subject).')
+
+    # 15. short-form future: regular endings on everyday verbs, with a definite object (no mutation after 'r)
+    SF = [('prynu', 'pryn', "'r tocynnau", 'buy the tickets'), ('gweld', 'gwel', "'r ffilm", 'see the film'), ('talu', 'tal', "'r bil", 'pay the bill'),
+          ('darllen', 'darllen', "'r llyfr", 'read the book'), ('yfed', 'yf', "'r te", 'drink the tea'), ('bwyta', 'bwyt', "'r gacen", 'eat the cake'),
+          ('gorffen', 'gorffenn', "'r gwaith", 'finish the work'), ('dysgu', 'dysg', "'r gân", 'learn the song'), ('gwerthu', 'gwerth', "'r car", 'sell the car'),
+          ('canu', 'can', "'r anthem", 'sing the anthem')]
+    SP = [('i', 'I', 'a', []), ('di', 'you', 'i', []), ('e', 'he', 'ith', ['iff']), ('hi', 'she', 'ith', ['iff']), ('ni', 'we', 'wn', []),
+          ('chi', 'you (chi)', 'wch', []), ('nhw', 'they', 'an', ['ant'])]
+    for j, (vn, stem, obj, en) in enumerate(SF):
+        for k in range(3):
+            pro, pen, end, alt_ends = SP[(j * 3 + k) % len(SP)]
+            f = stem + end
+            subj = pen.replace(' (chi)', '')
+            drill('p16', ['sf-endings'], f"___ {pro}{obj}.", f'{vn}, {pen}', f"{subj[0].upper() + subj[1:]} will {en}.", f[0].upper() + f[1:],
+                  alts=[(stem + e)[0].upper() + (stem + e)[1:] for e in alt_ends],
+                  explain=f'Short-form future: stem {stem}- + -{end} for {pen}: {f} {pro}.')
 
     # 12. inflected prepositions
     PR = [('i', 'me'), ('ti', 'you'), ('fe', 'him'), ('hi', 'her'), ('ni', 'us'), ('chi', 'you (chi)'), ('nhw', 'them')]
@@ -738,10 +796,20 @@ def main():
     U = units()
     ids = {u['id'] for u in U}
     C['units'] = [u for u in C['units'] if u['id'] not in ids] + U
+    TILE_SWAP = {'p2-05': {'hwyr': 'hwyrach'}, 'p5-14': {'helpu': 'help'}, 'p6-06': {'yn': 'mewn'}}
     for u in C['units']:
         for q in u['questions']:
             if q['id'] in FIXES:
                 q.update(FIXES[q['id']])
+            # tidy-ups: no alt that repeats the answer, no clue printed twice, no tile that repeats an answer word
+            if q['type'] in ('type', 'tiles') and q.get('alts'):
+                q['alts'] = [a for a in dict.fromkeys(q['alts']) if a != q['answer']]
+            if q['type'] == 'type' and q.get('hint'):
+                tail = ' (' + q['hint'] + ')'
+                if q['text'].rstrip().endswith(tail):
+                    q['text'] = q['text'].rstrip()[:-len(tail)]
+            if q['id'] in TILE_SWAP:
+                q['distractors'] = [TILE_SWAP[q['id']].get(d, d) for d in q['distractors']]
     for k, (t, b) in NEW_SKILLS.items():
         C['skills'][k] = {'group': 'point', 'title': t, 'blurb': b}
     have = {g['term'] for g in C['glossary']}
